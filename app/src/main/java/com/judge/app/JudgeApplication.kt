@@ -1,5 +1,8 @@
 package com.judge.app
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
+import com.judge.data.DogRepository
 
-class JudgeApplication : Application()
+class JudgeApplication : MultiDexApplication() {
+    val dogsRepository = DogRepository()
+}

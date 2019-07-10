@@ -11,7 +11,7 @@ class HomeActivity : BaseMvRxActivity() {
     private val navHostFragment: NavHostFragment by lazy {
         supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
     }
-    private val bottomNavigationView: BottomNavigationView by lazy {
+    private val bottomNavigationView by lazy {
         findViewById<BottomNavigationView>(R.id.nav_view)
     }
 
