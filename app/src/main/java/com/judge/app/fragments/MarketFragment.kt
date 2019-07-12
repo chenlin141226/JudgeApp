@@ -24,7 +24,7 @@ class MarketFragment : BaseMvRxFragment() {
     }
 
     override fun invalidate() = withState(videoViewModel) { state ->
-        loadingAnimation.isVisible = state.response is Loading
+        loadingAnimation.isVisible = state.video is Loading
         videosRecyclerView.withModels {
             state.videos?.forEach {
                 videoRow {

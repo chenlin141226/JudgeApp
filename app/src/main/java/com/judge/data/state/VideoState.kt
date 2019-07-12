@@ -5,10 +5,8 @@ import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.Uninitialized
 import com.judge.data.AVideo
 import com.judge.data.Video
-import com.judge.network.JsonResponse
 
 data class VideoState(
-    val response: Async<JsonResponse<Video>> = Uninitialized,
-    val video: Video? = null,
+    val video: Async<Video> = Uninitialized,
     val videos: List<AVideo>? = emptyList()
 ) : MvRxState

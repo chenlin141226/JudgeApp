@@ -1,5 +1,6 @@
-package com.judge.data
+package com.judge.data.repository
 
+import com.judge.data.Dog
 import io.reactivex.Observable
 
 class DogRepository {
