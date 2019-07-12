@@ -3,11 +3,10 @@ package com.judge.network
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object ServiceCreator {
-    private const val BASE_URL = "http://guolin.tech/"
+    private const val BASE_URL = "http://api.kan.tv"
 
     private val httpClient = OkHttpClient.Builder()
 
@@ -15,7 +14,6 @@ object ServiceCreator {
         .baseUrl(BASE_URL)
         .client(httpClient.build())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
         .addConverterFactory(MoshiConverterFactory.create())
 
 

@@ -2,10 +2,10 @@ package com.judge.models
 
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
-import com.judge.app.JudgeApplication
-import com.judge.app.MvRxViewModel
+import com.judge.app.core.JudgeApplication
+import com.judge.app.core.MvRxViewModel
 import com.judge.data.DogRepository
-import com.judge.state.DogState
+import com.judge.data.state.DogState
 import io.reactivex.schedulers.Schedulers
 
 class DogViewModel(

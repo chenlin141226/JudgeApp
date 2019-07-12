@@ -1,4 +1,4 @@
-package com.judge.app
+package com.judge.app.core
 
 import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.MvRxState

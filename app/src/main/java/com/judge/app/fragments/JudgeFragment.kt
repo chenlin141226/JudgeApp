@@ -30,6 +30,7 @@ class JudgeFragment : BaseMvRxFragment() {
                     id(it.id)
                     dog(it)
                 }
+
             }
         }
     }

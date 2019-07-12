@@ -1,4 +1,4 @@
-package com.judge.state
+package com.judge.data.state
 
 import com.airbnb.mvrx.Async
 import com.airbnb.mvrx.MvRxState
