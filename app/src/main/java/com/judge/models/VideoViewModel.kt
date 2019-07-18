@@ -15,7 +15,8 @@ class VideoViewModel(
         fetchVideos()
     }
 
-    private fun fetchVideos() {
+    private fun fetchVideos() = withState {
+        if (it.isLoading) return@withState
         videoRepository.getVideos().subscribeOn(Schedulers.io())
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnComplete { setState { copy(isLoading = false) } }

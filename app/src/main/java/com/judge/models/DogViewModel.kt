@@ -16,6 +16,11 @@ class DogViewModel(
     dogRepository: DogRepository
 ) : MvRxViewModel<DogState>(state) {
     init {
+        fetchDogs(dogRepository)
+    }
+
+    private fun fetchDogs(dogRepository: DogRepository) = withState {
+        if (it.isLoading) return@withState
         dogRepository.getDogs()
             .subscribeOn(Schedulers.io())
             .doOnSubscribe { setState { copy(isLoading = true) } }
