@@ -31,6 +31,11 @@ class DogRow @JvmOverloads constructor(
         breedsView.text = dog.breeds
     }
 
+    @ModelProp
+    fun setTextColor(color: Int) {
+        nameView.setTextColor(color)
+    }
+
     @CallbackProp
     fun setClickListener(listener: OnClickListener?) {
         setOnClickListener(listener)

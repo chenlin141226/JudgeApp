@@ -1,7 +1,6 @@
 package com.judge.app.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,7 @@ import com.airbnb.mvrx.withState
 import com.judge.R
 import com.judge.models.VideoViewModel
 import com.judge.videoRow
-import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.loadingAnimation
+import com.judge.views.loadingView
 import kotlinx.android.synthetic.main.market_fagment.*
 
 class MarketFragment : BaseMvRxFragment() {
@@ -24,8 +22,11 @@ class MarketFragment : BaseMvRxFragment() {
     }
 
     override fun invalidate() = withState(videoViewModel) { state ->
-        loadingAnimation.isVisible = state.video is Loading
         videosRecyclerView.withModels {
+            loadingView {
+                id("loader")
+                loading(state.isLoading)
+            }
             state.videos?.forEach {
                 videoRow {
                     id(it.id)
