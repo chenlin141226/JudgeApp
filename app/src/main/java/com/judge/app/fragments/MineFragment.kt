@@ -1,20 +1,26 @@
 package com.judge.app.fragments
 
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.airbnb.mvrx.BaseMvRxFragment
-import com.judge.R
+import com.airbnb.mvrx.fragmentViewModel
+import com.judge.app.core.BaseFragment
+import com.judge.app.core.MvRxEpoxyController
+import com.judge.app.core.simpleController
+import com.judge.models.VideoViewModel
+import com.judge.videoRow
+import com.judge.views.loadingView
 
-class MineFragment : BaseMvRxFragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.mine_fragment, container, false)
-    }
-
-    override fun invalidate() {
-        Log.e("Tag", "MineFragment invalidate")
+class MineFragment : BaseFragment() {
+    private val videoViewModel: VideoViewModel by fragmentViewModel()
+    override fun epoxyController(): MvRxEpoxyController = simpleController(videoViewModel) { state ->
+        loadingView {
+            id("loader")
+            loading(state.isLoading)
+        }
+        state.videos?.forEach {
+            videoRow {
+                id(it.id)
+                video(it)
+            }
+        }
     }
 
 }
