@@ -9,3 +9,4 @@ fun setImage(imageView: ImageView, imageUrl: String) {
     Picasso.with(imageView.context).load(imageUrl)
         .into(imageView)
 }
+

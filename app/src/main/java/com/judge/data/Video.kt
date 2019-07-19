@@ -1,13 +1,15 @@
 package com.judge.data
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
 data class Video(
-
     @field:Json(name = "aVideo") @Json(name = "aVideo") val aVideo: List<AVideo>,
     @field:Json(name = "iTotalPageNum") @Json(name = "iTotalPageNum") val iTotalPageNum: Int
 )
 
+@Parcelize
 data class AVideo(
     @field:Json(name = "avatar_thumb") @Json(name = "avatar_thumb") val avatar_thumb: String,
     @field:Json(name = "cate_id") @Json(name = "cate_id") val cate_id: String,
@@ -23,4 +25,5 @@ data class AVideo(
     @field:Json(name = "user_nicename") @Json(name = "user_nicename") val user_nicename: String,
     @field:Json(name = "views") @Json(name = "views") val views: Int,
     @field:Json(name = "virtual_views") @Json(name = "virtual_views") val virtual_views: String
-)
+) : Parcelable
+
