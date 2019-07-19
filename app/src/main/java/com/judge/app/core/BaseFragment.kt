@@ -3,7 +3,6 @@ package com.judge.app.core
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.annotation.IdRes
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,7 @@ abstract class BaseFragment : BaseMvRxFragment() {
 
     protected lateinit var recyclerView: EpoxyRecyclerView
     protected lateinit var toolbar: Toolbar
-    protected lateinit var coordinatorLayout: CoordinatorLayout
+    //protected lateinit var coordinatorLayout: CoordinatorLayout
     protected val epoxyController by lazy { epoxyController() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +34,7 @@ abstract class BaseFragment : BaseMvRxFragment() {
         return inflater.inflate(R.layout.fragment_base_mvrx, container, false).apply {
             recyclerView = findViewById(R.id.recycler_view)
             toolbar = findViewById(R.id.toolbar)
-            coordinatorLayout = findViewById(R.id.coordinator_layout)
+           // coordinatorLayout = findViewById(R.id.coordinator_layout)
 
             recyclerView.setController(epoxyController)
 

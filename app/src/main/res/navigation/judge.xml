@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/judge" app:startDestination="@id/judgeFragment">
+
+    <fragment android:id="@+id/judgeFragment"
+              android:name="com.judge.app.fragments.JudgeFragment"
+              android:label="JudgeFragment"/>
+</navigation>

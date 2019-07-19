@@ -6,4 +6,6 @@ import com.judge.data.Dog
 data class DogState(
     val dogs: List<Dog>? = emptyList(),
     val isLoading: Boolean = false
-) : MvRxState
+) : MvRxState {
+    fun dog(dogId: Long?): Dog? = dogs?.firstOrNull { it.id == dogId }
+}

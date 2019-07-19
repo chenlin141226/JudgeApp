@@ -6,7 +6,7 @@
     <string name="cd_form">Form</string>
     <string name="title_home">Home</string>
     <string name="title_register">Register</string>
-    <string name="title_list">Leaderboard</string>
+    <string name="title_list">Judge</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>

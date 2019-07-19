@@ -5,7 +5,7 @@ import io.reactivex.Observable
 
 class DogRepository {
     fun getDogs() = Observable.fromCallable<List<Dog>> {
-        Thread.sleep(2000)
+        //Thread.sleep(2000)
         listOf(
             Dog(
                 44365525,
