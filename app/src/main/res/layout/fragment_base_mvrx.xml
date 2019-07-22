@@ -12,8 +12,25 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:navigationIcon="@drawable/ic_arrow_back"/>
-    <com.airbnb.epoxy.EpoxyRecyclerView
-            android:id="@+id/recycler_view"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:srlEnableLoadMore="false"
+            app:srlEnableAutoLoadMore="false"
+            app:srlEnableRefresh="false"
+
+    >
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </LinearLayout>

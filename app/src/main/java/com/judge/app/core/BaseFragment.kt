@@ -13,11 +13,13 @@ import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.MvRx
 import com.judge.R
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
 
 abstract class BaseFragment : BaseMvRxFragment() {
 
     protected lateinit var recyclerView: EpoxyRecyclerView
     protected lateinit var toolbar: Toolbar
+    protected lateinit var refreshLayout: SmartRefreshLayout
     //protected lateinit var coordinatorLayout: CoordinatorLayout
     protected val epoxyController by lazy { epoxyController() }
 
@@ -27,17 +29,18 @@ abstract class BaseFragment : BaseMvRxFragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_base_mvrx, container, false).apply {
             recyclerView = findViewById(R.id.recycler_view)
             toolbar = findViewById(R.id.toolbar)
-           // coordinatorLayout = findViewById(R.id.coordinator_layout)
+            refreshLayout = findViewById(R.id.refreshLayout)
+            // coordinatorLayout = findViewById(R.id.coordinator_layout)
 
             recyclerView.setController(epoxyController)
-
+            initRefreshLayout()
             toolbar.setupWithNavController(findNavController())
         }
     }
@@ -51,6 +54,8 @@ abstract class BaseFragment : BaseMvRxFragment() {
      * Basic usages can simply use [simpleController]
      */
     abstract fun epoxyController(): MvRxEpoxyController
+
+    open fun initRefreshLayout() {}
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

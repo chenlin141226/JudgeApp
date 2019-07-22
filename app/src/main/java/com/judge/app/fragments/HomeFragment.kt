@@ -17,9 +17,9 @@ class HomeFragment : BaseFragment() {
             id("loader")
             loading(state.isLoading)
         }
-        state.dogs?.forEachIndexed { index, dog ->
+        state.dogs.forEachIndexed { index, dog ->
             dogRow {
-                id(dog.id)
+                id(dog.id + index)
                 dog(dog)
                 textColor(dog.color)
                 clickListener { _ ->
@@ -31,4 +31,20 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    override fun initRefreshLayout() {
+        super.initRefreshLayout()
+        refreshLayout.apply {
+            setEnableAutoLoadMore(true)
+            setEnableRefresh(true)
+            setEnableLoadMore(true)
+            setOnRefreshListener {
+                viewModel.refreshDogs()
+                it.finishRefresh(1000)
+            }
+            setOnLoadMoreListener {
+                viewModel.fetchDogs()
+                it.finishLoadMore(1000)
+            }
+        }
+    }
 }

@@ -6,6 +6,8 @@ fun <T> List<T>.update(value: T, finder: (T) -> Boolean) = indexOfFirst(finder).
 
 fun <T> List<T>.copy(i: Int, value: T): List<T> = toMutableList().apply { set(i, value) }
 
+fun <T> List<T>.clear(i: Int, value: T): List<T> = toMutableList().apply { clear() }
+
 inline fun <T> List<T>.delete(filter: (T) -> Boolean): List<T> =
     toMutableList().apply { removeAt(indexOfFirst(filter)) }
 

@@ -27,7 +27,7 @@ class DetailFragment : BaseFragment() {
     private val dogViewModel: DogViewModel by fragmentViewModel()
     //private val dogId: Long by args()
     val dog :Dog by args()
-    override fun epoxyController(): MvRxEpoxyController = simpleController(dogViewModel) { state ->
+    override fun epoxyController(): MvRxEpoxyController = simpleController(dogViewModel) { _ ->
         //val dog = state.dog(dogId) ?: throw IllegalStateException("Cannot find dog with id $dogId")
         dogDetailView {
             id(dog.id)

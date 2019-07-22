@@ -9,28 +9,38 @@ import com.judge.data.Dog
 import com.judge.data.repository.DogRepository
 import com.judge.data.state.DogState
 import com.judge.extensions.copy
+import com.judge.extensions.update
 import io.reactivex.schedulers.Schedulers
 
 class DogViewModel(
     state: DogState,
-    dogRepository: DogRepository
+    private val dogRepository: DogRepository
 ) : MvRxViewModel<DogState>(state) {
     init {
-        fetchDogs(dogRepository)
+        fetchDogs()
     }
 
-    private fun fetchDogs(dogRepository: DogRepository) = withState {
+    fun fetchDogs() = withState {
         if (it.isLoading) return@withState
         dogRepository.getDogs()
             .subscribeOn(Schedulers.io())
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnComplete { setState { copy(isLoading = false) } }
-            .execute { copy(dogs = it()) }
+            .execute { copy(dogs = dogs + (it() ?: emptyList())) }
+    }
+
+    fun refreshDogs() = withState {
+        if (it.isLoading) return@withState
+        dogRepository.getDogs()
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe { setState { copy(isLoading = true) } }
+            .doOnComplete { setState { copy(isLoading = false) } }
+            .execute { copy(dogs = it() ?: emptyList()) }
     }
 
     fun setItemState(index: Int, dog: Dog) {
         setState {
-            copy(dogs = dogs?.copy(index, dog.copy(color = Color.RED)))
+            copy(dogs = dogs.copy(index, dog.copy(color = Color.RED)))
         }
     }
 

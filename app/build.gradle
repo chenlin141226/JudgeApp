@@ -61,6 +61,12 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.airbnb.android:lottie:3.0.0'
     implementation 'com.airbnb.android:mvrx:1.0.2'
+    //下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-14'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-14'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //liveEventBus
+    implementation 'com.jeremyliao:live-event-bus-x:1.4.4'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
