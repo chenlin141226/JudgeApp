@@ -1,8 +1,14 @@
 package com.judge.app.core
 
-import androidx.multidex.MultiDexApplication
-import com.judge.data.repository.DogRepository
+import android.app.Application
 
-class JudgeApplication : MultiDexApplication() {
+import com.judge.data.repository.DogRepository
+import com.judge.utils.NetworkUtils
+
+class JudgeApplication : Application() {
     val dogsRepository = DogRepository()
+    override fun onCreate() {
+        super.onCreate()
+        NetworkUtils.startNetService(this)
+    }
 }

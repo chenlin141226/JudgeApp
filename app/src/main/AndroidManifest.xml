@@ -4,6 +4,7 @@
           package="com.judge">
 
     <dist:module dist:instant="true"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -22,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <service android:name=".utils.NetworkService"/>
     </application>
 
 </manifest>
