@@ -11,6 +11,7 @@ import com.judge.views.loadingView
 
 class MarketFragment : BaseFragment() {
     private val videoViewModel: VideoViewModel by fragmentViewModel()
+
     override fun epoxyController(): MvRxEpoxyController = simpleController(videoViewModel) { state ->
         loadingView {
             id("loader")
@@ -22,5 +23,9 @@ class MarketFragment : BaseFragment() {
                 video(it)
             }
         }
+    }
+
+    override fun initData() {
+        videoViewModel.fetchVideos()
     }
 }

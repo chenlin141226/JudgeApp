@@ -41,6 +41,7 @@ abstract class BaseFragment : BaseMvRxFragment() {
 
             recyclerView.setController(epoxyController)
             initRefreshLayout()
+            initData()
             toolbar.setupWithNavController(findNavController())
         }
     }
@@ -56,6 +57,8 @@ abstract class BaseFragment : BaseMvRxFragment() {
     abstract fun epoxyController(): MvRxEpoxyController
 
     open fun initRefreshLayout() {}
+
+    open fun initData() {}
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

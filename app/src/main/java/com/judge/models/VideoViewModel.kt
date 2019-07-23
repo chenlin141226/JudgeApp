@@ -6,7 +6,7 @@ import com.jeremyliao.liveeventbus.utils.AppUtils
 import com.judge.app.core.MvRxViewModel
 import com.judge.data.repository.VideoRepository
 import com.judge.data.state.VideoState
-import com.judge.utils.ToastUtils
+import com.judge.utils.NetworkUtils
 import io.reactivex.schedulers.Schedulers
 
 class VideoViewModel(
@@ -17,7 +17,9 @@ class VideoViewModel(
         fetchVideos()
     }
 
-    private fun fetchVideos() = withState {
+    fun fetchVideos() = withState {
+        if (!NetworkUtils.isAvailable(AppUtils.getApplicationContext()))
+            return@withState
         if (it.isLoading) return@withState
         videoRepository.getVideos().subscribeOn(Schedulers.io())
             .doOnSubscribe { setState { copy(isLoading = true) } }
