@@ -1,6 +1,5 @@
 package com.judge.app.fragments
 
-import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.*
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
@@ -24,8 +23,7 @@ class HomeFragment : BaseFragment() {
                 textColor(dog.color)
                 clickListener { _ ->
                     viewModel.setItemState(index, dog)
-                    findNavController().navigate(R.id.action_homeFragment_to_detailFragment, DetailFragment.arg(dog))
-
+                    navigateTo(R.id.action_homeFragment_to_detailFragment, dog)
                 }
             }
         }

@@ -1,19 +1,15 @@
 package com.judge.app.fragments
 
-import android.os.Bundle
-import com.airbnb.mvrx.MvRx
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.args
-import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.*
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
+import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.Dog
-import com.judge.models.DogViewModel
 import com.judge.views.dogDetailView
 
 
-data class VideoDetailState(val dog: Dog) :
+data class DogDetailState(val dog: Dog) :
     MvRxState {
     /**
      * This secondary constructor will automatically called if your Fragment has
@@ -22,30 +18,25 @@ data class VideoDetailState(val dog: Dog) :
     //constructor(args: Dog) : this(dog = args)
 }
 
-
-class DetailFragment : BaseFragment() {
-    private val dogViewModel: DogViewModel by fragmentViewModel()
-    //private val dogId: Long by args()
-    val dog :Dog by args()
-    override fun epoxyController(): MvRxEpoxyController = simpleController(dogViewModel) { _ ->
-        //val dog = state.dog(dogId) ?: throw IllegalStateException("Cannot find dog with id $dogId")
-        dogDetailView {
-            id(dog.id)
-            dog(dog)
+class DogDetailViewModel(
+    state: DogDetailState
+) : MvRxViewModel<DogDetailState>(state) {
+    companion object : MvRxViewModelFactory<DogDetailViewModel, DogDetailState> {
+        @JvmStatic
+        override fun create(viewModelContext: ViewModelContext, state: DogDetailState): DogDetailViewModel? {
+            return DogDetailViewModel(state)
         }
     }
+}
 
-    companion object {
-        fun arg(dogId: Long): Bundle {
-            val args = Bundle()
-            args.putLong(MvRx.KEY_ARG, dogId)
-            return args
-        }
+class DetailFragment : BaseFragment() {
+    private val dogDetailViewModel: DogDetailViewModel by fragmentViewModel()
 
-        fun arg(dog: Dog): Bundle {
-            val args = Bundle()
-            args.putParcelable(MvRx.KEY_ARG, dog)
-            return args
+    override fun epoxyController(): MvRxEpoxyController = simpleController(dogDetailViewModel) { state ->
+        //val dog = state.dog(dogId) ?: throw IllegalStateException("Cannot find dog with id $dogId")
+        dogDetailView {
+            id(state.dog.id)
+            dog(state.dog)
         }
     }
 
