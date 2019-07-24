@@ -1,5 +1,6 @@
 package com.judge.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.PendingIntent
 import android.content.*
@@ -18,7 +19,7 @@ import java.lang.reflect.Method
  * Created by zzq on 2016/11/17.
  */
 object NetworkUtils {
-    private val TAG = NetworkUtils::class.java.simpleName
+    val TAG = NetworkUtils::class.java.simpleName
 
     /**
      * 接受网络状态的广播Action
@@ -54,7 +55,7 @@ object NetworkUtils {
 
     /**
      * 接受服务上发过来的广播
-     */
+     *//*
     private val mReceiver = object : BroadcastReceiver() {
 
         override fun onReceive(context: Context, intent: Intent?) {
@@ -79,7 +80,7 @@ object NetworkUtils {
                 }
             }
         }
-    }
+    }*/
 
     //设置网络改变监听
     private var mListener: OnChangeInternetListener? = null
@@ -260,22 +261,20 @@ object NetworkUtils {
      */
     fun printNetworkInfo(context: Context): Boolean {
         val connectivity = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (connectivity != null) {
-            val info = connectivity.allNetworkInfo
-            if (info != null) {
-                for (i in info.indices) {
-                    LogUtils.i(TAG, "NetworkInfo[" + i + "]isAvailable : " + info[i].isAvailable)
-                    LogUtils.i(TAG, "NetworkInfo[" + i + "]isConnected : " + info[i].isConnected)
-                    LogUtils.i(
-                        TAG,
-                        "NetworkInfo[" + i + "]isConnectedOrConnecting : " + info[i].isConnectedOrConnecting
-                    )
-                    LogUtils.i(TAG, "NetworkInfo[" + i + "]: " + info[i])
-                }
-                LogUtils.i(TAG, "\n")
-            } else {
-                LogUtils.i(TAG, "getAllNetworkInfo is null")
+        val info = connectivity.allNetworkInfo
+        if (info != null) {
+            for (i in info.indices) {
+                LogUtils.i(TAG, "NetworkInfo[" + i + "]isAvailable : " + info[i].isAvailable)
+                LogUtils.i(TAG, "NetworkInfo[" + i + "]isConnected : " + info[i].isConnected)
+                LogUtils.i(
+                    TAG,
+                    "NetworkInfo[" + i + "]isConnectedOrConnecting : " + info[i].isConnectedOrConnecting
+                )
+                LogUtils.i(TAG, "NetworkInfo[" + i + "]: " + info[i])
             }
+            LogUtils.i(TAG, "\n")
+        } else {
+            LogUtils.i(TAG, "getAllNetworkInfo is null")
         }
         return false
     }
@@ -355,7 +354,7 @@ object NetworkUtils {
     fun openSetting(activity: Activity) {
         var intent: Intent? = null
         //判断手机系统的版本  即API大于10 就是3.0或以上版本
-        if (10 < android.os.Build.VERSION.SDK_INT) {
+        if (android.os.Build.VERSION.SDK_INT > 10) {
             intent = Intent(Settings.ACTION_SETTINGS)
         } else {
             intent = Intent()
@@ -372,10 +371,6 @@ object NetworkUtils {
      * @param context
      */
     fun startNetService(context: Context) {
-        //注册广播
-        val intentFilter = IntentFilter()
-        intentFilter.addAction(NET_BROADCAST_ACTION)
-        context.registerReceiver(mReceiver, intentFilter)
         //开启服务
         val intent = Intent(context, NetworkService::class.java)
         context.bindService(intent, object : ServiceConnection {
@@ -393,7 +388,7 @@ object NetworkUtils {
         mListener = listener
     }
 
-    private fun setOnChangeInternet(flag: Boolean) {
+    fun setOnChangeInternet(flag: Boolean) {
         if (mListener != null) {
             mListener!!.changeInternet(flag)
         }

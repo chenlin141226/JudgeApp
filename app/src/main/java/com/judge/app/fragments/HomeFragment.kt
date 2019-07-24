@@ -47,4 +47,8 @@ class HomeFragment : BaseFragment() {
             }
         }
     }
+
+    override fun onNetWorkChanged(state: Boolean) {
+        if (state) initData()
+    }
 }

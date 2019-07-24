@@ -9,6 +9,7 @@ import com.judge.videoRow
 import com.judge.views.loadingView
 
 class JudgeFragment : BaseFragment() {
+
     private val videoViewModel: VideoViewModel by fragmentViewModel()
 
     override fun epoxyController(): MvRxEpoxyController = simpleController(videoViewModel) { state ->
@@ -26,5 +27,9 @@ class JudgeFragment : BaseFragment() {
 
     override fun initData() {
         videoViewModel.fetchVideos()
+    }
+
+    override fun onNetWorkChanged(state: Boolean) {
+        if (state) initData()
     }
 }

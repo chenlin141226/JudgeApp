@@ -48,4 +48,8 @@ class DetailFragment : BaseFragment() {
             return args
         }
     }
+
+    override fun onNetWorkChanged(state: Boolean) {
+        if (state) initData()
+    }
 }

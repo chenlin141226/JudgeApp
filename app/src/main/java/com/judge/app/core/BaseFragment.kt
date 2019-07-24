@@ -13,6 +13,8 @@ import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.MvRx
 import com.judge.R
+import com.judge.utils.LogUtils
+import com.judge.utils.NetworkUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 
 abstract class BaseFragment : BaseMvRxFragment() {
@@ -33,6 +35,11 @@ abstract class BaseFragment : BaseMvRxFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        NetworkUtils.setOnChangeInternetListener(object : NetworkUtils.OnChangeInternetListener {
+            override fun changeInternet(flag: Boolean) {
+                onNetWorkChanged(flag)
+            }
+        })
         return inflater.inflate(R.layout.fragment_base_mvrx, container, false).apply {
             recyclerView = findViewById(R.id.recycler_view)
             toolbar = findViewById(R.id.toolbar)
@@ -55,6 +62,8 @@ abstract class BaseFragment : BaseMvRxFragment() {
      * Basic usages can simply use [simpleController]
      */
     abstract fun epoxyController(): MvRxEpoxyController
+
+    abstract fun onNetWorkChanged(state: Boolean)
 
     open fun initRefreshLayout() {}
 

@@ -22,25 +22,31 @@ class NetworkService : Service() {
             val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val info = connectivityManager.activeNetworkInfo
             if (info == null) {
-                networkBroadCast(context, intent, -1)
+                ToastUtils.showSingleLongToast("当前没有网络")
+                NetworkUtils.setOnChangeInternet(false)//设置网络监听
+                LogUtils.i(NetworkUtils.TAG, "网络更改为 无网络  CURRENT_NETWORK_STATE =${NetworkUtils.CURRENT_NETWORK_STATE}")
                 return
             }
-            val type = info.type
-            when (type) {
-                ConnectivityManager.TYPE_WIFI -> networkBroadCast(context, intent, 1)
-                ConnectivityManager.TYPE_MOBILE -> networkBroadCast(context, intent, 2)
+            when (info.type) {
+                1 -> {
+                    NetworkUtils.setOnChangeInternet(true)//设置网络监听
+                    LogUtils.i(
+                        NetworkUtils.TAG,
+                        "网络更改为 WIFI网络  CURRENT_NETWORK_STATE=${NetworkUtils.CURRENT_NETWORK_STATE}"
+                    )
+                }
+                2 -> {
+                    NetworkUtils.setOnChangeInternet(true)//设置网络监听
+                    LogUtils.i(
+                        NetworkUtils.TAG,
+                        "网络更改为 移动网络  CURRENT_NETWORK_STATE =${NetworkUtils.CURRENT_NETWORK_STATE}"
+                    )
+                }
                 else -> {
                 }
             }
         }
     }
-
-    private fun networkBroadCast(context: Context, intent: Intent, netState: Int) {
-        intent.action = NetworkUtils.NET_BROADCAST_ACTION
-        intent.putExtra(NetworkUtils.NET_STATE_NAME, netState)
-        context.sendBroadcast(intent)
-    }
-
 
     override fun onBind(intent: Intent): IBinder? {
         return null
