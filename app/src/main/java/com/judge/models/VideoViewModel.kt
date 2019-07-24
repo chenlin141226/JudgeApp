@@ -12,9 +12,6 @@ class VideoViewModel(
     initialState: VideoState,
     private val videoRepository: VideoRepository
 ) : MvRxViewModel<VideoState>(initialState) {
-    init {
-        fetchVideos()
-    }
 
     fun fetchVideos() = withState { state ->
         if (state.isLoading) return@withState

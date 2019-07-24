@@ -29,22 +29,26 @@ class NetworkService : Service() {
             }
             when (info.type) {
                 1 -> {
-                    NetworkUtils.setOnChangeInternet(true)//设置网络监听
+
                     LogUtils.i(
                         NetworkUtils.TAG,
                         "网络更改为 WIFI网络  CURRENT_NETWORK_STATE=${NetworkUtils.CURRENT_NETWORK_STATE}"
                     )
                 }
                 2 -> {
-                    NetworkUtils.setOnChangeInternet(true)//设置网络监听
                     LogUtils.i(
                         NetworkUtils.TAG,
                         "网络更改为 移动网络  CURRENT_NETWORK_STATE =${NetworkUtils.CURRENT_NETWORK_STATE}"
                     )
                 }
                 else -> {
+                    LogUtils.i(
+                        NetworkUtils.TAG,
+                        "网络更改为 移动网络  CURRENT_NETWORK_STATE =${NetworkUtils.CURRENT_NETWORK_STATE}"
+                    )
                 }
             }
+            NetworkUtils.setOnChangeInternet(true)//设置网络监听
         }
     }
 
@@ -62,11 +66,6 @@ class NetworkService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(mReceiver)
-    }
-
-    companion object {
-
-        private val GRAY_SERVICE_ID = 1001
     }
 
 }
