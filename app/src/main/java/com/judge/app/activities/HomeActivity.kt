@@ -1,16 +1,12 @@
 package com.judge.app.activities
 
 import android.os.Bundle
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import com.airbnb.mvrx.BaseMvRxActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.judge.R
 import com.judge.extensions.setupWithNavController
 
 class HomeActivity : BaseMvRxActivity() {
-    private var currentNavController: LiveData<NavController>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +33,7 @@ class HomeActivity : BaseMvRxActivity() {
         val navGraphIds = listOf(R.navigation.home, R.navigation.judge, R.navigation.market, R.navigation.mine)
 
         // Setup the bottom navigation view with a list of navigation graphs
-        val controller = bottomNavigationView.setupWithNavController(
+        bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
@@ -48,10 +44,7 @@ class HomeActivity : BaseMvRxActivity() {
         /*controller.observe(this, Observer { navController ->
             //setupActionBarWithNavController(navController)
         })*/
-        currentNavController = controller
+        //currentNavController = controller
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return currentNavController?.value?.navigateUp() ?: false
-    }
 }

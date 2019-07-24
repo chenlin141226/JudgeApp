@@ -16,7 +16,7 @@ class LogInterceptor : Interceptor {
         val endTime = System.currentTimeMillis()
         val source = response.body()?.source()
         source?.request(Long.MAX_VALUE)
-        val buffer = source?.buffer
+        val buffer = source?.buffer()
 
         val log = "\n**********************************"
             .plus("\nnetwork code ==== " + response.code())

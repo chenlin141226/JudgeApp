@@ -3,7 +3,7 @@ package com.judge.network
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ServiceCreator {
@@ -21,7 +21,7 @@ object ServiceCreator {
         .baseUrl(BASE_URL)
         .client(httpClient.build())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())
 
 
     private val retrofit = builder.build()

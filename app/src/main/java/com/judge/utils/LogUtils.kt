@@ -131,7 +131,7 @@ object LogUtils {
                 Log.v(tag, msg, tr)
             }
             if (LOG_TO_FILE)
-                log2File(level.toString(), tag, if (msg!! + tr!! == null) "" else "\n" + Log.getStackTraceString(tr))
+                log2File(level.toString(), tag, "\n" + Log.getStackTraceString(tr))
         }
     }
 
