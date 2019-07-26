@@ -29,7 +29,4 @@ class MarketFragment : BaseFragment() {
         videoViewModel.fetchVideos()
     }
 
-    override fun onNetWorkChanged(state: Boolean) {
-        if (state) initData()
-    }
 }

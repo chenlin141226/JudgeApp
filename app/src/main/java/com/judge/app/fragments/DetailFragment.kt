@@ -39,8 +39,4 @@ class DetailFragment : BaseFragment() {
             dog(state.dog)
         }
     }
-
-    override fun onNetWorkChanged(state: Boolean) {
-        if (state) initData()
-    }
 }

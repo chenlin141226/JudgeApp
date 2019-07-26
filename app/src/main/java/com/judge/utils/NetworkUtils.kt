@@ -1,21 +1,17 @@
 package com.judge.utils
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.PendingIntent
 import android.content.*
 import android.location.LocationManager
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.net.Uri
 import android.os.IBinder
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.util.Log
 
-import java.lang.reflect.Method
-
-/**
+/**666666
  * Created by zzq on 2016/11/17.
  */
 object NetworkUtils {

@@ -28,8 +28,4 @@ class JudgeFragment : BaseFragment() {
     override fun initData() {
         videoViewModel.fetchVideos()
     }
-
-    override fun onNetWorkChanged(state: Boolean) {
-        if (state) initData()
-    }
 }

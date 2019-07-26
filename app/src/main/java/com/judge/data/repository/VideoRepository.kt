@@ -5,7 +5,6 @@ import com.judge.network.JsonResponse
 import com.judge.network.ServiceCreator
 import com.judge.network.services.VideoService
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 
 class VideoRepository {
     private val videoService: VideoService by lazy {
