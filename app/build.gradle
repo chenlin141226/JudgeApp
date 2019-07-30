@@ -6,7 +6,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.judge"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -64,7 +64,12 @@ dependencies {
     //liveEventBus
     implementation 'com.jeremyliao:live-event-bus-x:1.4.4'
 
-    implementation "org.jetbrains.anko:anko:0.10.8"
+    //implementation "org.jetbrains.anko:anko:0.10.8"
+    //基础工具库
+    implementation "com.github.tamsiree.RxTool:RxKit:2.3.9"
+
+    //UI库
+    implementation "com.github.tamsiree.RxTool:RxUI:2.3.9"
 
     implementation 'me.jessyan:autosize:1.1.2'
 
