@@ -1,5 +1,6 @@
 package com.judge.app.core
 
+
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.annotation.IdRes
@@ -13,11 +14,11 @@ import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.MvRx
 import com.judge.R
+import com.judge.app.activities.HomeActivity
 import com.judge.utils.NetworkUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import org.jetbrains.anko.AnkoLogger
 
-abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
+abstract class BaseFragment : BaseMvRxFragment() {
 
     protected lateinit var recyclerView: EpoxyRecyclerView
     protected lateinit var toolbar: Toolbar
@@ -48,8 +49,13 @@ abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
             recyclerView.setController(epoxyController)
             initRefreshLayout()
             initData()
+            setToolBar()
             toolbar.setupWithNavController(findNavController())
         }
+    }
+
+    open fun setToolBar() {
+
     }
 
     override fun invalidate() {
@@ -89,4 +95,5 @@ abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
         val bundle = arg?.let { Bundle().apply { putParcelable(MvRx.KEY_ARG, it) } }
         findNavController().navigate(actionId, bundle)
     }
+
 }

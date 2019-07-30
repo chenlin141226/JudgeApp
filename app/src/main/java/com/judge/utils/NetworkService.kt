@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.IBinder
+import com.vondear.rxtool.view.RxToast
 
 /**
  * 网络状态监听服务
@@ -22,7 +23,7 @@ class NetworkService : Service() {
             val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val info = connectivityManager.activeNetworkInfo
             if (info == null) {
-                ToastUtils.showSingleLongToast("当前没有网络")
+                RxToast.showToast("当前没有网络")
                 NetworkUtils.setOnChangeInternet(false)//设置网络监听
                 LogUtils.i(NetworkUtils.TAG, "网络更改为 无网络  CURRENT_NETWORK_STATE =${NetworkUtils.CURRENT_NETWORK_STATE}")
                 return

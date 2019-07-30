@@ -1,12 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppThemeBase" parent="Theme.AppCompat.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus" tools:ignore="NewApi">true</item>
+    </style>
+
+    <style name="BaseAppTheme" parent="AppThemeBase">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@android:color/white</item>
     </style>
+
+    <style name="AppTheme" parent="BaseAppTheme"/>
 
     <style name="LoginTheme" parent="AppTheme">
         <item name="android:windowTranslucentStatus" tools:ignore="NewApi">true</item>

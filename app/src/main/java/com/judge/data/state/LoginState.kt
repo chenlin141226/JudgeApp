@@ -10,5 +10,6 @@ data class LoginState(
  val username : String? = null,
  val password :  String? = null,
  val question :  String? = null,
+ val userNameIsOk : Boolean = false,
  val code : String? = null
 ): MvRxState

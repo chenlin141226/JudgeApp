@@ -4,12 +4,14 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="video" type="com.judge.data.AVideo"/>
+        <variable name="onClick" type="android.view.View.OnClickListener"/>
     </data>
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:background="#1D2C69"
+            android:onClick="@{onClick}"
             android:foreground="?android:attr/selectableItemBackground"
 
             app:cardCornerRadius="8dp">

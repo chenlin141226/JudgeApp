@@ -19,7 +19,7 @@
             android:background="@drawable/login_content_border">
 
         <EditText
-                android:id="@+id/user_name"
+                android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/login_input_bg"
@@ -28,7 +28,7 @@
                 android:maxLength="16"/>
 
         <EditText
-                android:id="@+id/password"
+                android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/login_input_bg"
@@ -39,7 +39,7 @@
 
 
         <EditText
-                android:id="@+id/code"
+                android:id="@+id/et_code"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginTop="36dp"
@@ -68,7 +68,7 @@
     </LinearLayout>
 
     <ImageView
-            android:id="@+id/login"
+            android:id="@+id/iv_login"
             android:layout_width="240dp"
             android:layout_height="70dp"
             android:background="@drawable/login_btn"

@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.dog_row.view.breedsView
 import kotlinx.android.synthetic.main.dog_row.view.image
 import kotlinx.android.synthetic.main.dog_row.view.nameView
 
-@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
+@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_MATCH_HEIGHT)
 class DogDetailView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

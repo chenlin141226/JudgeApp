@@ -21,27 +21,27 @@
     <item
             android:id="@+id/home"
             android:icon="@drawable/ic_home"
-            android:contentDescription="@string/cd_home"
+            android:contentDescription="@string/title_home"
             android:title="@string/title_home"/>
     <item
             android:id="@+id/judge"
-            android:icon="@drawable/ic_list"
-            android:contentDescription="@string/cd_list"
-            android:title="@string/title_list"/>
+            android:icon="@drawable/ic_judge"
+            android:contentDescription="@string/title_judge"
+            android:title="@string/title_judge"/>
     <item
             android:id="@+id/space"
-            android:contentDescription="@string/cd_list"
+            android:contentDescription="@string/title_market"
             android:title=""
             android:enabled="false"
     />
     <item
             android:id="@+id/market"
-            android:icon="@drawable/ic_feedback"
-            android:contentDescription="@string/cd_form"
-            android:title="@string/title_register"/>
+            android:icon="@drawable/ic_market"
+            android:contentDescription="@string/title_market"
+            android:title="@string/title_market"/>
     <item
             android:id="@+id/mine"
-            android:icon="@drawable/ic_notifications_black_24dp"
-            android:contentDescription="@string/cd_form"
-            android:title="@string/title_register"/>
+            android:icon="@drawable/ic_mine"
+            android:contentDescription="@string/title_mine"
+            android:title="@string/title_mine"/>
 </menu>

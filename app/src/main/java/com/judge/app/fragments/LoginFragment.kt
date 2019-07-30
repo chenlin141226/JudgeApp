@@ -8,6 +8,7 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
 import com.judge.models.LoginViewModel
 import com.judge.views.loginView
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * @author: jaffa
@@ -26,6 +27,18 @@ class LoginFragment : BaseFragment() {
     override fun epoxyController() = simpleController(loginViewModel) { state ->
         loginView {
             id("login")
+            userName(state.username)
+            password(state.password)
+            code(state.code)
+            onUserNameChanged { loginViewModel.setUserName(it) }
+            onPasswordChanged { loginViewModel.setPassword(it) }
+            onCodeChanged { loginViewModel.setCode(it) }
+            clickListener { _->
+                   loginViewModel.checkUserName()
+                if(!state.userNameIsOk){
+                    toast("用户名为空")
+                }
+            }
         }
     }
 }

@@ -17,6 +17,27 @@ class LoginViewModel(loginState: LoginState,private val loginRepository: LoginRe
 
     }
 
+    fun setUserName(username : String){
+        setState { copy(username = username) }
+    }
+
+    fun setPassword(password : String){
+        setState { copy(password = password) }
+    }
+
+    fun setCode(code : String){
+        setState { copy(code = code) }
+    }
+
+    fun checkUserName()  = withState {state ->
+       if(state.username.isNullOrEmpty ()){
+//           setState {
+//               copy(userNameIsOk = username.isEmpty{})
+//           }
+       }
+        //setState { copy(userNameIsOk = s) }
+    }
+
     companion object : MvRxViewModelFactory<LoginViewModel,LoginState>{
         override fun create(viewModelContext: ViewModelContext, state: LoginState): LoginViewModel? {
             val loginRepository = LoginRepository()
