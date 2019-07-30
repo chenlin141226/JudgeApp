@@ -13,5 +13,6 @@
     <string name="username">用户名/email</string>
     <string name="password">密码</string>
     <string name="code">输入验证码</string>
+    <string name="login">登录</string>
 
 </resources>

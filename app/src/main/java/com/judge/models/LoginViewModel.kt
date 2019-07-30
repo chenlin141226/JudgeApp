@@ -9,6 +9,7 @@ import com.judge.data.state.LoginState
 /**
  * @author: jaffa
  * @date: 2019/7/28
+ * 登录界面的viewmodel
  */
 class LoginViewModel(loginState: LoginState,private val loginRepository: LoginRepository) : MvRxViewModel<LoginState>(loginState){
 

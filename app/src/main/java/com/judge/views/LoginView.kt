@@ -10,6 +10,7 @@ import com.judge.R
 /**
  * @author: jaffa
  * @date: 2019/7/28
+ * 登录view
  */
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_MATCH_HEIGHT)
 class LoginView @JvmOverloads constructor(

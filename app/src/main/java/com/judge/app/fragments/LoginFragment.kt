@@ -1,5 +1,8 @@
 package com.judge.app.fragments
 
+import android.os.Bundle
+
+import androidx.core.view.isVisible
 import com.airbnb.mvrx.fragmentViewModel
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
@@ -14,6 +17,11 @@ import com.judge.views.loginView
 class LoginFragment : BaseFragment() {
 
     val loginViewModel: LoginViewModel by fragmentViewModel()
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        toolbar.isVisible = false
+    }
 
     override fun epoxyController() = simpleController(loginViewModel) { state ->
         loginView {
