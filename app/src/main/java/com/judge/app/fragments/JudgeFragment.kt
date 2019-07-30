@@ -1,5 +1,6 @@
 package com.judge.app.fragments
 
+import android.view.View
 import com.airbnb.mvrx.fragmentViewModel
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
@@ -38,6 +39,11 @@ class JudgeFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun setToolBar() {
+        super.setToolBar()
+        toolbar.visibility = View.VISIBLE
     }
 
     override fun initData() {

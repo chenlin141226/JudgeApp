@@ -1,12 +1,12 @@
 package com.judge.app.activities
 
 import android.os.Bundle
-import com.airbnb.mvrx.BaseMvRxActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.judge.R
+import com.judge.app.core.BaseActivity
 import com.judge.extensions.setupWithNavController
 
-class HomeActivity : BaseMvRxActivity() {
+class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
