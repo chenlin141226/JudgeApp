@@ -7,6 +7,8 @@ import com.judge.app.core.simpleController
 import com.judge.models.VideoViewModel
 import com.judge.videoRow
 import com.judge.views.loadingView
+import com.vondear.rxtool.view.RxToast
+import com.vondear.rxui.view.dialog.RxDialogSureCancel
 
 class JudgeFragment : BaseFragment() {
 
@@ -21,6 +23,19 @@ class JudgeFragment : BaseFragment() {
             videoRow {
                 id(it.id)
                 video(it)
+                onClick { _ ->
+                    RxDialogSureCancel(context).apply {
+                        setContent("确定测试！")
+                        sureView.setOnClickListener {
+                            dismiss()
+                            RxToast.showToast("you clicked confirm!")
+                        }
+                        cancelView.setOnClickListener {
+                            dismiss()
+                            RxToast.showToast("you clicked cancel!")
+                        }
+                    }.show()
+                }
             }
         }
     }

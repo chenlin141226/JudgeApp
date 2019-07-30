@@ -8,7 +8,7 @@ import com.judge.models.DogViewModel
 import com.judge.views.dogRow
 import com.judge.views.loadingView
 import com.judge.R
-import org.jetbrains.anko.support.v4.toast
+
 
 class HomeFragment : BaseFragment() {
     private val viewModel: DogViewModel by fragmentViewModel()
@@ -24,7 +24,6 @@ class HomeFragment : BaseFragment() {
                 textColor(dog.color)
                 clickListener { _ ->
                     viewModel.setItemState(index, dog)
-                    toast("you clicked me!")
                     navigateTo(R.id.action_homeFragment_to_detailFragment, dog)
                 }
             }

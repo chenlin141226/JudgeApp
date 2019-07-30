@@ -10,6 +10,7 @@ import android.os.IBinder
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.util.Log
+import com.vondear.rxtool.RxTool
 
 /**666666
  * Created by zzq on 2016/11/17.
@@ -39,7 +40,7 @@ object NetworkUtils {
     // WLAN或移动网络(3G/2G)
     val isGpsEnabled: Boolean
         get() {
-            val locationManager = AppUtils.appContext!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val locationManager = RxTool.getContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
             val gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
             val network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
             if (gps || network) {
@@ -337,7 +338,7 @@ object NetworkUtils {
         GPSIntent.addCategory("android.intent.category.ALTERNATIVE")
         GPSIntent.data = Uri.parse("custom:3")
         try {
-            PendingIntent.getBroadcast(AppUtils.appContext, 0, GPSIntent, 0).send()
+            PendingIntent.getBroadcast(RxTool.getContext(), 0, GPSIntent, 0).send()
         } catch (e: PendingIntent.CanceledException) {
             e.printStackTrace()
         }

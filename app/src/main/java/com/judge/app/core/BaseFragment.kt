@@ -15,9 +15,8 @@ import com.airbnb.mvrx.MvRx
 import com.judge.R
 import com.judge.utils.NetworkUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import org.jetbrains.anko.AnkoLogger
 
-abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
+abstract class BaseFragment : BaseMvRxFragment(){
 
     protected lateinit var recyclerView: EpoxyRecyclerView
     protected lateinit var toolbar: Toolbar
