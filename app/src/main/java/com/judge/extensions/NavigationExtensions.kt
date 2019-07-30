@@ -18,8 +18,11 @@ package com.judge.extensions
 
 import android.content.Intent
 import android.util.SparseArray
+import android.view.MenuItem
 import androidx.core.util.forEach
 import androidx.core.util.set
+import androidx.core.view.children
+import androidx.core.view.forEach
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -87,16 +90,20 @@ fun BottomNavigationView.setupWithNavController(
     // When a navigation item is selected
     setOnNavigationItemSelectedListener { item ->
         // Don't do anything if the state is state has already been saved.
+        resetItemIcon(this)
+        setSelectItem(item)
         if (fragmentManager.isStateSaved) {
             false
         } else {
             val newlySelectedItemTag = graphIdToTagMap[item.itemId]
             if (selectedItemTag != newlySelectedItemTag) {
                 // Pop everything above the first fragment (the "fixed start destination")
-                fragmentManager.popBackStack(firstFragmentTag,
-                    FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                fragmentManager.popBackStack(
+                    firstFragmentTag,
+                    FragmentManager.POP_BACK_STACK_INCLUSIVE
+                )
                 val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
-                    as NavHostFragment
+                        as NavHostFragment
 
                 // Exclude the first fragment tag because it's always in the back stack.
                 if (firstFragmentTag != newlySelectedItemTag) {
@@ -118,7 +125,8 @@ fun BottomNavigationView.setupWithNavController(
                             R.anim.nav_default_enter_anim,
                             R.anim.nav_default_exit_anim,
                             R.anim.nav_default_pop_enter_anim,
-                            R.anim.nav_default_pop_exit_anim)
+                            R.anim.nav_default_pop_exit_anim
+                        )
                         .setReorderingAllowed(true)
                         .commit()
                 }
@@ -173,7 +181,8 @@ private fun BottomNavigationView.setupDeepLinks(
         )
         // Handle Intent
         if (navHostFragment.navController.handleDeepLink(intent)
-                && selectedItemId != navHostFragment.navController.graph.id) {
+            && selectedItemId != navHostFragment.navController.graph.id
+        ) {
             this.selectedItemId = navHostFragment.navController.graph.id
         }
     }
@@ -186,7 +195,7 @@ private fun BottomNavigationView.setupItemReselected(
     setOnNavigationItemReselectedListener { item ->
         val newlySelectedItemTag = graphIdToTagMap[item.itemId]
         val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
-            as NavHostFragment
+                as NavHostFragment
         val navController = selectedFragment.navController
         // Pop the back stack to the start destination of the current navController graph
         navController.popBackStack(
@@ -249,3 +258,23 @@ private fun FragmentManager.isOnBackStack(backStackName: String): Boolean {
 }
 
 private fun getFragmentTag(index: Int) = "bottomNavigation#$index"
+
+fun setSelectItem(item: MenuItem) {
+    when (item.itemId) {
+        R.id.home -> item.setIcon(R.drawable.ic_home_selected)
+        R.id.judge -> item.setIcon(R.drawable.ic_judge_selected)
+        R.id.market -> item.setIcon(R.drawable.ic_market_selected)
+        R.id.mine -> item.setIcon(R.drawable.ic_mine_selected)
+    }
+}
+
+fun resetItemIcon(bottomNavigationView: BottomNavigationView) {
+    bottomNavigationView.menu.forEach { item ->
+        when (item.itemId) {
+            R.id.home -> item.setIcon(R.drawable.ic_home)
+            R.id.judge -> item.setIcon(R.drawable.ic_judge)
+            R.id.market -> item.setIcon(R.drawable.ic_market)
+            R.id.mine -> item.setIcon(R.drawable.ic_mine)
+        }
+    }
+}

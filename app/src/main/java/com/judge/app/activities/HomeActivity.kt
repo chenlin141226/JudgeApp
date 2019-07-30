@@ -1,10 +1,12 @@
 package com.judge.app.activities
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.core.view.get
 import com.judge.R
 import com.judge.app.core.BaseActivity
+import com.judge.extensions.setSelectItem
 import com.judge.extensions.setupWithNavController
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : BaseActivity() {
 
@@ -22,18 +24,21 @@ class HomeActivity : BaseActivity() {
         // and its selectedItemId, we can proceed with setting up the
         // BottomNavigationBar with Navigation
         setupBottomNavigationBar()
+
     }
 
     /**
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
-
+        bottom_nav.apply {
+            itemIconTintList = null
+            setSelectItem(bottom_nav.menu[0])
+        }
         val navGraphIds = listOf(R.navigation.home, R.navigation.judge, R.navigation.market, R.navigation.mine)
 
         // Setup the bottom navigation view with a list of navigation graphs
-        bottomNavigationView.setupWithNavController(
+        bottom_nav.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
