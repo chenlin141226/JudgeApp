@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mine_item_titles">
+        <item>我的消息</item>
+        <item>勋章中心</item>
+        <item>我的哨子</item>
+        <item>我的主题</item>
+        <item>我的收藏</item>
+        <item>我的足迹</item>
+        <item>设置</item>
+    </string-array>
+
+    <integer-array name="mine_item_left_icons">
+        <item>@drawable/ic_message</item>
+        <item>@drawable/ic_medal</item>
+        <item>@drawable/ic_whistle</item>
+        <item>@drawable/ic_theme</item>
+        <item>@drawable/ic_favorite</item>
+        <item>@drawable/ic_track</item>
+        <item>@drawable/ic_setting</item>
+    </integer-array>
+
+    <integer-array name="mine_item_left_icons_selected">
+        <item>@drawable/ic_message_selected</item>
+        <item>@drawable/ic_medal_selected</item>
+        <item>@drawable/ic_whistle_selected</item>
+        <item>@drawable/ic_theme_selected</item>
+        <item>@drawable/ic_favorite_selected</item>
+        <item>@drawable/ic_track_selected</item>
+        <item>@drawable/ic_setting_selected</item>
+    </integer-array>
+</resources>

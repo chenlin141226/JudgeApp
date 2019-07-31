@@ -8,7 +8,6 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
 import com.judge.models.LoginViewModel
 import com.judge.views.loginView
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * @author: jaffa
@@ -34,8 +33,11 @@ class LoginFragment : BaseFragment() {
             onPasswordChanged { loginViewModel.setPassword(it) }
             onCodeChanged { loginViewModel.setCode(it) }
             clickListener { _->
-                if(loginViewModel.checkUserName()){
-                    toast("null")
+
+                if(loginViewModel.checkUserName()) {
+                    loginViewModel.checkUserName()
+                    if (!state.userNameIsOk) {
+                    }
                 }
             }
         }

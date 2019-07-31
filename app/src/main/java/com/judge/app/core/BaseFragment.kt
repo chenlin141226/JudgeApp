@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.airbnb.epoxy.EpoxyRecyclerView
@@ -15,20 +17,41 @@ import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.MvRx
 import com.judge.R
 import com.judge.app.activities.HomeActivity
+import com.judge.models.SharedViewModel
+import com.judge.utils.LogUtils
 import com.judge.utils.NetworkUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import kotlinx.android.synthetic.main.activity_home.*
 
 abstract class BaseFragment : BaseMvRxFragment() {
 
     protected lateinit var recyclerView: EpoxyRecyclerView
     protected lateinit var toolbar: Toolbar
     protected lateinit var refreshLayout: SmartRefreshLayout
+    protected lateinit var sharedViewModel: SharedViewModel
     //protected lateinit var coordinatorLayout: CoordinatorLayout
     protected val epoxyController by lazy { epoxyController() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         epoxyController.onRestoreInstanceState(savedInstanceState)
+        sharedViewModel = activity?.run {
+            ViewModelProviders.of(this)[SharedViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
+
+        sharedViewModel.visible.observe(this, Observer {
+            try {
+                if (it) {
+                    (activity as HomeActivity).bottom_nav.visibility = View.VISIBLE
+                    (activity as HomeActivity).signImageView.visibility = View.VISIBLE
+                } else {
+                    (activity as HomeActivity).bottom_nav.visibility = View.GONE
+                    (activity as HomeActivity).signImageView.visibility = View.GONE
+                }
+            } catch (e: Exception) {
+                LogUtils.e(e.toString())
+            }
+        })
     }
 
     override fun onCreateView(

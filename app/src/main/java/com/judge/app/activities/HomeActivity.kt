@@ -1,6 +1,7 @@
 package com.judge.app.activities
 
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.get
 import com.judge.R
 import com.judge.app.core.BaseActivity
