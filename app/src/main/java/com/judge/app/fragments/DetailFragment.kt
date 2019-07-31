@@ -39,4 +39,8 @@ class DetailFragment : BaseFragment() {
             dog(state.dog)
         }
     }
+
+    override fun initData() {
+        sharedViewModel.setVisible(false)
+    }
 }

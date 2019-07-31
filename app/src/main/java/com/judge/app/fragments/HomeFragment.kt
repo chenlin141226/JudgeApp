@@ -17,6 +17,7 @@ class HomeFragment : BaseFragment() {
             id("loader")
             loading(state.isLoading)
         }
+
         state.dogs.forEachIndexed { index, dog ->
             dogRow {
                 id(dog.id + index)
@@ -44,6 +45,10 @@ class HomeFragment : BaseFragment() {
                 it.finishLoadMore(1000)
             }
         }
+    }
+
+    override fun initData() {
+        sharedViewModel.setVisible(true)
     }
 
 }
