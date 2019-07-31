@@ -24,6 +24,7 @@
                 android:layout_height="52dp"
                 android:background="@drawable/login_input_bg"
                 android:hint="@string/username"
+                android:textColor="#d4cdca"
                 android:padding="10dp"
                 android:maxLength="16"/>
 
@@ -33,9 +34,20 @@
                 android:layout_height="52dp"
                 android:background="@drawable/login_input_bg"
                 android:hint="@string/password"
+                android:textColor="#d4cdca"
                 android:padding="10dp"
                 android:layout_marginTop="36dp"
                 android:maxLength="16"/>
+
+        <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/login_input_bg"
+                android:layout_marginTop="36dp"
+                android:spinnerMode="dropdown"
+                android:dropDownVerticalOffset="50dp"/>
+
 
 
         <EditText
@@ -45,6 +57,7 @@
                 android:layout_marginTop="36dp"
                 android:background="@drawable/login_input_bg"
                 android:hint="@string/code"
+                android:textColor="#d4cdca"
                 android:padding="10dp"
                 android:maxLength="16"/>
 
@@ -87,7 +100,7 @@
                     android:textSize="35sp"
                     android:textColor="#fff"/>
             <LinearLayout
-                    android:id="@+id/login_back"
+                    android:id="@+id/loginJump"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:gravity="center"

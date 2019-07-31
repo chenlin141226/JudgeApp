@@ -11,5 +11,12 @@
     <string name="login">登录</string>
     <string name="sign_in">sign in</string>
     <string name="mine_item_icon">mine item icon</string>
-
+    <string name="question">安全提问(未设置请忽略)</string>
+    <string name="mather_name">母亲的名字</string>
+    <string name="grandfather_name">爷爷的名字</string>
+    <string name="father_city">父亲出生的城市</string>
+    <string name="teacher_name">您其中一位老师的名字</string>
+    <string name="computer_model">您个人计算机的型号</string>
+    <string name="food_name">您最喜欢的餐馆名称</string>
+    <string name="last_four">驾驶执照最后四位数</string>
 </resources>
