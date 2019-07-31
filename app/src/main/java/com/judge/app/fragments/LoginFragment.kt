@@ -8,7 +8,6 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
 import com.judge.models.LoginViewModel
 import com.judge.views.loginView
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * @author: jaffa
@@ -36,7 +35,7 @@ class LoginFragment : BaseFragment() {
             clickListener { _->
                    loginViewModel.checkUserName()
                 if(!state.userNameIsOk){
-                    toast("用户名为空")
+
                 }
             }
         }
