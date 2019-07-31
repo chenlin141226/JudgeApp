@@ -9,5 +9,5 @@
     <string name="password">密码</string>
     <string name="code">输入验证码</string>
     <string name="login">登录</string>
-
+    <string name="sign_in">sign in</string>
 </resources>

@@ -34,9 +34,8 @@ class LoginFragment : BaseFragment() {
             onPasswordChanged { loginViewModel.setPassword(it) }
             onCodeChanged { loginViewModel.setCode(it) }
             clickListener { _->
-                   loginViewModel.checkUserName()
-                if(!state.userNameIsOk){
-                    toast("用户名为空")
+                if(loginViewModel.checkUserName()){
+                    toast("null")
                 }
             }
         }
