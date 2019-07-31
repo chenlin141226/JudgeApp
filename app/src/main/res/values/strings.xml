@@ -9,7 +9,6 @@
     <string name="password">密码</string>
     <string name="code">输入验证码</string>
     <string name="login">登录</string>
-
     <string name="sign_in">sign in</string>
     <string name="mine_item_icon">mine item icon</string>
     <string name="level">LV：2</string>
@@ -21,6 +20,5 @@
     <string name="moth_sign">本月签到</string>
     <string name="number">225</string>
     <string name="focus">关注</string>
-
 
 </resources>

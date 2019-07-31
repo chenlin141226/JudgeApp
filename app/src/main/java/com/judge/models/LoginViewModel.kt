@@ -5,13 +5,14 @@ import com.airbnb.mvrx.ViewModelContext
 import com.judge.app.core.MvRxViewModel
 import com.judge.data.repository.LoginRepository
 import com.judge.data.state.LoginState
+import com.vondear.rxtool.RxDataTool
 
 /**
  * @author: jaffa
  * @date: 2019/7/28
  * 登录界面的viewmodel
  */
-class LoginViewModel(loginState: LoginState,private val loginRepository: LoginRepository) : MvRxViewModel<LoginState>(loginState){
+class LoginViewModel(private val  loginState: LoginState,private val loginRepository: LoginRepository) : MvRxViewModel<LoginState>(loginState){
 
     init {
 
@@ -29,14 +30,7 @@ class LoginViewModel(loginState: LoginState,private val loginRepository: LoginRe
         setState { copy(code = code) }
     }
 
-    fun checkUserName()  = withState {state ->
-       if(state.username.isNullOrEmpty ()){
-//           setState {
-//               copy(userNameIsOk = username.isEmpty{})
-//           }
-       }
-        //setState { copy(userNameIsOk = s) }
-    }
+    fun checkUserName():Boolean = RxDataTool.isEmpty(loginState.username)
 
     companion object : MvRxViewModelFactory<LoginViewModel,LoginState>{
         override fun create(viewModelContext: ViewModelContext, state: LoginState): LoginViewModel? {

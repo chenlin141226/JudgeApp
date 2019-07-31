@@ -33,9 +33,11 @@ class LoginFragment : BaseFragment() {
             onPasswordChanged { loginViewModel.setPassword(it) }
             onCodeChanged { loginViewModel.setCode(it) }
             clickListener { _->
-                   loginViewModel.checkUserName()
-                if(!state.userNameIsOk){
 
+                if(loginViewModel.checkUserName()) {
+                    loginViewModel.checkUserName()
+                    if (!state.userNameIsOk) {
+                    }
                 }
             }
         }
