@@ -13,8 +13,10 @@ import com.judge.app.core.simpleController
 import com.judge.data.MineItem
 import com.judge.extensions.copy
 import com.judge.mineItem
+import com.judge.mineTitle
 import com.vondear.rxtool.RxTool
 import com.vondear.rxtool.view.RxToast
+import java.util.*
 
 data class MineItemState(
     val mineItems: List<MineItem> = emptyList()
@@ -25,7 +27,7 @@ class MineItemViewModel(
 ) : MvRxViewModel<MineItemState>(initialState) {
     private val leftSelectedIcons: TypedArray =
         RxTool.getContext().resources.obtainTypedArray(R.array.mine_item_left_icons_selected)
-    private val list = mutableListOf<MineItem>()
+    private val list = LinkedList<MineItem>()
 
     init {
         getItems()
@@ -72,6 +74,9 @@ class MineFragment : BaseFragment() {
     private val viewModel: MineItemViewModel by fragmentViewModel()
 
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
+        mineTitle {
+            id("mine title")
+        }
         state.mineItems.forEachIndexed { index, item ->
             mineItem {
                 id(index)
