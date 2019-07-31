@@ -5,6 +5,10 @@
     <string name="title_judge">裁判说</string>
     <string name="title_market">积分</string>
     <string name="title_mine">我的</string>
+    <string name="username">用户名/email</string>
+    <string name="password">密码</string>
+    <string name="code">输入验证码</string>
+    <string name="login">登录</string>
 
     <string name="sign_in">sign in</string>
     <string name="mine_item_icon">mine item icon</string>

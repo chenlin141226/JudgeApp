@@ -24,6 +24,7 @@ class HomeFragment : BaseFragment() {
                 textColor(dog.color)
                 clickListener { _ ->
                     viewModel.setItemState(index, dog)
+                    toast("you clicked me!")
                     navigateTo(R.id.action_homeFragment_to_detailFragment, dog)
                 }
             }

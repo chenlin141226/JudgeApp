@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/login"
+            app:startDestination="@id/loginFragment">
+    <fragment android:id="@+id/loginFragment"
+              android:name="com.judge.app.fragments.LoginFragment"
+              android:label="LoginFragment">
+        <action android:id="@+id/action_loginFragment_to_registerFragment"
+                app:destination="@id/registerFragment"/>
+        <action android:id="@+id/action_homeFragment_to_forgetFragment"
+                app:destination="@id/forgetFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/registerFragment"
+              android:name="com.judge.app.fragments.RegisterFragment"
+              android:label=""/>
+
+    <fragment android:id="@+id/forgetFragment"
+              android:name="com.judge.app.fragments.ForgetFragment"
+              android:label=""/>
+
+</navigation>
