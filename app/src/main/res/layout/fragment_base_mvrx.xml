@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"/>
         <com.airbnb.epoxy.EpoxyRecyclerView
                 android:id="@+id/recycler_view"
-                android:background="@color/gray1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
