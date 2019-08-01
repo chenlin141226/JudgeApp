@@ -3,11 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.judge"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -64,7 +65,7 @@ dependencies {
     //liveEventBus
     implementation 'com.jeremyliao:live-event-bus-x:1.4.4'
 
-    //implementation "org.jetbrains.anko:anko:0.10.8"
+    implementation "org.jetbrains.anko:anko:0.10.8"
     //基础工具库
     implementation "com.github.tamsiree.RxTool:RxKit:2.3.9"
 

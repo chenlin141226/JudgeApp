@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import com.airbnb.mvrx.MvRx
 import com.judge.R
 import com.judge.app.activities.HomeActivity
 import com.judge.models.SharedViewModel
+import com.judge.utils.CenterTitle.centerTitle
 import com.judge.utils.LogUtils
 import com.judge.utils.NetworkUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -29,6 +31,7 @@ abstract class BaseFragment : BaseMvRxFragment() {
     protected lateinit var toolbar: Toolbar
     protected lateinit var refreshLayout: SmartRefreshLayout
     protected lateinit var sharedViewModel: SharedViewModel
+    protected lateinit var rightButton: Button
     //protected lateinit var coordinatorLayout: CoordinatorLayout
     protected val epoxyController by lazy { epoxyController() }
 
@@ -68,12 +71,14 @@ abstract class BaseFragment : BaseMvRxFragment() {
             recyclerView = findViewById(R.id.recycler_view)
             toolbar = findViewById(R.id.toolbar)
             refreshLayout = findViewById(R.id.refreshLayout)
+            rightButton = findViewById(R.id.right_button)
             // coordinatorLayout = findViewById(R.id.coordinator_layout)
             recyclerView.setController(epoxyController)
             initRefreshLayout()
             initData()
             setToolBar()
             toolbar.setupWithNavController(findNavController())
+            centerTitle(toolbar, true)
         }
     }
 

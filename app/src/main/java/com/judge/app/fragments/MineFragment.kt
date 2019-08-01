@@ -15,7 +15,6 @@ import com.judge.extensions.copy
 import com.judge.mineItem
 import com.judge.mineTitle
 import com.vondear.rxtool.RxTool
-import com.vondear.rxtool.view.RxToast
 import java.util.*
 
 data class MineItemState(
@@ -83,7 +82,7 @@ class MineFragment : BaseFragment() {
                 item(item)
                 onClick { _ ->
                     viewModel.updateIcon(index, item)
-                    RxToast.showToast("clicked item!")
+                    navigateTo(R.id.action_mineFragment_to_whistleFragment, null)
                 }
             }
         }
