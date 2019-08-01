@@ -111,6 +111,22 @@ class LoginView @JvmOverloads constructor(
     fun setCodeClickListener(listener: OnClickListener?){
         btn_get_code.setOnClickListener(listener)
     }
+
+    /**
+     * 立即注册
+     */
+    @CallbackProp
+    fun setRegisterClickListener(listener: OnClickListener?){
+        register.setOnClickListener(listener)
+    }
+
+    /**
+     * 找回密码
+     */
+    @CallbackProp
+    fun setFindClickListener(listener: OnClickListener?){
+        findpassword.setOnClickListener(listener)
+    }
 }
 
 fun EditText.setTextIfDifferent(newText: CharSequence?): Boolean {

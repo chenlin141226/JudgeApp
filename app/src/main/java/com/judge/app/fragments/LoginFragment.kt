@@ -8,9 +8,11 @@ import android.widget.ImageView
 import android.widget.Toast
 
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.fragmentViewModel
 import com.judge.R
 import com.judge.app.activities.HomeActivity
+import com.judge.app.activities.LoggingActivity
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
 import com.judge.data.state.LoginState
@@ -37,7 +39,6 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun epoxyController() = simpleController(loginViewModel) { state ->
@@ -90,6 +91,15 @@ class LoginFragment : BaseFragment() {
                         toast("用户名不合法")
                     }
                 }
+            }
+
+            //立即注册
+            registerClickListener { _ ->
+                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            }
+            //找回密码
+            findClickListener { _ ->
+                findNavController().navigate(R.id.action_homeFragment_to_forgetFragment)
             }
 
         }

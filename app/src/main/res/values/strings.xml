@@ -5,10 +5,6 @@
     <string name="title_judge">裁判说</string>
     <string name="title_market">积分</string>
     <string name="title_mine">我的</string>
-    <string name="username">用户名/email</string>
-    <string name="password">密码</string>
-    <string name="code">输入验证码</string>
-    <string name="login">登录</string>
     <string name="sign_in">sign in</string>
     <string name="mine_item_icon">mine item icon</string>
     <string name="level">LV：2</string>
@@ -20,6 +16,15 @@
     <string name="moth_sign">本月签到</string>
     <string name="number">225</string>
     <string name="focus">关注</string>
+
+
+    <!--   ——————————登录 —————————— -->
+    <string name="username">用户名/email</string>
+    <string name="password">密码</string>
+    <string name="code">输入验证码</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="find_psw">找回密码</string>
     <string name="question">安全提问(未设置请忽略)</string>
     <string name="mather_name">母亲的名字</string>
     <string name="grandfather_name">爷爷的名字</string>
@@ -28,4 +33,15 @@
     <string name="computer_model">您个人计算机的型号</string>
     <string name="food_name">您最喜欢的餐馆名称</string>
     <string name="last_four">驾驶执照最后四位数</string>
+    <string name="register_now">立即注册</string>
+    <string name="find_password">找回密码</string>
+
+    <!--————————注册——————————-->
+    <string name="regsiter_username">用户名:不得小于3个字</string>
+    <string name="regsiter_password">密码:最小长度为6个字符</string>
+    <string name="confirm_password">确认密码:请再次输入密码</string>
+    <string name="email">Email:请输入邮箱地址</string>
+    <string name="phone">手机号:请输入11位手机号</string>
+    <string name="message_code">短信验证码</string>
+    <string name="register_bottom_message">如果您已拥有 裁判说Caipanshuo ID，则可在此 </string>
 </resources>
