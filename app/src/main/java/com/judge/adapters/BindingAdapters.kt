@@ -3,7 +3,7 @@ package com.judge.adapters
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.judge.data.MineItem
+import com.judge.data.MineItemBean
 import com.squareup.picasso.Picasso
 import com.vondear.rxtool.RxTool
 
@@ -14,7 +14,7 @@ fun setImage(imageView: ImageView, imageUrl: String) {
 }
 
 @BindingAdapter("drawableSrc", requireAll = false)
-fun setDrawable(textView: TextView, item: MineItem) {
+fun setDrawable(textView: TextView, item: MineItemBean) {
     textView.setCompoundDrawablesWithIntrinsicBounds(
         RxTool.getContext().resources.getDrawable(item.leftIconIdRes),
         null,

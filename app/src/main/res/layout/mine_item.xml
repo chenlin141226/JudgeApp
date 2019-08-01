@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
 >
     <data>
-        <variable name="item" type="com.judge.data.MineItem"/>
+        <variable name="item" type="com.judge.data.MineItemBean"/>
         <variable name="onClick" type="android.view.View.OnClickListener"/>
     </data>
     <TextView
