@@ -10,6 +10,17 @@
         <item>设置</item>
     </string-array>
 
+    <string-array name="login_item_spinner">
+        <item>@string/question</item>
+        <item>@string/mather_name</item>
+        <item>@string/grandfather_name</item>
+        <item>@string/father_city</item>
+        <item>@string/teacher_name</item>
+        <item>@string/computer_model</item>
+        <item>@string/food_name</item>
+        <item>@string/last_four</item>
+    </string-array>
+
     <integer-array name="mine_item_left_icons">
         <item>@drawable/ic_message</item>
         <item>@drawable/ic_medal</item>

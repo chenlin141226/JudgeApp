@@ -1,8 +1,8 @@
 package com.judge.app.activities
 
 import android.os.Bundle
-import com.airbnb.mvrx.BaseMvRxActivity
 import com.judge.R
+import com.judge.app.core.BaseActivity
 
 /**
  * @author: jaffa
@@ -10,7 +10,7 @@ import com.judge.R
  * 登录Activity
  */
 
-class LoggingActivity : BaseMvRxActivity() {
+class LoggingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

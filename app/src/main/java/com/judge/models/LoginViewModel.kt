@@ -15,7 +15,7 @@ import com.vondear.rxtool.RxDataTool
 class LoginViewModel(private val  loginState: LoginState,private val loginRepository: LoginRepository) : MvRxViewModel<LoginState>(loginState){
 
     init {
-
+        checkUserName1()
     }
 
     fun setUserName(username : String){
@@ -30,7 +30,21 @@ class LoginViewModel(private val  loginState: LoginState,private val loginReposi
         setState { copy(code = code) }
     }
 
-    fun checkUserName():Boolean = RxDataTool.isEmpty(loginState.username)
+    fun setQuestion(question : String){
+        setState { copy(question = question) }
+    }
+
+    fun checkUserName() : Boolean =  RxDataTool.isNullString(loginState.username)
+
+    fun checkUserName1() = withState { loginState->
+        val userisNull = RxDataTool.isNullString(loginState.username)
+        if(userisNull){
+            setState { copy(userNameIsOk = true) }
+        }else{
+            setState { copy(userNameIsOk = false) }
+        }
+    }
+
 
     companion object : MvRxViewModelFactory<LoginViewModel,LoginState>{
         override fun create(viewModelContext: ViewModelContext, state: LoginState): LoginViewModel? {
