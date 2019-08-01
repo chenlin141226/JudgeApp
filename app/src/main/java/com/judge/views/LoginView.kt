@@ -13,6 +13,7 @@ import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
 import com.judge.R
+import com.vondear.rxui.view.RxCaptcha
 import kotlinx.android.synthetic.main.view_login.view.*
 
 /**
@@ -34,14 +35,24 @@ class LoginView @JvmOverloads constructor(
     init {
         inflate(context, R.layout.view_login, this)
 
-        val spinnerData = resources.getStringArray(R.array.login_item_spinner)
         et_username.addTextChangedListener(userNameWatcher)
         et_password.addTextChangedListener(passwordWatcher)
         et_code.addTextChangedListener(codeWatcher)
 
+        val spinnerData = resources.getStringArray(R.array.login_item_spinner)
         val spinnerAdapter = ArrayAdapter<String>(context,R.layout.login_spinner,spinnerData)
         spinner.adapter = spinnerAdapter
         //spinner.setSelection(0)
+
+        RxCaptcha.build()
+            .backColor(0xf9c660)
+            .codeLength(6)
+            .fontSize(50)
+            .lineNumber(2)
+            .size(180, 60)
+            .type(RxCaptcha.TYPE.CHARS)
+            .into(btn_get_code)
+
     }
 
     @TextProp
@@ -77,16 +88,45 @@ class LoginView @JvmOverloads constructor(
         iv_login.setOnClickListener(listener)
     }
 
+    /**
+     * 下拉框选择
+     */
     @CallbackProp
     fun setSpinnerItemSelectedListener(listener : AdapterView.OnItemSelectedListener?){
         spinner.onItemSelectedListener = listener
     }
 
+    /**
+     * 跳过登录
+     */
     @CallbackProp
     fun setJumpClickListener(listener: OnClickListener?){
         loginJump.setOnClickListener(listener)
     }
 
+    /**
+     * 验证码点击
+     */
+    @CallbackProp
+    fun setCodeClickListener(listener: OnClickListener?){
+        btn_get_code.setOnClickListener(listener)
+    }
+
+    /**
+     * 立即注册
+     */
+    @CallbackProp
+    fun setRegisterClickListener(listener: OnClickListener?){
+        register.setOnClickListener(listener)
+    }
+
+    /**
+     * 找回密码
+     */
+    @CallbackProp
+    fun setFindClickListener(listener: OnClickListener?){
+        findpassword.setOnClickListener(listener)
+    }
 }
 
 fun EditText.setTextIfDifferent(newText: CharSequence?): Boolean {
