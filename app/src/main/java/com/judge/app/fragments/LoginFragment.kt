@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ImageView
 import android.widget.Toast
 
 import androidx.core.view.isVisible
@@ -17,6 +18,7 @@ import com.judge.models.LoginViewModel
 import com.judge.views.loginView
 import com.vondear.rxtool.RxDataTool
 import com.vondear.rxtool.view.RxToast
+import com.vondear.rxui.view.RxCaptcha
 import org.jetbrains.anko.support.v4.toast
 
 /**
@@ -67,6 +69,18 @@ class LoginFragment : BaseFragment() {
                 }
 
             })
+
+            //点击更新验证码
+            codeClickListener { btn_code ->
+                   RxCaptcha.build()
+                       .backColor(0xf9c660)
+                       .codeLength(6)
+                       .fontSize(60)
+                       .lineNumber(2)
+                       .size(220, 80)
+                       .type(RxCaptcha.TYPE.CHARS)
+                       .into(btn_code as ImageView?)
+            }
 
             //点击登录
             clickListener { _ ->

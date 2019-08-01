@@ -115,6 +115,14 @@
             </LinearLayout>
 
     </RelativeLayout>
+    
+    <ImageView
+            android:id="@+id/btn_get_code"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            app:layout_anchor="@id/et_code"
+            app:layout_anchorGravity="right|center"
+            android:layout_marginRight="70dp"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
