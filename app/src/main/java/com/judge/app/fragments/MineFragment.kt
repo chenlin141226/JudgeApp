@@ -81,8 +81,11 @@ class MineFragment : BaseFragment() {
                 id(index)
                 item(item)
                 onClick { _ ->
+                    when (index) {
+                        0 ->navigateTo(R.id.action_mineFragment_to_messageFragment, null)
+                        else -> navigateTo(R.id.action_mineFragment_to_whistleFragment, null)
+                    }
                     viewModel.updateIcon(index, item)
-                    navigateTo(R.id.action_mineFragment_to_whistleFragment, null)
                 }
             }
         }

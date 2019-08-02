@@ -25,6 +25,15 @@ fun setDrawable(textView: TextView, item: MineItemBean) {
     )
 }
 
+@BindingAdapter("srcType", requireAll = false)
+fun setTypedSrc(imageView: ImageView, type: Int) {
+    when (type) {
+        0 -> imageView.setImageResource(R.drawable.ic_personal_message)
+        1 -> imageView.setImageResource(R.drawable.ic_public_message)
+        else -> imageView.setImageResource(R.drawable.ic_personal_message)
+    }
+}
+
 @BindingAdapter("whistleType", requireAll = false)
 fun setWhistleImage(imageView: ImageView, whistleType: String) {
     when (whistleType.toInt()) {
