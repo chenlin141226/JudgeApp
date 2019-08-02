@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.jeremyliao:live-event-bus-x:1.4.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7ef13536491fde6cca02467a39a2783a/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7ef13536491fde6cca02467a39a2783a/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jeremyliao/live-event-bus-x/1.4.4/9dbc25f0f1da9c7c19e1d5751b54a1633064ee4c/live-event-bus-x-1.4.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
