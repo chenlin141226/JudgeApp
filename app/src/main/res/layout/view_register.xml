@@ -8,7 +8,7 @@
     <RelativeLayout
             android:id="@+id/rl_title"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/dp_50"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -20,23 +20,23 @@
                 android:layout_centerInParent="true"
                 android:text="@string/register"
                 android:textColor="#fff"
-                android:textSize="35sp"
+                android:textSize="@dimen/text_25"
                 tools:ignore="RelativeOverlap" />
 
         <LinearLayout
                 android:id="@+id/register_back"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_20"
                 android:gravity="center"
                 tools:ignore="RtlHardcoded">
 
             <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/dp_23"
+                    android:layout_height="@dimen/dp_23"
                     android:background="@drawable/left"
                     tools:ignore="ContentDescription" />
         </LinearLayout>
@@ -53,92 +53,99 @@
         <LinearLayout
                 android:id="@+id/ll_bg"
                 android:layout_width="match_parent"
-                android:layout_height="680dp"
-                android:layout_marginLeft="33dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="33dp"
-                android:layout_marginBottom="35dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_50"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_25"
                 android:background="@drawable/login_content_border"
                 android:orientation="vertical"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp">
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20">
 
             <EditText
                     android:id="@+id/et_username"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_40"
                     android:background="@drawable/login_input_bg"
                     android:hint="@string/regsiter_username"
                     android:maxLength="16"
-                    android:padding="10dp"
+                    android:padding="@dimen/dp_10"
                     android:textColor="#d4cdca"
+                    android:textSize="@dimen/text_14"
                     tools:ignore="Autofill,TextFields" />
 
             <EditText
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:background="@drawable/login_input_bg"
                     android:hint="@string/regsiter_password"
                     android:maxLength="16"
-                    android:padding="10dp"
+                    android:padding="@dimen/dp_10"
                     android:textColor="#d4cdca"
+                    android:textSize="@dimen/text_14"
                     tools:ignore="Autofill,TextFields" />
 
             <EditText
                     android:id="@+id/confirm_password"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:background="@drawable/login_input_bg"
                     android:hint="@string/confirm_password"
                     android:maxLength="16"
-                    android:padding="10dp"
+                    android:padding="@dimen/dp_10"
                     android:textColor="#d4cdca"
+                    android:textSize="@dimen/text_14"
                     tools:ignore="Autofill,TextFields" />
 
             <EditText
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:background="@drawable/login_input_bg"
                     android:hint="@string/email"
                     android:maxLength="16"
-                    android:padding="10dp"
+                    android:padding="@dimen/dp_10"
                     android:textColor="#d4cdca"
+                    android:textSize="@dimen/text_14"
                     tools:ignore="Autofill,TextFields" />
 
             <EditText
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:background="@drawable/login_input_bg"
                     android:hint="@string/phone"
                     android:maxLength="16"
-                    android:padding="10dp"
+                    android:padding="@dimen/dp_10"
                     android:textColor="#d4cdca"
+                    android:textSize="@dimen/text_14"
                     tools:ignore="Autofill,TextFields" />
 
             <EditText
                     android:id="@+id/et_message_code"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:background="@drawable/login_input_bg"
                     android:hint="@string/message_code"
                     android:maxLength="16"
-                    android:padding="10dp"
+                    android:padding="@dimen/dp_10"
                     android:textColor="#d4cdca"
+                    android:textSize="@dimen/text_14"
                     tools:ignore="Autofill,TextFields" />
 
             <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_40"
                     android:background="@drawable/login_input_bg">
 
                 <EditText
@@ -148,49 +155,30 @@
                         android:background="@drawable/login_input_bg"
                         android:hint="@string/code"
                         android:maxLength="16"
-                        android:padding="10dp"
+                        android:padding="@dimen/dp_10"
                         android:textColor="#d4cdca"
+                        android:textSize="@dimen/text_14"
                         tools:ignore="Autofill,TextFields" />
 
                 <ImageView
                         android:id="@+id/btn_get_code"
-                        android:layout_width="100dp"
-                        android:layout_height="35dp"
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="@dimen/dp_30"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="@dimen/dp_10"
                         tools:ignore="ContentDescription" />
             </RelativeLayout>
 
         </LinearLayout>
 
         <ImageView
-                android:id="@+id/iv_register"
-                android:layout_width="239dp"
-                android:layout_height="70dp"
+                android:id="@+id/reister_submit"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="@dimen/dp_50"
                 android:layout_gravity="bottom|center_horizontal"
                 android:background="@drawable/reister_submit"
                 tools:ignore="ContentDescription" />
     </FrameLayout>
-    <!--<TextView-->
-            <!--android:id="@+id/tv_about_spannable"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="33dp"-->
-            <!--android:layout_marginRight="33dp"-->
-            <!--android:textColor="#a7a19e"-->
-            <!--android:text="@string/register_bottom_message"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"/>-->
-    <!--<TextView-->
-            <!--android:id="@+id/tv_login"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/login"-->
-            <!--android:textColor="@color/colorPrimary"-->
-            <!--app:layout_constraintLeft_toRightOf="@id/tv_about_spannable"-->
-            <!--app:layout_constraintTop_toTopOf="@id/tv_about_spannable"-->
-            <!--app:layout_constraintBottom_toBottomOf="@id/tv_about_spannable"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

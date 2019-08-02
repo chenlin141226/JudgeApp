@@ -44,4 +44,7 @@
     <string name="phone">手机号:请输入11位手机号</string>
     <string name="message_code">短信验证码</string>
     <string name="register_bottom_message">如果您已拥有 裁判说Caipanshuo ID，则可在此 </string>
+    <string name="emails">email</string>
+    <string name="user">用户名</string>
+
 </resources>
