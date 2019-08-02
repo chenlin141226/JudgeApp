@@ -10,16 +10,15 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.MineItem
+import com.judge.data.MineItemBean
 import com.judge.extensions.copy
 import com.judge.mineItem
 import com.judge.mineTitle
 import com.vondear.rxtool.RxTool
-import com.vondear.rxtool.view.RxToast
 import java.util.*
 
 data class MineItemState(
-    val mineItems: List<MineItem> = emptyList()
+    val mineItems: List<MineItemBean> = emptyList()
 ) : MvRxState
 
 class MineItemViewModel(
@@ -27,7 +26,7 @@ class MineItemViewModel(
 ) : MvRxViewModel<MineItemState>(initialState) {
     private val leftSelectedIcons: TypedArray =
         RxTool.getContext().resources.obtainTypedArray(R.array.mine_item_left_icons_selected)
-    private val list = LinkedList<MineItem>()
+    private val list = LinkedList<MineItemBean>()
 
     init {
         getItems()
@@ -37,7 +36,7 @@ class MineItemViewModel(
         val leftIcons = RxTool.getContext().resources.obtainTypedArray(R.array.mine_item_left_icons)
         val titles = RxTool.getContext().resources.getStringArray(R.array.mine_item_titles)
         titles.asIterable().forEachIndexed { index, title ->
-            val item = MineItem(
+            val item = MineItemBean(
                 leftIconIdRes = leftIcons.getResourceId(index, 0),
                 rightIconIdRes = R.drawable.icon_forward,
                 text = title
@@ -50,7 +49,7 @@ class MineItemViewModel(
         }
     }
 
-    fun updateIcon(index: Int, item: MineItem) {
+    fun updateIcon(index: Int, item: MineItemBean) {
         setState {
             copy(
                 mineItems = list.copy(
@@ -83,7 +82,7 @@ class MineFragment : BaseFragment() {
                 item(item)
                 onClick { _ ->
                     viewModel.updateIcon(index, item)
-                    RxToast.showToast("clicked item!")
+                    navigateTo(R.id.action_mineFragment_to_whistleFragment, null)
                 }
             }
         }

@@ -1,43 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="mine_item_titles">
-        <item>我的消息</item>
-        <item>勋章中心</item>
-        <item>我的哨子</item>
-        <item>我的主题</item>
-        <item>我的收藏</item>
-        <item>我的足迹</item>
-        <item>设置</item>
-    </string-array>
+	<string-array name="mine_item_titles">
+		<item>我的消息</item>
+		<item>勋章中心</item>
+		<item>我的哨子</item>
+		<item>我的主题</item>
+		<item>我的收藏</item>
+		<item>我的足迹</item>
+		<item>设置</item>
+	</string-array>
 
-    <string-array name="login_item_spinner">
-        <item>@string/question</item>
-        <item>@string/mather_name</item>
-        <item>@string/grandfather_name</item>
-        <item>@string/father_city</item>
-        <item>@string/teacher_name</item>
-        <item>@string/computer_model</item>
-        <item>@string/food_name</item>
-        <item>@string/last_four</item>
-    </string-array>
+	<string-array name="whistle_rule_name">
+		<item>打个招呼</item>
+		<item>每天登陆</item>
+		<item>设置头像</item>
+		<item>邮箱认证</item>
+		<item>注册推广</item>
+		<item>访问推广</item>
+		<item>加个精华</item>
+		<item>发表回复</item>
+		<item>发表主题</item>
+	</string-array>
 
-    <integer-array name="mine_item_left_icons">
-        <item>@drawable/ic_message</item>
-        <item>@drawable/ic_medal</item>
-        <item>@drawable/ic_whistle</item>
-        <item>@drawable/ic_theme</item>
-        <item>@drawable/ic_favorite</item>
-        <item>@drawable/ic_track</item>
-        <item>@drawable/ic_setting</item>
-    </integer-array>
+	<string-array name="whistle_rule_period">
+		<item>每天</item>
+		<item>每天</item>
+		<item>一次性</item>
+		<item>一次性</item>
+		<item>不限周期</item>
+		<item>不限周期</item>
+		<item>不限周期</item>
+		<item>每天</item>
+		<item>每天</item>
+	</string-array>
 
-    <integer-array name="mine_item_left_icons_selected">
-        <item>@drawable/ic_message_selected</item>
-        <item>@drawable/ic_medal_selected</item>
-        <item>@drawable/ic_whistle_selected</item>
-        <item>@drawable/ic_theme_selected</item>
-        <item>@drawable/ic_favorite_selected</item>
-        <item>@drawable/ic_track_selected</item>
-        <item>@drawable/ic_setting_selected</item>
-    </integer-array>
+	<string-array name="whistle_rule_reward_content">
+		<item>每天</item>
+		<item>每天</item>
+		<item>一次性</item>
+		<item>一次性</item>
+		<item>不限周期</item>
+		<item>不限周期</item>
+		<item>不限周期</item>
+		<item>每天</item>
+		<item>每天</item>
+	</string-array>
+
+	<string-array name="whistle_rule_reward_time">
+		<item>5</item>
+		<item>1</item>
+		<item>1</item>
+		<item>1</item>
+		<item>不限</item>
+		<item>不限</item>
+		<item>不限</item>
+		<item>100</item>
+		<item>1</item>
+	</string-array>
+
+	<string-array name="login_item_spinner">
+		<item>@string/question</item>
+		<item>@string/mather_name</item>
+		<item>@string/grandfather_name</item>
+		<item>@string/father_city</item>
+		<item>@string/teacher_name</item>
+		<item>@string/computer_model</item>
+		<item>@string/food_name</item>
+		<item>@string/last_four</item>
+	</string-array>
+
+	<integer-array name="mine_item_left_icons">
+		<item>@drawable/ic_message</item>
+		<item>@drawable/ic_medal</item>
+		<item>@drawable/ic_whistle</item>
+		<item>@drawable/ic_theme</item>
+		<item>@drawable/ic_favorite</item>
+		<item>@drawable/ic_track</item>
+		<item>@drawable/ic_setting</item>
+	</integer-array>
+
+	<integer-array name="mine_item_left_icons_selected">
+		<item>@drawable/ic_message_selected</item>
+		<item>@drawable/ic_medal_selected</item>
+		<item>@drawable/ic_whistle_selected</item>
+		<item>@drawable/ic_theme_selected</item>
+		<item>@drawable/ic_favorite_selected</item>
+		<item>@drawable/ic_track_selected</item>
+		<item>@drawable/ic_setting_selected</item>
+	</integer-array>
 </resources>

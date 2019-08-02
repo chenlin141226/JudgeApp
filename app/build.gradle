@@ -3,11 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.judge"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -71,7 +72,7 @@ dependencies {
     //UI库
     implementation "com.github.tamsiree.RxTool:RxUI:2.3.9"
 
-    implementation 'me.jessyan:autosize:1.1.2'
+    //implementation 'me.jessyan:autosize:1.1.2'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

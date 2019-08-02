@@ -2,7 +2,7 @@ package com.judge.data
 
 import androidx.annotation.DrawableRes
 
-data class MineItem(
+data class MineItemBean(
     @DrawableRes
     val leftIconIdRes: Int,
     @DrawableRes

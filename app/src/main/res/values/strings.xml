@@ -16,6 +16,10 @@
     <string name="moth_sign">本月签到</string>
     <string name="number">225</string>
     <string name="focus">关注</string>
+    <string name="whistle_title">我的哨子</string>
+
+    <string name="back_icon">back icon</string>
+
 
 
     <!--   ——————————登录 —————————— -->
@@ -33,6 +37,8 @@
     <string name="computer_model">您个人计算机的型号</string>
     <string name="food_name">您最喜欢的餐馆名称</string>
     <string name="last_four">驾驶执照最后四位数</string>
+    <string name="whistle_image">whistle image</string>
+	<string name="whistle_rules">获取规则</string>
     <string name="register_now">立即注册</string>
     <string name="find_password">找回密码</string>
 
@@ -44,6 +50,10 @@
     <string name="phone">手机号:请输入11位手机号</string>
     <string name="message_code">短信验证码</string>
     <string name="register_bottom_message">如果您已拥有 裁判说Caipanshuo ID，则可在此 </string>
+	<string name="action_name">动作名称</string>
+    <string name="period">周期范围</string>
+    <string name="reward_time">奖励次数</string>
+    <string name="reword_content">奖励内容</string>
     <string name="emails">email</string>
     <string name="user">用户名</string>
 

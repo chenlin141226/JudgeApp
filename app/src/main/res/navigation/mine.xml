@@ -3,7 +3,29 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/mine" app:startDestination="@id/mineFragment">
 
-    <fragment android:id="@+id/mineFragment"
-              android:name="com.judge.app.fragments.MineFragment"
-              android:label="MineFragment"/>
+	<fragment android:id="@+id/mineFragment"
+	          android:name="com.judge.app.fragments.MineFragment"
+	          android:label="MineFragment">
+		<action android:id="@+id/action_mineFragment_to_whistleFragment"
+		        app:destination="@id/whistleFragment"
+				app:enterAnim="@anim/slide_in_right"
+				app:exitAnim="@anim/slide_out_left"
+				app:popEnterAnim="@anim/slide_in_left"
+				app:popExitAnim="@anim/slide_out_right"
+		/>
+	</fragment>
+	<fragment android:id="@+id/whistleFragment"
+	          android:name="com.judge.app.fragments.WhistleFragment"
+	          android:label="@string/whistle_title">
+		<action android:id="@+id/action_whistleFragment_to_whistleRulesFragment"
+		        app:destination="@id/whistleRulesFragment"
+				app:enterAnim="@anim/slide_in_right"
+				app:exitAnim="@anim/slide_out_left"
+				app:popEnterAnim="@anim/slide_in_left"
+				app:popExitAnim="@anim/slide_out_right"
+		/>
+	</fragment>
+	<fragment android:id="@+id/whistleRulesFragment"
+	          android:name="com.judge.app.fragments.WhistleRulesFragment"
+	          android:label="@string/whistle_rules"/>
 </navigation>
