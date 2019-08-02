@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    override fun initRefreshLayout() {
+    override fun initView() {
         refreshLayout.apply {
             setEnableAutoLoadMore(true)
             setEnableRefresh(true)

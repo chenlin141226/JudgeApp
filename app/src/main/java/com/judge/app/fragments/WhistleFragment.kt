@@ -13,6 +13,7 @@ import com.judge.app.core.simpleController
 import com.judge.data.WhistleBean
 import com.judge.whistleItem
 import org.jetbrains.anko.collections.forEachWithIndex
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 
 
@@ -67,7 +68,12 @@ class WhistleFragment : BaseFragment() {
     override fun setToolBar() {
         super.setToolBar()
         toolbar.visibility = View.VISIBLE
-        rightButton.visibility = View.VISIBLE
+        rightButton.apply {
+            visibility = View.VISIBLE
+            onClick {
+                navigateTo(R.id.action_whistleFragment_to_whistleRulesFragment, null)
+            }
+        }
     }
 
 }

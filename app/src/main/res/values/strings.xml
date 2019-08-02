@@ -50,4 +50,8 @@
     <string name="phone">手机号:请输入11位手机号</string>
     <string name="message_code">短信验证码</string>
     <string name="register_bottom_message">如果您已拥有 裁判说Caipanshuo ID，则可在此 </string>
+	<string name="action_name">动作名称</string>
+    <string name="period">周期范围</string>
+    <string name="reward_time">奖励次数</string>
+    <string name="reword_content">奖励内容</string>
 </resources>

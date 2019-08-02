@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewStub
 import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -32,6 +33,8 @@ abstract class BaseFragment : BaseMvRxFragment() {
     protected lateinit var refreshLayout: SmartRefreshLayout
     protected lateinit var sharedViewModel: SharedViewModel
     protected lateinit var rightButton: Button
+    protected lateinit var titleViewStub: ViewStub
+    protected lateinit var bottomViewStub: ViewStub
     //protected lateinit var coordinatorLayout: CoordinatorLayout
     protected val epoxyController by lazy { epoxyController() }
 
@@ -72,9 +75,11 @@ abstract class BaseFragment : BaseMvRxFragment() {
             toolbar = findViewById(R.id.toolbar)
             refreshLayout = findViewById(R.id.refreshLayout)
             rightButton = findViewById(R.id.right_button)
+            titleViewStub = findViewById(R.id.titleStub)
+            bottomViewStub = findViewById(R.id.bottomStub)
             // coordinatorLayout = findViewById(R.id.coordinator_layout)
             recyclerView.setController(epoxyController)
-            initRefreshLayout()
+            initView()
             initData()
             setToolBar()
             toolbar.setupWithNavController(findNavController())
@@ -100,9 +105,10 @@ abstract class BaseFragment : BaseMvRxFragment() {
         if (state) initData()
     }
 
-    open fun initRefreshLayout() {}
+    open fun initView() {}
 
     open fun initData() {}
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
