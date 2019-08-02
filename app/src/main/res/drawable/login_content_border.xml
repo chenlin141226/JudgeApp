@@ -11,8 +11,8 @@
             <gradient
                     android:angle="270"
 
-                    android:endColor="#0F000000"
-                    android:startColor="#0F000000" />
+                    android:endColor="#F5F6F7"
+                    android:startColor="#F5F6F7" />
 
             <corners
                     android:bottomLeftRadius="8dip"
@@ -31,8 +31,8 @@
 
             <gradient
                     android:angle="270"
-                    android:endColor="#FFFFFF"
-                    android:startColor="#FFFFFF" />
+                    android:endColor="#F5F6F7"
+                    android:startColor="#F5F6F7" />
 
             <corners
                     android:bottomLeftRadius="8dip"

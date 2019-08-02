@@ -42,12 +42,11 @@ class LoginView @JvmOverloads constructor(
         val spinnerData = resources.getStringArray(R.array.login_item_spinner)
         val spinnerAdapter = ArrayAdapter<String>(context,R.layout.login_spinner,spinnerData)
         spinner.adapter = spinnerAdapter
-        //spinner.setSelection(0)
 
         RxCaptcha.build()
             .backColor(0xf9c660)
             .codeLength(6)
-            .fontSize(50)
+            .fontSize(40)
             .lineNumber(2)
             .size(180, 60)
             .type(RxCaptcha.TYPE.CHARS)
@@ -136,7 +135,7 @@ fun EditText.setTextIfDifferent(newText: CharSequence?): Boolean {
 }
 
 
-private class SimpleTextWatcher(val onTextChanged : (newText : String) -> Unit) : TextWatcher{
+ class SimpleTextWatcher(val onTextChanged : (newText : String) -> Unit) : TextWatcher{
     override fun afterTextChanged(s: Editable?) {
     }
 

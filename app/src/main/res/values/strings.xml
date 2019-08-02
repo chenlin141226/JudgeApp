@@ -56,4 +56,7 @@
     <string name="period">周期范围</string>
     <string name="reward_time">奖励次数</string>
     <string name="reword_content">奖励内容</string>
+    <string name="emails">email</string>
+    <string name="user">用户名</string>
+
 </resources>

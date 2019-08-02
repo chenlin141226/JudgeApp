@@ -22,10 +22,10 @@
             android:id="@+id/tv_about_spannable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="33dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
             android:clickable="true"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_14"
             android:textColor="#a7a19e"/>
 </LinearLayout>

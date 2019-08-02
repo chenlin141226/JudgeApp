@@ -21,6 +21,8 @@ import com.judge.views.loginView
 import com.vondear.rxtool.RxDataTool
 import com.vondear.rxtool.view.RxToast
 import com.vondear.rxui.view.RxCaptcha
+import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.support.v4.act
 import org.jetbrains.anko.support.v4.toast
 
 /**
@@ -35,6 +37,7 @@ class LoginFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         toolbar.isVisible = false
+        (activity as LoggingActivity).tv_about_spannable.isVisible = false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,7 +79,7 @@ class LoginFragment : BaseFragment() {
                    RxCaptcha.build()
                        .backColor(0xf9c660)
                        .codeLength(6)
-                       .fontSize(60)
+                       .fontSize(40)
                        .lineNumber(2)
                        .size(220, 80)
                        .type(RxCaptcha.TYPE.CHARS)
