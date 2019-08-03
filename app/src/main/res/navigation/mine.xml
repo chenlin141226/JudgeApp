@@ -5,7 +5,7 @@
 
     <fragment android:id="@+id/mineFragment"
               android:name="com.judge.app.fragments.MineFragment"
-              android:label="MineFragment">
+              android:label="">
         <action android:id="@+id/action_mineFragment_to_whistleFragment"
                 app:destination="@id/whistleFragment"
                 app:enterAnim="@anim/slide_in_right"

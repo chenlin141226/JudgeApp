@@ -58,5 +58,6 @@
     <string name="reword_content">奖励内容</string>
     <string name="emails">email</string>
     <string name="user">用户名</string>
+    <string name="ignore_unread">忽略未读</string>
 
 </resources>

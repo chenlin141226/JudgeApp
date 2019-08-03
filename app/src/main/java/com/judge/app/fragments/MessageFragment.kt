@@ -1,6 +1,7 @@
 package com.judge.app.fragments
 
 import android.view.View
+import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
@@ -13,6 +14,7 @@ class MessageFragment : BaseFragment() {
             title("私人消息")
             messageType(0)
             onClick { _ ->
+                navigateTo(R.id.action_messageFragment_to_personalMessageFragment, null)
             }
         }
         messageItem {
@@ -20,6 +22,7 @@ class MessageFragment : BaseFragment() {
             title("公告消息")
             messageType(1)
             onClick { _ ->
+                navigateTo(R.id.action_messageFragment_to_publicMessageFragment, null)
             }
         }
     }

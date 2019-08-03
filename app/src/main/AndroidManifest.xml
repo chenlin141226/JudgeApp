@@ -17,7 +17,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="GoogleAppIndexingWarning"
+            tools:targetApi="n">
         <activity android:name=".app.activities.LoggingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -29,13 +30,6 @@
         <activity android:name=".app.activities.HomeActivity"/>
 
         <service android:name=".utils.NetworkService"/>
-
-        <!--<meta-data-->
-                <!--android:name="design_width_in_dp"-->
-                <!--android:value="540"/>-->
-        <!--<meta-data-->
-                <!--android:name="design_height_in_dp"-->
-                <!--android:value="667"/>-->
     </application>
 
 </manifest>
