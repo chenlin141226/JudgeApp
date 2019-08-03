@@ -73,6 +73,8 @@ dependencies {
     //UI库
     implementation "com.github.tamsiree.RxTool:RxUI:2.3.9"
 
+    //侧滑菜单布局
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
     //implementation 'me.jessyan:autosize:1.1.2'
 
     testImplementation 'junit:junit:4.12'

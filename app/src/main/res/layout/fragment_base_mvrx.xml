@@ -33,6 +33,7 @@
 			android:id="@+id/refreshLayout"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+			android:background="@color/gray1"
 			app:srlEnableLoadMore="false"
 			app:srlEnableAutoLoadMore="false"
 			app:srlEnableRefresh="false"
