@@ -7,9 +7,9 @@ import android.widget.FrameLayout
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
+import com.bumptech.glide.Glide
 import com.judge.R
 import com.judge.data.Dog
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dog_row.view.*
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
@@ -24,7 +24,7 @@ class DogRow @JvmOverloads constructor(
 
     @ModelProp
     fun setDog(dog: Dog) {
-        Picasso.with(context)
+        Glide.with(context)
             .load(dog.imageUrl)
             .into(image)
         nameView.text = dog.name

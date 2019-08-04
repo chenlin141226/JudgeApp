@@ -17,9 +17,15 @@
     <string name="number">225</string>
     <string name="focus">关注</string>
     <string name="whistle_title">我的哨子</string>
-
+    <string name="mine_message">我的消息</string>
+    <string name="public_message">公共消息</string>
+    <string name="personal_message">私人消息</string>
+    <string name="my_topic">我的主题</string>
+    <string name="published_topic">我发表的</string>
+    <string name="replied_topic">我回复的</string>
+    <string name="clear_all">全部清空</string>
     <string name="back_icon">back icon</string>
-
+    <string name="ignore_unread">忽略未读</string>
 
 
     <!--   ——————————登录 —————————— -->
@@ -60,5 +66,6 @@
     <!-- ——————   积分商城  —————-->
     <string name="me" >我的</string>
     <string name="all_product" >全部商品</string>
+
 
 </resources>

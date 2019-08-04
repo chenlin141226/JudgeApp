@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/dp_30"
+        android:background="@drawable/login_bg"
+>
 
     <LinearLayout
             android:id="@+id/content"
@@ -28,7 +32,7 @@
                 android:padding="@dimen/dp_10"
                 android:textColor="#d4cdca"
                 android:textSize="@dimen/text_14"
-                tools:ignore="Autofill,TextFields" />
+                tools:ignore="Autofill,TextFields"/>
 
         <EditText
                 android:id="@+id/et_password"
@@ -41,7 +45,7 @@
                 android:padding="10dp"
                 android:textColor="#d4cdca"
                 android:textSize="@dimen/text_14"
-                tools:ignore="Autofill,TextFields" />
+                tools:ignore="Autofill,TextFields"/>
 
         <Spinner
                 android:id="@+id/spinner"
@@ -50,7 +54,7 @@
                 android:layout_marginTop="@dimen/dp_36"
                 android:background="@drawable/login_input_bg"
                 android:dropDownVerticalOffset="@dimen/dp_40"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown"/>
 
         <EditText
                 android:id="@+id/et_code"
@@ -63,7 +67,7 @@
                 android:padding="@dimen/dp_10"
                 android:textColor="#d4cdca"
                 android:textSize="@dimen/text_14"
-                tools:ignore="Autofill,TextFields" />
+                tools:ignore="Autofill,TextFields"/>
 
 
     </LinearLayout>
@@ -82,7 +86,7 @@
                 android:layout_height="@dimen/dp_50"
                 android:layout_gravity="center"
                 android:background="@drawable/login_header"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"/>
     </LinearLayout>
 
     <ImageView
@@ -92,7 +96,7 @@
             android:background="@drawable/login_btn"
             app:layout_anchor="@id/content"
             app:layout_anchorGravity="bottom|center"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"/>
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -106,7 +110,7 @@
                 android:text="@string/login"
                 android:textColor="#fff"
                 android:textSize="@dimen/text_25"
-                tools:ignore="RelativeOverlap" />
+                tools:ignore="RelativeOverlap"/>
 
         <LinearLayout
                 android:id="@+id/loginJump"
@@ -123,7 +127,7 @@
                     android:layout_width="@dimen/dp_23"
                     android:layout_height="@dimen/dp_23"
                     android:background="@drawable/right"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -135,7 +139,7 @@
             android:layout_marginEnd="@dimen/dp_50"
             app:layout_anchor="@id/et_code"
             app:layout_anchorGravity="right|center"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"/>
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -152,7 +156,7 @@
                 android:layout_marginStart="@dimen/dp_70"
                 android:text="@string/register_now"
                 android:textColor="#ef9a48"
-                android:textSize="@dimen/text_16" />
+                android:textSize="@dimen/text_16"/>
 
         <TextView
                 android:id="@+id/findpassword"
@@ -164,7 +168,7 @@
                 android:text="@string/find_password"
                 android:textColor="#ef9a48"
                 android:textSize="@dimen/text_16"
-                tools:ignore="RelativeOverlap" />
+                tools:ignore="RelativeOverlap"/>
     </RelativeLayout>
 
 
