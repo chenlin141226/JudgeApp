@@ -57,4 +57,8 @@
     <string name="emails">email</string>
     <string name="user">用户名</string>
 
+    <!-- ——————   积分商城  —————-->
+    <string name="me" >我的</string>
+    <string name="all_product" >全部商品</string>
+
 </resources>

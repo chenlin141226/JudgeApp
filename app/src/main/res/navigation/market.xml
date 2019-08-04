@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/market" app:startDestination="@id/marketFragment">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/market"
+            app:startDestination="@id/marketFragment"
+            tools:ignore="UnusedNavigation">
 
-    <fragment android:id="@+id/marketFragment" android:name="com.judge.app.fragments.MarketFragment"
-              android:label="MarketFragment"/>
+    <fragment android:id="@+id/marketFragment"
+              android:name="com.judge.app.fragments.MarketFragment"
+              android:label="@string/all_product"/>
 </navigation>
