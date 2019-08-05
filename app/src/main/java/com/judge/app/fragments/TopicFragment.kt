@@ -3,6 +3,7 @@ package com.judge.app.fragments
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.judge.R
+import com.judge.adapters.ViewPagerAdapter
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
@@ -32,7 +33,8 @@ class TopicFragment : BaseFragment() {
         }
         titleViewStub.layoutResource = R.layout.topic_view
         titleViewStub.inflate().apply {
-            tabLayout.setViewPager(viewPager, titles, activity, fragments)
+            viewPager.adapter = ViewPagerAdapter(childFragmentManager, fragments, titles)
+            tabLayout.setViewPager(viewPager)
         }
     }
 }
