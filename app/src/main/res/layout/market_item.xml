@@ -52,8 +52,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_market"/>
         <ImageButton
                 android:id="@+id/btn_exchange"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_20"
+                android:layout_width="@dimen/dp_47"
+                android:layout_height="@dimen/dp_23"
                 android:background="@drawable/exchange"
                 android:onClick="@{onClick}"
                 app:layout_constraintRight_toRightOf="parent"

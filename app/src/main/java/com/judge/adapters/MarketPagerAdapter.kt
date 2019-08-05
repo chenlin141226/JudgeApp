@@ -1,14 +1,9 @@
 package com.judge.adapters
 
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.judge.R
-import com.judge.app.fragments.PublicMessageFragment
-import com.judge.app.fragments.PublishedTopicFragment
 import com.judge.app.fragments.market.AllProductFragment
-import com.vondear.rxtool.RxTool
 
 /**
  * @author: jaffa
@@ -19,20 +14,12 @@ class MarketPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     var fragments: MutableList<Fragment> = ArrayList()
     var titles: Array<String>? = null
 
-//    val titles = arrayOf(
-//        RxTool.getContext().getString(R.string.virtualCard),
-//        RxTool.getContext().getString(R.string.videoMembers),
-//        RxTool.getContext().getString(R.string.technology),
-//        RxTool.getContext().getString(R.string.gameExtensions)
-//    )
 
     init {
-        //for (index in 0 until 4){
-        fragments.add(AllProductFragment())
-        fragments.add(PublishedTopicFragment())
-        fragments.add(PublicMessageFragment())
-        fragments.add(PublicMessageFragment())
-        //}
+        for (index in 0 until 4) {
+            fragments.add(AllProductFragment(index))
+
+        }
     }
 
 

@@ -34,7 +34,7 @@ class MarketFragment : BaseFragment() {
             text = resources.getString(R.string.me)
             textColor = ContextCompat.getColor(context,R.color.color_gray)
             onClick {
-                navigateTo(R.id.action_whistleFragment_to_whistleRulesFragment, null)
+                navigateTo(R.id.action_marketFragment_to_myProductFragment, null)
             }
         }
     }
@@ -56,15 +56,12 @@ class MarketFragment : BaseFragment() {
 
             viewPager?.let {
                 it.adapter = myAdapter
-                it.currentItem = 1
+                it.currentItem = 0
                 it.offscreenPageLimit = 3
             }
             tabLayout.setupWithViewPager(viewPager)
             tabLayout.tabMode = TabLayout.MODE_FIXED
         }
-
-
-
 
     }
 

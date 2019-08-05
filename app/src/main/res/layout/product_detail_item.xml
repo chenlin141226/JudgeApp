@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+    <ImageView
+            android:id="@+id/iv_topUrl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:background="@drawable/market_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_25"
+            android:background="#fcecce"
+            app:layout_constraintTop_toBottomOf="@id/iv_topUrl"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+                android:id="@+id/tv_productName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="锦瑟香也 fz t1 耳机"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_centerVertical="true"/>
+
+        <TextView
+                android:id="@+id/tv_whistleNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4600 铜哨子"
+                android:layout_marginRight="@dimen/dp_30"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_75"
+            android:background="#f6f5fa"
+            app:layout_constraintTop_toBottomOf="@id/rl"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+                android:id="@+id/tv_goods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goods_category"
+                android:layout_marginLeft="@dimen/dp_40"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+                android:id="@+id/tv_goodsCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 游戏数码"
+                app:layout_constraintLeft_toRightOf="@id/tv_goods"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <TextView
+                android:id="@+id/tv_goodsPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 149元"
+                android:layout_marginRight="@dimen/dp_40"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goods_price"
+                app:layout_constraintRight_toLeftOf="@id/tv_goodsPrice"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/receive_address"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_20"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_20"
+            android:padding="@dimen/dp_5"
+            android:background="@drawable/login_content_border"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="13dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/name"
+                    android:textSize="@dimen/text_16"
+                    android:textColor="@color/colorAccent"/>
+
+            <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:inputType="textVisiblePassword"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/_9"
+                    android:textColorHint="@color/_9"
+                    android:textSize="@dimen/text_16"/>
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/e"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="13dp">
+
+            <TextView
+                    android:layout_width="@dimen/dp_35"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/qq"
+                    android:textSize="@dimen/text_16"
+                    android:textColor="@color/colorAccent"/>
+
+            <EditText
+                    android:id="@+id/et_qq"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:inputType="textVisiblePassword"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/_9"
+                    android:textColorHint="@color/_9"
+                    android:textSize="@dimen/text_16"/>
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/e"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="13dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/phone_number"
+                    android:textSize="@dimen/text_16"
+                    android:textColor="@color/colorAccent"/>
+
+            <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:inputType="textVisiblePassword"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/_9"
+                    android:textColorHint="@color/_9"
+                    android:textSize="@dimen/text_16"/>
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/e"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="13dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/address"
+                    android:textSize="@dimen/text_16"
+                    android:textColor="@color/colorAccent"/>
+
+            <EditText
+                    android:id="@+id/et_adress"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:inputType="textVisiblePassword"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/_9"
+                    android:textColorHint="@color/_9"
+                    android:textSize="@dimen/text_16"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageButton
+            android:id="@+id/btn_exchange"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_45"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/exchange"
+            app:layout_constraintTop_toBottomOf="@id/ll_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

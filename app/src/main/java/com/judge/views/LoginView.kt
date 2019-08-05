@@ -2,17 +2,16 @@ package com.judge.views
 
 import android.content.Context
 import android.text.Editable
-import android.text.Spanned
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.FrameLayout
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
 import com.judge.R
+import com.judge.extensions.setTextIfDifferent
 import com.vondear.rxui.view.RxCaptcha
 import kotlinx.android.synthetic.main.view_login.view.*
 
@@ -61,12 +60,12 @@ class LoginView @JvmOverloads constructor(
 
     @TextProp
     fun setPassword(password : CharSequence?){
-
+        et_username.setTextIfDifferent(password)
     }
 
     @TextProp
     fun setCode(code : CharSequence?){
-
+        et_username.setTextIfDifferent(code)
     }
 
 
@@ -127,13 +126,6 @@ class LoginView @JvmOverloads constructor(
         findpassword.setOnClickListener(listener)
     }
 }
-
-fun EditText.setTextIfDifferent(newText: CharSequence?): Boolean {
-    setText(newText)
-    setSelection(newText?.length ?: 0)
-    return true
-}
-
 
  class SimpleTextWatcher(val onTextChanged : (newText : String) -> Unit) : TextWatcher{
     override fun afterTextChanged(s: Editable?) {

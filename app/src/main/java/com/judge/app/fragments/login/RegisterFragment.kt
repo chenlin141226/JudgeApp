@@ -1,4 +1,4 @@
-package com.judge.app.fragments
+package com.judge.app.fragments.login
 
 import android.os.Bundle
 import android.view.View
