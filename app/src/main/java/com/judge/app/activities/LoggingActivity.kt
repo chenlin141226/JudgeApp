@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.judge.R
@@ -39,7 +40,7 @@ class LoggingActivity : BaseActivity() {
 
 
             override fun updateDrawState(ds: TextPaint) {
-                ds.color = resources.getColor(R.color.colorPrimary)
+                ds.color = ContextCompat.getColor(applicationContext,R.color.colorPrimary)
                 ds.isUnderlineText = false
             }
         }

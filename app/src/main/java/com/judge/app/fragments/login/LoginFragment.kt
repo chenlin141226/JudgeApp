@@ -1,4 +1,4 @@
-package com.judge.app.fragments
+package com.judge.app.fragments.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,7 +22,6 @@ import com.vondear.rxtool.RxDataTool
 import com.vondear.rxtool.view.RxToast
 import com.vondear.rxui.view.RxCaptcha
 import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.support.v4.act
 import org.jetbrains.anko.support.v4.toast
 
 /**

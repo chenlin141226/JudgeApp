@@ -66,6 +66,9 @@
     <!-- ——————   积分商城  —————-->
     <string name="me" >我的</string>
     <string name="all_product" >全部商品</string>
-
+    <string name="virtualCard" >虚拟卡片</string>
+    <string name="videoMembers" >视频会员</string>
+    <string name="technology" >数码周边</string>
+    <string name="gameExtensions" >游戏周边</string>
 
 </resources>

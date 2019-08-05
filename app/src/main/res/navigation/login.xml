@@ -4,7 +4,7 @@
             android:id="@+id/login"
             app:startDestination="@id/loginFragment">
     <fragment android:id="@+id/loginFragment"
-              android:name="com.judge.app.fragments.LoginFragment"
+              android:name="com.judge.app.fragments.login.LoginFragment"
               android:label="LoginFragment">
         <action android:id="@+id/action_loginFragment_to_registerFragment"
                 app:destination="@id/registerFragment"
@@ -22,11 +22,11 @@
     </fragment>
 
     <fragment android:id="@+id/registerFragment"
-              android:name="com.judge.app.fragments.RegisterFragment"
+              android:name="com.judge.app.fragments.login.RegisterFragment"
               android:label=""/>
 
     <fragment android:id="@+id/forgetFragment"
-              android:name="com.judge.app.fragments.ForgetFragment"
+              android:name="com.judge.app.fragments.login.ForgetFragment"
               android:label=""/>
 
 </navigation>

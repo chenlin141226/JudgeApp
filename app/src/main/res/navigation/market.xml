@@ -7,6 +7,6 @@
             tools:ignore="UnusedNavigation">
 
     <fragment android:id="@+id/marketFragment"
-              android:name="com.judge.app.fragments.MarketFragment"
+              android:name="com.judge.app.fragments.market.MarketFragment"
               android:label="@string/all_product"/>
 </navigation>
