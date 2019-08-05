@@ -27,7 +27,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".app.activities.HomeActivity"/>
+        <activity android:name=".app.activities.HomeActivity"
+                  android:screenOrientation="portrait"
+        />
 
         <service android:name=".utils.NetworkService"/>
     </application>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="title_textSize" format="dimension"/>
+        <attr name="indicatorWidth" format="dimension"/>
+        <attr name="indicatorHeight" format="dimension"/>
+        <attr name="indicatorBottomMargin" format="dimension"/>
+        <attr name="normalColor" format="color"/>
+        <attr name="lightColor" format="color"/>
+        <attr name="indicatorColor" format="color"/>
+        <attr name="currentItem" format="integer"/>
+        <attr name="change_color" format="boolean"/>
+        <attr name="change_size" format="boolean"/>
+        <attr name="bold" format="boolean"/>
+        <attr name="visibleItemCount" format="integer"/>
+    </declare-styleable>
+</resources>

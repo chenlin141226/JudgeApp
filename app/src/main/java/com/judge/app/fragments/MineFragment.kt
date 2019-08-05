@@ -84,6 +84,7 @@ class MineFragment : BaseFragment() {
                     when (index) {
                         0 ->navigateTo(R.id.action_mineFragment_to_messageFragment, null)
                         3 -> navigateTo(R.id.action_mineFragment_to_topicFragment, null)
+                        4 -> navigateTo(R.id.action_mineFragment_to_favoriteFragment, null)
                         else -> navigateTo(R.id.action_mineFragment_to_whistleFragment, null)
                     }
                     viewModel.updateIcon(index, item)
