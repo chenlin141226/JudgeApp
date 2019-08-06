@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.airbnb.epoxy.EpoxyRecyclerView
+import com.airbnb.epoxy.EpoxyTouchHelper
+import com.airbnb.epoxy.EpoxyTouchHelperCallback
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.MvRx
 import com.judge.R

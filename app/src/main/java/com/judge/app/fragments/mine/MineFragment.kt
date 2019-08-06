@@ -1,4 +1,4 @@
-package com.judge.app.fragments
+package com.judge.app.fragments.mine
 
 import android.content.res.TypedArray
 import com.airbnb.mvrx.MvRxState
@@ -82,9 +82,11 @@ class MineFragment : BaseFragment() {
                 item(item)
                 onClick { _ ->
                     when (index) {
-                        0 ->navigateTo(R.id.action_mineFragment_to_messageFragment, null)
+                        0 -> navigateTo(R.id.action_mineFragment_to_messageFragment, null)
+                        2 -> navigateTo(R.id.action_mineFragment_to_whistleFragment, null)
                         3 -> navigateTo(R.id.action_mineFragment_to_topicFragment, null)
                         4 -> navigateTo(R.id.action_mineFragment_to_favoriteFragment, null)
+                        5 -> navigateTo(R.id.action_mineFragment_to_historyFragment, null)
                         else -> navigateTo(R.id.action_mineFragment_to_whistleFragment, null)
                     }
                     viewModel.updateIcon(index, item)

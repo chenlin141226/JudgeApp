@@ -1,14 +1,11 @@
 package com.judge.adapters
 
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.judge.R
-import com.judge.app.fragments.PublicMessageFragment
-import com.judge.app.fragments.PublishedTopicFragment
+import com.judge.app.fragments.mine.PublicMessageFragment
+import com.judge.app.fragments.mine.PublishedTopicFragment
 import com.judge.app.fragments.market.AllProductFragment
-import com.vondear.rxtool.RxTool
 
 /**
  * @author: jaffa

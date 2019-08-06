@@ -1,9 +1,11 @@
-package com.judge.app.fragments
+package com.judge.app.fragments.mine
 
+import android.view.View
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.airbnb.mvrx.fragmentViewModel
+import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
@@ -11,16 +13,17 @@ import com.judge.app.core.simpleController
 import com.judge.data.TopicBean
 import com.judge.topicItem
 import org.jetbrains.anko.collections.forEachWithIndex
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
-data class PublicTopicState(
+data class FavoriteState(
     val topicItems: List<TopicBean> = emptyList()
 ) : MvRxState
 
-class PublicTopicViewModel(
-    initialState: PublicTopicState
-) : MvRxViewModel<PublicTopicState>(initialState) {
+class FavoriteViewModel(
+    initialState: FavoriteState
+) : MvRxViewModel<FavoriteState>(initialState) {
     private val list = LinkedList<TopicBean>()
 
     /* init {
@@ -44,15 +47,15 @@ class PublicTopicViewModel(
         }
     }
 
-    companion object : MvRxViewModelFactory<PublicTopicViewModel, PublicTopicState> {
-        override fun create(viewModelContext: ViewModelContext, state: PublicTopicState): PublicTopicViewModel? {
-            return PublicTopicViewModel(state)
+    companion object : MvRxViewModelFactory<FavoriteViewModel, FavoriteState> {
+        override fun create(viewModelContext: ViewModelContext, state: FavoriteState): FavoriteViewModel? {
+            return FavoriteViewModel(state)
         }
     }
 }
 
-class PublishedTopicFragment : BaseFragment() {
-    private val viewModel: PublicTopicViewModel by fragmentViewModel()
+class FavoriteFragment : BaseFragment() {
+    private val viewModel: FavoriteViewModel by fragmentViewModel()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         state.topicItems.forEachWithIndex { index, topicBean ->
             topicItem {
@@ -70,7 +73,15 @@ class PublishedTopicFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
+        toolbar.visibility = View.VISIBLE
+        toolbar.visibility = View.VISIBLE
+        rightButton.apply {
+            visibility = View.VISIBLE
+            text = getString(R.string.clear_all)
+            onClick {
+
+            }
+        }
         viewModel.fetchTopics()
     }
-
 }

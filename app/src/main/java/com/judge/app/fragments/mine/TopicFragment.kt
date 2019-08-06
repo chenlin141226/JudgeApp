@@ -1,4 +1,4 @@
-package com.judge.app.fragments
+package com.judge.app.fragments.mine
 
 import android.view.View
 import androidx.fragment.app.Fragment
