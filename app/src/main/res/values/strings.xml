@@ -46,7 +46,7 @@
     <string name="food_name">您最喜欢的餐馆名称</string>
     <string name="last_four">驾驶执照最后四位数</string>
     <string name="whistle_image">whistle image</string>
-	<string name="whistle_rules">获取规则</string>
+    <string name="whistle_rules">获取规则</string>
     <string name="register_now">立即注册</string>
     <string name="find_password">找回密码</string>
 
@@ -57,8 +57,8 @@
     <string name="email">Email:请输入邮箱地址</string>
     <string name="phone">手机号:请输入11位手机号</string>
     <string name="message_code">短信验证码</string>
-    <string name="register_bottom_message">如果您已拥有 裁判说Caipanshuo ID，则可在此 </string>
-	<string name="action_name">动作名称</string>
+    <string name="register_bottom_message">如果您已拥有 裁判说Caipanshuo ID，则可在此</string>
+    <string name="action_name">动作名称</string>
     <string name="period">周期范围</string>
     <string name="reward_time">奖励次数</string>
     <string name="reword_content">奖励内容</string>
@@ -66,11 +66,20 @@
     <string name="user">用户名</string>
 
     <!-- ——————   积分商城  —————-->
-    <string name="me" >我的</string>
-    <string name="all_product" >全部商品</string>
-    <string name="virtualCard" >虚拟卡片</string>
-    <string name="videoMembers" >视频会员</string>
-    <string name="technology" >数码周边</string>
-    <string name="gameExtensions" >游戏周边</string>
+    <string name="me">我的</string>
+    <string name="myproduct">我的商品</string>
+    <string name="all_product">全部商品</string>
+    <string name="product_detail">商品详情</string>
+    <string name="virtualCard">虚拟卡片</string>
+    <string name="videoMembers">视频会员</string>
+    <string name="technology">数码周边</string>
+    <string name="gameExtensions">游戏周边</string>
+    <string name="goods_category">商品分类: </string>
+    <string name="goods_price">市场价格: </string>
+    <string name="receive_address">收获地址</string>
+    <string name="name">姓名:</string>
+    <string name="qq">QQ:</string>
+    <string name="phone_number">手机:</string>
+    <string name="address">地址:</string>
 
 </resources>

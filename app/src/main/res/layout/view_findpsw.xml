@@ -10,6 +10,7 @@
             android:id="@+id/rl_title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_50"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

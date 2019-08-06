@@ -8,5 +8,28 @@
 
     <fragment android:id="@+id/marketFragment"
               android:name="com.judge.app.fragments.market.MarketFragment"
-              android:label="@string/all_product"/>
+              android:label="@string/all_product">
+        <action android:id="@+id/action_marketFragment_to_myProductFragment"
+                app:destination="@id/myfragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+
+        <action android:id="@+id/action_marketFragment_to_productDetailsFragment"
+                app:destination="@id/product_details"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/myfragment"
+              android:name="com.judge.app.fragments.market.MyProductFragment"
+              android:label="@string/myproduct"/>
+
+    <fragment android:id="@+id/product_details"
+              android:name="com.judge.app.fragments.market.ProductDetailsFragment"
+              android:label="@string/product_detail"/>
+
 </navigation>

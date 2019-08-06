@@ -1,5 +1,7 @@
 package com.judge.extensions
 
+import android.widget.EditText
+
 fun <T> List<T>.update(value: T, finder: (T) -> Boolean) = indexOfFirst(finder).let { index ->
     if (index >= 0) copy(index, value) else this + value
 }
@@ -16,4 +18,10 @@ fun <T> List<T>.delete(i: Int): List<T> =
 
 fun <T> List<T>.update(newValue: (T) -> T, finder: (T) -> Boolean) = indexOfFirst(finder).let { index ->
     if (index >= 0) copy(index, newValue(get(index))) else this
+}
+
+fun EditText.setTextIfDifferent(newText: CharSequence?): Boolean {
+    setText(newText)
+    setSelection(newText?.length ?: 0)
+    return true
 }
