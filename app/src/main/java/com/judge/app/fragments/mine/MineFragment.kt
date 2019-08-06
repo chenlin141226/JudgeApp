@@ -83,11 +83,13 @@ class MineFragment : BaseFragment() {
                 onClick { _ ->
                     when (index) {
                         0 -> navigateTo(R.id.action_mineFragment_to_messageFragment, null)
+                        1 -> navigateTo(R.id.action_mineFragment_to_medalCenterFragment, null)
                         2 -> navigateTo(R.id.action_mineFragment_to_whistleFragment, null)
                         3 -> navigateTo(R.id.action_mineFragment_to_topicFragment, null)
                         4 -> navigateTo(R.id.action_mineFragment_to_favoriteFragment, null)
                         5 -> navigateTo(R.id.action_mineFragment_to_historyFragment, null)
-                        else -> navigateTo(R.id.action_mineFragment_to_whistleFragment, null)
+                        6 -> navigateTo(R.id.action_mineFragment_to_settingFragment, null)
+                        else -> navigateTo(R.id.action_mineFragment_to_settingFragment, null)
                     }
                     viewModel.updateIcon(index, item)
                 }

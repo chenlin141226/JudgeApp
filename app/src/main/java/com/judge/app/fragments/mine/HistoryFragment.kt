@@ -1,6 +1,7 @@
 package com.judge.app.fragments.mine
 
 import android.view.View
+import androidx.core.view.isVisible
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
@@ -72,10 +73,9 @@ class HistoryFragment :BaseFragment(){
         }
     }
 
-    override fun initData() {
-        super.initData()
-        toolbar.visibility = View.VISIBLE
-        toolbar.visibility = View.VISIBLE
+    override fun initView() {
+        super.initView()
+        toolbar.isVisible = true
         rightButton.apply {
             visibility = View.VISIBLE
             text = getString(R.string.clear_all)
@@ -83,6 +83,9 @@ class HistoryFragment :BaseFragment(){
 
             }
         }
+    }
+    override fun initData() {
+        super.initData()
         viewModel.fetchTopics()
     }
 }

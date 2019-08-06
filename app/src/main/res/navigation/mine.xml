@@ -41,6 +41,20 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
         />
+        <action android:id="@+id/action_mineFragment_to_medalCenterFragment"
+                app:destination="@id/medalCenterFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+        <action android:id="@+id/action_mineFragment_to_settingFragment"
+                app:destination="@id/settingFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
     </fragment>
     <fragment android:id="@+id/whistleFragment"
               android:name="com.judge.app.fragments.mine.WhistleFragment"
@@ -89,4 +103,10 @@
     <fragment android:id="@+id/historyFragment"
               android:name="com.judge.app.fragments.mine.HistoryFragment"
               android:label="@string/my_history"/>
+    <fragment android:id="@+id/settingFragment"
+              android:name="com.judge.app.fragments.mine.SettingFragment"
+              android:label="@string/setting"/>
+    <fragment android:id="@+id/medalCenterFragment"
+              android:name="com.judge.app.fragments.mine.MedalCenterFragment"
+              android:label="@string/medal_center"/>
 </navigation>

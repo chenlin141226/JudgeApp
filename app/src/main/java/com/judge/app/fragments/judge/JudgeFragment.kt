@@ -1,4 +1,4 @@
-package com.judge.app.fragments
+package com.judge.app.fragments.judge
 
 import android.view.View
 import com.airbnb.mvrx.fragmentViewModel

@@ -4,6 +4,6 @@
             android:id="@+id/judge" app:startDestination="@id/judgeFragment">
 
     <fragment android:id="@+id/judgeFragment"
-              android:name="com.judge.app.fragments.JudgeFragment"
+              android:name="com.judge.app.fragments.judge.JudgeFragment"
               android:label="JudgeFragment"/>
 </navigation>

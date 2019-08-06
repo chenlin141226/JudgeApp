@@ -1,4 +1,4 @@
-package com.judge.app.fragments
+package com.judge.app.fragments.home
 
 import com.airbnb.mvrx.*
 import com.judge.app.core.BaseFragment

@@ -5,7 +5,7 @@
             app:startDestination="@id/homeFragment">
 
     <fragment android:id="@+id/homeFragment"
-              android:name="com.judge.app.fragments.HomeFragment"
+              android:name="com.judge.app.fragments.home.HomeFragment"
               android:label="HomeFragment">
         <action android:id="@+id/action_homeFragment_to_detailFragment"
                 app:destination="@id/detailFragment"
@@ -15,6 +15,6 @@
                 app:popExitAnim="@anim/slide_out_right"
         />
     </fragment>
-    <fragment android:id="@+id/detailFragment" android:name="com.judge.app.fragments.DetailFragment"
+    <fragment android:id="@+id/detailFragment" android:name="com.judge.app.fragments.home.DetailFragment"
               android:label="DetailFragment"/>
 </navigation>

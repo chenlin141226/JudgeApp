@@ -24,6 +24,9 @@
     <string name="published_topic">我发表的</string>
     <string name="replied_topic">我回复的</string>
     <string name="my_favorite">我的收藏</string>
+    <string name="setting">设置</string>
+    <string name="mine">我的</string>
+    <string name="medal_center">勋章中心</string>
     <string name="my_history">我的足迹</string>
     <string name="clear_all">全部清空</string>
     <string name="back_icon">back icon</string>
@@ -74,8 +77,8 @@
     <string name="videoMembers">视频会员</string>
     <string name="technology">数码周边</string>
     <string name="gameExtensions">游戏周边</string>
-    <string name="goods_category">商品分类: </string>
-    <string name="goods_price">市场价格: </string>
+    <string name="goods_category">商品分类:</string>
+    <string name="goods_price">市场价格:</string>
     <string name="receive_address">收获地址</string>
     <string name="name">姓名:</string>
     <string name="qq">QQ:</string>
