@@ -22,18 +22,18 @@ data class MarketState(val marketItems: List<MarketBean> = emptyList()) : MvRxSt
 
 class MarketViewModel(initialState: MarketState) : MvRxViewModel<MarketState>(initialState) {
     private val list = LinkedList<MarketBean>()
-    fun getMarket(index: Int) {
-        for (i in 1 until 10) {
-            val bean: MarketBean = when {
-                i % 2 == 0 -> MarketBean("", "jaffa yeqi linlei$index", "库存12", "消耗了1600吊死扶")
-                i % 3 == 0 -> MarketBean("", "jaffa yeqi linlei$index", "库存12", "消耗了1600吊死扶")
-                else -> MarketBean("", "jaffa yeqi linlei$index", "库存12", "消耗了1600吊死扶")
-            }
-            list.add(bean)
+
+    fun fetchMarket(index: Int){
+        for (i in 1..10){
+            val market = MarketBean(
+                marketUrl = "https://i.redd.it/nbju2rir9xp11.jpg",
+                marketName = "小鱼儿$i",
+                marketNumber = "1314",
+                marketinfo = "你太美，基态美$index"
+            )
+            list.add(market)
         }
-        setState {
-            copy(marketItems = list)
-        }
+        setState { copy(marketItems = list) }
     }
 
     fun removeMarket(){
@@ -69,13 +69,10 @@ class AllProductFragment(index: Int) : BaseFragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.removeMarket()
-    }
+
 
     override fun initData() {
-        viewModel.getMarket(index)
+        viewModel.fetchMarket(index)
 
     }
 }

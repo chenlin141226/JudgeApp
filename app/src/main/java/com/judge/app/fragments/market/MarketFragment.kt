@@ -5,14 +5,13 @@ import android.graphics.Color
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
 import com.judge.R
-import com.judge.adapters.MarketPagerAdapter
+import com.judge.adapters.ViewPagerAdapter
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
-import com.vondear.rxtool.RxTool
-import kotlinx.android.synthetic.main.table_layout.view.*
+import kotlinx.android.synthetic.main.topic_view.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.textColor
 
@@ -47,20 +46,19 @@ class MarketFragment : BaseFragment() {
             resources.getString(R.string.gameExtensions)
         )
 
-        val myAdapter = MarketPagerAdapter(childFragmentManager)
-        myAdapter.setTitle(titles)
-        //使用Viewstub添加布局
-        titleViewStub.layoutResource = R.layout.table_layout
-
-        var inflate = titleViewStub.inflate().apply {
-
-            viewPager?.let {
-                it.adapter = myAdapter
-                it.currentItem = 0
-                it.offscreenPageLimit = 3
+        val fragments = ArrayList<Fragment>().also {
+            for (index in 0 until 4) {
+                it.add(AllProductFragment(index))
             }
-            tabLayout.setupWithViewPager(viewPager)
-            tabLayout.tabMode = TabLayout.MODE_FIXED
+        }
+
+        //使用Viewstub添加布局
+        titleViewStub.layoutResource = R.layout.topic_view
+
+         titleViewStub.inflate().apply {
+             viewPager.adapter = ViewPagerAdapter(childFragmentManager, fragments, titles)
+             //viewPager.set
+             tabLayout.setViewPager(viewPager)
         }
 
     }
