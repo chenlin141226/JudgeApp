@@ -1,4 +1,4 @@
-package com.judge.app.fragments.mine
+package com.judge.app.fragments.mine.topic
 
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
@@ -9,19 +9,19 @@ import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.TopicBean
-import com.judge.extensions.delete
 import com.judge.topicItem
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
-data class PublicTopicState(
+
+data class RepliedTopicState(
     val topicItems: List<TopicBean> = emptyList()
 ) : MvRxState
 
-class PublicTopicViewModel(
-    initialState: PublicTopicState
-) : MvRxViewModel<PublicTopicState>(initialState) {
+class RepliedTopicViewModel(
+    initialState: RepliedTopicState
+) : MvRxViewModel<RepliedTopicState>(initialState) {
     private val list = LinkedList<TopicBean>()
 
     init {
@@ -32,7 +32,7 @@ class PublicTopicViewModel(
         for (i in 1..20) {
             val topic = TopicBean(
                 title = "天下武功，唯快不破，欲练此功，必先自宫",
-                topicUserName = "花无缺$i",
+                topicUserName = "花无缺",
                 time = "一天前",
                 viewedCount = "1314",
                 commentCount = "1314"
@@ -45,21 +45,15 @@ class PublicTopicViewModel(
         }
     }
 
-    fun deleteTopic(index: Int) {
-        setState {
-            copy(topicItems = topicItems.delete(index))
-        }
-    }
-
-    companion object : MvRxViewModelFactory<PublicTopicViewModel, PublicTopicState> {
-        override fun create(viewModelContext: ViewModelContext, state: PublicTopicState): PublicTopicViewModel? {
-            return PublicTopicViewModel(state)
+    companion object : MvRxViewModelFactory<RepliedTopicViewModel, RepliedTopicState> {
+        override fun create(viewModelContext: ViewModelContext, state: RepliedTopicState): RepliedTopicViewModel? {
+            return RepliedTopicViewModel(state)
         }
     }
 }
 
-class PublishedTopicFragment : BaseFragment() {
-    private val viewModel: PublicTopicViewModel by fragmentViewModel()
+class RepliedTopicFragment : BaseFragment() {
+    private val viewModel: RepliedTopicViewModel by fragmentViewModel()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         state.topicItems.forEachWithIndex { index, topicBean ->
             topicItem {
@@ -69,13 +63,10 @@ class PublishedTopicFragment : BaseFragment() {
                     toast("You clicked item!")
                 }
                 onDeleteClick { _ ->
-                    viewModel.deleteTopic(index)
-                    toast("Item index  is $index!")
+                    toast("You clicked delete button!")
                 }
             }
-
         }
-
     }
 
 }

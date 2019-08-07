@@ -1,4 +1,4 @@
-package com.judge.app.fragments.mine
+package com.judge.app.fragments.mine.setting
 
 import androidx.core.view.isVisible
 import com.airbnb.mvrx.MvRxState
@@ -14,6 +14,7 @@ import com.judge.data.SettingItemBean
 import com.judge.settingItem
 import com.judge.settingTitle
 import com.vondear.rxtool.RxTool
+import com.vondear.rxui.view.dialog.RxDialogChooseImage
 import org.jetbrains.anko.collections.forEachWithIndex
 import java.util.*
 
@@ -60,11 +61,16 @@ class SettingFragment : BaseFragment() {
                 settingTitle {
                     id(item.title + index)
                     item(item)
+                    onClick { _ ->
+                        RxDialogChooseImage(activity, RxDialogChooseImage.LayoutType.TITLE).show()
+                    }
                 }
             } else {
                 settingItem {
                     id(item.title + index)
                     item(item)
+                    onClick { _ ->
+                    }
                 }
             }
         }
@@ -74,4 +80,5 @@ class SettingFragment : BaseFragment() {
         super.initView()
         toolbar.isVisible = true
     }
+
 }

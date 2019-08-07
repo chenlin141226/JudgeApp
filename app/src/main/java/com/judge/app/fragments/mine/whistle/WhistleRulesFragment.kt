@@ -1,4 +1,4 @@
-package com.judge.app.fragments.mine
+package com.judge.app.fragments.mine.whistle
 
 import android.view.View
 import com.airbnb.mvrx.MvRxState

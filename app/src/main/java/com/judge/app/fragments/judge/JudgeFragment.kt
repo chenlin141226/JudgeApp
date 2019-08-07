@@ -9,6 +9,8 @@ import com.judge.models.VideoViewModel
 import com.judge.videoRow
 import com.judge.views.loadingView
 import com.vondear.rxtool.view.RxToast
+import com.vondear.rxui.view.dialog.RxDialog
+import com.vondear.rxui.view.dialog.RxDialogSure
 import com.vondear.rxui.view.dialog.RxDialogSureCancel
 
 class JudgeFragment : BaseFragment() {

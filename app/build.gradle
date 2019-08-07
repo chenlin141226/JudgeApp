@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+
     defaultConfig {
         applicationId "com.judge"
         minSdkVersion 19
@@ -51,13 +51,13 @@ dependencies {
     implementation 'com.airbnb.android:epoxy-databinding:2.6.0'
     kapt "com.airbnb.android:epoxy-processor:3.7.0"
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'com.airbnb.android:lottie:3.0.0'
+    implementation 'com.airbnb.android:lottie:3.0.7'
     implementation 'com.airbnb.android:mvrx:1.0.2'
     //下拉刷新
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-14'
@@ -73,11 +73,21 @@ dependencies {
     //UI库
     implementation "com.github.tamsiree.RxTool:RxUI:2.3.9"
 
+    //相机库
+    implementation "com.github.tamsiree.RxTool:RxCamera:2.3.9"
+    //图片裁剪
+    implementation 'com.github.yalantis:ucrop:2.2.3-native'
     //侧滑菜单布局
     implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
     //implementation 'me.jessyan:autosize:1.1.2'
 
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
+    //时间地，址选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.8'
+
+    //popup window
+    implementation 'com.lxj:xpopup:1.8.8-x'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

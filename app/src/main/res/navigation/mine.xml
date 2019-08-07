@@ -57,7 +57,7 @@
         />
     </fragment>
     <fragment android:id="@+id/whistleFragment"
-              android:name="com.judge.app.fragments.mine.WhistleFragment"
+              android:name="com.judge.app.fragments.mine.whistle.WhistleFragment"
               android:label="@string/whistle_title">
         <action android:id="@+id/action_whistleFragment_to_whistleRulesFragment"
                 app:destination="@id/whistleRulesFragment"
@@ -68,10 +68,10 @@
         />
     </fragment>
     <fragment android:id="@+id/whistleRulesFragment"
-              android:name="com.judge.app.fragments.mine.WhistleRulesFragment"
+              android:name="com.judge.app.fragments.mine.whistle.WhistleRulesFragment"
               android:label="@string/whistle_rules"/>
     <fragment android:id="@+id/messageFragment"
-              android:name="com.judge.app.fragments.mine.MessageFragment"
+              android:name="com.judge.app.fragments.mine.message.MessageFragment"
               android:label="@string/mine_message">
         <action android:id="@+id/action_messageFragment_to_publicMessageFragment"
                 app:destination="@id/publicMessageFragment"
@@ -89,13 +89,13 @@
         />
     </fragment>
     <fragment android:id="@+id/publicMessageFragment"
-              android:name="com.judge.app.fragments.mine.PublicMessageFragment"
+              android:name="com.judge.app.fragments.mine.message.PublicMessageFragment"
               android:label="@string/public_message"/>
     <fragment android:id="@+id/personalMessageFragment"
-              android:name="com.judge.app.fragments.mine.PersonalMessageFragment"
+              android:name="com.judge.app.fragments.mine.message.PersonalMessageFragment"
               android:label="@string/personal_message"/>
     <fragment android:id="@+id/topicFragment"
-              android:name="com.judge.app.fragments.mine.TopicFragment"
+              android:name="com.judge.app.fragments.mine.topic.TopicFragment"
               android:label="@string/my_topic"/>
     <fragment android:id="@+id/favoriteFragment"
               android:name="com.judge.app.fragments.mine.FavoriteFragment"
@@ -104,7 +104,7 @@
               android:name="com.judge.app.fragments.mine.HistoryFragment"
               android:label="@string/my_history"/>
     <fragment android:id="@+id/settingFragment"
-              android:name="com.judge.app.fragments.mine.SettingFragment"
+              android:name="com.judge.app.fragments.mine.setting.SettingFragment"
               android:label="@string/setting"/>
     <fragment android:id="@+id/medalCenterFragment"
               android:name="com.judge.app.fragments.mine.MedalCenterFragment"
