@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="item" type="com.judge.data.SettingItemBean"/>
+        <variable name="onClick" type="android.view.View.OnClickListener"/>
+    </data>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:onClick="@{onClick}"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@{item.title}"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_16"
+        />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_16"
+                android:gravity="center"
+                android:text="@{item.content}"
+                android:drawablePadding="@dimen/dp_20"
+                android:drawableEnd="@drawable/icon_forward"
+        />
+
+    </LinearLayout>
+</layout>

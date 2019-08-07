@@ -60,8 +60,7 @@ class PublicTopicViewModel(
 
 class PublishedTopicFragment : BaseFragment() {
     private val viewModel: PublicTopicViewModel by fragmentViewModel()
-    override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) {
-            state ->
+    override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         state.topicItems.forEachWithIndex { index, topicBean ->
             topicItem {
                 id(topicBean.title + index)

@@ -74,7 +74,6 @@ class FavoriteFragment : BaseFragment() {
     override fun initData() {
         super.initData()
         toolbar.visibility = View.VISIBLE
-        toolbar.visibility = View.VISIBLE
         rightButton.apply {
             visibility = View.VISIBLE
             text = getString(R.string.clear_all)

@@ -24,9 +24,9 @@ class RepliedTopicViewModel(
 ) : MvRxViewModel<RepliedTopicState>(initialState) {
     private val list = LinkedList<TopicBean>()
 
-    /*init {
+    init {
         fetchTopics()
-    }*/
+    }
 
     fun fetchTopics() {
         for (i in 1..20) {
@@ -69,8 +69,4 @@ class RepliedTopicFragment : BaseFragment() {
         }
     }
 
-    override fun initData() {
-        super.initData()
-        viewModel.fetchTopics()
-    }
 }

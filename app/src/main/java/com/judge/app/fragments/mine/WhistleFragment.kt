@@ -25,9 +25,10 @@ class WhistleViewModel(
     initialState: WhistleState
 ) : MvRxViewModel<WhistleState>(initialState) {
     private val list = LinkedList<WhistleBean>()
-    /*init {
+
+    init {
         getWhistles()
-    }*/
+    }
 
     fun getWhistles() {
         for (i in 1..10) {
@@ -59,10 +60,6 @@ class WhistleFragment : BaseFragment() {
                 whistleBean(item)
             }
         }
-    }
-
-    override fun initData() {
-        viewModel.getWhistles()
     }
 
     override fun setToolBar() {

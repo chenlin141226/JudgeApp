@@ -9,7 +9,9 @@
         R.layout.topic_item,
         R.layout.market_item,
         R.layout.personal_message_item,
-        R.layout.public_message_item})
+        R.layout.public_message_item,
+        R.layout.setting_title,
+        R.layout.setting_item})
 package com.judge;
 
 import com.airbnb.epoxy.EpoxyDataBindingLayouts;

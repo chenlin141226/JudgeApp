@@ -14,6 +14,11 @@ fun setImage(imageView: ImageView, imageUrl: String) {
         .error(R.drawable.default_message_photo).into(imageView)
 }
 
+@BindingAdapter("photoUrl", requireAll = false)
+fun setPhotoImage(imageView: ImageView, imageUrl: String) {
+    Glide.with(imageView).load(imageUrl).placeholder(R.drawable.default_photo)
+        .error(R.drawable.default_photo).into(imageView)
+}
 
 @BindingAdapter("drawableSrc", requireAll = false)
 fun setDrawable(textView: TextView, item: MineItemBean) {

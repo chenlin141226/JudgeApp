@@ -28,9 +28,9 @@ class HistoryViewModel(
 ) : MvRxViewModel<HistoryState>(initialState) {
     private val list = LinkedList<TopicBean>()
 
-    /* init {
-         fetchTopics()
-     }*/
+    init {
+        fetchTopics()
+    }
 
     fun fetchTopics() {
         for (i in 1..20) {
@@ -56,7 +56,7 @@ class HistoryViewModel(
     }
 }
 
-class HistoryFragment :BaseFragment(){
+class HistoryFragment : BaseFragment() {
     private val viewModel: HistoryViewModel by fragmentViewModel()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         state.topicItems.forEachWithIndex { index, topicBean ->
@@ -83,9 +83,5 @@ class HistoryFragment :BaseFragment(){
 
             }
         }
-    }
-    override fun initData() {
-        super.initData()
-        viewModel.fetchTopics()
     }
 }
