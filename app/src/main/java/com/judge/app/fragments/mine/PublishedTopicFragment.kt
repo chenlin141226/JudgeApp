@@ -24,11 +24,11 @@ class PublicTopicViewModel(
 ) : MvRxViewModel<PublicTopicState>(initialState) {
     private val list = LinkedList<TopicBean>()
 
-    /* init {
-         fetchTopics()
-     }*/
+    init {
+        fetchTopics()
+    }
 
-    fun fetchTopics() {
+    private fun fetchTopics() {
         for (i in 1..20) {
             val topic = TopicBean(
                 title = "天下武功，唯快不破，欲练此功，必先自宫",
@@ -76,11 +76,6 @@ class PublishedTopicFragment : BaseFragment() {
 
         }
 
-    }
-
-    override fun initData() {
-        super.initData()
-        viewModel.fetchTopics()
     }
 
 }
