@@ -1,11 +1,13 @@
 package com.judge.adapters
 
+import android.text.TextUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.judge.R
 import com.judge.data.MineItemBean
+import com.judge.data.SettingItemBean
 import com.vondear.rxtool.RxTool
 
 @BindingAdapter("imageUrl", requireAll = false)
@@ -15,9 +17,15 @@ fun setImage(imageView: ImageView, imageUrl: String) {
 }
 
 @BindingAdapter("photoUrl", requireAll = false)
-fun setPhotoImage(imageView: ImageView, imageUrl: String) {
-    Glide.with(imageView).load(imageUrl).placeholder(R.drawable.default_photo)
-        .error(R.drawable.default_photo).into(imageView)
+fun setPhotoImage(imageView: ImageView, item:SettingItemBean) {
+    if (!TextUtils.isEmpty(item.photoUrl)) {
+        Glide.with(imageView).load(item.photoUrl).placeholder(R.drawable.default_photo)
+            .error(R.drawable.default_photo).into(imageView)
+    } else {
+        Glide.with(imageView).load(item.photoUri).placeholder(R.drawable.default_photo)
+            .error(R.drawable.default_photo).into(imageView)
+    }
+
 }
 
 @BindingAdapter("drawableSrc", requireAll = false)
