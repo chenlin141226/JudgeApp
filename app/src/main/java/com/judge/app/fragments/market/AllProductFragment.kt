@@ -1,9 +1,6 @@
 package com.judge.app.fragments.market
 
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
-import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.*
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
@@ -21,10 +18,15 @@ import java.util.*
 data class MarketState(val marketItems: List<MarketBean> = emptyList()) : MvRxState
 
 class MarketViewModel(initialState: MarketState) : MvRxViewModel<MarketState>(initialState) {
-    private val list = LinkedList<MarketBean>()
+    private val list = mutableListOf<MarketBean>()
 
-    fun fetchMarket(index: Int){
-        for (i in 1..10){
+    init {
+        fetchMarket(0)
+    }
+
+
+    fun fetchMarket(index: Int) {
+        for (i in 1..10) {
             val market = MarketBean(
                 marketUrl = "https://i.redd.it/nbju2rir9xp11.jpg",
                 marketName = "小鱼儿$i",
@@ -36,7 +38,7 @@ class MarketViewModel(initialState: MarketState) : MvRxViewModel<MarketState>(in
         setState { copy(marketItems = list) }
     }
 
-    fun removeMarket(){
+    fun removeMarket() {
         list.clear()
         setState { copy(marketItems = list) }
     }
@@ -57,22 +59,24 @@ class AllProductFragment(index: Int) : BaseFragment() {
 
     override fun epoxyController() = simpleController(viewModel) { state ->
 
-            state.marketItems.forEachWithIndex { index, item ->
+        state.marketItems.forEachWithIndex { index, item ->
 
-                marketItem {
-                    id(item.marketName + index)
-                    marketBean(item)
-                    onClick {_ ->
-                       navigateTo(R.id.action_marketFragment_to_productDetailsFragment,item)
-                    }
+            marketItem {
+                id(item.marketName + index)
+                marketBean(item)
+                onClick { _ ->
+                    navigateTo(R.id.action_marketFragment_to_productDetailsFragment, item)
                 }
+            }
         }
     }
 
-
-
     override fun initData() {
-        viewModel.fetchMarket(index)
+     viewModel.fetchMarket(index)
+    }
 
+    override fun onDestroyView() {
+        viewModel.removeMarket()
+        super.onDestroyView()
     }
 }

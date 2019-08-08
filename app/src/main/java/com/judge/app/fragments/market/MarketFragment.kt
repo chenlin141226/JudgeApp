@@ -57,7 +57,7 @@ class MarketFragment : BaseFragment() {
 
          titleViewStub.inflate().apply {
              viewPager.adapter = ViewPagerAdapter(childFragmentManager, fragments, titles)
-             //viewPager.set
+             viewPager.offscreenPageLimit = 4
              tabLayout.setViewPager(viewPager)
         }
 

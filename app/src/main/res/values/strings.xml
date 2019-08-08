@@ -84,5 +84,6 @@
     <string name="qq">QQ:</string>
     <string name="phone_number">手机:</string>
     <string name="address">地址:</string>
+    <string name="exchange">兑换</string>
 
 </resources>
