@@ -92,5 +92,6 @@
     <string name="edit_QQ">编辑QQ</string>
     <string name="complete">完成</string>
     <string name="exchange">兑换</string>
+    <string name="manual_granted">人工授予</string>
 
 </resources>

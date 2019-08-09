@@ -10,16 +10,17 @@ import com.bumptech.glide.request.RequestOptions
 import com.judge.R
 import com.judge.data.MineItemBean
 import com.judge.data.SettingItemBean
+import com.judge.network.ServiceCreator
 import com.vondear.rxtool.RxTool
 
 @BindingAdapter("imageUrl", requireAll = false)
 fun setImage(imageView: ImageView, imageUrl: String) {
-    Glide.with(imageView).load(imageUrl).placeholder(R.drawable.default_message_photo)
+    Glide.with(imageView).load(ServiceCreator.BASE_URL + imageUrl).placeholder(R.drawable.default_message_photo)
         .error(R.drawable.default_message_photo).into(imageView)
 }
 
 @BindingAdapter("photoUrl", requireAll = false)
-fun setPhotoImage(imageView: ImageView, item:SettingItemBean) {
+fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
     if (!TextUtils.isEmpty(item.photoUrl)) {
         Glide.with(imageView).load(item.photoUrl).placeholder(R.drawable.default_photo)
             .apply(RequestOptions.bitmapTransform(CircleCrop()))
