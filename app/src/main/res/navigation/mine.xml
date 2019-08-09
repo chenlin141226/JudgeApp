@@ -150,8 +150,16 @@
         />
     </fragment>
     <fragment android:id="@+id/medalCenterFragment"
-              android:name="com.judge.app.fragments.mine.MedalCenterFragment"
-              android:label="@string/medal_center"/>
+              android:name="com.judge.app.fragments.mine.medal.MedalCenterFragment"
+              android:label="@string/medal_center">
+        <action android:id="@+id/action_medalCenterFragment_to_mineMedalFragment"
+                app:destination="@id/mineMedalFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+    </fragment>
     <fragment android:id="@+id/editNameFragment" android:name="com.judge.app.fragments.mine.setting.EditNameFragment"
               android:label="@string/edit_name"/>
     <fragment android:id="@+id/editGenderFragment"
@@ -168,4 +176,6 @@
               android:label="@string/edit_phone"/>
     <fragment android:id="@+id/editQQFragment" android:name="com.judge.app.fragments.mine.setting.EditQQFragment"
               android:label="@string/edit_QQ"/>
+    <fragment android:id="@+id/mineMedalFragment" android:name="com.judge.app.fragments.mine.medal.MineMedalFragment"
+              android:label="@string/mine_medal"/>
 </navigation>

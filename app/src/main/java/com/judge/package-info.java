@@ -13,7 +13,8 @@
         R.layout.setting_title,
         R.layout.setting_item,
         R.layout.edit_text_view,
-        R.layout.medal_item_view
+        R.layout.medal_item_view,
+        R.layout.no_medal_view
 })
 package com.judge;
 

@@ -1,4 +1,4 @@
-package com.judge.app.fragments.mine
+package com.judge.app.fragments.mine.medal
 
 import androidx.core.view.isVisible
 import com.airbnb.mvrx.MvRxState
@@ -14,8 +14,6 @@ import com.judge.data.Medal
 import com.judge.data.repository.MineRepository
 import com.judge.medalItemView
 import com.judge.utils.LogUtils
-import com.vondear.rxtool.RxTool
-import com.vondear.rxui.view.dialog.RxDialogLoading
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -79,7 +77,7 @@ class MedalCenterFragment : BaseFragment() {
             isVisible = true
             text = getString(R.string.mine)
             onClick {
-
+                navigateTo(R.id.action_medalCenterFragment_to_mineMedalFragment, null)
             }
         }
     }
