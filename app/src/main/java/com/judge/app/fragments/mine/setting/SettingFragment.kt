@@ -2,6 +2,7 @@ package com.judge.app.fragments.mine.setting
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -18,6 +19,7 @@ import com.judge.data.SettingItemBean
 import com.judge.extensions.copy
 import com.judge.settingItem
 import com.judge.settingTitle
+import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxPhotoTool
 import com.vondear.rxtool.RxTool
 import com.vondear.rxui.view.dialog.RxDialogChooseImage
@@ -87,6 +89,14 @@ class SettingFragment : BaseFragment() {
                     id(item.title + index)
                     item(item)
                     onClick { _ ->
+                        when (index) {
+                            1 -> navigateTo(R.id.action_settingFragment_to_editNameFragment)
+                            2 -> navigateTo(R.id.action_settingFragment_to_editGenderFragment)
+                            3 -> navigateTo(R.id.action_settingFragment_to_editBirthdayFragment)
+                            4 -> navigateTo(R.id.action_settingFragment_to_editAddressFragment)
+                            5 -> navigateTo(R.id.action_settingFragment_to_editPhoneNumberFragment)
+                            6 -> navigateTo(R.id.action_settingFragment_to_editQQFragment)
+                        }
                     }
                 }
             }
@@ -152,9 +162,9 @@ class SettingFragment : BaseFragment() {
         //设置是否展示矩形裁剪框
         options.setShowCropFrame(false)
         //设置裁剪框横竖线的宽度
-        //options.setCropGridStrokeWidth(20);
+        options.setCropGridStrokeWidth(20);
         //设置裁剪框横竖线的颜色
-        //options.setCropGridColor(Color.GREEN);
+        options.setCropGridColor(Color.GREEN);
         //设置竖线的数量
         options.setCropGridColumnCount(0)
         //设置横线的数量

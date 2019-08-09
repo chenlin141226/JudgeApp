@@ -1,24 +1,29 @@
 package com.judge.app.fragments.mine
 
 import android.content.res.TypedArray
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
-import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.*
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.MineDataBean
 import com.judge.data.MineItemBean
+import com.judge.data.repository.MineRepository
 import com.judge.extensions.copy
 import com.judge.mineItem
 import com.judge.mineTitle
+import com.judge.utils.LogUtils
 import com.vondear.rxtool.RxTool
+import com.vondear.rxui.view.dialog.RxDialogLoading
+import io.reactivex.schedulers.Schedulers
 import java.util.*
+import kotlin.collections.HashMap
 
 data class MineItemState(
-    val mineItems: List<MineItemBean> = emptyList()
+    val uerData: MineDataBean? = null,
+    val mineItems: List<MineItemBean> = emptyList(),
+    val isLoading: Boolean = false
 ) : MvRxState
 
 class MineItemViewModel(
@@ -27,9 +32,26 @@ class MineItemViewModel(
     private val leftSelectedIcons: TypedArray =
         RxTool.getContext().resources.obtainTypedArray(R.array.mine_item_left_icons_selected)
     private val list = LinkedList<MineItemBean>()
+    private val map = hashMapOf("version" to "4", "module" to "profile")
 
     init {
         getItems()
+        getUserData(map)
+    }
+
+    private fun getUserData(map: HashMap<String, String>) = withState { state ->
+        if (state.isLoading) return@withState
+        MineRepository.getUserData(map).subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                setState { copy(isLoading = true) }
+            }
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute {
+                copy(uerData = it()?.Variables)
+            }
     }
 
     private fun getItems() {
@@ -73,6 +95,9 @@ class MineFragment : BaseFragment() {
     private val viewModel: MineItemViewModel by fragmentViewModel()
 
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
+        if (state.isLoading) {
+            RxDialogLoading(context).show()
+        }
         mineTitle {
             id("mine title")
         }

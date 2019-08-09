@@ -24,9 +24,11 @@ import com.judge.utils.CenterTitle.centerTitle
 import com.judge.utils.LogUtils
 import com.judge.utils.NetworkUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.vondear.rxui.view.dialog.RxDialogLoading
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.AnkoLogger
 
-abstract class BaseFragment : BaseMvRxFragment() {
+abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
 
     protected lateinit var recyclerView: EpoxyRecyclerView
     protected lateinit var toolbar: Toolbar
@@ -35,6 +37,7 @@ abstract class BaseFragment : BaseMvRxFragment() {
     protected lateinit var rightButton: Button
     protected lateinit var titleViewStub: ViewStub
     protected lateinit var bottomViewStub: ViewStub
+    protected lateinit var loadingDialog: RxDialogLoading
     //protected lateinit var coordinatorLayout: CoordinatorLayout
     protected val epoxyController by lazy { epoxyController() }
 
@@ -79,6 +82,7 @@ abstract class BaseFragment : BaseMvRxFragment() {
             bottomViewStub = findViewById(R.id.bottomStub)
             // coordinatorLayout = findViewById(R.id.coordinator_layout)
             recyclerView.setController(epoxyController)
+            loadingDialog = RxDialogLoading(context, false, null)
             initView()
             initData()
             setToolBar()
