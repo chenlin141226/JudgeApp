@@ -93,6 +93,8 @@
     <string name="complete">完成</string>
     <string name="exchange">兑换</string>
     <string name="manual_granted">人工授予</string>
+    <string name="no_medal">您还没有获得过勋章</string>
+    <string name="mine_medal">我的勋章</string>
 
     <!-- ——————   裁判说  —————-->
     <string name="attention">关注</string>
