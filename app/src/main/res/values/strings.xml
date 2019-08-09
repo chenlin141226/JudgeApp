@@ -84,5 +84,12 @@
     <string name="qq">QQ:</string>
     <string name="phone_number">手机:</string>
     <string name="address">地址:</string>
+    <string name="edit_name">编辑姓名</string>
+    <string name="edit_gender">编辑性别</string>
+    <string name="edit_birthday">编辑生日</string>
+    <string name="edit_address">编辑地址</string>
+    <string name="edit_phone">编辑号码</string>
+    <string name="edit_QQ">编辑QQ</string>
+    <string name="complete">完成</string>
 
 </resources>

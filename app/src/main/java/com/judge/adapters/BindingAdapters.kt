@@ -5,6 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.judge.R
 import com.judge.data.MineItemBean
 import com.judge.data.SettingItemBean
@@ -20,9 +22,11 @@ fun setImage(imageView: ImageView, imageUrl: String) {
 fun setPhotoImage(imageView: ImageView, item:SettingItemBean) {
     if (!TextUtils.isEmpty(item.photoUrl)) {
         Glide.with(imageView).load(item.photoUrl).placeholder(R.drawable.default_photo)
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .error(R.drawable.default_photo).into(imageView)
     } else {
         Glide.with(imageView).load(item.photoUri).placeholder(R.drawable.default_photo)
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .error(R.drawable.default_photo).into(imageView)
     }
 

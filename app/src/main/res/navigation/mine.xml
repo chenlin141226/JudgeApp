@@ -105,8 +105,67 @@
               android:label="@string/my_history"/>
     <fragment android:id="@+id/settingFragment"
               android:name="com.judge.app.fragments.mine.setting.SettingFragment"
-              android:label="@string/setting"/>
+              android:label="@string/setting">
+        <action android:id="@+id/action_settingFragment_to_editNameFragment"
+                app:destination="@id/editNameFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+        <action android:id="@+id/action_settingFragment_to_editGenderFragment"
+                app:destination="@id/editGenderFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+        <action android:id="@+id/action_settingFragment_to_editBirthdayFragment"
+                app:destination="@id/editBirthdayFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+        <action android:id="@+id/action_settingFragment_to_editAddressFragment"
+                app:destination="@id/editAddressFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+        <action android:id="@+id/action_settingFragment_to_editPhoneNumberFragment"
+                app:destination="@id/editPhoneNumberFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+        <action android:id="@+id/action_settingFragment_to_editQQFragment"
+                app:destination="@id/editQQFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+    </fragment>
     <fragment android:id="@+id/medalCenterFragment"
               android:name="com.judge.app.fragments.mine.MedalCenterFragment"
               android:label="@string/medal_center"/>
+    <fragment android:id="@+id/editNameFragment" android:name="com.judge.app.fragments.mine.setting.EditNameFragment"
+              android:label="@string/edit_name"/>
+    <fragment android:id="@+id/editGenderFragment"
+              android:name="com.judge.app.fragments.mine.setting.EditGenderFragment"
+              android:label="@string/edit_gender"/>
+    <fragment android:id="@+id/editBirthdayFragment"
+              android:name="com.judge.app.fragments.mine.setting.EditBirthdayFragment"
+              android:label="@string/edit_birthday"/>
+    <fragment android:id="@+id/editAddressFragment"
+              android:name="com.judge.app.fragments.mine.setting.EditAddressFragment"
+              android:label="@string/edit_address"/>
+    <fragment android:id="@+id/editPhoneNumberFragment"
+              android:name="com.judge.app.fragments.mine.setting.EditPhoneNumberFragment"
+              android:label="@string/edit_phone"/>
+    <fragment android:id="@+id/editQQFragment" android:name="com.judge.app.fragments.mine.setting.EditQQFragment"
+              android:label="@string/edit_QQ"/>
 </navigation>

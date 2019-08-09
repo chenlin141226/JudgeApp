@@ -25,8 +25,9 @@ import com.judge.utils.LogUtils
 import com.judge.utils.NetworkUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.AnkoLogger
 
-abstract class BaseFragment : BaseMvRxFragment() {
+abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
 
     protected lateinit var recyclerView: EpoxyRecyclerView
     protected lateinit var toolbar: Toolbar
