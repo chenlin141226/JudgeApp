@@ -50,11 +50,13 @@
                 android:layout_marginBottom="@dimen/dp_5"
                 app:layout_constraintLeft_toRightOf="@id/iv_market"
                 app:layout_constraintBottom_toBottomOf="@id/iv_market"/>
-        <ImageButton
+        <Button
                 android:id="@+id/btn_exchange"
                 android:layout_width="@dimen/dp_47"
                 android:layout_height="@dimen/dp_23"
-                android:background="@drawable/exchange"
+               android:background="@drawable/mark_item_exchange"
+                android:textAlignment="center"
+                android:text="@string/exchange"
                 android:onClick="@{onClick}"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_markerName"
