@@ -16,6 +16,7 @@
         R.layout.medal_item_view,
         R.layout.no_medal_view
 })
+
 package com.judge;
 
 import com.airbnb.epoxy.EpoxyDataBindingLayouts;

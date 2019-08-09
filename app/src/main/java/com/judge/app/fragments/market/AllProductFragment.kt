@@ -65,6 +65,9 @@ class AllProductFragment(index: Int) : BaseFragment() {
                 id(item.marketName + index)
                 marketBean(item)
                 onClick { _ ->
+                    navigateTo(R.id.action_marketFragment_to_exchangeSuccessFragment)
+                }
+                onParentClick { _ ->
                     navigateTo(R.id.action_marketFragment_to_productDetailsFragment, item)
                 }
             }
