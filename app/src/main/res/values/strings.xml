@@ -86,4 +86,10 @@
     <string name="address">地址:</string>
     <string name="exchange">兑换</string>
 
+    <!-- ——————   裁判说  —————-->
+    <string name="attention">关注</string>
+    <string name="plate">主版</string>
+    <string name="recommend">推荐</string>
+    <string name="information">资讯</string>
+
 </resources>

@@ -8,6 +8,10 @@
                 name="marketBean"
                 type="com.judge.data.MarketBean"/>
         <variable
+                name="onParentClick"
+                type="android.view.View.OnClickListener"/>
+
+        <variable
                 name="onClick"
                 type="android.view.View.OnClickListener"/>
     </data>
@@ -18,6 +22,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
+            android:onClick="@{onParentClick}"
             android:background="@drawable/market_item_bg">
            <ImageView
                    android:id="@+id/iv_market"

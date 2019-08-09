@@ -11,7 +11,8 @@
         R.layout.personal_message_item,
         R.layout.public_message_item,
         R.layout.setting_title,
-        R.layout.setting_item})
+        R.layout.setting_item,
+        R.layout.exchange_success_fragment})
 package com.judge;
 
 import com.airbnb.epoxy.EpoxyDataBindingLayouts;

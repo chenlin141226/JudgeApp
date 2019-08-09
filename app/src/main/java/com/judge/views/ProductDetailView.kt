@@ -27,7 +27,7 @@ import org.jetbrains.anko.coroutines.experimental.asReference
  * @author: jaffa
  * @date: 2019/8/5
  */
-@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_MATCH_HEIGHT)
+@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
 class ProductDetailView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
