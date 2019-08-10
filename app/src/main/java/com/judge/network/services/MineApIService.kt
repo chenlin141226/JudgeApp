@@ -14,4 +14,7 @@ interface MineApIService {
 
     @GET("/api/mobile/index.php")
     fun getMedals(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<MedalBean>>
+
+    @GET("/api/mobile/index.php")
+    fun getWhistles(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<MedalBean>>
 }

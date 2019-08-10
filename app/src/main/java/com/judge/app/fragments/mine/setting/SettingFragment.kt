@@ -6,10 +6,12 @@ import android.graphics.Color
 import android.net.Uri
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.airbnb.mvrx.fragmentViewModel
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
@@ -19,7 +21,6 @@ import com.judge.data.SettingItemBean
 import com.judge.extensions.copy
 import com.judge.settingItem
 import com.judge.settingTitle
-import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxPhotoTool
 import com.vondear.rxtool.RxTool
 import com.vondear.rxui.view.dialog.RxDialogChooseImage
@@ -64,6 +65,12 @@ class SettingViewModel(
         }
     }
 
+    fun updateItem(settingArgs: SettingArgs) {
+        setState {
+            copy(items = items.copy(settingArgs.index, items[settingArgs.index].copy(content = settingArgs.content)))
+        }
+    }
+
     companion object : MvRxViewModelFactory<SettingViewModel, SettingState> {
         override fun create(viewModelContext: ViewModelContext, state: SettingState): SettingViewModel? {
             return SettingViewModel(state)
@@ -89,18 +96,28 @@ class SettingFragment : BaseFragment() {
                     id(item.title + index)
                     item(item)
                     onClick { _ ->
+                        val settingArgs = SettingArgs(index)
                         when (index) {
-                            1 -> navigateTo(R.id.action_settingFragment_to_editNameFragment)
-                            2 -> navigateTo(R.id.action_settingFragment_to_editGenderFragment)
-                            3 -> navigateTo(R.id.action_settingFragment_to_editBirthdayFragment)
-                            4 -> navigateTo(R.id.action_settingFragment_to_editAddressFragment)
-                            5 -> navigateTo(R.id.action_settingFragment_to_editPhoneNumberFragment)
-                            6 -> navigateTo(R.id.action_settingFragment_to_editQQFragment)
+                            1 -> navigateTo(R.id.action_settingFragment_to_editNameFragment, settingArgs)
+                            2 -> navigateTo(R.id.action_settingFragment_to_editGenderFragment, settingArgs)
+                            3 -> navigateTo(R.id.action_settingFragment_to_editBirthdayFragment, settingArgs)
+                            4 -> navigateTo(R.id.action_settingFragment_to_editAddressFragment, settingArgs)
+                            5 -> navigateTo(R.id.action_settingFragment_to_editPhoneNumberFragment, settingArgs)
+                            6 -> navigateTo(R.id.action_settingFragment_to_editQQFragment, settingArgs)
                         }
                     }
                 }
             }
+
         }
+    }
+
+    override fun initData() {
+        super.initData()
+        LiveEventBus.get().with("setting", SettingArgs::class.java)
+            .observe(this@SettingFragment, Observer<SettingArgs> {
+                viewModel.updateItem(it)
+            })
     }
 
     override fun initView() {

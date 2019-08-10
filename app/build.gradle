@@ -64,7 +64,7 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-14'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //liveEventBus
-    implementation 'com.jeremyliao:live-event-bus-x:1.4.4'
+    implementation 'com.jeremyliao:live-event-bus-x:1.4.5'
 
     implementation "org.jetbrains.anko:anko:0.10.8"
     //基础工具库
