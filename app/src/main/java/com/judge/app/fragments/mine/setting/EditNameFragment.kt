@@ -41,16 +41,24 @@ class EditViewModel(
 ) : MvRxViewModel<EditState>(initialState) {
     private val list = LinkedList<SettingItemBean>()
 
-    init {
-        getEditItems()
-    }
-
-    private fun getEditItems() {
-        val item = SettingItemBean(
-            title = "隐私",
-            content = "公开"
+    fun getEditItems(index: Int) {
+        when (index) {
+            1 -> {
+            }
+            2 -> list.add(SettingItemBean(title = "性别", content = "男"))
+            3 -> list.add(SettingItemBean(title = "生日", content = "2019-12-12"))
+            4 -> list.add(SettingItemBean(title = "居住地", content = "广东 深圳"))
+            5 -> {
+            }
+            6 -> {
+            }
+        }
+        list.add(
+            SettingItemBean(
+                title = "隐私",
+                content = "公开"
+            )
         )
-        list.add(item)
         setState {
             copy(items = list)
         }

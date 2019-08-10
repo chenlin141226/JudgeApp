@@ -54,6 +54,7 @@ class EditPhoneNumberFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
+        viewModel.getEditItems(5)
         args = SettingArgs()
     }
 }

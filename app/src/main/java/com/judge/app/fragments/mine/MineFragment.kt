@@ -96,7 +96,9 @@ class MineFragment : BaseFragment() {
 
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         if (state.isLoading) {
-            RxDialogLoading(context).show()
+            loadingDialog.show()
+        } else {
+            loadingDialog.dismiss()
         }
         mineTitle {
             id("mine title")

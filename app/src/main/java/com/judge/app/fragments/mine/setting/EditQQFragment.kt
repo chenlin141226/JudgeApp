@@ -52,6 +52,7 @@ class EditQQFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
+        viewModel.getEditItems(6)
         args = SettingArgs()
     }
 }
