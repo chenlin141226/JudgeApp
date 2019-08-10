@@ -2,15 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="watcher" type="androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged"/>
+        <variable name="item" type="com.judge.app.fragments.mine.setting.SettingArgs"/>
     </data>
     <EditText
             android:afterTextChanged="@{watcher}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edit"
+            android:text="@{item.content}"
             android:minHeight="@dimen/dp_50"
             android:layout_margin="@dimen/dp_20"
             android:padding="@dimen/dp_5"
             android:gravity="start|top"
-            />
+    />
 </layout>

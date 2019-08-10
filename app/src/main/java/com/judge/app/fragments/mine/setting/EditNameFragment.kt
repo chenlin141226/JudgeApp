@@ -30,10 +30,10 @@ data class SettingArgs @JvmOverloads constructor(
 ) : Parcelable
 
 data class EditState(
-    val arg: SettingArgs,
+    val settingArgs: SettingArgs,
     val items: List<SettingItemBean> = emptyList()
 ) : MvRxState {
-    constructor(args: SettingArgs) : this(arg = args)
+    constructor(args: SettingArgs) : this(settingArgs = args)
 }
 
 class EditViewModel(
@@ -69,8 +69,9 @@ class EditNameFragment : BaseFragment() {
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         editTextView {
             id("nameEdit")
+            item(state.settingArgs)
             watcher {
-                args.index = state.arg.index
+                args.index = state.settingArgs.index
                 args.content = it.toString()
             }
         }

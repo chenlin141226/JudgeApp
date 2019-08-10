@@ -19,8 +19,9 @@ class EditQQFragment : BaseFragment() {
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         editTextView {
             id("QQEdit")
+            item(state.settingArgs)
             watcher {
-                args.index = state.arg.index
+                args.index = state.settingArgs.index
                 args.content = it.toString()
             }
         }

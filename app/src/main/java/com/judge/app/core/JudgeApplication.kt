@@ -16,7 +16,6 @@ class JudgeApplication : MultiDexApplication() {
         RxTool.init(this)
         NetworkUtils.startNetService(this)
         LiveEventBus.get().config().lifecycleObserverAlwaysActive(false)
-            .supportBroadcast(this)
             .autoClear(true)
     }
 }

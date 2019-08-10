@@ -19,8 +19,9 @@ class EditPhoneNumberFragment : BaseFragment() {
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         editTextView {
             id("phoneNumberEdit")
+            item(state.settingArgs)
             watcher {
-                args.index = state.arg.index
+                args.index = state.settingArgs.index
                 args.content = it.toString()
             }
         }
