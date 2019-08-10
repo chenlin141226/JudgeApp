@@ -12,6 +12,7 @@ import com.judge.data.MineItemBean
 import com.judge.data.SettingItemBean
 import com.judge.network.ServiceCreator
 import com.vondear.rxtool.RxTool
+import org.jetbrains.anko.textColor
 
 @BindingAdapter("imageUrl", requireAll = false)
 fun setImage(imageView: ImageView, imageUrl: String) {
@@ -41,6 +42,15 @@ fun setDrawable(textView: TextView, item: MineItemBean) {
         RxTool.getContext().resources.getDrawable(item.rightIconIdRes),
         null
     )
+}
+
+@BindingAdapter("colorType", requireAll = false)
+fun setColorType(textView: TextView, type: Int) {
+    when (type) {
+        1 -> textView.textColor = R.color.colorPrimary
+        3 -> textView.textColor = R.color.gray
+        else -> textView.textColor = R.color.black
+    }
 }
 
 @BindingAdapter("srcType", requireAll = false)
