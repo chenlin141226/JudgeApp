@@ -22,7 +22,7 @@ class ForgetFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        toolbar.isVisible = false
         //隐藏部登录文字
         (activity as LoggingActivity).tv_about_spannable.isVisible = true
         val navController = Navigation.findNavController(view)
@@ -47,5 +47,9 @@ class ForgetFragment : BaseFragment() {
                 context?.let { RxToast.info(it,"提交成功",Toast.LENGTH_SHORT,true).show() }
             }
         }
+    }
+
+    override fun setToolBar() {
+        toolbar.visibility = View.INVISIBLE
     }
 }

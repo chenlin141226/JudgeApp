@@ -1,7 +1,5 @@
 package com.judge.app.activities
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Layout
 import android.text.TextPaint
@@ -11,7 +9,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import com.judge.R
 import com.judge.app.core.BaseActivity
 import com.vondear.rxtool.RxTextTool
