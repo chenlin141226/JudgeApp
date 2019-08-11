@@ -10,8 +10,11 @@ import android.widget.FrameLayout
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.judge.R
 import com.judge.extensions.setTextIfDifferent
+import com.judge.network.Constant
 import com.vondear.rxui.view.RxCaptcha
 import kotlinx.android.synthetic.main.view_login.view.*
 
@@ -27,8 +30,8 @@ class LoginView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private val userNameWatcher = SimpleTextWatcher{onUserNameChanged?.invoke(it)}
-    private val passwordWatcher = SimpleTextWatcher{onPasswordChanged?.invoke(it)}
+    private val userNameWatcher = SimpleTextWatcher { onUserNameChanged?.invoke(it) }
+    private val passwordWatcher = SimpleTextWatcher { onPasswordChanged?.invoke(it) }
     private val codeWatcher = SimpleTextWatcher { onCodeChanged?.invoke(it) }
 
     init {
@@ -39,50 +42,47 @@ class LoginView @JvmOverloads constructor(
         et_code.addTextChangedListener(codeWatcher)
 
         val spinnerData = resources.getStringArray(R.array.login_item_spinner)
-        val spinnerAdapter = ArrayAdapter<String>(context,R.layout.login_spinner,spinnerData)
+        val spinnerAdapter = ArrayAdapter<String>(context, R.layout.login_spinner, spinnerData)
         spinner.adapter = spinnerAdapter
 
-        RxCaptcha.build()
-            .backColor(0xf9c660)
-            .codeLength(6)
-            .fontSize(40)
-            .lineNumber(2)
-            .size(180, 60)
-            .type(RxCaptcha.TYPE.CHARS)
+        
+        Glide.with(context).load(Constant.BASE_URL + Constant.SAFE_CODE)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .centerCrop()
             .into(btn_get_code)
-
     }
 
     @TextProp
-    fun setUserName(username : CharSequence?){
-       et_username.setTextIfDifferent(username)
+    fun setUserName(username: CharSequence?) {
+        et_username.setTextIfDifferent(username)
     }
 
     @TextProp
-    fun setPassword(password : CharSequence?){
+    fun setPassword(password: CharSequence?) {
         et_username.setTextIfDifferent(password)
     }
 
     @TextProp
-    fun setCode(code : CharSequence?){
+    fun setCode(code: CharSequence?) {
         et_username.setTextIfDifferent(code)
     }
 
 
     @set:CallbackProp
-    var onUserNameChanged : ((newText : String) -> Unit)? =null
+    var onUserNameChanged: ((newText: String) -> Unit)? = null
 
     @set:CallbackProp
-    var onPasswordChanged : ((newText : String) -> Unit)? =null
+    var onPasswordChanged: ((newText: String) -> Unit)? = null
 
     @set:CallbackProp
-    var onCodeChanged : ((newText : String) -> Unit)? =null
+    var onCodeChanged: ((newText: String) -> Unit)? = null
 
     /**
      * 登录的点击事件
      */
     @CallbackProp
-    fun setClickListener(listener : OnClickListener?){
+    fun setClickListener(listener: OnClickListener?) {
         iv_login.setOnClickListener(listener)
     }
 
@@ -90,7 +90,7 @@ class LoginView @JvmOverloads constructor(
      * 下拉框选择
      */
     @CallbackProp
-    fun setSpinnerItemSelectedListener(listener : AdapterView.OnItemSelectedListener?){
+    fun setSpinnerItemSelectedListener(listener: AdapterView.OnItemSelectedListener?) {
         spinner.onItemSelectedListener = listener
     }
 
@@ -98,7 +98,7 @@ class LoginView @JvmOverloads constructor(
      * 跳过登录
      */
     @CallbackProp
-    fun setJumpClickListener(listener: OnClickListener?){
+    fun setJumpClickListener(listener: OnClickListener?) {
         loginJump.setOnClickListener(listener)
     }
 
@@ -106,7 +106,7 @@ class LoginView @JvmOverloads constructor(
      * 验证码点击
      */
     @CallbackProp
-    fun setCodeClickListener(listener: OnClickListener?){
+    fun setCodeClickListener(listener: OnClickListener?) {
         btn_get_code.setOnClickListener(listener)
     }
 
@@ -114,7 +114,7 @@ class LoginView @JvmOverloads constructor(
      * 立即注册
      */
     @CallbackProp
-    fun setRegisterClickListener(listener: OnClickListener?){
+    fun setRegisterClickListener(listener: OnClickListener?) {
         register.setOnClickListener(listener)
     }
 
@@ -122,12 +122,12 @@ class LoginView @JvmOverloads constructor(
      * 找回密码
      */
     @CallbackProp
-    fun setFindClickListener(listener: OnClickListener?){
+    fun setFindClickListener(listener: OnClickListener?) {
         findpassword.setOnClickListener(listener)
     }
 }
 
- class SimpleTextWatcher(val onTextChanged : (newText : String) -> Unit) : TextWatcher{
+class SimpleTextWatcher(val onTextChanged: (newText: String) -> Unit) : TextWatcher {
     override fun afterTextChanged(s: Editable?) {
     }
 

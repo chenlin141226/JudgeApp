@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.fragmentViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.judge.R
 import com.judge.app.activities.HomeActivity
 import com.judge.app.activities.LoggingActivity
@@ -17,12 +19,14 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
 import com.judge.data.state.LoginState
 import com.judge.models.LoginViewModel
+import com.judge.network.Constant
 import com.judge.views.loginView
 import com.vondear.rxtool.RxDataTool
 import com.vondear.rxtool.view.RxToast
-import com.vondear.rxui.view.RxCaptcha
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.support.v4.toast
+
+
 
 /**
  * @author: jaffa
@@ -75,14 +79,12 @@ class LoginFragment : BaseFragment() {
 
             //点击更新验证码
             codeClickListener { btn_code ->
-                   RxCaptcha.build()
-                       .backColor(0xf9c660)
-                       .codeLength(6)
-                       .fontSize(40)
-                       .lineNumber(2)
-                       .size(220, 80)
-                       .type(RxCaptcha.TYPE.CHARS)
-                       .into(btn_code as ImageView?)
+                Glide.with(context!!)
+                    .load(Constant.BASE_URL+Constant.SAFE_CODE)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .centerCrop()
+                    .into(btn_code as ImageView)
             }
 
             //点击登录
