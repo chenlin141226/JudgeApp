@@ -7,15 +7,14 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.MineDataBean
-import com.judge.data.MineItemBean
+import com.judge.data.bean.MineDataBean
+import com.judge.data.bean.MineItemBean
 import com.judge.data.repository.MineRepository
 import com.judge.extensions.copy
 import com.judge.mineItem
 import com.judge.mineTitle
 import com.judge.utils.LogUtils
 import com.vondear.rxtool.RxTool
-import com.vondear.rxui.view.dialog.RxDialogLoading
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 import kotlin.collections.HashMap

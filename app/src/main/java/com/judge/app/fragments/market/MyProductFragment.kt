@@ -7,7 +7,7 @@ import com.airbnb.mvrx.fragmentViewModel
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.MarketBean
+import com.judge.data.bean.MarketBean
 import com.judge.marketItem
 import org.jetbrains.anko.collections.forEachWithIndex
 import java.util.*

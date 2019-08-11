@@ -10,7 +10,7 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.Medal
+import com.judge.data.bean.Medal
 import com.judge.data.repository.MineRepository
 import com.judge.medalItemView
 import com.judge.utils.LogUtils

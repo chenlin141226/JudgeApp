@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         >
     <data>
-        <variable name="message" type="com.judge.data.PublicMessageBean"/>
+        <variable name="message" type="com.judge.data.bean.PublicMessageBean"/>
         <variable name="onClick" type="android.view.View.OnClickListener"/>
     </data>
     <LinearLayout

@@ -1,7 +1,7 @@
 package com.judge.data.repository
 
-import com.judge.data.MedalBean
-import com.judge.data.MineDataBean
+import com.judge.data.bean.MedalBean
+import com.judge.data.bean.MineDataBean
 import com.judge.network.JsonResponse
 import com.judge.network.ServiceCreator
 import com.judge.network.services.MineApIService

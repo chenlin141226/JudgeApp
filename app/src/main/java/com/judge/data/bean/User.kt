@@ -1,4 +1,4 @@
-package com.judge.data
+package com.judge.data.bean
 
 data class User(
     val userName: String,

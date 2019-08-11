@@ -1,4 +1,4 @@
-package com.judge.data
+package com.judge.data.bean
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

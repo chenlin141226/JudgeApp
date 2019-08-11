@@ -10,7 +10,7 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.PublicMessageBean
+import com.judge.data.bean.PublicMessageBean
 import com.judge.publicMessageItem
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick

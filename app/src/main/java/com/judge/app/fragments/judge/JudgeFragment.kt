@@ -25,9 +25,10 @@ class JudgeFragment : BaseFragment() {
         )
 
         val fragments = ArrayList<Fragment>().also {
-            for (index in 0 until 4) {
-                it.add(AttentionFragment())
-            }
+            it.add(AttentionFragment())
+            it.add(EditionFragment())
+            it.add(RecommendFragment())
+            it.add(InformationFragment())
         }
 
         //使用Viewstub添加布局

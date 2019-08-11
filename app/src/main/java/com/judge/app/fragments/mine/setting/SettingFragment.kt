@@ -17,7 +17,7 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.SettingItemBean
+import com.judge.data.bean.SettingItemBean
 import com.judge.extensions.copy
 import com.judge.settingItem
 import com.judge.settingTitle

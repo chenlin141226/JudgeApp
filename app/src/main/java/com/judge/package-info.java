@@ -17,7 +17,8 @@
         R.layout.no_medal_view,
         R.layout.blank_view,
         R.layout.text_view_item,
-        R.layout.exchange_success_fragment
+        R.layout.exchange_success_fragment,
+        R.layout.attention_item
 })
 
 package com.judge;

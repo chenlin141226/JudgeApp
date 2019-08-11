@@ -1,8 +1,6 @@
 package com.judge.views
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -11,17 +9,10 @@ import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
 import com.judge.R
-import com.judge.data.MarketBean
+import com.judge.data.bean.MarketBean
 import com.judge.extensions.setTextIfDifferent
-import com.vondear.rxtool.RxActivityTool
-import com.vondear.rxtool.RxAppTool
-import com.vondear.rxtool.RxDeviceTool
-import com.vondear.rxtool.RxTool
 import kotlinx.android.synthetic.main.product_detail_item.view.*
-import org.jetbrains.anko.coroutines.experimental.asReference
 
 /**
  * @author: jaffa

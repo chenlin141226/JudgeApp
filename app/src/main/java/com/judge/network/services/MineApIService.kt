@@ -1,7 +1,7 @@
 package com.judge.network.services
 
-import com.judge.data.MedalBean
-import com.judge.data.MineDataBean
+import com.judge.data.bean.MedalBean
+import com.judge.data.bean.MineDataBean
 import com.judge.network.JsonResponse
 import io.reactivex.Observable
 import retrofit2.http.GET

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 	<data>
-		<variable name="ruleItem" type="com.judge.data.WhistleRulesBean"/>
+		<variable name="ruleItem" type="com.judge.data.bean.WhistleRulesBean"/>
 	</data>
 	<LinearLayout
 			android:orientation="horizontal"

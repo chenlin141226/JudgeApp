@@ -5,14 +5,14 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.Dog
+import com.judge.data.bean.Dog
 import com.judge.views.dogDetailView
 
 
 data class DogDetailState(val dog: Dog) :
     MvRxState {
     /**
-     * This secondary constructor will automatically called if your Fragment has
+     * This secondary constructor will automatically called if your InformationFragment has
      * a parcelable in its arguments at key [com.airbnb.mvrx.MvRx.KEY_ARG].
      */
     //constructor(args: Dog) : this(dog = args)

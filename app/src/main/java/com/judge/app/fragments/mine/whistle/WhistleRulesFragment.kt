@@ -10,7 +10,7 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.WhistleRulesBean
+import com.judge.data.bean.WhistleRulesBean
 import com.judge.whistleRulesItem
 import com.vondear.rxtool.RxTool
 import org.jetbrains.anko.collections.forEachWithIndex

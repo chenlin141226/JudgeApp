@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
 >
 	<data>
-		<variable name="whistleBean" type="com.judge.data.WhistleBean"/>
+		<variable name="whistleBean" type="com.judge.data.bean.WhistleBean"/>
 	</data>
 	<LinearLayout
 			android:orientation="horizontal"

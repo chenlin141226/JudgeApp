@@ -8,8 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.judge.R
-import com.judge.data.MineItemBean
-import com.judge.data.SettingItemBean
+import com.judge.data.bean.MineItemBean
+import com.judge.data.bean.SettingItemBean
 import com.judge.network.ServiceCreator
 import com.vondear.rxtool.RxTool
 import org.jetbrains.anko.textColor

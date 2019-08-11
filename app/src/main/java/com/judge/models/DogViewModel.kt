@@ -5,11 +5,10 @@ import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.judge.app.core.JudgeApplication
 import com.judge.app.core.MvRxViewModel
-import com.judge.data.Dog
+import com.judge.data.bean.Dog
 import com.judge.data.repository.DogRepository
 import com.judge.data.state.DogState
 import com.judge.extensions.copy
-import com.judge.extensions.update
 import io.reactivex.schedulers.Schedulers
 
 class DogViewModel(

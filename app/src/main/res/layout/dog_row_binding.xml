@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="dog" type="com.judge.data.Dog"/>
+        <variable name="dog" type="com.judge.data.bean.Dog"/>
     </data>
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

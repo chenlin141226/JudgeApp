@@ -9,7 +9,7 @@ import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.bumptech.glide.Glide
 import com.judge.R
-import com.judge.data.Dog
+import com.judge.data.bean.Dog
 import kotlinx.android.synthetic.main.dog_detail.view.*
 import kotlinx.android.synthetic.main.dog_row.view.breedsView
 import kotlinx.android.synthetic.main.dog_row.view.image

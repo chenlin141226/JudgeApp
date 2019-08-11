@@ -100,7 +100,7 @@ abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
     }
 
     /**
-     * Provide the EpoxyController to use when building models for this Fragment.
+     * Provide the EpoxyController to use when building models for this InformationFragment.
      * Basic usages can simply use [simpleController]
      */
     abstract fun epoxyController(): MvRxEpoxyController

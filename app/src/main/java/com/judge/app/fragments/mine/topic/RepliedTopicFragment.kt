@@ -8,7 +8,7 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.TopicBean
+import com.judge.data.bean.TopicBean
 import com.judge.topicItem
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.support.v4.toast

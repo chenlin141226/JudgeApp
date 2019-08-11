@@ -13,10 +13,9 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.SettingItemBean
+import com.judge.data.bean.SettingItemBean
 import com.judge.editTextView
 import com.judge.settingItem
-import com.judge.views.BottomPopupViewList
 import kotlinx.android.parcel.Parcelize
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
