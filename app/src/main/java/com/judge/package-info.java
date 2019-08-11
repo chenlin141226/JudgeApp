@@ -18,7 +18,8 @@
         R.layout.blank_view,
         R.layout.text_view_item,
         R.layout.exchange_success_fragment,
-        R.layout.attention_item
+        R.layout.attention_item,
+        R.layout.recommend_item
 })
 
 package com.judge;
