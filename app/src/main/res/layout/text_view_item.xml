@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+    <data>
+        <variable name="colorType" type="int"/>
+        <variable name="content" type="String"/>
+        <variable name="onClick" type="android.view.View.OnClickListener"/>
+    </data>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{content}"
+            android:textSize="@dimen/text_17"
+            android:gravity="center"
+            android:onClick="@{onClick}"
+            android:padding="@dimen/dp_5"
+            app:colorType="@{colorType}"
+    />
+</layout>

@@ -15,6 +15,8 @@
         R.layout.edit_text_view,
         R.layout.medal_item_view,
         R.layout.no_medal_view,
+        R.layout.blank_view,
+        R.layout.text_view_item,
         R.layout.exchange_success_fragment
 })
 

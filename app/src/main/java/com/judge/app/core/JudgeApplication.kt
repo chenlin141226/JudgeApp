@@ -1,6 +1,7 @@
 package com.judge.app.core
 
 import androidx.multidex.MultiDexApplication
+import com.jeremyliao.liveeventbus.LiveEventBus
 
 import com.judge.data.repository.DogRepository
 import com.judge.utils.LogUtils
@@ -14,5 +15,7 @@ class JudgeApplication : MultiDexApplication() {
         LogUtils.init(this)
         RxTool.init(this)
         NetworkUtils.startNetService(this)
+        LiveEventBus.get().config().lifecycleObserverAlwaysActive(false)
+            .autoClear(true)
     }
 }
