@@ -1,5 +1,6 @@
 package com.judge.app.fragments.judge
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.judge.R
 import com.judge.adapters.ViewPagerAdapter
@@ -16,7 +17,6 @@ class JudgeFragment : BaseFragment() {
     }
 
     override fun initView() {
-
         val titles = arrayOf(
             resources.getString(R.string.attention),
             resources.getString(R.string.plate),
