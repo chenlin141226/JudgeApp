@@ -85,8 +85,14 @@ class SettingViewModel(
 class SettingFragment : BaseFragment() {
     private var resultUri: Uri? = null
     val viewModel: SettingViewModel by fragmentViewModel()
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private val list = LinkedList<SettingItemBean>()
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
+        list.clear()
         state.items.forEachWithIndex { index, item ->
+            list.add(item)
             if (index == 0) {
                 settingTitle {
                     id(item.title + index)
@@ -107,7 +113,7 @@ class SettingFragment : BaseFragment() {
                     id(item.title + index)
                     item(item)
                     onClick { _ ->
-                        val settingArgs = SettingArgs(index)
+                        val settingArgs = SettingArgs(index, list[index].content)
                         when (index) {
                             1 -> navigateTo(R.id.action_settingFragment_to_editNameFragment, settingArgs)
                             2 -> navigateTo(R.id.action_settingFragment_to_editGenderFragment, settingArgs)

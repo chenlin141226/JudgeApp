@@ -10,18 +10,22 @@ import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
 import com.judge.editTextView
 import com.judge.settingItem
+import com.judge.views.BottomPopupViewList
+import com.lxj.xpopup.interfaces.OnSelectListener
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.toast
 
 class EditQQFragment : BaseFragment() {
     private val viewModel: EditViewModel by fragmentViewModel()
     private lateinit var args: SettingArgs
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
+        args.index = state.settingArgs.index
+        args.content = state.settingArgs.content
         editTextView {
             id("QQEdit")
             item(state.settingArgs)
             watcher {
-                args.index = state.settingArgs.index
                 args.content = it.toString()
             }
         }
@@ -30,6 +34,13 @@ class EditQQFragment : BaseFragment() {
                 id("QQ privacy$index")
                 item(itemBean)
                 onClick { _ ->
+                    BottomPopupViewList(context!!, viewModel.privacyList)
+                        .setOnSelectListener(OnSelectListener { position, text ->
+                            toast(text)
+                            if (position != viewModel.privacyList.size-1){
+                                viewModel.updateItem(index, itemBean, text)
+                            }
+                        }).showPopup()
                 }
             }
         }
