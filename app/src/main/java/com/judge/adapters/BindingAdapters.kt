@@ -47,9 +47,9 @@ fun setDrawable(textView: TextView, item: MineItemBean) {
 @BindingAdapter("colorType", requireAll = false)
 fun setColorType(textView: TextView, type: Int) {
     when (type) {
-        1 -> textView.textColor = R.color.colorPrimary
-        3 -> textView.textColor = R.color.gray
-        else -> textView.textColor = R.color.black
+        1 -> textView.textColor = RxTool.getContext().resources.getColor(R.color.colorPrimary)
+        3 -> textView.textColor = RxTool.getContext().resources.getColor(R.color.gray)
+        else -> textView.textColor = RxTool.getContext().resources.getColor(R.color.black)
     }
 }
 

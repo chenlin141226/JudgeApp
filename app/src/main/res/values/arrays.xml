@@ -68,6 +68,25 @@
         <item>QQ</item>
     </string-array>
 
+    <string-array name="setting_bottom_list">
+        <item>拍照</item>
+        <item>相册选取</item>
+        <item>取消</item>
+    </string-array>
+
+    <string-array name="privacy_contents">
+        <item>公开</item>
+        <item>好友可见</item>
+        <item>保密</item>
+        <item>取消</item>
+    </string-array>
+
+    <string-array name="gender_list">
+        <item>男</item>
+        <item>女</item>
+        <item>取消</item>
+    </string-array>
+
     <string-array name="login_item_spinner">
         <item>@string/question</item>
         <item>@string/mather_name</item>
