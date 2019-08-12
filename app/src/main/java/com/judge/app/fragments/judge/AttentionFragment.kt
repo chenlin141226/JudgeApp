@@ -30,7 +30,7 @@ class AttentionViewModel(initialState: AttentionState) : MvRxViewModel<Attention
     }
 
     fun fetchAttention() {
-        for (i in 1..9) {
+        for (i in 1 .. 9) {
             val market = AttentionBean(
                 attentionUrl = "https://i.redd.it/nbju2rir9xp11.jpg",
                 attentionName = "小鱼儿$i",

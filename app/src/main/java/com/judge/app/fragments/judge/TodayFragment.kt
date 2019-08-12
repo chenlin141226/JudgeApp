@@ -8,5 +8,8 @@ import com.judge.app.core.simpleController
  * @date: 2019/8/11
  */
 class TodayFragment : BaseFragment() {
-    override fun epoxyController() = simpleController {  }
+
+    override fun epoxyController() = simpleController {
+
+    }
 }
