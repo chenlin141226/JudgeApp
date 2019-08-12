@@ -1,6 +1,8 @@
 package com.judge.app.fragments.judge
 
+import android.graphics.Color
 import androidx.fragment.app.Fragment
+import com.flyco.tablayout.listener.OnTabSelectListener
 import com.judge.R
 import com.judge.adapters.ViewPagerAdapter
 import com.judge.app.core.BaseFragment
@@ -17,10 +19,17 @@ class InformationFragment : BaseFragment() {
     }
 
     override fun initView() {
+
+        recyclerView.setBackgroundColor(Color.parseColor("#f6f5fa"))
+
         val titles = arrayOf(
             resources.getString(R.string.today),
             resources.getString(R.string.currentWeek),
             resources.getString(R.string.currentMonth)
+        )
+
+        val views = arrayOf(
+            R.drawable.login_content_border
         )
 
         val fragments = ArrayList<Fragment>().also {
