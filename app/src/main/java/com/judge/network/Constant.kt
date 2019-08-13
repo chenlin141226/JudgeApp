@@ -9,4 +9,7 @@ object Constant {
 
     //随机验证码
      const val SAFE_CODE = "/source/plugin/login_mobile/index.php?version=4&module=seccode"
+
+    //每日最佳，每周，每月
+    const val JUDGE_INFORMATION = " /api/mobile/index.php"
 }

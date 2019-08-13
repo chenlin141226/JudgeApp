@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+                name="informationBean"
+                type="com.judge.data.bean.Data"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/information_bg"
+            android:padding="@dimen/dp_15"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_10">
+
+        <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="巴西杯撒旦及时发觉发表电视舒服打发士大夫十分"
+                android:text="@{informationBean.title}"
+                android:textSize="@dimen/text_14"
+                android:textColor="#494850"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+                android:id="@+id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/eye"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_info"
+                android:layout_marginTop="@dimen/dp_10"
+                android:baselineAlignBottom="true"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_num"/>
+
+        <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="231"
+                android:text="@{informationBean.views}"
+                app:layout_constraintLeft_toRightOf="@id/iv"
+                app:layout_constraintTop_toBottomOf="@id/tv_info"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textColor="#adabb3"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2019-08-12"
+                android:textColor="#adabb3"
+                android:text="@{informationBean.dateline}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_info"
+                android:layout_marginTop="@dimen/dp_10"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

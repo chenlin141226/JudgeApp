@@ -2,11 +2,17 @@ package com.judge.app.fragments.judge
 
 import android.graphics.Color
 import androidx.fragment.app.Fragment
-import com.flyco.tablayout.listener.OnTabSelectListener
+import androidx.viewpager.widget.ViewPager
+import com.airbnb.mvrx.*
 import com.judge.R
 import com.judge.adapters.ViewPagerAdapter
 import com.judge.app.core.BaseFragment
+import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.bean.Data
+import com.judge.data.repository.JudgeRepository
+import com.judge.utils.LogUtils
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.topic_view.view.*
 
 /**
@@ -14,6 +20,8 @@ import kotlinx.android.synthetic.main.topic_view.view.*
  * @date: 2019/8/11
  */
 class InformationFragment : BaseFragment() {
+
+
     override fun epoxyController() = simpleController {
 
     }
@@ -28,14 +36,11 @@ class InformationFragment : BaseFragment() {
             resources.getString(R.string.currentMonth)
         )
 
-        val views = arrayOf(
-            R.drawable.login_content_border
-        )
-
         val fragments = ArrayList<Fragment>().also {
-               it.add(TodayFragment())
-               it.add(CurrentWeek())
-               it.add(CurrentMonth())
+                it.add(TodayFragment())
+                it.add(CurrentWeek())
+                it.add(CurrentMonth())
+
         }
 
         //使用Viewstub添加布局
@@ -44,6 +49,7 @@ class InformationFragment : BaseFragment() {
             viewPager.adapter = ViewPagerAdapter(childFragmentManager, fragments, titles)
             viewPager.offscreenPageLimit = 4
             tabLayout.setViewPager(viewPager)
+            viewPager.currentItem = 0
         }
     }
 }
