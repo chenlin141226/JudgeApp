@@ -12,8 +12,11 @@ import com.judge.app.core.simpleController
 import com.judge.blankView
 import com.judge.editTextView
 import com.judge.settingItem
+import com.judge.views.BottomPopupViewList
+import com.lxj.xpopup.interfaces.OnSelectListener
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.toast
 
 class EditAddressFragment : BaseFragment() {
     private val viewModel: EditViewModel by fragmentViewModel()
@@ -27,6 +30,15 @@ class EditAddressFragment : BaseFragment() {
                 id("Address privacy$index")
                 item(itemBean)
                 onClick { _ ->
+                    if (index == 1) {
+                        BottomPopupViewList(context!!, viewModel.privacyList)
+                            .setOnSelectListener(OnSelectListener { position, text ->
+                                toast(text)
+                                if (position != viewModel.privacyList.size - 1) {
+                                    viewModel.updateItem(index, itemBean, text)
+                                }
+                            }).showPopup()
+                    }
                 }
             }
         }

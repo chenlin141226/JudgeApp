@@ -21,6 +21,9 @@ import com.judge.data.bean.SettingItemBean
 import com.judge.extensions.copy
 import com.judge.settingItem
 import com.judge.settingTitle
+import com.judge.views.BottomPopupViewList
+import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vondear.rxtool.RxPhotoTool
 import com.vondear.rxtool.RxTool
 import com.vondear.rxui.view.dialog.RxDialogChooseImage
@@ -40,6 +43,7 @@ class SettingViewModel(
     initialState: SettingState
 ) : MvRxViewModel<SettingState>(initialState) {
     private val list = LinkedList<SettingItemBean>()
+    val bottomList: Array<String> = RxTool.getContext().resources.getStringArray(R.array.setting_bottom_list)
 
     init {
         getSettingTitles()
@@ -81,14 +85,27 @@ class SettingViewModel(
 class SettingFragment : BaseFragment() {
     private var resultUri: Uri? = null
     val viewModel: SettingViewModel by fragmentViewModel()
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private val list = LinkedList<SettingItemBean>()
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
+        list.clear()
         state.items.forEachWithIndex { index, item ->
+            list.add(item)
             if (index == 0) {
                 settingTitle {
                     id(item.title + index)
                     item(item)
                     onClick { _ ->
-                        RxDialogChooseImage(this@SettingFragment, RxDialogChooseImage.LayoutType.TITLE).show()
+                        //RxDialogChooseImage(this@SettingFragment, RxDialogChooseImage.LayoutType.TITLE).show()
+                        BottomPopupViewList(context!!, viewModel.bottomList)
+                            .setOnSelectListener(OnSelectListener { position, _ ->
+                                when (position) {
+                                    0 -> RxPhotoTool.openCameraImage(this@SettingFragment)
+                                    1 -> RxPhotoTool.openLocalImage(this@SettingFragment)
+                                }
+                            }).showPopup()
                     }
                 }
             } else {
@@ -96,7 +113,7 @@ class SettingFragment : BaseFragment() {
                     id(item.title + index)
                     item(item)
                     onClick { _ ->
-                        val settingArgs = SettingArgs(index)
+                        val settingArgs = SettingArgs(index, list[index].content)
                         when (index) {
                             1 -> navigateTo(R.id.action_settingFragment_to_editNameFragment, settingArgs)
                             2 -> navigateTo(R.id.action_settingFragment_to_editGenderFragment, settingArgs)

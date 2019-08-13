@@ -10,12 +10,16 @@ import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
 import com.judge.blankView
 import com.judge.settingItem
+import com.judge.views.BottomPopupViewList
+import com.lxj.xpopup.interfaces.OnSelectListener
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.toast
 
 class EditGenderFragment : BaseFragment() {
     private val viewModel: EditViewModel by fragmentViewModel()
     private lateinit var args: SettingArgs
+    private lateinit var list: Array<String>
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         blankView {
             id("blank view")
@@ -25,6 +29,18 @@ class EditGenderFragment : BaseFragment() {
                 id("Gender privacy$index")
                 item(itemBean)
                 onClick { _ ->
+                    list = when (index) {
+                        0 -> viewModel.genderList
+                        1 -> viewModel.privacyList
+                        else -> emptyArray()
+                    }
+                    BottomPopupViewList(context!!, list)
+                        .setOnSelectListener(OnSelectListener { position, text ->
+                            toast(text)
+                            if (position != list.size - 1) {
+                                viewModel.updateItem(index, itemBean, text)
+                            }
+                        }).showPopup()
                 }
             }
         }
