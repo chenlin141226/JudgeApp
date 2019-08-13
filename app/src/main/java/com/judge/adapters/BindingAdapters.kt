@@ -8,11 +8,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.judge.R
+import com.judge.data.bean.Data
 import com.judge.data.bean.MineItemBean
 import com.judge.data.bean.SettingItemBean
 import com.judge.network.ServiceCreator
 import com.vondear.rxtool.RxTool
+import org.jetbrains.anko.db.LongParser
 import org.jetbrains.anko.textColor
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 @BindingAdapter("imageUrl", requireAll = false)
 fun setImage(imageView: ImageView, imageUrl: String) {
@@ -70,5 +75,13 @@ fun setWhistleImage(imageView: ImageView, whistleType: String) {
         3 -> imageView.setImageResource(R.drawable.ic_copper_whistle)
         else -> imageView.setImageResource(R.drawable.ic_copper_whistle)
     }
+}
+
+@BindingAdapter("dataText", requireAll = false)
+fun setInforMationText(textView: TextView, item: Data) {
+    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+    val format = sdf.format(Date(item.dateline.toLong()*1000))
+    textView.text = format
 }
 
