@@ -1,5 +1,6 @@
 package com.judge.app.fragments.mine.setting
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
@@ -24,12 +25,15 @@ import com.judge.settingTitle
 import com.judge.views.BottomPopupViewList
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.interfaces.OnSelectListener
+import com.tbruyelle.rxpermissions2.RxPermissions
+import com.vondear.rxtool.RxPermissionsTool
 import com.vondear.rxtool.RxPhotoTool
 import com.vondear.rxtool.RxTool
 import com.vondear.rxui.view.dialog.RxDialogChooseImage
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropActivity
 import org.jetbrains.anko.collections.forEachWithIndex
+import org.jetbrains.anko.support.v4.toast
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -98,11 +102,22 @@ class SettingFragment : BaseFragment() {
                     id(item.title + index)
                     item(item)
                     onClick { _ ->
+                        RxPermissionsTool.with(activity).initPermission()
                         //RxDialogChooseImage(this@SettingFragment, RxDialogChooseImage.LayoutType.TITLE).show()
                         BottomPopupViewList(context!!, viewModel.bottomList)
                             .setOnSelectListener(OnSelectListener { position, _ ->
                                 when (position) {
-                                    0 -> RxPhotoTool.openCameraImage(this@SettingFragment)
+                                    0 -> {
+                                        RxPermissions(this@SettingFragment).request(
+                                            Manifest.permission.CAMERA
+                                        ).subscribe {
+                                            if (it) {
+                                                RxPhotoTool.openCameraImage(this@SettingFragment)
+                                            } else {
+                                                toast("请打开相机权限！")
+                                            }
+                                        }
+                                    }
                                     1 -> RxPhotoTool.openLocalImage(this@SettingFragment)
                                 }
                             }).showPopup()

@@ -89,6 +89,9 @@ dependencies {
     //popup window
     implementation 'com.lxj:xpopup:1.8.8-x'
 
+    //权限管理类库
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

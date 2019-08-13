@@ -86,6 +86,5 @@ class EditAddressFragment : BaseFragment() {
         super.initData()
         viewModel.getEditItems(4)
         args = SettingArgs()
-        viewModel.getProvinces(context!!)
     }
 }

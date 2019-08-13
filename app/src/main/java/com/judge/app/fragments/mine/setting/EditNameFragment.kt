@@ -1,41 +1,31 @@
 package com.judge.app.fragments.mine.setting
 
-import android.content.Context
 import android.os.Parcelable
 import android.text.InputType
-import android.text.TextUtils
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.airbnb.mvrx.fragmentViewModel
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.bean.ProvinceBean
 import com.judge.data.bean.SettingItemBean
 import com.judge.editTextView
 import com.judge.extensions.copy
 import com.judge.settingItem
 import com.judge.views.BottomPopupViewList
 import com.lxj.xpopup.interfaces.OnSelectListener
-import com.vondear.rxtool.RxPhotoTool
 import com.vondear.rxtool.RxTool
 import kotlinx.android.parcel.Parcelize
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 @Parcelize
@@ -58,7 +48,6 @@ class EditViewModel(
     private val list = LinkedList<SettingItemBean>()
     val privacyList: Array<String> = RxTool.getContext().resources.getStringArray(R.array.privacy_contents)
     val genderList: Array<String> = RxTool.getContext().resources.getStringArray(R.array.gender_list)
-    var provinces: List<ProvinceBean> = ArrayList()
     fun getEditItems(index: Int) {
         when (index) {
             1 -> {
@@ -86,10 +75,6 @@ class EditViewModel(
         setState {
             copy(items = items.copy(index, bean.copy(content = content)))
         }
-    }
-
-    fun getProvinces(context: Context) {
-
     }
 
     companion object : MvRxViewModelFactory<EditViewModel, EditState> {
