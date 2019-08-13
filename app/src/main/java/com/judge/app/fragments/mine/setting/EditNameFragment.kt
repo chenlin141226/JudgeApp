@@ -48,6 +48,7 @@ class EditViewModel(
 ) : MvRxViewModel<EditState>(initialState) {
     private val list = LinkedList<SettingItemBean>()
     val privacyList: Array<String> = RxTool.getContext().resources.getStringArray(R.array.privacy_contents)
+    val genderList: Array<String> = RxTool.getContext().resources.getStringArray(R.array.gender_list)
     fun getEditItems(index: Int) {
         when (index) {
             1 -> {
