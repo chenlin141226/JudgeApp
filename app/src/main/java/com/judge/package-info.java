@@ -1,6 +1,6 @@
 //@EpoxyDataBindingPattern(rClass = R.class, layoutPrefix = "epoxy_layout")
 
-@EpoxyDataBindingLayouts({R.layout.dog_row_binding,
+@EpoxyDataBindingLayouts({
         R.layout.mine_item,
         R.layout.mine_title,
         R.layout.whistle_item,

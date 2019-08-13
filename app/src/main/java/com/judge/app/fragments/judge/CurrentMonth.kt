@@ -8,7 +8,6 @@ import com.judge.data.bean.Data
 import com.judge.data.repository.JudgeRepository
 import com.judge.todayItem
 import com.judge.utils.LogUtils
-import com.judge.views.loadingView
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 
@@ -59,10 +58,7 @@ class CurrentMonth : BaseFragment() {
     override fun epoxyController() = simpleController(viewModel) { state ->
 
         if(state.information == null){
-            loadingView {
-                id("load")
-                loading(true)
-            }
+
         }
 
         state.information?.forEachWithIndex { index, item ->

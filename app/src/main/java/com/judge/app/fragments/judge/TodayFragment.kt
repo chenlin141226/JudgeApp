@@ -11,7 +11,6 @@ import com.judge.data.bean.Data
 import com.judge.data.repository.JudgeRepository
 import com.judge.todayItem
 import com.judge.utils.LogUtils
-import com.judge.views.loadingView
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 import java.text.SimpleDateFormat
@@ -23,7 +22,7 @@ import java.util.*
  */
 data class TodayState(
     val information: List<Data>? = emptyList(),
-    val times : String? = null,
+    val times: String? = null,
     val isLoading: Boolean = false
 ) : MvRxState
 
@@ -88,11 +87,7 @@ class TodayFragment : BaseFragment() {
 
     override fun epoxyController() = simpleController(viewModel) { state ->
 
-        if(state.information == null){
-            loadingView {
-                id("load")
-                loading(true)
-            }
+        if (state.information == null) {
         }
 
         state.information?.forEachWithIndex { index, item ->
