@@ -19,7 +19,8 @@
         R.layout.text_view_item,
         R.layout.exchange_success_fragment,
         R.layout.attention_item,
-        R.layout.recommend_item
+        R.layout.recommend_item,
+        R.layout.today_item
 })
 
 package com.judge;
