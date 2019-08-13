@@ -1,5 +1,6 @@
 package com.judge.app.fragments.mine.setting
 
+import android.text.InputType
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.fragmentViewModel
@@ -24,6 +25,7 @@ class EditQQFragment : BaseFragment() {
         args.content = state.settingArgs.content
         editTextView {
             id("QQEdit")
+            inputType(InputType.TYPE_CLASS_NUMBER)
             item(state.settingArgs)
             watcher {
                 args.content = it.toString()

@@ -24,6 +24,7 @@ import com.judge.utils.CenterTitle.centerTitle
 import com.judge.utils.LogUtils
 import com.judge.utils.NetworkUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.vondear.rxtool.RxKeyboardTool
 import com.vondear.rxui.view.dialog.RxDialogLoading
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.AnkoLogger
@@ -134,4 +135,8 @@ abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
         findNavController().navigate(actionId, bundle)
     }
 
+    override fun onPause() {
+        super.onPause()
+        RxKeyboardTool.hideSoftInput(activity)
+    }
 }

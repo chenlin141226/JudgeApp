@@ -1,5 +1,6 @@
 package com.judge.app.fragments.mine.setting
 
+import android.text.InputType
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.fragmentViewModel
@@ -25,6 +26,7 @@ class EditPhoneNumberFragment : BaseFragment() {
         editTextView {
             id("phoneNumberEdit")
             item(state.settingArgs)
+            inputType(InputType.TYPE_CLASS_PHONE)
             watcher {
                 args.content = it.toString()
             }

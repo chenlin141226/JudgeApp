@@ -3,6 +3,7 @@
     <data>
         <variable name="watcher" type="androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged"/>
         <variable name="item" type="com.judge.app.fragments.mine.setting.SettingArgs"/>
+        <variable name="inputType" type="int"/>
     </data>
     <EditText
             android:afterTextChanged="@{watcher}"
@@ -13,6 +14,7 @@
             android:minHeight="@dimen/dp_50"
             android:layout_margin="@dimen/dp_20"
             android:padding="@dimen/dp_5"
+            android:inputType="@{inputType}"
             android:gravity="start|top"
     />
 </layout>

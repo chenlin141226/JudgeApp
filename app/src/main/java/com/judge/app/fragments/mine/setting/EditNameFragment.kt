@@ -1,6 +1,7 @@
 package com.judge.app.fragments.mine.setting
 
 import android.os.Parcelable
+import android.text.InputType
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.MvRxState
@@ -91,6 +92,7 @@ class EditNameFragment : BaseFragment() {
         args.content = state.settingArgs.content
         editTextView {
             id("nameEdit")
+            inputType(InputType.TYPE_CLASS_TEXT)
             item(state.settingArgs)
             watcher {
                 args.content = it.toString()
@@ -104,7 +106,7 @@ class EditNameFragment : BaseFragment() {
                     BottomPopupViewList(context!!, viewModel.privacyList)
                         .setOnSelectListener(OnSelectListener { position, text ->
                             toast(text)
-                            if (position != viewModel.privacyList.size-1){
+                            if (position != viewModel.privacyList.size - 1) {
                                 viewModel.updateItem(index, itemBean, text)
                             }
                         }).showPopup()
