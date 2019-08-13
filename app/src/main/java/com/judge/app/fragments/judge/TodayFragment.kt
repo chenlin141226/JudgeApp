@@ -1,5 +1,6 @@
 package com.judge.app.fragments.judge
 
+import androidx.databinding.BindingAdapter
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
@@ -16,6 +17,10 @@ import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 import java.text.SimpleDateFormat
 import java.util.*
+import android.widget.TextView
+import android.widget.Toast
+import com.vondear.rxtool.view.RxToast
+
 
 /**
  * @author: jaffa
@@ -49,15 +54,6 @@ class TodayViewModel(initialiState: TodayState) : MvRxViewModel<TodayState>(init
                 LogUtils.d(it()?.Variables?.data.toString())
                 copy(information = it()?.Variables?.data ?: emptyList())
             }
-    }
-
-    fun format() = withState { state ->
-        val formatter = SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss")
-        state.information?.forEachWithIndex { i, data ->
-            setState {
-                copy(times = formatter.format(data.dateline))
-            }
-        }
     }
 
 //    fun fetchToday() = withState { state ->
@@ -101,6 +97,11 @@ class TodayFragment : BaseFragment() {
                 informationBean(item)
             }
         }
+    }
+
+    @BindingAdapter("data")
+    fun setData(textView: TextView, data: String) {
+        context?.let { RxToast.info(it, data, Toast.LENGTH_SHORT, true).show() }
     }
 
     override fun initView() {
