@@ -113,8 +113,6 @@ class EditNameFragment : BaseFragment() {
                 }
             }
         }
-
-
     }
 
     override fun initView() {

@@ -1,6 +1,5 @@
 package com.judge.app.fragments.mine.setting
 
-import android.content.res.AssetManager
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.fragmentViewModel
@@ -15,7 +14,6 @@ import com.judge.blankView
 import com.judge.settingItem
 import com.judge.views.BottomPopupViewList
 import com.lxj.xpopup.interfaces.OnSelectListener
-import com.vondear.rxtool.RxTool
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
@@ -24,6 +22,8 @@ class EditBirthdayFragment : BaseFragment() {
     private val viewModel: EditViewModel by fragmentViewModel()
     private lateinit var args: SettingArgs
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
+        args.index = state.settingArgs.index
+        args.content = state.settingArgs.content
         blankView {
             id("blank view")
         }

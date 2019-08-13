@@ -26,6 +26,8 @@ class EditAddressFragment : BaseFragment() {
     private val viewModel: EditViewModel by fragmentViewModel()
     private lateinit var args: SettingArgs
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
+        args.index = state.settingArgs.index
+        args.content = state.settingArgs.content
         blankView {
             id("blank view")
         }
