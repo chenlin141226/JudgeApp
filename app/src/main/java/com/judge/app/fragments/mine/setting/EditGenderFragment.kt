@@ -21,6 +21,8 @@ class EditGenderFragment : BaseFragment() {
     private lateinit var args: SettingArgs
     private lateinit var list: Array<String>
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
+        args.index = state.settingArgs.index
+        args.content = state.settingArgs.content
         blankView {
             id("blank view")
         }

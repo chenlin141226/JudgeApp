@@ -20,7 +20,6 @@ import com.judge.extensions.copy
 import com.judge.settingItem
 import com.judge.views.BottomPopupViewList
 import com.lxj.xpopup.interfaces.OnSelectListener
-import com.vondear.rxtool.RxPhotoTool
 import com.vondear.rxtool.RxTool
 import kotlinx.android.parcel.Parcelize
 import org.jetbrains.anko.collections.forEachWithIndex
@@ -114,8 +113,6 @@ class EditNameFragment : BaseFragment() {
                 }
             }
         }
-
-
     }
 
     override fun initView() {
