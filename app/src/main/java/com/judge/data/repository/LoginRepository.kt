@@ -1,7 +1,7 @@
 package com.judge.data.repository
 
+import com.judge.data.bean.PhoneCodeBean
 import com.judge.data.bean.RegisterResultBean
-import com.judge.network.JsonResponse
 import com.judge.network.ServiceCreator
 import com.judge.network.services.LoginApiService
 import io.reactivex.Observable
@@ -16,7 +16,13 @@ object LoginRepository {
         ServiceCreator.create(LoginApiService::class.java)
     }
 
-    fun register(map: HashMap<String,String>): Observable<RegisterResultBean> {
-        return loginseivice.register(map)
+    //获取手机验证码
+    fun getPhoneCode(map: HashMap<String,String>): Observable<PhoneCodeBean> {
+        return loginseivice.getPhoneCode(map)
+    }
+
+    //注册
+    fun register(map : HashMap<String,String>) : Observable<RegisterResultBean>{
+        return  loginseivice.register(map)
     }
 }

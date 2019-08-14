@@ -1,15 +1,11 @@
 package com.judge.models
 
-import android.widget.Toast
 import com.airbnb.mvrx.*
 import com.judge.app.core.MvRxViewModel
+import com.judge.data.bean.PhoneCodeBean
 import com.judge.data.bean.RegisterResultBean
 import com.judge.data.repository.LoginRepository
-import com.vondear.rxtool.RxTool
-import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 /**
  * @author: jaffa
@@ -17,8 +13,10 @@ import org.jetbrains.anko.uiThread
  * 登录界面的viewmodel
  */
 data class RegisterState(
-    val sendResult: Async<RegisterResultBean> = Uninitialized,
-    val register: RegisterResultBean? = null,
+    val sendResult: Async<PhoneCodeBean> = Uninitialized,
+    val register: PhoneCodeBean? = null,
+    val submitResult: Async<RegisterResultBean> = Uninitialized,
+    val submit: RegisterResultBean? = null,
     val username: String = "",
     val password: String = "",
     val confirmPwd: String = "",
@@ -61,29 +59,31 @@ class RegisterViewModel(registerState: RegisterState) :
         setState { copy(code = code) }
     }
 
-    //获取手机验证码
-    fun getPhoneCode() = withState { state ->
-        if (state.phone.isEmpty()) {
-            doAsync {
-                if (state.phone.isEmpty()) {
-                    uiThread {
-                        RxToast.info(RxTool.getContext(), "请输入手机号码", Toast.LENGTH_SHORT, true).show()
-                    }
-                    return@doAsync
-                }
-            }
-        } else {
-            val map = hashMapOf("phone" to state.phone)
 
-            LoginRepository.register(map)
-                .subscribeOn(Schedulers.io())
-                .execute {
-                    copy(sendResult = it, register = it())
-                }
-        }
+    //注册
+    fun submit() = withState { state ->
+        val map = hashMapOf(
+            "phone" to state.phone, "username" to state.username,
+            "password" to state.password, "pcode" to state.code, "seccode" to state.phoneCode, "email" to state.email
+        )
 
+        LoginRepository.register(map).subscribeOn(Schedulers.io())
+            .execute { copy(submitResult = it, submit = it()) }
     }
 
+    //获取手机验证码
+    fun getPhoneCode() = withState { state ->
+
+        val map = hashMapOf("phone" to state.phone)
+
+        LoginRepository.getPhoneCode(map)
+            .subscribeOn(Schedulers.io())
+            .execute {
+                copy(sendResult = it, register = it())
+            }
+
+
+    }
 
     companion object : MvRxViewModelFactory<RegisterViewModel, RegisterState> {
         override fun create(viewModelContext: ViewModelContext, state: RegisterState): RegisterViewModel? {
