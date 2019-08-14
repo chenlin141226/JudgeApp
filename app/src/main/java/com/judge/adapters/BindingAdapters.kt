@@ -13,7 +13,6 @@ import com.judge.data.bean.MineItemBean
 import com.judge.data.bean.SettingItemBean
 import com.judge.network.ServiceCreator
 import com.vondear.rxtool.RxTool
-import org.jetbrains.anko.db.LongParser
 import org.jetbrains.anko.textColor
 import java.text.SimpleDateFormat
 import java.util.*
@@ -81,7 +80,6 @@ fun setWhistleImage(imageView: ImageView, whistleType: String) {
 fun setInforMationText(textView: TextView, item: Data) {
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
-    val format = sdf.format(Date(item.dateline.toLong()*1000))
+    val format = sdf.format(Date(item.dateline.toLong() * 1000))
     textView.text = format
 }
-

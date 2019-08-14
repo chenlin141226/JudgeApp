@@ -1,6 +1,6 @@
 //@EpoxyDataBindingPattern(rClass = R.class, layoutPrefix = "epoxy_layout")
 
-@EpoxyDataBindingLayouts({R.layout.dog_row_binding,
+@EpoxyDataBindingLayouts({
         R.layout.mine_item,
         R.layout.mine_title,
         R.layout.whistle_item,
@@ -20,7 +20,8 @@
         R.layout.exchange_success_fragment,
         R.layout.attention_item,
         R.layout.recommend_item,
-        R.layout.today_item
+        R.layout.today_item,
+        R.layout.news_item_view
 })
 
 package com.judge;

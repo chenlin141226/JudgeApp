@@ -1,7 +1,7 @@
 package com.judge.data.bean
 
-data class MedalBean(
-    val `data`: List<Medal>,
+data class BannerBean(
+    val `data`: List<Banner>,
     val auth: Any,
     val code: String,
     val cookiepre: String,
@@ -17,14 +17,9 @@ data class MedalBean(
     val success: String
 )
 
-data class Medal(
-    val available: String,
-    val credit: String,
-    val description: String,
-    val expiration: String,
-    val image: String,
-    val medalid: String,
-    val name: String,
-    val price: String,
-    val type: String
+
+data class Banner(
+    val displayorder: String,
+    val pic: String,
+    val title: String
 )

@@ -1,5 +1,5 @@
-<resources>
-    <string name="app_name">裁判说</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:override="true">裁判说</string>
 
     <string name="title_home">首页</string>
     <string name="title_judge">裁判说</string>
