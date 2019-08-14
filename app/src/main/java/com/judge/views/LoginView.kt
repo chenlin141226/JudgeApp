@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
 import com.airbnb.epoxy.CallbackProp
+import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
 import com.bumptech.glide.Glide
@@ -60,12 +61,12 @@ class LoginView @JvmOverloads constructor(
 
     @TextProp
     fun setPassword(password: CharSequence?) {
-        et_username.setTextIfDifferent(password)
+        et_password.setTextIfDifferent(password)
     }
 
     @TextProp
     fun setCode(code: CharSequence?) {
-        et_username.setTextIfDifferent(code)
+        et_code.setTextIfDifferent(code)
     }
 
 
@@ -81,7 +82,7 @@ class LoginView @JvmOverloads constructor(
     /**
      * 登录的点击事件
      */
-    @CallbackProp
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
     fun setClickListener(listener: OnClickListener?) {
         iv_login.setOnClickListener(listener)
     }
@@ -105,7 +106,7 @@ class LoginView @JvmOverloads constructor(
     /**
      * 验证码点击
      */
-    @CallbackProp
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
     fun setCodeClickListener(listener: OnClickListener?) {
         btn_get_code.setOnClickListener(listener)
     }

@@ -1,5 +1,6 @@
 package com.judge.data.repository
 
+import com.judge.data.bean.LoginBean
 import com.judge.data.bean.PhoneCodeBean
 import com.judge.data.bean.RegisterResultBean
 import com.judge.network.ServiceCreator
@@ -24,5 +25,10 @@ object LoginRepository {
     //注册
     fun register(map : HashMap<String,String>) : Observable<RegisterResultBean>{
         return  loginseivice.register(map)
+    }
+
+    //登录
+    fun Login(map: HashMap<String, String>) : Observable<LoginBean>{
+        return loginseivice.login(map)
     }
 }

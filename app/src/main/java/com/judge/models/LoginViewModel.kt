@@ -1,21 +1,29 @@
 package com.judge.models
 
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
+import com.airbnb.mvrx.*
 import com.judge.app.core.MvRxViewModel
+import com.judge.data.bean.LoginBean
 import com.judge.data.repository.LoginRepository
-import com.judge.data.state.LoginState
-import com.vondear.rxtool.RxDataTool
+import io.reactivex.schedulers.Schedulers
 
 /**
  * @author: jaffa
  * @date: 2019/7/28
  * 登录界面的viewmodel
  */
+data class LoginState(
+    val loginRequest : Async<LoginBean> = Uninitialized,
+    val login : LoginBean? = null,
+    val username : String = "",
+    val password :  String = "",
+    val question :  String? = null,
+    val seccode : String = ""
+): MvRxState
+
 class LoginViewModel(private val  loginState: LoginState) : MvRxViewModel<LoginState>(loginState){
 
     init {
-        checkUserName1()
+
     }
 
     fun setUserName(username : String){
@@ -26,23 +34,25 @@ class LoginViewModel(private val  loginState: LoginState) : MvRxViewModel<LoginS
         setState { copy(password = password) }
     }
 
-    fun setCode(code : String){
-        setState { copy(code = code) }
+    fun setCode(seccode : String){
+        setState { copy(seccode = seccode) }
     }
 
     fun setQuestion(question : String){
         setState { copy(question = question) }
     }
 
-    fun checkUserName() : Boolean =  RxDataTool.isNullString(loginState.username)
+    fun login() = withState { state: LoginState ->
 
-    fun checkUserName1() = withState { loginState->
-        val userisNull = RxDataTool.isNullString(loginState.username)
-        if(userisNull){
-            setState { copy(userNameIsOk = true) }
-        }else{
-            setState { copy(userNameIsOk = false) }
-        }
+        if (state.loginRequest is Loading) return@withState
+
+        val maps = hashMapOf("username" to state.username,"password" to state.password,"seccode" to state.seccode)
+
+        LoginRepository.Login(maps).subscribeOn(Schedulers.io())
+            .execute {
+                copy(loginRequest = it,login = it())
+            }
+
     }
 
 

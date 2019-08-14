@@ -16,6 +16,9 @@ object Constant {
     //注册(post)
     const val REGISTER = "/source/plugin/login_mobile/index.php?version=4&module=regist"
 
+    //登录
+    const val LOGIN = "/source/plugin/login_mobile/index.php?version=4&module=login"
+
     //每日最佳，每周，每月
     const val JUDGE_INFORMATION = " /api/mobile/index.php"
 }
