@@ -12,7 +12,7 @@ import com.vondear.rxtool.RxDataTool
  * @date: 2019/7/28
  * 登录界面的viewmodel
  */
-class LoginViewModel(private val  loginState: LoginState,private val loginRepository: LoginRepository) : MvRxViewModel<LoginState>(loginState){
+class LoginViewModel(private val  loginState: LoginState) : MvRxViewModel<LoginState>(loginState){
 
     init {
         checkUserName1()
@@ -48,8 +48,7 @@ class LoginViewModel(private val  loginState: LoginState,private val loginReposi
 
     companion object : MvRxViewModelFactory<LoginViewModel,LoginState>{
         override fun create(viewModelContext: ViewModelContext, state: LoginState): LoginViewModel? {
-            val loginRepository = LoginRepository()
-            return LoginViewModel(state,loginRepository)
+            return LoginViewModel(state)
         }
     }
 }

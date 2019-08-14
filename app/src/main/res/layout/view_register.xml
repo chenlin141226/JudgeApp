@@ -130,18 +130,36 @@
                     android:textSize="@dimen/text_14"
                     tools:ignore="Autofill,TextFields" />
 
-            <EditText
-                    android:id="@+id/et_message_code"
+            <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/login_input_bg"
-                    android:hint="@string/message_code"
-                    android:maxLength="16"
-                    android:padding="@dimen/dp_10"
-                    android:textColor="#d4cdca"
-                    android:textSize="@dimen/text_14"
-                    tools:ignore="Autofill,TextFields" />
+                    android:background="@drawable/login_input_bg">
+
+                <EditText
+                        android:id="@+id/et_message_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/login_input_bg"
+                        android:hint="@string/message_code"
+                        android:maxLength="16"
+                        android:padding="@dimen/dp_10"
+                        android:textColor="#d4cdca"
+                        android:textSize="@dimen/text_14"
+                        tools:ignore="Autofill,TextFields" />
+
+                <Button
+                        android:id="@+id/iv"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="@dimen/dp_30"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/dp_10"
+                        android:background="@color/colorPrimary"
+                        android:text="获取"
+                        android:textColor="#fff"
+                        tools:ignore="ContentDescription" />
+            </RelativeLayout>
 
             <RelativeLayout
                     android:layout_width="match_parent"

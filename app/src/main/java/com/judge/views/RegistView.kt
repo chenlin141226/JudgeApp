@@ -6,7 +6,9 @@ import android.widget.FrameLayout
 import android.widget.ScrollView
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelView
+import com.airbnb.epoxy.TextProp
 import com.judge.R
+import com.judge.extensions.setTextIfDifferent
 import kotlinx.android.synthetic.main.view_register.view.*
 
 /**
@@ -29,7 +31,7 @@ class RegistView @JvmOverloads constructor(
     private val codeWatcher = SimpleTextWatcher{onCodeChanged?.invoke(it)}
 
     init {
-        ScrollView.inflate(context, R.layout.view_register, this)
+        inflate(context, R.layout.view_register, this)
 
         et_username.addTextChangedListener(userNameWatcher)
         et_password.addTextChangedListener(passwordWatcher)
@@ -39,6 +41,42 @@ class RegistView @JvmOverloads constructor(
         et_message_code.addTextChangedListener(messageWatcher)
         et_code.addTextChangedListener(codeWatcher)
     }
+
+    @TextProp
+     fun setUserName(username : CharSequence?){
+        et_username.setTextIfDifferent(username)
+    }
+
+    @TextProp
+    fun setPassword(password : CharSequence?){
+        et_password.setTextIfDifferent(password)
+    }
+
+    @TextProp
+    fun setConfirmPassword(confPwd : CharSequence?){
+        confirm_password.setTextIfDifferent(confPwd)
+    }
+
+    @TextProp
+    fun setEmail(email : CharSequence?){
+        et_email.setTextIfDifferent(email)
+    }
+
+    @TextProp
+    fun setPhomeNumber(phone : CharSequence?){
+        et_phone.setTextIfDifferent(phone)
+    }
+
+    @TextProp
+    fun setMessageCode(messageCode : CharSequence?){
+        et_message_code.setTextIfDifferent(messageCode)
+    }
+
+    @TextProp
+    fun setCode(code : CharSequence?){
+        et_code.setTextIfDifferent(code)
+    }
+
 
     @set:CallbackProp
     var onUserNameChanged : ((newText : String) -> Unit)? =null
@@ -68,7 +106,7 @@ class RegistView @JvmOverloads constructor(
 
     @CallbackProp
     fun setPhonrCodeClickListener(listener: OnClickListener?){
-
+        iv.setOnClickListener(listener)
     }
 
     @CallbackProp
