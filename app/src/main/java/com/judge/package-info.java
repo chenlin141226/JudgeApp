@@ -20,7 +20,8 @@
         R.layout.exchange_success_fragment,
         R.layout.attention_item,
         R.layout.recommend_item,
-        R.layout.today_item
+        R.layout.today_item,
+        R.layout.news_item_view
 })
 
 package com.judge;

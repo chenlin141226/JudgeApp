@@ -17,7 +17,7 @@ class MineMedalFragment : BaseFragment() {
         } else {
             loadingDialog.dismiss()
         }
-        if (state.medals.isNullOrEmpty()) {
+        if (state.medals.isNullOrEmpty() && !state.isLoading) {
             noMedalView {
                 id("no medal")
             }

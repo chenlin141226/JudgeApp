@@ -1,7 +1,7 @@
 package com.judge.data.bean
 
 data class BannerBean(
-    val `data`: List<Data>,
+    val `data`: List<Banner>,
     val auth: Any,
     val code: String,
     val cookiepre: String,
@@ -15,4 +15,11 @@ data class BannerBean(
     val readaccess: String,
     val saltkey: String,
     val success: String
+)
+
+
+data class Banner(
+    val displayorder: String,
+    val pic: String,
+    val title: String
 )
