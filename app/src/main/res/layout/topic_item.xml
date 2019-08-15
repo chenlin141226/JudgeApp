@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="topic" type="com.judge.data.bean.TopicBean"/>
+        <variable name="topic" type="com.judge.data.bean.Topic"/>
         <variable name="onItemClick" type="android.view.View.OnClickListener"/>
         <variable name="onDeleteClick" type="android.view.View.OnClickListener"/>
     </data>
@@ -22,7 +22,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@{topic.title}"
+                    android:text="@{topic.subject}"
                     android:layout_margin="@dimen/dp_10"
                     android:textSize="@dimen/text_18"
                     android:textStyle="bold"
@@ -35,14 +35,14 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title"
                     android:layout_margin="@dimen/dp_10"
-                    android:text="@{topic.topicUserName}"
+                    android:text="@{topic.author}"
                     android:textSize="@dimen/text_16"
                     android:gravity="center_vertical"
             />
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{topic.time}"
+                    android:text="@{topic.lastpost}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/topic_userName"
                     app:layout_constraintTop_toBottomOf="@+id/title"
@@ -54,7 +54,7 @@
                     android:id="@+id/comment_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{topic.commentCount}"
+                    android:text="@{topic.comments}"
                     android:textSize="@dimen/text_16"
                     android:layout_margin="@dimen/dp_10"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{topic.viewedCount}"
+                    android:text="@{topic.views}"
                     android:textSize="@dimen/text_16"
                     android:layout_margin="@dimen/dp_10"
                     app:layout_constraintBottom_toBottomOf="parent"

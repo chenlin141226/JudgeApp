@@ -4,10 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.judge.data.bean.City
-import com.judge.data.bean.MedalBean
-import com.judge.data.bean.MineDataBean
-import com.judge.data.bean.ProvinceBean
+import com.judge.data.bean.*
 import com.judge.network.JsonResponse
 import com.judge.network.ServiceCreator
 import com.judge.network.services.MineApIService
@@ -27,6 +24,10 @@ object MineRepository {
 
     fun getMedals(map: HashMap<String, String>): Observable<JsonResponse<MedalBean>> {
         return mineService.getMedals(map)
+    }
+
+    fun getPublishedTopics(map: HashMap<String, String>): Observable<JsonResponse<TopicBean>> {
+        return mineService.getTopics(map)
     }
 
     private fun getProvinces(context: Context): List<ProvinceBean> {
