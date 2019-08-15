@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.ScrollView
 import com.airbnb.epoxy.CallbackProp
+import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
 import com.judge.R
@@ -104,17 +105,17 @@ class RegistView @JvmOverloads constructor(
         register_back.setOnClickListener(listener)
     }
 
-    @CallbackProp
-    fun setPhonrCodeClickListener(listener: OnClickListener?){
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
+    fun setPhoneCodeClickListener(listener: OnClickListener?){
         iv.setOnClickListener(listener)
     }
 
-    @CallbackProp
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
     fun setCodeClickListener(listener: OnClickListener?){
         btn_get_code.setOnClickListener(listener)
     }
 
-    @CallbackProp
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
     fun setSubmitClickListener(listener: OnClickListener?){
         reister_submit.setOnClickListener(listener)
     }

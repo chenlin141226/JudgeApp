@@ -17,15 +17,12 @@ import com.judge.app.activities.HomeActivity
 import com.judge.app.activities.LoggingActivity
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
-import com.judge.data.state.LoginState
+import com.judge.models.LoginState
 import com.judge.models.LoginViewModel
 import com.judge.network.Constant
 import com.judge.views.loginView
-import com.vondear.rxtool.RxDataTool
 import com.vondear.rxtool.view.RxToast
 import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.support.v4.toast
-
 
 
 /**
@@ -53,7 +50,7 @@ class LoginFragment : BaseFragment() {
             //用户名
             userName(state.username)
             password(state.password)
-            code(state.code)
+            code(state.seccode)
             onUserNameChanged { loginViewModel.setUserName(it) }
             onPasswordChanged { loginViewModel.setPassword(it) }
             onCodeChanged { loginViewModel.setCode(it) }
@@ -80,7 +77,7 @@ class LoginFragment : BaseFragment() {
             //点击更新验证码
             codeClickListener { btn_code ->
                 Glide.with(context!!)
-                    .load(Constant.BASE_URL+Constant.SAFE_CODE)
+                    .load(Constant.BASE_URL + Constant.SAFE_CODE)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .centerCrop()
@@ -89,17 +86,33 @@ class LoginFragment : BaseFragment() {
 
             //点击登录
             clickListener { _ ->
-                loginViewModel.selectSubscribe(LoginState::username, LoginState::question) { username, question ->
-                    context?.let { RxToast.info(it, question.toString(), Toast.LENGTH_SHORT, true).show() }
-                    if (RxDataTool.isNullString(question)) {
-                        toast("用户名不合法")
-                    }
+                if (state.username.isEmpty()) {
+                    context?.let { RxToast.info(it, resources.getString(R.string.hint_username), Toast.LENGTH_SHORT, false).show() }
+                    return@clickListener
+                }
+
+                if (state.password.isEmpty()) {
+                    context?.let { RxToast.info(it, resources.getString(R.string.hint_password), Toast.LENGTH_SHORT, false).show() }
+                    return@clickListener
+                }
+
+                if (state.seccode.isEmpty()) {
+                    context?.let { RxToast.info(it, resources.getString(R.string.hint_code), Toast.LENGTH_SHORT, false).show() }
+                    return@clickListener
+                }
+
+                loginViewModel.login()
+
+                if(state.login?.retcode == 100001){
+                    context?.let { RxToast.info(it, state.login.retmsg.toString(), Toast.LENGTH_SHORT, false).show() }
                 }
             }
 
+
+
             //立即注册
             registerClickListener { _ ->
-                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
             //找回密码
             findClickListener { _ ->

@@ -67,7 +67,15 @@
     <string name="reword_content">奖励内容</string>
     <string name="emails">email</string>
     <string name="user">用户名</string>
-
+    <string name="hint_username">请输入用户名</string>
+    <string name="hint_phone">请输入手机号码</string>
+    <string name="hint_password">请输入账号密码</string>
+    <string name="hint_confirm">请确认账号密码</string>
+    <string name="isequal">两次输入密码不相同</string>
+    <string name="hint_email">请输入邮箱地址</string>
+    <string name="hint_phoneCode">请输入手机验证码</string>
+    <string name="hint_code">请输入随机验证码</string>
+  
     <!-- ——————   积分商城  —————-->
     <string name="me">我的</string>
     <string name="myproduct">我的商品</string>
