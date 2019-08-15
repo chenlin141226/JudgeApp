@@ -15,7 +15,7 @@ data class ProfileBean(
     val qiandaodb: Qiandaodb,
     val readaccess: String,
     val saltkey: String,
-    val space: Space,
+    val space: ProfileDetail,
     val success: String,
     val wsq: Wsq
 )
@@ -36,7 +36,7 @@ data class Wsq(
     val wsq_apicredit: Any
 )
 
-data class Space(
+data class ProfileDetail(
     val acceptemail: List<Any>,
     val accessmasks: String,
     val addfriend: String,
