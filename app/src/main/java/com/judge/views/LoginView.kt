@@ -47,11 +47,11 @@ class LoginView @JvmOverloads constructor(
         spinner.adapter = spinnerAdapter
 
         
-        Glide.with(context).load(Constant.BASE_URL + Constant.SAFE_CODE)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .skipMemoryCache(true)
-            .centerCrop()
-            .into(btn_get_code)
+//        Glide.with(context).load(Constant.BASE_URL + Constant.SAFE_CODE)
+//            .diskCacheStrategy(DiskCacheStrategy.NONE)
+//            .skipMemoryCache(true)
+//            .centerCrop()
+//            .into(btn_get_code)
     }
 
     @TextProp

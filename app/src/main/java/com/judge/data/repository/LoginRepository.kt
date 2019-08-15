@@ -28,7 +28,7 @@ object LoginRepository {
     }
 
     //登录
-    fun Login(map: HashMap<String, String>) : Observable<LoginBean>{
-        return loginseivice.login(map)
+    fun Login(username:String,password:String,secode:String) : Observable<LoginBean>{
+        return loginseivice.login(username,password,secode)
     }
 }
