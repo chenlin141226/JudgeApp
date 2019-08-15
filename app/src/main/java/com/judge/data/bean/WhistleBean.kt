@@ -1,11 +1,11 @@
 package com.judge.data.bean
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-@Parcelize
 data class WhistleBean(
-    val whistleName: String,
-    val whistleType: String,
-    val whistleNumber: Int
-) : Parcelable
+    val allowexchangein: Any,
+    val allowexchangeout: Any,
+    val img: String,
+    val ratio: String,
+    val showinthread: Any,
+    val title: String,
+    val unit: String
+)

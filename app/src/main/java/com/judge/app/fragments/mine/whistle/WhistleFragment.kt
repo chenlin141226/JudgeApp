@@ -11,36 +11,27 @@ import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.WhistleBean
+import com.judge.data.repository.MineRepository
 import com.judge.whistleItem
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import java.util.*
 
 
 data class WhistleState(
-    val whistleItems: List<WhistleBean> = emptyList()
+    val whistleItems: List<WhistleBean>? = emptyList()
 ) : MvRxState
 
 class WhistleViewModel(
     initialState: WhistleState
 ) : MvRxViewModel<WhistleState>(initialState) {
-    private val list = LinkedList<WhistleBean>()
 
     init {
         getWhistles()
     }
 
-    fun getWhistles() {
-        for (i in 1..10) {
-            val bean: WhistleBean = when {
-                i % 2 == 0 -> WhistleBean("金哨子", "1", 125)
-                i % 3 == 0 -> WhistleBean("银哨子", "2", 111)
-                else -> WhistleBean("铜哨子", "3", 113)
-            }
-            list.add(bean)
-        }
+    private fun getWhistles() {
         setState {
-            copy(whistleItems = list)
+            copy(whistleItems = MineRepository.userProfile?.extcredits)
         }
     }
 
@@ -54,9 +45,9 @@ class WhistleViewModel(
 class WhistleFragment : BaseFragment() {
     private val viewModel: WhistleViewModel by fragmentViewModel()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-        state.whistleItems.forEachWithIndex { index, item ->
+        state.whistleItems?.forEachWithIndex { index, item ->
             whistleItem {
-                id(item.whistleName + index)
+                id(item.title + index)
                 whistleBean(item)
             }
         }

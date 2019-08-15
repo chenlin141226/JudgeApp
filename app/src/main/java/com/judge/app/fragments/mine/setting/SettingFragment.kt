@@ -19,9 +19,12 @@ import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.SettingItemBean
+import com.judge.data.bean.UpLoadPhotoResultBean
+import com.judge.data.repository.MineRepository
 import com.judge.extensions.copy
 import com.judge.settingItem
 import com.judge.settingTitle
+import com.judge.utils.LogUtils
 import com.judge.views.BottomPopupViewList
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.interfaces.OnSelectListener
@@ -32,6 +35,10 @@ import com.vondear.rxtool.RxTool
 import com.vondear.rxui.view.dialog.RxDialogChooseImage
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropActivity
+import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.support.v4.toast
 import java.io.File
@@ -40,7 +47,8 @@ import java.util.*
 
 
 data class SettingState(
-    val items: List<SettingItemBean> = emptyList()
+    val items: List<SettingItemBean> = emptyList(),
+    val resultBean: UpLoadPhotoResultBean? = null
 ) : MvRxState
 
 class SettingViewModel(
@@ -48,6 +56,7 @@ class SettingViewModel(
 ) : MvRxViewModel<SettingState>(initialState) {
     private val list = LinkedList<SettingItemBean>()
     val bottomList: Array<String> = RxTool.getContext().resources.getStringArray(R.array.setting_bottom_list)
+    private val map = hashMapOf("version" to "4", "module" to "uploadavatar")
 
     init {
         getSettingTitles()
@@ -55,9 +64,10 @@ class SettingViewModel(
 
     private fun getSettingTitles() {
         val titles = RxTool.getContext().resources.getStringArray(R.array.setting_item_title)
-        titles.asIterable().forEachIndexed { _, name ->
+        titles.asIterable().forEachIndexed { index, name ->
             val item = SettingItemBean(
-                title = name
+                title = name,
+                photoUrl = MineRepository.userProfile?.member_avatar ?: ""
             )
             list.add(item)
         }
@@ -70,6 +80,14 @@ class SettingViewModel(
     fun updatePhoto(uri: Uri) {
         setState {
             copy(items = items.copy(0, items[0].copy(photoUri = uri, photoUrl = "")))
+        }
+    }
+
+    fun upLoadPhoto(file: File) {
+        val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+        val body = MultipartBody.Part.createFormData("FileData", file.name, requestFile)
+        MineRepository.upLoadPhoto(body, map).subscribeOn(Schedulers.io()).execute {
+            copy(resultBean = it()?.Variables)
         }
     }
 
@@ -174,12 +192,14 @@ class SettingFragment : BaseFragment() {
             RxPhotoTool.CROP_IMAGE//普通裁剪后的处理
             -> {
                 viewModel.updatePhoto(RxPhotoTool.cropImageUri)
+                viewModel.upLoadPhoto(File(RxPhotoTool.getImageAbsolutePath(context, RxPhotoTool.cropImageUri)))
             }
 
             UCrop.REQUEST_CROP//UCrop裁剪之后的处理
             -> if (resultCode == Activity.RESULT_OK) {
                 resultUri = data?.let { UCrop.getOutput(it) }
                 resultUri?.let { viewModel.updatePhoto(it) }
+                viewModel.upLoadPhoto(File(RxPhotoTool.getImageAbsolutePath(context, resultUri)))
             }
         }
     }
