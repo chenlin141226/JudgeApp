@@ -12,51 +12,61 @@ import io.reactivex.schedulers.Schedulers
  * 登录界面的viewmodel
  */
 data class LoginState(
-    val loginRequest : Async<LoginBean> = Uninitialized,
-    val login : LoginBean? = null,
-    val username : String = "",
-    val password :  String = "",
-    val question :  String? = null,
-    val seccode : String = ""
-): MvRxState
+    val loginRequest: Async<LoginBean> = Uninitialized,
+    val login: LoginBean? = null,
+    val username: String = "",
+    val password: String = "",
+    val question: String? = null,
+    val seccode: String = ""
+) : MvRxState
 
-class LoginViewModel(private val  loginState: LoginState) : MvRxViewModel<LoginState>(loginState){
+class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginState>(loginState) {
 
     init {
 
     }
 
-    fun setUserName(username : String){
+    fun setUserName(username: String) {
         setState { copy(username = username) }
     }
 
-    fun setPassword(password : String){
+    fun setPassword(password: String) {
         setState { copy(password = password) }
     }
 
-    fun setCode(seccode : String){
+    fun setCode(seccode: String) {
         setState { copy(seccode = seccode) }
     }
 
-    fun setQuestion(question : String){
+    fun setQuestion(question: String) {
         setState { copy(question = question) }
+    }
+
+    fun requestCode() = withState {
+
+
     }
 
     fun login() = withState { state: LoginState ->
 
         if (state.loginRequest is Loading) return@withState
 
-        val maps = hashMapOf("username" to state.username,"password" to state.password,"seccode" to state.seccode)
+        //val maps = hashMapOf("username" to state.username,"password" to state.password,"seccode" to state.seccode)
 
-        LoginRepository.Login(maps).subscribeOn(Schedulers.io())
+//        val maps = HashMap<String, String>()
+//        maps["username"] = state.username
+//        maps["password"] = state.password
+//        maps["seccode"] = state.seccode
+
+        LoginRepository.Login(state.username,state.password,state.seccode).subscribeOn(Schedulers.io())
             .execute {
-                copy(loginRequest = it,login = it())
+                copy(loginRequest = it, login = it())
             }
 
     }
 
 
-    companion object : MvRxViewModelFactory<LoginViewModel,LoginState>{
+    companion object : MvRxViewModelFactory<LoginViewModel, LoginState> {
         override fun create(viewModelContext: ViewModelContext, state: LoginState): LoginViewModel? {
             return LoginViewModel(state)
         }

@@ -5,9 +5,8 @@ import com.judge.data.bean.PhoneCodeBean
 import com.judge.data.bean.RegisterResultBean
 import com.judge.network.Constant
 import io.reactivex.Observable
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import okhttp3.ResponseBody
+import retrofit2.http.*
 
 /**
  * @author: jaffa
@@ -28,5 +27,9 @@ interface LoginApiService {
     //登录
     @FormUrlEncoded
     @POST(Constant.LOGIN)
-    fun login(@FieldMap map: HashMap<String, String>) : Observable<LoginBean>
+    fun login(@Field("username") username :String ,@Field("password") password :String,@Field("seccode") seccode :String ) : Observable<LoginBean>
+
+    //获取随机验证码
+    @GET(Constant.SAFE_CODE)
+    fun getCode() : Observable<ResponseBody>
 }
