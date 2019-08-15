@@ -8,40 +8,63 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.bean.TopicBean
+import com.judge.data.bean.Topic
+import com.judge.data.repository.MineRepository
+import com.judge.extensions.delete
 import com.judge.topicItem
+import com.judge.utils.LogUtils
+import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.support.v4.toast
-import java.util.*
 
 
 data class RepliedTopicState(
-    val topicItems: List<TopicBean> = emptyList()
+    val topicItems: List<Topic> = emptyList(),
+    val isLoading: Boolean = false
 ) : MvRxState
 
 class RepliedTopicViewModel(
     initialState: RepliedTopicState
 ) : MvRxViewModel<RepliedTopicState>(initialState) {
-    private val list = LinkedList<TopicBean>()
+    private val map = hashMapOf("version" to "4", "module" to "mythread", "start" to "0", "limit" to "20")
 
     init {
         fetchTopics()
     }
 
-    private fun fetchTopics() {
-        for (i in 1..20) {
-            val topic = TopicBean(
-                title = "天下武功，唯快不破，欲练此功，必先自宫",
-                topicUserName = "花无缺",
-                time = "一天前",
-                viewedCount = "1314",
-                commentCount = "1314"
-            )
-            list.add(topic)
-        }
+    fun fetchTopics() {
+        MineRepository.getPublishedTopics(map)
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                setState { copy(isLoading = true) }
+            }
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute {
+                copy(topicItems = topicItems.plus((it()?.Variables?.data ?: emptyList())))
+            }
+    }
 
+    fun refreshTopics() {
+        MineRepository.getPublishedTopics(map)
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                setState { copy(isLoading = true) }
+            }
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute {
+                copy(topicItems = (it()?.Variables?.data ?: emptyList()))
+            }
+    }
+
+    fun deleteTopic(index: Int) {
         setState {
-            copy(topicItems = list)
+            copy(topicItems = topicItems.delete(index))
         }
     }
 
@@ -55,10 +78,10 @@ class RepliedTopicViewModel(
 class RepliedTopicFragment : BaseFragment() {
     private val viewModel: RepliedTopicViewModel by fragmentViewModel()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-        state.topicItems.forEachWithIndex { index, topicBean ->
+        state.topicItems.forEachWithIndex { index, topic ->
             topicItem {
-                id(topicBean.title + index)
-                topic(topicBean)
+                id(topic.subject + index)
+                topic(topic)
                 onItemClick { _ ->
                     toast("You clicked item!")
                 }

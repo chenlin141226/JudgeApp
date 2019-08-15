@@ -68,11 +68,12 @@ fun setTypedSrc(imageView: ImageView, type: Int) {
 
 @BindingAdapter("whistleType", requireAll = false)
 fun setWhistleImage(imageView: ImageView, whistleType: String) {
-    when (whistleType.toInt()) {
-        1 -> imageView.setImageResource(R.drawable.ic_gold_whistle)
-        2 -> imageView.setImageResource(R.drawable.ic_silver_whistle)
-        3 -> imageView.setImageResource(R.drawable.ic_copper_whistle)
-        else -> imageView.setImageResource(R.drawable.ic_copper_whistle)
+    when (whistleType) {
+        "金哨子" -> imageView.setImageResource(R.drawable.ic_gold_whistle)
+        "银哨子" -> imageView.setImageResource(R.drawable.ic_silver_whistle)
+        "铜哨子" -> imageView.setImageResource(R.drawable.ic_copper_whistle)
+        else -> {
+        }
     }
 }
 

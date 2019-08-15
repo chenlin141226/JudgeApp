@@ -1,32 +1,38 @@
 package com.judge.data.repository
 
 import android.content.Context
-import android.text.TextUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.judge.data.bean.City
-import com.judge.data.bean.MedalBean
-import com.judge.data.bean.MineDataBean
-import com.judge.data.bean.ProvinceBean
+import com.judge.data.bean.*
 import com.judge.network.JsonResponse
 import com.judge.network.ServiceCreator
 import com.judge.network.services.MineApIService
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
 object MineRepository {
+    var userProfile: ProfileBean? = null
     private val mineService: MineApIService by lazy {
         ServiceCreator.create(MineApIService::class.java)
     }
 
-    fun getUserData(map: HashMap<String, String>): Observable<JsonResponse<MineDataBean>> {
+    fun getUserData(map: HashMap<String, String>): Observable<JsonResponse<ProfileBean>> {
         return mineService.getUerData(map)
     }
 
     fun getMedals(map: HashMap<String, String>): Observable<JsonResponse<MedalBean>> {
         return mineService.getMedals(map)
+    }
+
+    fun getPublishedTopics(map: HashMap<String, String>): Observable<JsonResponse<TopicBean>> {
+        return mineService.getTopics(map)
+    }
+
+    fun upLoadPhoto(file: MultipartBody.Part,map: HashMap<String, String>): Observable<JsonResponse<UpLoadPhotoResultBean>> {
+        return mineService.upLoadPhoto(file,map)
     }
 
     private fun getProvinces(context: Context): List<ProvinceBean> {

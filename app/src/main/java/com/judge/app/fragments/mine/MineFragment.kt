@@ -7,7 +7,7 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.bean.MineDataBean
+import com.judge.data.bean.ProfileBean
 import com.judge.data.bean.MineItemBean
 import com.judge.data.repository.MineRepository
 import com.judge.extensions.copy
@@ -20,7 +20,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 data class MineItemState(
-    val uerData: MineDataBean? = null,
+    val uerData: ProfileBean? = null,
     val mineItems: List<MineItemBean> = emptyList(),
     val isLoading: Boolean = false
 ) : MvRxState
@@ -49,6 +49,7 @@ class MineItemViewModel(
             }
             .doFinally { setState { copy(isLoading = false) } }
             .execute {
+                MineRepository.userProfile = it()?.Variables
                 copy(uerData = it()?.Variables)
             }
     }
