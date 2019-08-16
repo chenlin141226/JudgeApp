@@ -10,37 +10,43 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.bean.PublicMessageBean
+import com.judge.data.bean.PublicMessage
+import com.judge.data.repository.MineRepository
 import com.judge.publicMessageItem
+import com.judge.utils.LogUtils
+import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import java.util.*
 
 
 data class PublicMessageState(
-    val messageItems: List<PublicMessageBean> = emptyList()
+    val messageItems: List<PublicMessage>? = emptyList(),
+    val isLoading: Boolean = false
 ) : MvRxState
 
 class PublicMessageViewModel(
     initialState: PublicMessageState
 ) : MvRxViewModel<PublicMessageState>(initialState) {
-    private val list = LinkedList<PublicMessageBean>()
+    private val map = hashMapOf("version" to "4", "module" to "publicpm", "page" to "1")
 
     init {
         getMessages()
     }
 
-    private fun getMessages() {
-        for (i in 1..20) {
-            val item = PublicMessageBean(
-                title = "天下武功，唯快不破",
-                messageTime = "$i 分钟前"
-            )
-            list.add(item)
-        }
-        setState {
-            copy(messageItems = list)
-        }
+    private fun getMessages() = withState { state ->
+        if (state.isLoading) return@withState
+        MineRepository.getPublicMessages(map).subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                setState { copy(isLoading = true) }
+            }
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute {
+                copy(messageItems = it()?.Variables?.list)
+            }
+
     }
 
     companion object : MvRxViewModelFactory<PublicMessageViewModel, PublicMessageState> {
@@ -56,9 +62,9 @@ class PublicMessageViewModel(
 class PublicMessageFragment : BaseFragment() {
     private val viewModel: PublicMessageViewModel by fragmentViewModel()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-        state.messageItems.forEachWithIndex { index, messageBean ->
+        state.messageItems?.forEachWithIndex { index, messageBean ->
             publicMessageItem {
-                id(messageBean.title + index)
+                id(messageBean.id + index)
                 message(messageBean)
             }
         }

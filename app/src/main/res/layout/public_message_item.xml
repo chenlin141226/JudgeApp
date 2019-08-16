@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         >
     <data>
-        <variable name="message" type="com.judge.data.bean.PublicMessageBean"/>
+        <variable name="message" type="com.judge.data.bean.PublicMessage"/>
         <variable name="onClick" type="android.view.View.OnClickListener"/>
     </data>
     <LinearLayout
@@ -19,13 +19,13 @@
             android:layout_height="wrap_content">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="@{message.messageTime}"
+                  android:text="@{message.dateline}"
                   android:layout_margin="@dimen/dp_5"
                   android:gravity="center_vertical"
         />
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="@{message.title}"
+                  android:text="@{message.message}"
                   android:layout_margin="@dimen/dp_5"
                   android:gravity="center_vertical"
         />
