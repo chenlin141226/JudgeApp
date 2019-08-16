@@ -79,6 +79,16 @@ class RecommendFragment : BaseFragment() {
 
     override fun initView() {
         recyclerView.setBackgroundColor(Color.parseColor("#f6f5fa"))
+        refreshLayout.apply {
+            setEnableRefresh(true)
+            setEnableAutoLoadMore(false)
+            setEnableLoadMore(false)
+
+            setOnRefreshListener {
+                viewModel.fetchRecommend()
+                it.finishRefresh(1000)
+            }
+        }
     }
 
 }
