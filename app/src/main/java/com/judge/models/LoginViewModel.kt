@@ -47,7 +47,7 @@ class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginSt
 
     }
 
-    fun login() = withState { state: LoginState ->
+    fun login() = withState { state ->
 
         if (state.loginRequest is Loading) return@withState
 
