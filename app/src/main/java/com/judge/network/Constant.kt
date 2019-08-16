@@ -20,5 +20,9 @@ object Constant {
     const val LOGIN = "/source/plugin/login_mobile/index.php?version=4&module=login"
 
     //每日最佳，每周，每月
-    const val JUDGE_INFORMATION = " /api/mobile/index.php"
+    const val JUDGE_INFORMATION = "/api/mobile/index.php"
+
+    //裁判说 - 推荐
+
+    const val RECOMMEND = "/api/mobile/index.php?version=4&module=get_diy&bid=100"
 }

@@ -9,9 +9,13 @@ import com.airbnb.mvrx.fragmentViewModel
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.bean.Recommend
 import com.judge.data.bean.RecommendBean
+import com.judge.data.repository.JudgeRepository
 import com.judge.recommendItem
+import com.judge.utils.LogUtils
 import com.vondear.rxtool.view.RxToast
+import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 
 /**
@@ -20,30 +24,27 @@ import org.jetbrains.anko.collections.forEachWithIndex
  * 推荐
  */
 data class RecommendState(
-    val recommendItems: List<RecommendBean> = emptyList()
+    val recommendItems: List<Recommend>? = emptyList(),
+    val isLoading: Boolean = false
 ) : MvRxState
 
 class RecommendViewModel(initialState: RecommendState) : MvRxViewModel<RecommendState>(initialState) {
-    private val list = mutableListOf<RecommendBean>()
 
     init {
         fetchRecommend()
     }
 
-     fun fetchRecommend() {
-        for (i in 1..9) {
-            val recommend = RecommendBean(
-                info = "我等了一个不该等的人，我又拿什么把伤口抚平",
-                time = "03-18"
-            )
-            list.add(recommend)
-        }
-        setState { copy(recommendItems = list) }
+    fun fetchRecommend() = withState { state ->
+        if (state.isLoading) return@withState
+
+        JudgeRepository.getRecommend().subscribeOn(Schedulers.io())
+            .doOnSubscribe { setState { copy(isLoading = true) } }
+            .doOnError { it.message?.let { it1 -> LogUtils.e(it1) } }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute { copy(recommendItems = it()?.Variables?.data ?: emptyList()) }
     }
 
-     fun removeRecommend() {
-        list.clear()
-        setState { copy(recommendItems = list) }
+    fun removeRecommend() {
     }
 
 
@@ -54,35 +55,30 @@ class RecommendViewModel(initialState: RecommendState) : MvRxViewModel<Recommend
     }
 }
 
-class RecommendFragment : BaseFragment(){
+class RecommendFragment : BaseFragment() {
 
-    private val viewModel : RecommendViewModel by fragmentViewModel()
+    private val viewModel: RecommendViewModel by fragmentViewModel()
 
-    override fun epoxyController() = simpleController(viewModel) {state ->
+    override fun epoxyController() = simpleController(viewModel) { state ->
 
-        state.recommendItems.forEachWithIndex { idnex, item ->
-
-              recommendItem {
-                  id(item.info + idnex)
-                  recommendBean(item)
-                  onParentClick { _ ->
-                      context?.let { RxToast.info(it, "success", Toast.LENGTH_SHORT, true).show() }
-                  }
-              }
+        if (state.isLoading) {
+            loadingDialog.show()
+        } else {
+            loadingDialog.dismiss()
         }
 
-    }
+        state.recommendItems?.forEachWithIndex { idnex, item ->
 
-    override fun initData() {
-        viewModel.fetchRecommend()
+            recommendItem {
+                id(item.tid + idnex)
+                recommend(item)
+            }
+        }
+
     }
 
     override fun initView() {
         recyclerView.setBackgroundColor(Color.parseColor("#f6f5fa"))
     }
 
-    override fun onDestroyView() {
-        viewModel.removeRecommend()
-        super.onDestroyView()
-    }
 }

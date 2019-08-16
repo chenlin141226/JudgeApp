@@ -6,15 +6,12 @@
     <data>
 
         <variable
-                name="recommendBean"
-                type="com.judge.data.bean.RecommendBean"/>
+                name="recommend"
+                type="com.judge.data.bean.Recommend"/>
         <variable
                 name="onParentClick"
                 type="android.view.View.OnClickListener"/>
 
-        <variable
-                name="onClick"
-                type="android.view.View.OnClickListener"/>
     </data>
 
     <LinearLayout
@@ -33,7 +30,7 @@
                 tools:text = "难道就是愤怒的几十年"
                 android:lines="1"
                 android:singleLine="true"
-                android:text="@{recommendBean.info}"
+                android:text="@{recommend.title}"
                 android:textSize="@dimen/text_14"
                 android:textColor="#494850"/>
 
@@ -41,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text = "03-18"
-                android:text="@{recommendBean.time}"
+                app:recommendText ="@{recommend}"
                 android:textSize="@dimen/text_12"
                 android:textColor="#adabb3"
                 android:layout_marginLeft="@dimen/dp_10"

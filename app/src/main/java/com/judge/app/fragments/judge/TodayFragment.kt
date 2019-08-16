@@ -82,8 +82,10 @@ class TodayFragment : BaseFragment() {
     private val viewModel: TodayViewModel by fragmentViewModel()
 
     override fun epoxyController() = simpleController(viewModel) { state ->
-
-        if (state.information == null) {
+        if (state.isLoading) {
+            loadingDialog.show()
+        } else {
+            loadingDialog.dismiss()
         }
 
         state.information?.forEachWithIndex { index, item ->
