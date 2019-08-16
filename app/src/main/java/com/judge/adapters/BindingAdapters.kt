@@ -10,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.judge.R
 import com.judge.data.bean.Data
 import com.judge.data.bean.MineItemBean
+import com.judge.data.bean.Recommend
 import com.judge.data.bean.SettingItemBean
 import com.judge.network.ServiceCreator
 import com.vondear.rxtool.RxTool
@@ -78,7 +79,15 @@ fun setWhistleImage(imageView: ImageView, whistleType: String) {
 
 @BindingAdapter("dataText", requireAll = false)
 fun setInforMationText(textView: TextView, item: Data) {
-    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+    val format = sdf.format(Date(item.dateline.toLong() * 1000))
+    textView.text = format
+}
+
+@BindingAdapter("recommendText", requireAll = false)
+fun setrecommendTextText(textView: TextView, item: Recommend) {
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
 
     val format = sdf.format(Date(item.dateline.toLong() * 1000))
     textView.text = format
