@@ -72,8 +72,7 @@ fun setWhistleImage(imageView: ImageView, whistleType: String) {
         "金哨子" -> imageView.setImageResource(R.drawable.ic_gold_whistle)
         "银哨子" -> imageView.setImageResource(R.drawable.ic_silver_whistle)
         "铜哨子" -> imageView.setImageResource(R.drawable.ic_copper_whistle)
-        else -> {
-        }
+        else -> imageView.setImageResource(R.drawable.bg_whistle)
     }
 }
 

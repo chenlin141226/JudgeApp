@@ -24,15 +24,12 @@ import com.judge.data.repository.MineRepository
 import com.judge.extensions.copy
 import com.judge.settingItem
 import com.judge.settingTitle
-import com.judge.utils.LogUtils
 import com.judge.views.BottomPopupViewList
-import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.interfaces.OnSelectListener
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.vondear.rxtool.RxPermissionsTool
 import com.vondear.rxtool.RxPhotoTool
 import com.vondear.rxtool.RxTool
-import com.vondear.rxui.view.dialog.RxDialogChooseImage
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropActivity
 import io.reactivex.schedulers.Schedulers
@@ -64,11 +61,21 @@ class SettingViewModel(
 
     private fun getSettingTitles() {
         val titles = RxTool.getContext().resources.getStringArray(R.array.setting_item_title)
+        val profileDetail = MineRepository.userProfile?.space
         titles.asIterable().forEachIndexed { index, name ->
-            val item = SettingItemBean(
-                title = name,
-                photoUrl = MineRepository.userProfile?.member_avatar ?: ""
-            )
+            val item = when (index) {
+                0 -> SettingItemBean(
+                    title = name,
+                    photoUrl = MineRepository.userProfile?.member_avatar ?: ""
+                )
+                1 -> SettingItemBean(title = name, content = profileDetail?.realname ?: "")
+                2 -> SettingItemBean(title = name, content = profileDetail?.gender ?: "")
+                3 -> SettingItemBean(title = name, content = profileDetail?.birthday ?: "")
+                4 -> SettingItemBean(title = name, content = profileDetail?.address ?: "")
+                5 -> SettingItemBean(title = name, content = profileDetail?.telephone ?: "")
+                6 -> SettingItemBean(title = name, content = profileDetail?.qq ?: "")
+                else -> SettingItemBean(title = "")
+            }
             list.add(item)
         }
 
