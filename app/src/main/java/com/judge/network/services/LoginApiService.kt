@@ -27,7 +27,7 @@ interface LoginApiService {
     //登录
     @FormUrlEncoded
     @POST(Constant.LOGIN)
-    fun login(@Field("username") username :String ,@Field("password") password :String,@Field("seccode") seccode :String ) : Observable<LoginBean>
+    fun login(@FieldMap map : HashMap<String,String>) : Observable<LoginBean>
 
     //获取随机验证码
     @GET(Constant.SAFE_CODE)

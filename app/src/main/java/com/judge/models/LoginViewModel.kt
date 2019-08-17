@@ -1,10 +1,15 @@
 package com.judge.models
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.widget.ImageView
 import com.airbnb.mvrx.*
 import com.judge.app.core.MvRxViewModel
 import com.judge.data.bean.LoginBean
 import com.judge.data.repository.LoginRepository
+import com.judge.utils.LogUtils
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.support.v4.runOnUiThread
 
 /**
  * @author: jaffa
@@ -14,16 +19,18 @@ import io.reactivex.schedulers.Schedulers
 data class LoginState(
     val loginRequest: Async<LoginBean> = Uninitialized,
     val login: LoginBean? = null,
+    val isLoading: Boolean = false,
     val username: String = "",
     val password: String = "",
     val question: String? = null,
-    val seccode: String = ""
+    val seccode: String = "",
+    val codeUrl: Bitmap? = null
 ) : MvRxState
 
 class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginState>(loginState) {
 
     init {
-
+        requestCode()
     }
 
     fun setUserName(username: String) {
@@ -43,22 +50,23 @@ class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginSt
     }
 
     fun requestCode() = withState {
-
+        LoginRepository.getCode().subscribeOn(Schedulers.io()).map {
+            BitmapFactory.decodeStream(it.byteStream())
+        }.execute { copy(codeUrl = it()) }
 
     }
 
     fun login() = withState { state ->
 
-        if (state.loginRequest is Loading) return@withState
-
-        //val maps = hashMapOf("username" to state.username,"password" to state.password,"seccode" to state.seccode)
-
-//        val maps = HashMap<String, String>()
-//        maps["username"] = state.username
-//        maps["password"] = state.password
-//        maps["seccode"] = state.seccode
-
-        LoginRepository.Login(state.username,state.password,state.seccode).subscribeOn(Schedulers.io())
+        val maps = hashMapOf("username" to state.username, "password" to state.password, "seccode" to state.seccode)
+        LoginRepository.Login(maps).subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                setState { copy(isLoading = true) }
+            }
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .doFinally { setState { copy(isLoading = false) } }
             .execute {
                 copy(loginRequest = it, login = it())
             }

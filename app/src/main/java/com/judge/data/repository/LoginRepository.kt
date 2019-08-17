@@ -6,6 +6,7 @@ import com.judge.data.bean.RegisterResultBean
 import com.judge.network.ServiceCreator
 import com.judge.network.services.LoginApiService
 import io.reactivex.Observable
+import okhttp3.ResponseBody
 
 /**
  * @author: jaffa
@@ -18,17 +19,13 @@ object LoginRepository {
     }
 
     //获取手机验证码
-    fun getPhoneCode(map: HashMap<String,String>): Observable<PhoneCodeBean> {
-        return loginseivice.getPhoneCode(map)
-    }
+    fun getPhoneCode(map: HashMap<String,String>): Observable<PhoneCodeBean> = loginseivice.getPhoneCode(map)
+
+    fun getCode() : Observable<ResponseBody> = loginseivice.getCode()
 
     //注册
-    fun register(map : HashMap<String,String>) : Observable<RegisterResultBean>{
-        return  loginseivice.register(map)
-    }
+    fun register(map : HashMap<String,String>) : Observable<RegisterResultBean> = loginseivice.register(map)
 
     //登录
-    fun Login(username:String,password:String,secode:String) : Observable<LoginBean>{
-        return loginseivice.login(username,password,secode)
-    }
+    fun Login(map : HashMap<String,String>) : Observable<LoginBean> =loginseivice.login(map)
 }
