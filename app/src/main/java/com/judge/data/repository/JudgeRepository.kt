@@ -1,5 +1,6 @@
 package com.judge.data.repository
 
+import com.judge.data.bean.EditionBean
 import com.judge.data.bean.InformationBean
 import com.judge.data.bean.RecommendBean
 import com.judge.network.JsonResponse
@@ -17,11 +18,9 @@ object JudgeRepository {
         ServiceCreator.create(JudgeApiService::class.java)
     }
 
-    fun getInformation(map: HashMap<String, String>): Observable<JsonResponse<InformationBean>> {
-        return judgeService.getInformation(map)
-    }
+    fun getInformation(map: HashMap<String, String>): Observable<JsonResponse<InformationBean>> = judgeService.getInformation(map)
 
-   fun getRecommend() : Observable<JsonResponse<RecommendBean>> {
-       return judgeService.getRecommend()
-   }
+    fun getRecommend(): Observable<JsonResponse<RecommendBean>> = judgeService.getRecommend()
+
+    fun getEdition(): Observable<JsonResponse<EditionBean>> = judgeService.getEdition()
 }
