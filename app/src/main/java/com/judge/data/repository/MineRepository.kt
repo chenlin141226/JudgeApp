@@ -31,8 +31,19 @@ object MineRepository {
         return mineService.getTopics(map)
     }
 
-    fun upLoadPhoto(file: MultipartBody.Part,map: HashMap<String, String>): Observable<JsonResponse<UpLoadPhotoResultBean>> {
-        return mineService.upLoadPhoto(file,map)
+    fun upLoadPhoto(
+        file: MultipartBody.Part,
+        map: HashMap<String, String>
+    ): Observable<JsonResponse<UpLoadPhotoResultBean>> {
+        return mineService.upLoadPhoto(file, map)
+    }
+
+    fun getPublicMessages(map: HashMap<String, String>): Observable<JsonResponse<PublicMessageBean>> {
+        return mineService.getPublicMessage(map)
+    }
+
+    fun getPersonalMessages(map: HashMap<String, String>): Observable<JsonResponse<PersonalMessageBean>> {
+        return mineService.getPersonalMessage(map)
     }
 
     private fun getProvinces(context: Context): List<ProvinceBean> {

@@ -10,36 +10,41 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.bean.PersonalMessageBean
+import com.judge.data.bean.PersonalMessage
+import com.judge.data.repository.MineRepository
 import com.judge.personalMessageItem
+import com.judge.utils.LogUtils
+import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import java.util.*
 
 data class PersonalMessageState(
-    val messageItems: List<PersonalMessageBean> = emptyList()
+    val messageItems: List<PersonalMessage>? = emptyList(),
+    val isLoading: Boolean = false
 ) : MvRxState
 
 class PersonalMessageViewModel(
     initialState: PersonalMessageState
 ) : MvRxViewModel<PersonalMessageState>(initialState) {
-    private val list = LinkedList<PersonalMessageBean>()
+    private val map = hashMapOf("version" to "4", "module" to "mypm")
 
     init {
         getMessages()
     }
 
-    private fun getMessages() {
-        for (i in 1..20) {
-            val item = PersonalMessageBean(
-                title = "天下武功，唯快不破",
-                messageTime = "$i 分钟前"
-            )
-            list.add(item)
-        }
-        setState {
-            copy(messageItems = list)
-        }
+    private fun getMessages() = withState { state ->
+        if (state.isLoading) return@withState
+        MineRepository.getPersonalMessages(map).subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                setState { copy(isLoading = true) }
+            }
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute {
+                copy(messageItems = it()?.Variables?.list)
+            }
     }
 
     companion object : MvRxViewModelFactory<PersonalMessageViewModel, PersonalMessageState> {
@@ -55,9 +60,9 @@ class PersonalMessageViewModel(
 class PersonalMessageFragment : BaseFragment() {
     private val viewModel: PersonalMessageViewModel by fragmentViewModel()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-        state.messageItems.forEachWithIndex { index, item ->
+        state.messageItems?.forEachWithIndex { index, item ->
             personalMessageItem {
-                id(item.title + index)
+                id(item.tousername + index)
                 message(item)
             }
         }

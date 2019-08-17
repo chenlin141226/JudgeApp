@@ -1,9 +1,6 @@
 package com.judge.network.services
 
-import com.judge.data.bean.MedalBean
-import com.judge.data.bean.ProfileBean
-import com.judge.data.bean.TopicBean
-import com.judge.data.bean.UpLoadPhotoResultBean
+import com.judge.data.bean.*
 import com.judge.network.JsonResponse
 import io.reactivex.Observable
 import okhttp3.MultipartBody
@@ -25,5 +22,11 @@ interface MineApIService {
 
     @Multipart
     @POST("/api/mobile/index.php")
-    fun upLoadPhoto(@Part file: MultipartBody.Part,@QueryMap map: HashMap<String, String>): Observable<JsonResponse<UpLoadPhotoResultBean>>
+    fun upLoadPhoto(@Part file: MultipartBody.Part, @QueryMap map: HashMap<String, String>): Observable<JsonResponse<UpLoadPhotoResultBean>>
+
+    @GET("/api/mobile/index.php")
+    fun getPublicMessage(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<PublicMessageBean>>
+
+    @GET("/api/mobile/index.php")
+    fun getPersonalMessage(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<PersonalMessageBean>>
 }
