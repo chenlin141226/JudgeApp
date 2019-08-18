@@ -6,8 +6,8 @@
     <data>
 
         <variable
-                name="attentionBean"
-                type="com.judge.data.bean.AttentionBean"/>
+                name="attention"
+                type="com.judge.data.bean.Attention"/>
 
         <variable
                 name="onParentClick"
@@ -24,6 +24,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
+            android:padding="@dimen/dp_20"
             android:onClick="@{onParentClick}"
             android:background="@drawable/market_item_bg">
 
@@ -31,8 +32,7 @@
                 android:id="@+id/iv_market"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="@dimen/dp_50"
-                android:background="@drawable/footbar"
-                android:layout_margin="@dimen/dp_20"
+                app:imageAllUrl="@{attention.icon}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -41,7 +41,7 @@
                 android:id="@+id/tv_markerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{attentionBean.attentionName}"
+                android:text="@{attention.title}"
                 android:textColor="#000"
                 android:textSize="@dimen/text_16"
                 tools:text="dsfdsfdsfdsf"
@@ -54,7 +54,7 @@
                 android:id="@+id/tv_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{attentionBean.attentionNumber}"
+                android:text="@{attention.todayposts}"
                 android:textColor="#feae34"
                 android:textSize="@dimen/text_16"
                 tools:text="dsfs"
@@ -67,7 +67,7 @@
                 android:id="@+id/tv_markerNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{attentionBean.attentionInfo}"
+                android:text="@{attention.description}"
                 android:textSize="@dimen/text_12"
                 tools:text="dsfdsfdsfdsf"
                 android:singleLine="true"
@@ -81,13 +81,12 @@
                 android:id="@+id/btn_exchange"
                 android:layout_width="@dimen/dp_47"
                 android:layout_height="@dimen/dp_23"
-                android:background="@drawable/subscibe_selector"
+                android:background="@drawable/subscibe"
                 android:textAlignment="center"
-                android:text="@string/subscribe"
+                android:text="@string/subscribed"
                 android:onClick="@{onClick}"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_markerName"
-                android:layout_marginRight="@dimen/dp_15"
                 tools:ignore="RtlHardcoded"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.judge.data.repository
 
+import com.judge.data.bean.AttentionBean
 import com.judge.data.bean.EditionBean
 import com.judge.data.bean.InformationBean
 import com.judge.data.bean.RecommendBean
@@ -18,9 +19,15 @@ object JudgeRepository {
         ServiceCreator.create(JudgeApiService::class.java)
     }
 
+    //资讯
     fun getInformation(map: HashMap<String, String>): Observable<JsonResponse<InformationBean>> = judgeService.getInformation(map)
 
+    //推荐
     fun getRecommend(): Observable<JsonResponse<RecommendBean>> = judgeService.getRecommend()
 
+    //主版
     fun getEdition(): Observable<JsonResponse<EditionBean>> = judgeService.getEdition()
+
+    //关注
+    fun getAttention() : Observable<JsonResponse<AttentionBean>> = judgeService.getAttention()
 }

@@ -17,6 +17,7 @@ import com.judge.utils.LogUtils
 import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
+import org.jetbrains.anko.support.v4.runOnUiThread
 
 /**
  * @author: jaffa
@@ -61,10 +62,13 @@ class RecommendFragment : BaseFragment() {
 
     override fun epoxyController() = simpleController(viewModel) { state ->
 
-        if (state.isLoading) {
-            loadingDialog.show()
-        } else {
-            loadingDialog.dismiss()
+        runOnUiThread {
+            if (state.isLoading) {
+                loadingDialog.show()
+            } else {
+                loadingDialog.dismiss()
+            }
+
         }
 
         state.recommendItems?.forEachWithIndex { idnex, item ->

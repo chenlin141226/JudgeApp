@@ -82,11 +82,6 @@ class TodayFragment : BaseFragment() {
     private val viewModel: TodayViewModel by fragmentViewModel()
 
     override fun epoxyController() = simpleController(viewModel) { state ->
-        if (state.isLoading) {
-            loadingDialog.show()
-        } else {
-            loadingDialog.dismiss()
-        }
 
         state.information?.forEachWithIndex { index, item ->
             todayItem {
@@ -94,11 +89,6 @@ class TodayFragment : BaseFragment() {
                 informationBean(item)
             }
         }
-    }
-
-    @BindingAdapter("data")
-    fun setData(textView: TextView, data: String) {
-        context?.let { RxToast.info(it, data, Toast.LENGTH_SHORT, true).show() }
     }
 
     override fun initView() {

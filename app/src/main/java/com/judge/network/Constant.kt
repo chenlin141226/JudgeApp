@@ -28,4 +28,7 @@ object Constant {
 
     //裁判说 - 主版
     const val EDITION = "/api/mobile/index.php?version=4&module=forumindex"
+
+    //裁判说 - 关注
+    const val ATTENTION = "/api/mobile/index.php?version=4&module=myfavforum"
 }
