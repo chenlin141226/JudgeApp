@@ -13,6 +13,7 @@ import com.judge.data.bean.MineItemBean
 import com.judge.data.bean.Recommend
 import com.judge.data.bean.SettingItemBean
 import com.judge.network.ServiceCreator
+import com.mcxtzhang.swipemenulib.SwipeMenuLayout
 import com.vondear.rxtool.RxTool
 import org.jetbrains.anko.textColor
 import java.text.SimpleDateFormat
@@ -37,6 +38,11 @@ fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
             .error(R.drawable.default_photo).into(imageView)
     }
 
+}
+
+@BindingAdapter("swipeState",requireAll = false)
+fun setWipeMenu(swipeMenu:SwipeMenuLayout,ste:String){
+    swipeMenu.smoothClose()
 }
 
 @BindingAdapter("drawableSrc", requireAll = false)
