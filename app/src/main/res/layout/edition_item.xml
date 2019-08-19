@@ -6,8 +6,8 @@
     <data>
 
         <variable
-                name="attention"
-                type="com.judge.data.bean.Attention"/>
+                name="editionItem"
+                type="com.judge.data.bean.Forumlist"/>
 
         <variable
                 name="onParentClick"
@@ -24,15 +24,15 @@
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:padding="@dimen/dp_20"
             android:onClick="@{onParentClick}"
+            android:padding="@dimen/dp_20"
             android:background="@drawable/market_item_bg">
 
         <ImageView
                 android:id="@+id/iv_market"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="@dimen/dp_50"
-                app:imageAllUrl="@{attention.icon}"
+                app:imageAllUrl="@{editionItem.icon}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -41,7 +41,7 @@
                 android:id="@+id/tv_markerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{attention.title}"
+                android:text="@{editionItem.name}"
                 android:textColor="#000"
                 android:textSize="@dimen/text_16"
                 tools:text="dsfdsfdsfdsf"
@@ -54,7 +54,7 @@
                 android:id="@+id/tv_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{attention.todayposts}"
+                android:text="@{editionItem.todayposts}"
                 android:textColor="#feae34"
                 android:textSize="@dimen/text_16"
                 tools:text="dsfs"
@@ -67,23 +67,25 @@
                 android:id="@+id/tv_markerNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{attention.description}"
+                android:text="@{editionItem.description}"
                 android:textSize="@dimen/text_12"
                 tools:text="dsfdsfdsfdsf"
+                android:lines="1"
                 android:singleLine="true"
                 android:textColor="@color/color_gray"
-                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginBottom="@dimen/dp_5"
                 app:layout_constraintLeft_toRightOf="@id/iv_market"
-                app:layout_constraintBottom_toBottomOf="@id/iv_market"/>
+                app:layout_constraintBottom_toBottomOf="@id/iv_market"
+                />
 
         <Button
                 android:id="@+id/btn_exchange"
                 android:layout_width="@dimen/dp_47"
                 android:layout_height="@dimen/dp_23"
-                android:background="@drawable/subscibe"
                 android:textAlignment="center"
-                android:text="@string/subscribed"
+                android:background="@null"
+                app:edtionText="@{editionItem.favorite}"
                 android:onClick="@{onClick}"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_markerName"

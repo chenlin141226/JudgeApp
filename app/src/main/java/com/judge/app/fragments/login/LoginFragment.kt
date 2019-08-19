@@ -1,38 +1,25 @@
 package com.judge.app.fragments.login
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ImageView
 import android.widget.Toast
-
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.fragmentViewModel
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.judge.R
 import com.judge.app.activities.HomeActivity
 import com.judge.app.activities.LoggingActivity
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
-import com.judge.data.bean.LoginBean
-import com.judge.data.repository.LoginRepository
-import com.judge.models.LoginState
 import com.judge.models.LoginViewModel
-import com.judge.network.Constant
 import com.judge.network.ServiceCreator
 import com.judge.network.services.LoginApiService
 import com.judge.views.loginView
 import com.vondear.rxtool.view.RxToast
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.support.v4.runOnUiThread
 
 
 /**
@@ -84,24 +71,12 @@ class LoginFragment : BaseFragment() {
 
             })
 
+            //第一次获取验证码
+            setimageBitmap(state.codeUrl)
+
             //点击更新验证码
-            codeClickListener { btn_code ->
-
-
-                loginseivice.getCode().subscribeOn(Schedulers.io()).map {
-                    BitmapFactory.decodeStream(it.byteStream())
-                }.subscribe {
-                    runOnUiThread {
-                        (btn_code as ImageView).setImageBitmap(it)
-                    }
-                }
-
-//                Glide.with(context!!)
-//                    .load(Constant.BASE_URL + Constant.SAFE_CODE)
-//                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                    .skipMemoryCache(true)
-//                    .centerCrop()
-//                    .into(btn_code as ImageView)
+            codeClickListener { _ ->
+                loginViewModel.requestCode()
             }
 
             //点击登录
@@ -138,17 +113,13 @@ class LoginFragment : BaseFragment() {
                 }
 
                 loginViewModel.login()
-
-                if (state.login?.retmsg == "0") {
-                    context?.let {
-                        RxToast.info(it, state.login.retmsg.toString(), Toast.LENGTH_SHORT, false).show()
-                    }
-                } else {
+                if (state.loginRequest is Success && state.login?.retcode==0) {
                     context?.let {
                         RxToast.info(it, state.login?.retmsg.toString(), Toast.LENGTH_SHORT, false).show()
+                        startActivity(Intent(context, HomeActivity::class.java))
+                        activity?.finish()
                     }
                 }
-
             }
 
 

@@ -1,5 +1,7 @@
 package com.judge.network.services
 
+import com.judge.data.bean.AttentionBean
+import com.judge.data.bean.EditionBean
 import com.judge.data.bean.InformationBean
 import com.judge.data.bean.RecommendBean
 import com.judge.network.Constant
@@ -20,5 +22,13 @@ interface JudgeApiService {
 
     //推荐
     @GET(Constant.RECOMMEND)
-    fun getRecommend() : Observable<JsonResponse<RecommendBean>>
+    fun getRecommend(): Observable<JsonResponse<RecommendBean>>
+
+    //主版
+    @GET(Constant.EDITION)
+    fun getEdition(): Observable<JsonResponse<EditionBean>>
+
+    //关注
+    @GET(Constant.ATTENTION)
+    fun getAttention() : Observable<JsonResponse<AttentionBean>>
 }

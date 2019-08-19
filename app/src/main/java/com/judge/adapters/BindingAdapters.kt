@@ -1,6 +1,7 @@
 package com.judge.adapters
 
 import android.text.TextUtils
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -24,6 +25,12 @@ import java.util.*
 fun setImage(imageView: ImageView, imageUrl: String) {
     Glide.with(imageView).load(ServiceCreator.BASE_URL + imageUrl).placeholder(R.drawable.default_message_photo)
         .error(R.drawable.default_message_photo).into(imageView)
+}
+
+@BindingAdapter("imageAllUrl", requireAll = false)
+fun setAllImage(imageView: ImageView, imageUrl: String) {
+    Glide.with(imageView).load(imageUrl).placeholder(R.drawable.footbar)
+        .error(R.drawable.footbar).into(imageView)
 }
 
 @BindingAdapter("photoUrl", requireAll = false)
@@ -98,3 +105,15 @@ fun setrecommendTextText(textView: TextView, item: Recommend) {
     val format = sdf.format(Date(item.dateline.toLong() * 1000))
     textView.text = format
 }
+
+@BindingAdapter("edtionText", requireAll = false)
+fun setEditionText(btn: Button, favorite: String) {
+   if(favorite =="0"){
+       btn.text = "订阅"
+       btn.setBackgroundResource(R.drawable.mark_item_exchange)
+   }else if(favorite == "1"){
+       btn.text = "已订阅"
+       btn.setBackgroundResource(R.drawable.subscibe)
+   }
+}
+

@@ -110,6 +110,7 @@
     <string name="recommend">推荐</string>
     <string name="information">资讯</string>
     <string name="subscribe">订阅</string>
+    <string name="subscribed">已订阅</string>
     <string name="today">当日</string>
     <string name="currentWeek">本周</string>
     <string name="currentMonth">当月</string>

@@ -1,6 +1,7 @@
 package com.judge.views
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -109,6 +110,14 @@ class LoginView @JvmOverloads constructor(
     @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
     fun setCodeClickListener(listener: OnClickListener?) {
         btn_get_code.setOnClickListener(listener)
+    }
+
+    /**
+     * 第一次获取验证码
+     */
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
+    fun setimageBitmap(bitmap : Bitmap?){
+        btn_get_code.setImageBitmap(bitmap)
     }
 
     /**

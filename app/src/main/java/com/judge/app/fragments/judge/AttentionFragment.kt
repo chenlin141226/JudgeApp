@@ -1,16 +1,17 @@
 package com.judge.app.fragments.judge
 
 import android.widget.Toast
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
-import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.*
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.attentionItem
+import com.judge.data.bean.Attention
 import com.judge.data.bean.AttentionBean
+import com.judge.data.repository.JudgeRepository
+import com.judge.utils.LogUtils
 import com.vondear.rxtool.view.RxToast
+import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 
 /**
@@ -19,7 +20,8 @@ import org.jetbrains.anko.collections.forEachWithIndex
  * 关注
  */
 data class AttentionState(
-    val attentionItems: List<AttentionBean> = emptyList()
+    val attentionItems: List<Attention> = emptyList(),
+    val isLoading: Boolean = false
 ) : MvRxState
 
 class AttentionViewModel(initialState: AttentionState) : MvRxViewModel<AttentionState>(initialState) {
@@ -29,22 +31,15 @@ class AttentionViewModel(initialState: AttentionState) : MvRxViewModel<Attention
         fetchAttention()
     }
 
-    fun fetchAttention() {
-        for (i in 1 .. 9) {
-            val market = AttentionBean(
-                attentionUrl = "https://i.redd.it/nbju2rir9xp11.jpg",
-                attentionName = "小鱼儿$i",
-                attentionNumber = "1314",
-                attentionInfo = "我等了一个不该等的人，我又拿什么把伤口抚平"
-            )
-            list.add(market)
-        }
-        setState { copy(attentionItems = list) }
-    }
+    fun fetchAttention() = withState { state: AttentionState ->
 
-    fun removeAttention() {
-        list.clear()
-        setState { copy(attentionItems = list) }
+        if(state.isLoading)return@withState
+
+        JudgeRepository.getAttention().subscribeOn(Schedulers.io())
+            .doOnSubscribe { setState { copy(isLoading = true) } }
+            .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute { copy(attentionItems = it()?.Variables?.list ?: emptyList())}
     }
 
 
@@ -63,8 +58,8 @@ class AttentionFragment : BaseFragment() {
 
         state.attentionItems.forEachWithIndex { index, item ->
             attentionItem {
-                id(item.attentionName+index)
-                attentionBean(item)
+                id(item.favid)
+                attention(item)
                 onParentClick { model, parentView, clickedView, position ->
                     context?.let { RxToast.info(it, "success", Toast.LENGTH_SHORT, true).show() }
                 }
@@ -75,12 +70,7 @@ class AttentionFragment : BaseFragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewmModel.removeAttention()
-    }
 
     override fun initData() {
-        viewmModel.fetchAttention()
     }
 }
