@@ -88,6 +88,10 @@ abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
             initData()
             setToolBar()
             toolbar.setupWithNavController(findNavController())
+            toolbar.setNavigationIcon(R.drawable.left)
+            /*(activity as BaseActivity).setSupportActionBar(toolbar)
+            (activity as BaseActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            (activity as BaseActivity).supportActionBar?.setDisplayShowHomeEnabled(true)*/
             centerTitle(toolbar, true)
         }
     }

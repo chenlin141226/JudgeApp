@@ -22,7 +22,9 @@
         R.layout.recommend_item,
         R.layout.today_item,
         R.layout.news_item_view,
-        R.layout.edition_item
+        R.layout.edition_item,
+        R.layout.search_edit_view,
+        R.layout.friend_item_view
 })
 
 package com.judge;

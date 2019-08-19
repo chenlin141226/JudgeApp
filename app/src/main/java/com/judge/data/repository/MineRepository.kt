@@ -75,4 +75,8 @@ object MineRepository {
         }
         return Pair(provinces, cities)
     }
+
+    fun getFriends(map: HashMap<String, String>): Observable<JsonResponse<FriendBean>> {
+        return mineService.getFriends(map)
+    }
 }

@@ -29,4 +29,7 @@ interface MineApIService {
 
     @GET("/api/mobile/index.php")
     fun getPersonalMessage(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<PersonalMessageBean>>
+
+    @GET("/api/mobile/index.php")
+    fun getFriends(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<FriendBean>>
 }

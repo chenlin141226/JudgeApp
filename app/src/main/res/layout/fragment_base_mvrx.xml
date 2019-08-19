@@ -11,8 +11,9 @@
 			android:layout_height="wrap_content"
 			android:background="@color/colorPrimary"
 			android:visibility="gone"
+			app:navigationContentDescription="@string/friends"
 			android:paddingTop="@dimen/dp_30"
-			app:navigationIcon="@drawable/ic_arrow_back">
+			app:navigationIcon="@drawable/left">
 		<Button
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -23,7 +24,7 @@
 				android:layout_alignParentEnd="true"
 				android:visibility="gone"
 				android:textColor="@color/white"
-				android:text="@string/whistle_rules"/>
+				/>
 	</androidx.appcompat.widget.Toolbar>
 	<ViewStub
 			android:id="@+id/titleStub"

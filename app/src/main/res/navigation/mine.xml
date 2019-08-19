@@ -87,6 +87,13 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
         />
+        <action android:id="@+id/action_messageFragment_to_friendsFragment"
+                app:destination="@id/friendsFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
     </fragment>
     <fragment android:id="@+id/publicMessageFragment"
               android:name="com.judge.app.fragments.mine.message.PublicMessageFragment"
@@ -178,4 +185,6 @@
               android:label="@string/edit_QQ"/>
     <fragment android:id="@+id/mineMedalFragment" android:name="com.judge.app.fragments.mine.medal.MineMedalFragment"
               android:label="@string/mine_medal"/>
+    <fragment android:id="@+id/friendsFragment" android:name="com.judge.app.fragments.mine.message.FriendsFragment"
+              android:label="@string/friends"/>
 </navigation>
