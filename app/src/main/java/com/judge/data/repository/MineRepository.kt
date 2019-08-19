@@ -9,6 +9,7 @@ import com.judge.network.ServiceCreator
 import com.judge.network.services.MineApIService
 import io.reactivex.Observable
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -33,9 +34,10 @@ object MineRepository {
 
     fun upLoadPhoto(
         file: MultipartBody.Part,
+        fileName: RequestBody,
         map: HashMap<String, String>
     ): Observable<JsonResponse<UpLoadPhotoResultBean>> {
-        return mineService.upLoadPhoto(file, map)
+        return mineService.upLoadPhoto(file, fileName)
     }
 
     fun getPublicMessages(map: HashMap<String, String>): Observable<JsonResponse<PublicMessageBean>> {

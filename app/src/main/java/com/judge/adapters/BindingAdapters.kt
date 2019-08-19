@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.judge.R
@@ -23,7 +24,10 @@ import java.util.*
 
 @BindingAdapter("imageUrl", requireAll = false)
 fun setImage(imageView: ImageView, imageUrl: String) {
-    Glide.with(imageView).load(ServiceCreator.BASE_URL + imageUrl).placeholder(R.drawable.default_message_photo)
+    Glide.with(imageView).load(ServiceCreator.BASE_URL + imageUrl)
+        .placeholder(R.drawable.default_message_photo)
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
+        .skipMemoryCache(true)
         .error(R.drawable.default_message_photo).into(imageView)
 }
 
@@ -38,6 +42,8 @@ fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
     if (!TextUtils.isEmpty(item.photoUrl)) {
         Glide.with(imageView).load(item.photoUrl).placeholder(R.drawable.default_photo)
             .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
             .error(R.drawable.default_photo).into(imageView)
     } else {
         Glide.with(imageView).load(item.photoUri).placeholder(R.drawable.default_photo)
@@ -47,8 +53,8 @@ fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
 
 }
 
-@BindingAdapter("swipeState",requireAll = false)
-fun setWipeMenu(swipeMenu:SwipeMenuLayout,ste:String){
+@BindingAdapter("swipeState", requireAll = false)
+fun setWipeMenu(swipeMenu: SwipeMenuLayout, ste: String) {
     swipeMenu.smoothClose()
 }
 
@@ -108,12 +114,12 @@ fun setrecommendTextText(textView: TextView, item: Recommend) {
 
 @BindingAdapter("edtionText", requireAll = false)
 fun setEditionText(btn: Button, favorite: String) {
-   if(favorite =="0"){
-       btn.text = "订阅"
-       btn.setBackgroundResource(R.drawable.mark_item_exchange)
-   }else if(favorite == "1"){
-       btn.text = "已订阅"
-       btn.setBackgroundResource(R.drawable.subscibe)
-   }
+    if (favorite == "0") {
+        btn.text = "订阅"
+        btn.setBackgroundResource(R.drawable.mark_item_exchange)
+    } else if (favorite == "1") {
+        btn.text = "已订阅"
+        btn.setBackgroundResource(R.drawable.subscibe)
+    }
 }
 

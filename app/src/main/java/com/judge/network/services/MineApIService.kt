@@ -4,6 +4,7 @@ import com.judge.data.bean.*
 import com.judge.network.JsonResponse
 import io.reactivex.Observable
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface MineApIService {
@@ -21,8 +22,9 @@ interface MineApIService {
     fun getTopics(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<TopicBean>>
 
     @Multipart
-    @POST("/api/mobile/index.php")
-    fun upLoadPhoto(@Part file: MultipartBody.Part, @QueryMap map: HashMap<String, String>): Observable<JsonResponse<UpLoadPhotoResultBean>>
+    @POST("/api/mobile/index.php?version=4&module=uploadavatar")
+    fun upLoadPhoto(@Part file: MultipartBody.Part, @Part("file") name: RequestBody
+                    ): Observable<JsonResponse<UpLoadPhotoResultBean>>
 
     @GET("/api/mobile/index.php")
     fun getPublicMessage(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<PublicMessageBean>>

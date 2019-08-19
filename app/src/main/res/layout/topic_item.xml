@@ -10,7 +10,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_topic"
             android:layout_margin="@dimen/dp_5"
-            app:swipeState="@{topic.author}"
             android:padding="@dimen/dp_10"
     >
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,6 +55,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{topic.comments}"
+                    android:drawableStart="@drawable/ic_comments"
+                    android:drawablePadding="@dimen/dp_5"
                     android:textSize="@dimen/text_16"
                     android:layout_margin="@dimen/dp_10"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -67,6 +68,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{topic.views}"
+                    android:drawableStart="@drawable/ic_views"
+                    android:drawablePadding="@dimen/dp_5"
                     android:textSize="@dimen/text_16"
                     android:layout_margin="@dimen/dp_10"
                     app:layout_constraintBottom_toBottomOf="parent"
