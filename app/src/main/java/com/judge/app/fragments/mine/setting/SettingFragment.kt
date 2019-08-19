@@ -93,10 +93,10 @@ class SettingViewModel(
     fun upLoadPhoto(file: File) {
         val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
         val body = MultipartBody.Part.createFormData("Filedata", file.name, requestFile)
-        MineRepository.upLoadPhoto(body, RequestBody.create(MediaType.parse("text/plain"), file.name), map)
+        MineRepository.upLoadPhoto(body, map)
             .subscribeOn(Schedulers.io()).execute {
-            copy(resultBean = it()?.Variables)
-        }
+                copy(resultBean = it()?.Variables)
+            }
     }
 
     fun updateItem(settingArgs: SettingArgs) {

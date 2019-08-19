@@ -34,10 +34,9 @@ object MineRepository {
 
     fun upLoadPhoto(
         file: MultipartBody.Part,
-        fileName: RequestBody,
         map: HashMap<String, String>
     ): Observable<JsonResponse<UpLoadPhotoResultBean>> {
-        return mineService.upLoadPhoto(file, fileName)
+        return mineService.upLoadPhoto(file, map)
     }
 
     fun getPublicMessages(map: HashMap<String, String>): Observable<JsonResponse<PublicMessageBean>> {
