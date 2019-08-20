@@ -64,6 +64,9 @@ class PersonalMessageFragment : BaseFragment() {
             personalMessageItem {
                 id(item.tousername + index)
                 message(item)
+                onItemClick { _ ->
+                    navigateTo(R.id.action_personalMessageFragment_to_friendsMessageFragment, item)
+                }
             }
         }
     }

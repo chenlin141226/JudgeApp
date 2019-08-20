@@ -100,7 +100,15 @@
               android:label="@string/public_message"/>
     <fragment android:id="@+id/personalMessageFragment"
               android:name="com.judge.app.fragments.mine.message.PersonalMessageFragment"
-              android:label="@string/personal_message"/>
+              android:label="@string/personal_message">
+        <action android:id="@+id/action_personalMessageFragment_to_friendsMessageFragment"
+                app:destination="@id/friendsMessageFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+    </fragment>
     <fragment android:id="@+id/topicFragment"
               android:name="com.judge.app.fragments.mine.topic.TopicFragment"
               android:label="@string/my_topic"/>

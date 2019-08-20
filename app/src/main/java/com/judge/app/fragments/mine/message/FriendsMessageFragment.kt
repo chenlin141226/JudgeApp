@@ -12,6 +12,7 @@ import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.Friend
 import com.judge.data.bean.FriendMessage
+import com.judge.data.bean.PersonalMessage
 import com.judge.data.repository.MineRepository
 import com.judge.friendMessageLeftView
 import com.judge.friendMessageRightView
@@ -25,9 +26,11 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 data class FriendMessageState(
     val isLoading: Boolean = false,
     val friendMessages: List<FriendMessage>? = emptyList(),
-    val friend: Friend
+    val friend: Friend?,
+    val personalMessage: PersonalMessage?
 ) : MvRxState {
-    constructor(args: Friend) : this(friend = args)
+    constructor(args: Friend) : this(friend = args, personalMessage = null)
+    constructor(args: PersonalMessage) : this(personalMessage = args, friend = null)
 }
 
 class FriendMessageViewModel(
@@ -82,11 +85,15 @@ class FriendsMessageFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
-        viewModel.selectSubscribe(FriendMessageState::friend) {
+        viewModel.selectSubscribe(
+            FriendMessageState::friend,
+            FriendMessageState::personalMessage
+        ) { friend, personalMessage ->
             toolbar.isVisible = true
-            toolbar.title = it.username
+            toolbar.title = friend?.username?:personalMessage?.tousername
             CenterTitle.centerTitle(toolbar, true)
         }
+
         titleViewStub.layoutResource = R.layout.friend_tip_view
         titleViewStub.inflate().apply {
             addFriend.onClick {
