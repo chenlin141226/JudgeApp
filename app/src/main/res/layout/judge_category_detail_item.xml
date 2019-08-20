@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:background="@drawable/judge_detail_item_bg"
+            >
+
+        <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="五大联赛与中超消息讨论模块，看尽绿茵风光色彩"
+                android:textSize="@dimen/text_16"
+                android:textColor="#494850"
+                android:lines="1"
+                android:singleLine="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_author"/>
+
+        <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="三生三世"
+                android:textColor="#adabb3"
+                android:layout_marginTop="@dimen/dp_10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="半小时前"
+                android:textColor="#adabb3"
+                android:layout_marginLeft="@dimen/dp_15"
+                app:layout_constraintLeft_toRightOf="@id/tv_author"
+                app:layout_constraintTop_toTopOf="@id/tv_author"/>
+
+        <ImageView
+                android:id="@+id/iv_views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/eye"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_3"
+                app:layout_constraintRight_toLeftOf="@id/tv_views"
+                app:layout_constraintBottom_toBottomOf="@id/tv_author"/>
+
+        <TextView
+                android:id="@+id/tv_views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="4"
+                android:textColor="#adabb3"
+                android:layout_marginEnd="@dimen/dp_10"
+                app:layout_constraintRight_toLeftOf="@id/iv_message"
+                app:layout_constraintTop_toTopOf="@id/tv_author"/>
+
+
+        <ImageView
+                android:id="@+id/iv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/message"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:layout_marginEnd="@dimen/dp_5"
+                app:layout_constraintRight_toLeftOf="@id/tv_message"
+                app:layout_constraintBottom_toBottomOf="@id/tv_author"/>
+
+        <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2"
+                android:textColor="#adabb3"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_author"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

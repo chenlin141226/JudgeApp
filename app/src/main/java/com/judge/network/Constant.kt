@@ -31,4 +31,7 @@ object Constant {
 
     //裁判说 - 关注
     const val ATTENTION = "/api/mobile/index.php?version=4&module=myfavforum"
+
+    //裁判说 - 详情页(最新)
+    const val CATEGORYDETAIL = "api/mobile/index.php?version=4&module=forumdisplay&filter=lastpost&orderby=lastpost"
 }

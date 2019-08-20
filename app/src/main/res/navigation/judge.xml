@@ -5,5 +5,13 @@
 
     <fragment android:id="@+id/judgeFragment"
               android:name="com.judge.app.fragments.judge.JudgeFragment"
-              android:label="JudgeFragment"/>
+              android:label="JudgeFragment">
+        <action
+                android:id="@+id/action_judgeFragment_to_judgeDetailFragment"
+                app:destination="@id/judgeDetailFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/judgeDetailFragment"
+            android:name="com.judge.app.fragments.judge.JudgeDetailFragment"
+            android:label="JudgeDetailFragment"/>
 </navigation>

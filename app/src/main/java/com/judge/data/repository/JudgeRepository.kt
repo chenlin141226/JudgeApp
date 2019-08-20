@@ -1,9 +1,6 @@
 package com.judge.data.repository
 
-import com.judge.data.bean.AttentionBean
-import com.judge.data.bean.EditionBean
-import com.judge.data.bean.InformationBean
-import com.judge.data.bean.RecommendBean
+import com.judge.data.bean.*
 import com.judge.network.JsonResponse
 import com.judge.network.ServiceCreator
 import com.judge.network.services.JudgeApiService
@@ -30,4 +27,7 @@ object JudgeRepository {
 
     //关注
     fun getAttention() : Observable<JsonResponse<AttentionBean>> = judgeService.getAttention()
+
+    //详情（最新）
+    fun getNewCategoryDetail(map: HashMap<String, String>) : Observable<JsonResponse<JudgeCategoryDetailBean>> = judgeService.getNewCategoryDetail(map)
 }

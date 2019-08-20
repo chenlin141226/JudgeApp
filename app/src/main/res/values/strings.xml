@@ -10,6 +10,7 @@
     <string name="level">LV：2</string>
     <string name="user_id">UID：120</string>
     <string name="user_photo">user photo</string>
+    <string name="friends">好友</string>
     <string name="fans">粉丝</string>
     <string name="total_sign">累计签到</string>
     <string name="moth_sign">本月签到</string>
@@ -113,9 +114,13 @@
     <string name="today">当日</string>
     <string name="currentWeek">本周</string>
     <string name="currentMonth">当月</string>
-    <string name="friends">好友</string>
     <string name="judge_is_waiting">裁判说等你电话</string>
     <string name="friend_tip">你们还不是好友，每天只能发送5条消息</string>
     <string name="add_friend">加为好友</string>
+    <string name="newest">最新</string>
+    <string name="hot">热门</string>
+    <string name="hotcard">热帖</string>
+    <string name="essence">精华</string>
+
 
 </resources>

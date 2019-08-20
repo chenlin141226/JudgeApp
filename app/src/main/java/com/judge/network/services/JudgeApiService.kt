@@ -1,9 +1,6 @@
 package com.judge.network.services
 
-import com.judge.data.bean.AttentionBean
-import com.judge.data.bean.EditionBean
-import com.judge.data.bean.InformationBean
-import com.judge.data.bean.RecommendBean
+import com.judge.data.bean.*
 import com.judge.network.Constant
 import com.judge.network.JsonResponse
 import io.reactivex.Observable
@@ -31,4 +28,7 @@ interface JudgeApiService {
     //关注
     @GET(Constant.ATTENTION)
     fun getAttention() : Observable<JsonResponse<AttentionBean>>
+
+    @GET(Constant.CATEGORYDETAIL)
+    fun getNewCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
 }

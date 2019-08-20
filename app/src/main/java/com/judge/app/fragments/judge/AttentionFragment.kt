@@ -1,7 +1,9 @@
 package com.judge.app.fragments.judge
 
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.*
+import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
@@ -61,7 +63,7 @@ class AttentionFragment : BaseFragment() {
                 id(item.favid)
                 attention(item)
                 onParentClick { model, parentView, clickedView, position ->
-                    context?.let { RxToast.info(it, "success", Toast.LENGTH_SHORT, true).show() }
+                    navigateTo(R.id.action_judgeFragment_to_judgeDetailFragment)
                 }
                 onClick { _ ->
                     context?.let { RxToast.info(it, "success", Toast.LENGTH_SHORT, true).show() }
