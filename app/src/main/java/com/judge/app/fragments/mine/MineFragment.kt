@@ -105,7 +105,7 @@ class MineFragment : BaseFragment() {
             photoUrl(state.uerData?.member_avatar)
             profile(state.uerData?.space)
             sign(state.uerData?.qiandaodb)
-            uid("UID:" + state.uerData?.space?.uid)
+            uid("UID: " + state.uerData?.space?.uid)
         }
         state.mineItems.forEachIndexed { index, item ->
             mineItem {
