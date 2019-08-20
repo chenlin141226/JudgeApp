@@ -22,7 +22,8 @@
         R.layout.recommend_item,
         R.layout.today_item,
         R.layout.news_item_view,
-        R.layout.edition_item
+        R.layout.edition_item,
+        R.layout.judge_category_detail_item,
 })
 
 package com.judge;

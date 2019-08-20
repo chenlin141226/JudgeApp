@@ -114,5 +114,10 @@
     <string name="today">当日</string>
     <string name="currentWeek">本周</string>
     <string name="currentMonth">当月</string>
+    <string name="newest">最新</string>
+    <string name="hot">热门</string>
+    <string name="hotcard">热帖</string>
+    <string name="essence">精华</string>
+
 
 </resources>
