@@ -72,6 +72,7 @@ class FriendsFragment : BaseFragment() {
                 onDeleteClick { _ ->
                 }
                 onItemClick { _ ->
+                    navigateTo(R.id.action_friendsFragment_to_friendsMessageFragment, friend)
                 }
             }
 

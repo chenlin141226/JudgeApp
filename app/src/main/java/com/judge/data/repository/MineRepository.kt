@@ -13,6 +13,7 @@ import okhttp3.RequestBody
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
+import kotlin.math.min
 
 object MineRepository {
     var userProfile: ProfileBean? = null
@@ -79,5 +80,9 @@ object MineRepository {
 
     fun getFriends(map: HashMap<String, String>): Observable<JsonResponse<FriendBean>> {
         return mineService.getFriends(map)
+    }
+
+    fun getFriendsMessage(map: HashMap<String, String>): Observable<JsonResponse<FriendsMessageBean>> {
+        return mineService.getFriendsMessage(map)
     }
 }

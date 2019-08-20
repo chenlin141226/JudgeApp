@@ -4,7 +4,6 @@ import com.judge.data.bean.*
 import com.judge.network.JsonResponse
 import io.reactivex.Observable
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface MineApIService {
@@ -36,4 +35,7 @@ interface MineApIService {
 
     @GET("/api/mobile/index.php")
     fun getFriends(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<FriendBean>>
+
+    @GET("/api/mobile/index.php")
+    fun getFriendsMessage(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<FriendsMessageBean>>
 }

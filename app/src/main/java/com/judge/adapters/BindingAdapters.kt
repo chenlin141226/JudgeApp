@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
 import com.judge.R
 import com.judge.data.bean.Data
@@ -16,19 +17,34 @@ import com.judge.data.bean.Recommend
 import com.judge.data.bean.SettingItemBean
 import com.judge.network.ServiceCreator
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout
+import com.vondear.rxtool.RxConstants
+import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxTool
 import org.jetbrains.anko.textColor
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-@BindingAdapter("imageUrl", requireAll = false)
-fun setImage(imageView: ImageView, imageUrl: String) {
-    Glide.with(imageView).load(ServiceCreator.BASE_URL + imageUrl)
-        .placeholder(R.drawable.default_message_photo)
+@BindingAdapter(value = ["imageUrl", "isPhoto"], requireAll = false)
+fun setImage(imageView: ImageView, imageUrl: String, isPhoto: Boolean) {
+    val url: String = if (imageUrl.contains(ServiceCreator.BASE_URL)) {
+        imageUrl
+    } else {
+        ServiceCreator.BASE_URL + imageUrl
+    }
+    val builder = Glide.with(imageView).load(url)
         .diskCacheStrategy(DiskCacheStrategy.NONE)
         .skipMemoryCache(true)
-        .error(R.drawable.default_message_photo).into(imageView)
+        .transition(withCrossFade())
+        .error(R.drawable.default_message_photo)
+    if (isPhoto) {
+        builder
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .into(imageView)
+    } else {
+        builder.into(imageView)
+    }
+
 }
 
 @BindingAdapter("imageAllUrl", requireAll = false)
