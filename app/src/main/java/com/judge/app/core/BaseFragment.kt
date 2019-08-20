@@ -84,10 +84,14 @@ abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
             // coordinatorLayout = findViewById(R.id.coordinator_layout)
             recyclerView.setController(epoxyController)
             loadingDialog = RxDialogLoading(context, false, null)
+            toolbar.setupWithNavController(findNavController())
             initView()
             initData()
             setToolBar()
-            toolbar.setupWithNavController(findNavController())
+            toolbar.setNavigationIcon(R.drawable.left)
+            /*(activity as BaseActivity).setSupportActionBar(toolbar)
+            (activity as BaseActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            (activity as BaseActivity).supportActionBar?.setDisplayShowHomeEnabled(true)*/
             centerTitle(toolbar, true)
         }
     }

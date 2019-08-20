@@ -6,7 +6,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
 import com.judge.R
 import com.judge.data.bean.Data
@@ -14,16 +16,35 @@ import com.judge.data.bean.MineItemBean
 import com.judge.data.bean.Recommend
 import com.judge.data.bean.SettingItemBean
 import com.judge.network.ServiceCreator
+import com.mcxtzhang.swipemenulib.SwipeMenuLayout
+import com.vondear.rxtool.RxConstants
+import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxTool
 import org.jetbrains.anko.textColor
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-@BindingAdapter("imageUrl", requireAll = false)
-fun setImage(imageView: ImageView, imageUrl: String) {
-    Glide.with(imageView).load(ServiceCreator.BASE_URL + imageUrl).placeholder(R.drawable.default_message_photo)
-        .error(R.drawable.default_message_photo).into(imageView)
+@BindingAdapter(value = ["imageUrl", "isPhoto"], requireAll = false)
+fun setImage(imageView: ImageView, imageUrl: String, isPhoto: Boolean) {
+    val url: String = if (imageUrl.contains(ServiceCreator.BASE_URL)) {
+        imageUrl
+    } else {
+        ServiceCreator.BASE_URL + imageUrl
+    }
+    val builder = Glide.with(imageView).load(url)
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
+        .skipMemoryCache(true)
+        .transition(withCrossFade())
+        .error(R.drawable.default_message_photo)
+    if (isPhoto) {
+        builder
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .into(imageView)
+    } else {
+        builder.into(imageView)
+    }
+
 }
 
 @BindingAdapter("imageAllUrl", requireAll = false)
@@ -37,6 +58,8 @@ fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
     if (!TextUtils.isEmpty(item.photoUrl)) {
         Glide.with(imageView).load(item.photoUrl).placeholder(R.drawable.default_photo)
             .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
             .error(R.drawable.default_photo).into(imageView)
     } else {
         Glide.with(imageView).load(item.photoUri).placeholder(R.drawable.default_photo)
@@ -44,6 +67,11 @@ fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
             .error(R.drawable.default_photo).into(imageView)
     }
 
+}
+
+@BindingAdapter("swipeState", requireAll = false)
+fun setWipeMenu(swipeMenu: SwipeMenuLayout, ste: String) {
+    swipeMenu.smoothClose()
 }
 
 @BindingAdapter("drawableSrc", requireAll = false)
@@ -102,12 +130,12 @@ fun setrecommendTextText(textView: TextView, item: Recommend) {
 
 @BindingAdapter("edtionText", requireAll = false)
 fun setEditionText(btn: Button, favorite: String) {
-   if(favorite =="0"){
-       btn.text = "订阅"
-       btn.setBackgroundResource(R.drawable.mark_item_exchange)
-   }else if(favorite == "1"){
-       btn.text = "已订阅"
-       btn.setBackgroundResource(R.drawable.subscibe)
-   }
+    if (favorite == "0") {
+        btn.text = "订阅"
+        btn.setBackgroundResource(R.drawable.mark_item_exchange)
+    } else if (favorite == "1") {
+        btn.text = "已订阅"
+        btn.setBackgroundResource(R.drawable.subscibe)
+    }
 }
 

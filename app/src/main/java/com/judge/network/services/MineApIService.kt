@@ -22,11 +22,20 @@ interface MineApIService {
 
     @Multipart
     @POST("/api/mobile/index.php")
-    fun upLoadPhoto(@Part file: MultipartBody.Part, @QueryMap map: HashMap<String, String>): Observable<JsonResponse<UpLoadPhotoResultBean>>
+    fun upLoadPhoto(
+        @Part file: MultipartBody.Part,
+        @QueryMap map: HashMap<String, String>
+    ): Observable<JsonResponse<UpLoadPhotoResultBean>>
 
     @GET("/api/mobile/index.php")
     fun getPublicMessage(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<PublicMessageBean>>
 
     @GET("/api/mobile/index.php")
     fun getPersonalMessage(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<PersonalMessageBean>>
+
+    @GET("/api/mobile/index.php")
+    fun getFriends(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<FriendBean>>
+
+    @GET("/api/mobile/index.php")
+    fun getFriendsMessage(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<FriendsMessageBean>>
 }

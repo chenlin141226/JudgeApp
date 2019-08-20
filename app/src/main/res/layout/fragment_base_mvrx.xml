@@ -4,15 +4,16 @@
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:background="@color/gray1"
 		android:orientation="vertical">
 	<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="@color/colorPrimary"
 			android:visibility="gone"
+			app:navigationContentDescription="@string/friends"
 			android:paddingTop="@dimen/dp_30"
-			app:navigationIcon="@drawable/ic_arrow_back">
+			app:navigationIcon="@drawable/left">
 		<Button
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -22,8 +23,8 @@
 				android:background="@null"
 				android:layout_alignParentEnd="true"
 				android:visibility="gone"
-				android:textColor="@color/white"
-				android:text="@string/whistle_rules"/>
+				android:textColor="@color/colorPrimary"
+				/>
 	</androidx.appcompat.widget.Toolbar>
 	<ViewStub
 			android:id="@+id/titleStub"

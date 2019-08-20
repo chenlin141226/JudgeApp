@@ -49,30 +49,34 @@
                     android:textSize="@dimen/text_16"
                     android:layout_margin="@dimen/dp_10"
                     android:gravity="center_vertical"
-                    />
+            />
             <TextView
                     android:id="@+id/comment_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{topic.comments}"
+                    android:drawableStart="@drawable/ic_comments"
+                    android:drawablePadding="@dimen/dp_5"
                     android:textSize="@dimen/text_16"
                     android:layout_margin="@dimen/dp_10"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title"
                     android:gravity="center_vertical"
-                    />
+            />
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{topic.views}"
+                    android:drawableStart="@drawable/ic_views"
+                    android:drawablePadding="@dimen/dp_5"
                     android:textSize="@dimen/text_16"
                     android:layout_margin="@dimen/dp_10"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/comment_count"
                     app:layout_constraintTop_toBottomOf="@+id/title"
                     android:gravity="center_vertical"
-                    />
+            />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <ImageView
                 android:layout_width="wrap_content"

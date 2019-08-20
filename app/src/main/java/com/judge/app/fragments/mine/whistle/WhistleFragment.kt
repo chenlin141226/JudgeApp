@@ -58,6 +58,7 @@ class WhistleFragment : BaseFragment() {
         toolbar.visibility = View.VISIBLE
         rightButton.apply {
             visibility = View.VISIBLE
+            text = getString(R.string.whistle_rules)
             onClick {
                 navigateTo(R.id.action_whistleFragment_to_whistleRulesFragment, null)
             }
