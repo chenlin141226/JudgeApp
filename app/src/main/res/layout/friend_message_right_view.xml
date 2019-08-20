@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+    <data>
+        <variable name="messageBean" type="com.judge.data.bean.FriendMessage"/>
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:gravity="center"
+    >
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{messageBean.vdateline}"
+                android:textColor="@color/gray"
+                android:layout_margin="@dimen/dp_5"
+        />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+        >
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:text="@{messageBean.message}"
+                    android:gravity="end|center_vertical"
+            />
+            <ImageView
+                    android:id="@+id/photo_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_50"
+                    android:minWidth="@dimen/dp_50"
+                    android:layout_margin="@dimen/dp_5"
+                    android:scaleType="fitXY"
+                    app:imageUrl="@{messageBean.avatar}"
+                    app:isPhoto="@{true}"
+                    android:contentDescription="@string/user_photo"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

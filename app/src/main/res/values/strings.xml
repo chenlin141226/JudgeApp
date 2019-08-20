@@ -115,5 +115,7 @@
     <string name="currentMonth">当月</string>
     <string name="friends">好友</string>
     <string name="judge_is_waiting">裁判说等你电话</string>
+    <string name="friend_tip">你们还不是好友，每天只能发送5条消息</string>
+    <string name="add_friend">加为好友</string>
 
 </resources>

@@ -5,6 +5,7 @@ import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.airbnb.mvrx.fragmentViewModel
+import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
@@ -12,9 +13,13 @@ import com.judge.app.core.simpleController
 import com.judge.data.bean.Friend
 import com.judge.data.bean.FriendMessage
 import com.judge.data.repository.MineRepository
+import com.judge.friendMessageLeftView
+import com.judge.friendMessageRightView
 import com.judge.utils.CenterTitle
 import com.judge.utils.LogUtils
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.friend_tip_view.view.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
 data class FriendMessageState(
@@ -60,7 +65,19 @@ class FriendMessageViewModel(
 class FriendsMessageFragment : BaseFragment() {
     private val viewModel: FriendMessageViewModel by fragmentViewModel()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-
+        state.friendMessages?.forEachIndexed { index, message ->
+            if (message.msgfromid == MineRepository.userProfile?.space?.uid) {
+                friendMessageRightView {
+                    id(message.message + index)
+                    messageBean(message)
+                }
+            } else {
+                friendMessageLeftView {
+                    id(message.message + index)
+                    messageBean(message)
+                }
+            }
+        }
     }
 
     override fun initView() {
@@ -69,6 +86,12 @@ class FriendsMessageFragment : BaseFragment() {
             toolbar.isVisible = true
             toolbar.title = it.username
             CenterTitle.centerTitle(toolbar, true)
+        }
+        titleViewStub.layoutResource = R.layout.friend_tip_view
+        titleViewStub.inflate().apply {
+            addFriend.onClick {
+
+            }
         }
     }
 }
