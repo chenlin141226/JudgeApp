@@ -128,4 +128,8 @@ class MineFragment : BaseFragment() {
         }
     }
 
+    override fun initView() {
+        super.initView()
+        sharedViewModel.setVisible(true)
+    }
 }

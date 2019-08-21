@@ -31,6 +31,7 @@ class MessageFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
+        sharedViewModel.setVisible(false)
         toolbar.visibility = View.VISIBLE
         rightButton.apply {
             isVisible = true

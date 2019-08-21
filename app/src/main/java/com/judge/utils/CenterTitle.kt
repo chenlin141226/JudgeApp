@@ -8,6 +8,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
+import com.judge.R
+import kotlin.math.max
 import kotlin.math.min
 
 object CenterTitle {
@@ -39,26 +41,41 @@ object CenterTitle {
         fieldNav.isAccessible = true
         val mNavButtonView: ImageButton? = fieldNav.get(toolbar) as ImageButton?
 
-
+        mNavButtonView?.setImageResource(R.drawable.left)
         mTitleTextView?.let {
 
             //removing observer for avoid recursive call
             if (::globalLayoutListener.isInitialized)
-                removeAllListners(mTitleTextView, mSubtitleTextView, globalLayoutListener, titleWatcher, subTitleWatcher)
+                removeAllListners(
+                    mTitleTextView,
+                    mSubtitleTextView,
+                    globalLayoutListener,
+                    titleWatcher,
+                    subTitleWatcher
+                )
 
             // view tree observer for listen any layout changes
-            globalLayoutListener = object : ViewTreeObserver.OnGlobalLayoutListener {
-
-                override fun onGlobalLayout() {
-                    removeAllListners(mTitleTextView, mSubtitleTextView, globalLayoutListener, titleWatcher, subTitleWatcher)
-                    centerTitle(toolbar, isCenter)
-                }
+            globalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
+                removeAllListners(
+                    mTitleTextView,
+                    mSubtitleTextView,
+                    globalLayoutListener,
+                    titleWatcher,
+                    subTitleWatcher
+                )
+                centerTitle(toolbar, isCenter)
             }
 
             titleWatcher = object : TextWatcher {
                 override fun afterTextChanged(p0: Editable?) {
                     mTitleTextView.requestLayout()
-                    removeAllListners(mTitleTextView, mSubtitleTextView, globalLayoutListener, titleWatcher, subTitleWatcher)
+                    removeAllListners(
+                        mTitleTextView,
+                        mSubtitleTextView,
+                        globalLayoutListener,
+                        titleWatcher,
+                        subTitleWatcher
+                    )
                     centerTitle(toolbar, isCenter)
                 }
 
@@ -73,7 +90,13 @@ object CenterTitle {
             subTitleWatcher = object : TextWatcher {
                 override fun afterTextChanged(p0: Editable?) {
                     mSubtitleTextView?.requestLayout()
-                    removeAllListners(mTitleTextView, mSubtitleTextView, globalLayoutListener, titleWatcher, subTitleWatcher)
+                    removeAllListners(
+                        mTitleTextView,
+                        mSubtitleTextView,
+                        globalLayoutListener,
+                        titleWatcher,
+                        subTitleWatcher
+                    )
                     centerTitle(toolbar, isCenter)
                 }
 
@@ -99,43 +122,49 @@ object CenterTitle {
                     val size = IntArray(2)
                     menuView?.getLocationOnScreen(size)
 
-                    menuIconsMargin = Math.min(when (size[0]) {
-                        0 -> menuIconsMargin
-                        else -> size[0]
-                    }, menuIconsMargin)
+                    menuIconsMargin = min(
+                        when (size[0]) {
+                            0 -> menuIconsMargin
+                            else -> size[0]
+                        }, menuIconsMargin
+                    )
                 }
 
             }
 
-            val leftSideMarginTitle = Math.max(
-                (toolbar.measuredWidth - mTitleTextView.measuredWidth) / 2, // get the left side margin by dividing total available space by 2
-                mNavButtonView?.measuredWidth.orZero()) // also consider nav button margin
+            val leftSideMarginTitle = max(
+                (toolbar.measuredWidth - mTitleTextView.measuredWidth) / 2,
+                mNavButtonView?.measuredWidth.orZero()
+            ) // also consider nav button margin
 
-            val leftSideMarginSubTitle = Math.max(
-                (toolbar.measuredWidth - mSubtitleTextView?.measuredWidth.orZero()) / 2, // get the left side margin by dividing total available space by 2
-                mNavButtonView?.measuredWidth.orZero()) // also consider nav button margin
+            val leftSideMarginSubTitle = max(
+                (toolbar.measuredWidth - mSubtitleTextView?.measuredWidth.orZero()) / 2,
+                mNavButtonView?.measuredWidth.orZero()
+            ) // also consider nav button margin
 
             // position title
             mTitleTextView.run {
                 left = if (isCenter) leftSideMarginTitle
                 else mNavButtonView?.measuredWidth.orZero()
                 right = min(toolbar.measuredWidth - leftSideMarginTitle, menuIconsMargin)
-                layoutParams.width = Math.min(toolbar.measuredWidth - leftSideMarginTitle, menuIconsMargin) - leftSideMarginTitle
+                layoutParams.width =
+                    min(toolbar.measuredWidth - leftSideMarginTitle, menuIconsMargin) - leftSideMarginTitle
                 //text = text
             }
 
             // position sub title
             mSubtitleTextView?.run {
-                if (isCenter) left = leftSideMarginSubTitle
-                else left = mNavButtonView?.measuredWidth.orZero()
-                right = Math.min(toolbar.measuredWidth - leftSideMarginSubTitle, menuIconsMargin)
-                layoutParams.width = Math.min(toolbar.measuredWidth - leftSideMarginSubTitle, menuIconsMargin) - leftSideMarginSubTitle
+                left = if (isCenter) leftSideMarginSubTitle
+                else mNavButtonView?.measuredWidth.orZero()
+                right = min(toolbar.measuredWidth - leftSideMarginSubTitle, menuIconsMargin)
+                layoutParams.width =
+                    min(toolbar.measuredWidth - leftSideMarginSubTitle, menuIconsMargin) - leftSideMarginSubTitle
                 text = text
             }
 
 
             // add a view tree observer so that we can center the title every time view tree is updated
-            val vto = mTitleTextView.getViewTreeObserver()
+            val vto = mTitleTextView.viewTreeObserver
             vto.addOnGlobalLayoutListener(globalLayoutListener)
 
             // add text watcher for listen text change
@@ -148,12 +177,14 @@ object CenterTitle {
     }
 
 
-    private fun removeAllListners(titleView: TextView,
-                                  subTitleView: TextView?,
-                                  titleObserver: ViewTreeObserver.OnGlobalLayoutListener,
-                                  titleTextWatcher: TextWatcher,
-                                  subTitleTextWatcher: TextWatcher) {
-        titleView.getViewTreeObserver().removeOnGlobalLayoutListener(titleObserver)
+    private fun removeAllListners(
+        titleView: TextView,
+        subTitleView: TextView?,
+        titleObserver: ViewTreeObserver.OnGlobalLayoutListener,
+        titleTextWatcher: TextWatcher,
+        subTitleTextWatcher: TextWatcher
+    ) {
+        titleView.viewTreeObserver.removeOnGlobalLayoutListener(titleObserver)
         titleView.removeTextChangedListener(titleTextWatcher)
         subTitleView?.removeTextChangedListener(subTitleTextWatcher)
     }

@@ -1,5 +1,8 @@
 package com.judge.data.bean
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 
 data class PersonalMessageBean(
     val auth: String,
@@ -21,6 +24,7 @@ data class PersonalMessageBean(
     val success: String
 )
 
+@Parcelize
 data class PersonalMessage(
     val isnew: String,
     val message: String,
@@ -33,4 +37,4 @@ data class PersonalMessage(
     val tousername: String,
     val vdateline: String,
     val avatar: String
-)
+):Parcelable

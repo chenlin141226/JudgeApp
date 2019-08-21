@@ -10,7 +10,6 @@
     <string name="level">LV：2</string>
     <string name="user_id">UID：120</string>
     <string name="user_photo">user photo</string>
-    <string name="friends">好友</string>
     <string name="fans">粉丝</string>
     <string name="total_sign">累计签到</string>
     <string name="moth_sign">本月签到</string>
@@ -121,6 +120,7 @@
     <string name="hot">热门</string>
     <string name="hotcard">热帖</string>
     <string name="essence">精华</string>
+    <string name="friends">好友</string>
 
 
 </resources>
