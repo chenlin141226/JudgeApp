@@ -121,6 +121,7 @@
     <string name="hotcard">热帖</string>
     <string name="essence">精华</string>
     <string name="friends">好友</string>
+    <string name="message_hint">请输入您要说的话</string>
 
 
 </resources>

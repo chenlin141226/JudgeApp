@@ -32,7 +32,8 @@ class RepliedTopicViewModel(
         fetchTopics()
     }
 
-    fun fetchTopics() {
+    fun fetchTopics() = withState { state ->
+        if (state.isLoading) return@withState
         MineRepository.getPublishedTopics(map)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe {
@@ -47,7 +48,8 @@ class RepliedTopicViewModel(
             }
     }
 
-    fun refreshTopics() {
+    fun refreshTopics() = withState { state ->
+        if (state.isLoading) return@withState
         MineRepository.getPublishedTopics(map)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe {
@@ -86,6 +88,7 @@ class RepliedTopicFragment : BaseFragment() {
                     toast("You clicked item!")
                 }
                 onDeleteClick { _ ->
+                    viewModel.deleteTopic(index)
                     toast("You clicked delete button!")
                 }
             }

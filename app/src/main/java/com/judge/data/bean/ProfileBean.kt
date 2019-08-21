@@ -29,7 +29,8 @@ data class Qiandaodb(
     val reward: String,
     val time: String,
     val todaysay: String,
-    val uid: String
+    val uid: String,
+    val level: String
 )
 
 data class Wsq(

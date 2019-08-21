@@ -35,7 +35,7 @@ class HomeViewModel(
 
     init {
         fetchBanners()
-        fetchNews()
+        refreshNews()
     }
 
     private fun fetchBanners() {

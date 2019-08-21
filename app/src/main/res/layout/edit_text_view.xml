@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <variable name="watcher" type="androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged"/>
-        <variable name="item" type="com.judge.app.fragments.mine.setting.SettingArgs"/>
-        <variable name="inputType" type="int"/>
+
+        <variable
+                name="watcher"
+                type="androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged" />
+
+        <variable
+                name="item"
+                type="com.judge.app.fragments.mine.setting.SettingArgs" />
+
+        <variable
+                name="inputType"
+                type="int" />
+
+        <variable
+                name="textWatcher"
+                type="android.text.TextWatcher" />
     </data>
+
     <EditText
-            android:afterTextChanged="@{watcher}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_edit"
-            android:text="@{item.content}"
-            android:minHeight="@dimen/dp_50"
             android:layout_margin="@dimen/dp_20"
-            android:padding="@dimen/dp_5"
-            android:inputType="@{inputType}"
+            android:background="@drawable/bg_edit"
             android:gravity="start|top"
-    />
+            android:inputType="@{inputType}"
+            android:minHeight="@dimen/dp_50"
+            android:padding="@dimen/dp_5"
+            android:text="@{item.content}"
+            app:addTextChangedListener="@{textWatcher}" />
 </layout>

@@ -36,7 +36,8 @@ class HistoryViewModel(
         fetchTopics()
     }
 
-    fun fetchTopics() {
+    private fun fetchTopics() = withState { state ->
+        if (state.isLoading) return@withState
         MineRepository.getPublishedTopics(map)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe {

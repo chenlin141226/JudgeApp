@@ -12,6 +12,7 @@ import com.judge.app.core.simpleController
 import com.judge.editTextView
 import com.judge.settingItem
 import com.judge.views.BottomPopupViewList
+import com.judge.views.SimpleTextWatcher
 import com.lxj.xpopup.interfaces.OnSelectListener
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -27,9 +28,9 @@ class EditPhoneNumberFragment : BaseFragment() {
             id("phoneNumberEdit")
             item(state.settingArgs)
             inputType(InputType.TYPE_CLASS_PHONE)
-            watcher {
-                args.content = it.toString()
-            }
+            textWatcher(SimpleTextWatcher{
+                args.content = it
+            })
         }
         state.items.forEachWithIndex { index, itemBean ->
             settingItem {
