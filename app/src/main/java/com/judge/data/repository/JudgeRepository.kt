@@ -30,4 +30,13 @@ object JudgeRepository {
 
     //详情（最新）
     fun getNewCategoryDetail(map: HashMap<String, String>) : Observable<JsonResponse<JudgeCategoryDetailBean>> = judgeService.getNewCategoryDetail(map)
+
+    //详情（热门）
+    fun getHotCategoryDetail(map: HashMap<String, String>) : Observable<JsonResponse<JudgeCategoryDetailBean>> = judgeService.getHotCategoryDetail(map)
+
+    //详情（热帖）
+    fun getHotTopicCategoryDetail(map: HashMap<String, String>) : Observable<JsonResponse<JudgeCategoryDetailBean>> = judgeService.getHotTopicCategoryDetail(map)
+
+    //详情（精华）
+    fun getEssenceCategoryDetail(map: HashMap<String, String>) : Observable<JsonResponse<JudgeCategoryDetailBean>> = judgeService.getEssenceCategoryDetail(map)
 }

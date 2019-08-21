@@ -4,21 +4,23 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+         <variable
+                 name="viewmodel"
+                 type="com.judge.data.bean.ForumThreadlist"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_10"
-            android:background="@drawable/judge_detail_item_bg"
-            >
+            android:background="@drawable/judge_detail_item_bg" >
 
         <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="五大联赛与中超消息讨论模块，看尽绿茵风光色彩"
+                android:text="@{viewmodel.subject}"
                 android:textSize="@dimen/text_16"
                 android:textColor="#494850"
                 android:lines="1"
@@ -32,8 +34,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="三生三世"
+                android:text="@{viewmodel.author}"
                 android:textColor="#adabb3"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -43,6 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="半小时前"
+                android:text="@{viewmodel.dateline}"
                 android:textColor="#adabb3"
                 android:layout_marginLeft="@dimen/dp_15"
                 app:layout_constraintLeft_toRightOf="@id/tv_author"
@@ -63,6 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="4"
+                android:text="@{viewmodel.views}"
                 android:textColor="#adabb3"
                 android:layout_marginEnd="@dimen/dp_10"
                 app:layout_constraintRight_toLeftOf="@id/iv_message"
@@ -84,6 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="2"
+                android:text="@{viewmodel.replies}"
                 android:textColor="#adabb3"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_author"/>
