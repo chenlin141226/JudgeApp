@@ -34,4 +34,13 @@ object Constant {
 
     //裁判说 - 详情页(最新)
     const val CATEGORYDETAIL = "api/mobile/index.php?version=4&module=forumdisplay&filter=lastpost&orderby=lastpost"
+
+    //裁判说 - 详情页(热门)
+    const val Hot            = "api/mobile/index.php?version=4&module=forumdisplay&filter=heat&orderby=heats"
+
+    //裁判说 - 详情页(热帖)
+    const val HOTTOPIC       = "api/mobile/index.php?version=4&module=forumdisplay&filter=hot"
+
+    //裁判说 - 详情页(精华)
+    const val ESSENCE        = "api/mobile/index.php?version=4&module=forumdisplay&filter=digest&digest=1"
 }

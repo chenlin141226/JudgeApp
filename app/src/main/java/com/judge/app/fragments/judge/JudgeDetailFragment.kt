@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.navigateUp
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -106,9 +105,9 @@ class JudgeDetailFragment : BaseMvRxFragment() {
         withState(viewModel) { state ->
             val fragments = ArrayList<Fragment>().also {
                 it.add(JudgeCateGoryDetailFragment(state.attention.id))
-                it.add(HotCategoryDatailFragment())
-                it.add(HotCardCategoryDatailFragment())
-                it.add(EssenceCategoryDatailFragment())
+                it.add(HotCategoryDatailFragment(state.attention.id))
+                it.add(HotCardCategoryDatailFragment(state.attention.id))
+                it.add(EssenceCategoryDatailFragment(state.attention.id))
             }
             viewPager.adapter = ViewPagerAdapter(childFragmentManager, fragments, titles)
             viewPager.offscreenPageLimit = 4

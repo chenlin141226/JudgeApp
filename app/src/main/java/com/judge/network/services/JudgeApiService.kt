@@ -29,6 +29,20 @@ interface JudgeApiService {
     @GET(Constant.ATTENTION)
     fun getAttention() : Observable<JsonResponse<AttentionBean>>
 
+    //详情最新
     @GET(Constant.CATEGORYDETAIL)
     fun getNewCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
+
+    //详情 热门
+    @GET(Constant.Hot)
+    fun getHotCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
+
+    // 详情 热帖
+    @GET(Constant.HOTTOPIC)
+    fun getHotTopicCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
+
+    //详情 金华
+    //详情最新
+    @GET(Constant.ESSENCE)
+    fun getEssenceCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
 }
