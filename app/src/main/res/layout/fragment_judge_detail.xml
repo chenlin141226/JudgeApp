@@ -5,13 +5,16 @@
 
     <data>
         <variable
-                name="viewModel"
-                type="com.judge.app.fragments.judge.JudgeDetailViewModel"/>
+                name="forum"
+                type="com.judge.data.bean.Forum"/>
+        <variable
+                name="onClick"
+                type="android.view.View.OnClickListener"/>
     </data>
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
         <RelativeLayout
@@ -30,6 +33,7 @@
                     android:layout_marginStart="@dimen/dp_10"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:gravity="center"
+                    android:onClick="@{onClick}"
                     tools:ignore="RtlHardcoded">
 
                 <ImageView
@@ -43,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="足球"
+                    android:text="@{forum.name}"
                     android:textColor="#FFF"
                     android:textSize="@dimen/text_16"
                     android:layout_centerInParent="true"/>
@@ -69,8 +74,8 @@
                     android:lines="1"
                     android:singleLine="true"
                     tools:text="五大联赛与中超消息讨论模块，看尽绿茵风光色彩"
-                    android:text="@{viewModel.desc}"
-                    android:textColor="#000"
+                    android:text="@{forum.description}"
+                    android:textColor="#393939"
                     android:textSize="@dimen/text_16"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -79,6 +84,7 @@
                     android:id="@+id/iv_header"
                     android:layout_width="@dimen/dp_80"
                     android:layout_height="@dimen/dp_80"
+                    app:imageAllUrl="@{forum.icon}"
                     android:background="@drawable/defaut_judge_detail"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_title"
@@ -89,9 +95,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="23"
+                    android:text="@{forum.todayposts}"
                     android:layout_marginStart="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_15"
                     android:textSize="@dimen/text_22"
+                    android:textColor="#515151"
                     app:layout_constraintLeft_toRightOf="@id/iv_header"
                     app:layout_constraintTop_toTopOf="@id/iv_header"/>
 
@@ -101,6 +109,7 @@
                     android:layout_height="wrap_content"
                     android:text="签到"
                     android:textSize="@dimen/text_16"
+                    android:textColor="#898c94"
                     app:layout_constraintLeft_toRightOf="@id/iv_header"
                     app:layout_constraintBottom_toBottomOf="@id/iv_header"
                     android:layout_marginBottom="@dimen/dp_15"
@@ -111,6 +120,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="348"
+                    android:text="@{forum.threads}"
+                    android:textColor="#515151"
                     android:layout_marginStart="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_15"
                     android:textSize="@dimen/text_22"
@@ -122,6 +133,7 @@
                     android:layout_height="wrap_content"
                     android:text="话题"
                     android:textSize="@dimen/text_16"
+                    android:textColor="#898c94"
                     app:layout_constraintLeft_toRightOf="@id/tv_sign_text"
                     app:layout_constraintBottom_toBottomOf="@id/iv_header"
                     android:layout_marginBottom="@dimen/dp_15"
@@ -129,30 +141,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-            <com.flyco.tablayout.SlidingTabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_30"
-                    android:background="@color/colorAccent"
-                    app:tl_textBold="BOTH"
-                    app:tl_indicator_style="BLOCK"
-                    app:tl_indicator_color="@color/colorPrimary"
-                    app:tl_indicator_width="@dimen/dp_65"
-                    app:tl_tab_space_equal="true"
-                    app:tl_textsize="@dimen/text_14"/>
-
-            <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:padding="@dimen/dp_20"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-        </LinearLayout>
     </LinearLayout>
 </layout>

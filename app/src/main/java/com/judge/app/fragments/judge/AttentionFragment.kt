@@ -63,7 +63,7 @@ class AttentionFragment : BaseFragment() {
                 id(item.favid)
                 attention(item)
                 onParentClick { model, parentView, clickedView, position ->
-                    navigateTo(R.id.action_judgeFragment_to_judgeDetailFragment)
+                    navigateTo(R.id.action_judgeFragment_to_judgeDetailFragment,item)
                 }
                 onClick { _ ->
                     context?.let { RxToast.info(it, "success", Toast.LENGTH_SHORT, true).show() }

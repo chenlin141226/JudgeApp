@@ -27,7 +27,8 @@
         R.layout.friend_item_view,
         R.layout.friend_message_left_view,
         R.layout.friend_message_right_view,
-        R.layout.judge_category_detail_item
+        R.layout.judge_category_detail_item,
+        R.layout.fragment_judge_detail
 })
 
 package com.judge;

@@ -1,5 +1,8 @@
 package com.judge.data.bean
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class AttentionBean(
     val auth: String,
     val code: String,
@@ -19,7 +22,7 @@ data class AttentionBean(
     val success: String
 )
 
-
+@Parcelize
 data class Attention(
     val dateline: String,
     val description: String,
@@ -35,4 +38,4 @@ data class Attention(
     val uid: String,
     val url: String,
     val yesterdayposts: String
-)
+):Parcelable
