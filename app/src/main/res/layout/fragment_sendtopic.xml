@@ -1,46 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/sign_bg">
+        android:orientation="vertical">
 
     <TextView
-            android:id="@+id/tv_post"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_60"
-            android:layout_marginBottom="@dimen/dp_80"
-            android:drawableTop="@drawable/post_selector"
-            android:drawablePadding="@dimen/dp_5"
-            android:text="@string/sign"
-            android:textAlignment="center"
-            android:textColor="@color/post_text_selector"
-            app:layout_constraintBottom_toBottomOf="@id/btn_quit"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:background="#ffae5a" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <TextView
-            android:id="@+id/tv_sign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_60"
-            android:layout_marginBottom="@dimen/dp_80"
-            android:drawableTop="@drawable/signs_selector"
-            android:drawablePadding="@dimen/dp_5"
-            android:text="@string/post"
-            android:textAlignment="center"
-            android:textColor="@color/post_text_selector"
-            app:layout_constraintBottom_toBottomOf="@id/btn_quit"
-            app:layout_constraintRight_toRightOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/sign_bg">
 
-    <ImageButton
-            android:id="@+id/btn_quit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_20"
-            android:background="@drawable/quit"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+                android:id="@+id/tv_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_60"
+                android:layout_marginBottom="@dimen/dp_80"
+                android:drawableTop="@drawable/post_selector"
+                android:drawablePadding="@dimen/dp_5"
+                android:text="@string/sign"
+                android:textAlignment="center"
+                android:textColor="@color/post_text_selector"
+                app:layout_constraintBottom_toBottomOf="@id/btn_quit"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+                android:id="@+id/tv_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_60"
+                android:layout_marginBottom="@dimen/dp_80"
+                android:drawableTop="@drawable/signs_selector"
+                android:drawablePadding="@dimen/dp_5"
+                android:text="@string/post"
+                android:textAlignment="center"
+                android:textColor="@color/post_text_selector"
+                app:layout_constraintBottom_toBottomOf="@id/btn_quit"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageButton
+                android:id="@+id/btn_quit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:background="@drawable/quit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+

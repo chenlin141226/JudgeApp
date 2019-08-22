@@ -13,6 +13,7 @@ import com.judge.R
 /**
  * @author: jaffa
  * @date: 2019/8/22
+ * 发帖模块
  */
 class SendTopicFragment : Fragment() {
     lateinit var sign: TextView

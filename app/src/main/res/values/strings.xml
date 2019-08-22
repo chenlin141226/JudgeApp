@@ -125,5 +125,8 @@
     <string name="post">签到</string>
     <string name="sign">发帖</string>
 
+    <!--    发帖   -->
+    <string name="publish">发表</string>
+
 
 </resources>

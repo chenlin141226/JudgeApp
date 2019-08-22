@@ -6,10 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_30"
-            android:background="#ffae5a" />
+
     <fragment
             android:id="@+id/my_nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
