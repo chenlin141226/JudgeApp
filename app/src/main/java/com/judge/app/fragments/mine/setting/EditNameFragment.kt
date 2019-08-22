@@ -2,15 +2,10 @@ package com.judge.app.fragments.mine.setting
 
 import android.os.Parcelable
 import android.text.InputType
-import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
-import com.airbnb.mvrx.fragmentViewModel
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.R
-import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
@@ -24,7 +19,6 @@ import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vondear.rxtool.RxTool
 import kotlinx.android.parcel.Parcelize
 import org.jetbrains.anko.collections.forEachWithIndex
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
@@ -47,8 +41,11 @@ class EditViewModel(
     initialState: EditState
 ) : MvRxViewModel<EditState>(initialState) {
     private val list = LinkedList<SettingItemBean>()
-    val privacyList: Array<String> = RxTool.getContext().resources.getStringArray(R.array.privacy_contents)
-    val genderList: Array<String> = RxTool.getContext().resources.getStringArray(R.array.gender_list)
+    val privacyList: Array<String> =
+        RxTool.getContext().resources.getStringArray(R.array.privacy_contents)
+    val genderList: Array<String> =
+        RxTool.getContext().resources.getStringArray(R.array.gender_list)
+
     fun getEditItems(index: Int) {
         when (index) {
             1 -> {
@@ -78,6 +75,12 @@ class EditViewModel(
         }
     }
 
+    fun setArgsValue(content: String) {
+        setState {
+            copy(items = items.copy(0, items[0].copy(content = content)))
+        }
+    }
+
     companion object : MvRxViewModelFactory<EditViewModel, EditState> {
         override fun create(viewModelContext: ViewModelContext, state: EditState): EditViewModel? {
             return EditViewModel(state)
@@ -85,17 +88,13 @@ class EditViewModel(
     }
 }
 
-class EditNameFragment : BaseFragment() {
-    private val viewModel: EditViewModel by fragmentViewModel()
-    private lateinit var args: SettingArgs
+class EditNameFragment : BaseEditFragment() {
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-        args.index = state.settingArgs.index
-        args.content = state.settingArgs.content
         editTextView {
             id("nameEdit")
             inputType(InputType.TYPE_CLASS_TEXT)
             item(state.settingArgs)
-            textWatcher(SimpleTextWatcher{
+            textWatcher(SimpleTextWatcher {
                 args.content = it
             })
         }
@@ -116,23 +115,4 @@ class EditNameFragment : BaseFragment() {
         }
     }
 
-    override fun initView() {
-        super.initView()
-        toolbar.isVisible = true
-        rightButton.apply {
-            text = getString(R.string.complete)
-            isVisible = true
-            onClick {
-                LiveEventBus.get()
-                    .with("setting")
-                    .post(args)
-                findNavController().popBackStack()
-            }
-        }
-    }
-
-    override fun initData() {
-        super.initData()
-        args = SettingArgs()
-    }
 }

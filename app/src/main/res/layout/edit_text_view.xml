@@ -5,10 +5,6 @@
     <data>
 
         <variable
-                name="watcher"
-                type="androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged" />
-
-        <variable
                 name="item"
                 type="com.judge.app.fragments.mine.setting.SettingArgs" />
 
