@@ -38,4 +38,8 @@ interface MineApIService {
 
     @GET("/api/mobile/index.php")
     fun getFriendsMessage(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<FriendsMessageBean>>
+
+    @FormUrlEncoded
+    @POST("/api/mobile/index.php?version=4&module=sendpm")
+    fun sendMessage(@FieldMap map: HashMap<String, String>): Observable<JsonResponse<MessageSendResultBean>>
 }

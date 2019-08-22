@@ -85,4 +85,8 @@ object MineRepository {
     fun getFriendsMessage(map: HashMap<String, String>): Observable<JsonResponse<FriendsMessageBean>> {
         return mineService.getFriendsMessage(map)
     }
+
+    fun sendMessage(map: HashMap<String, String>): Observable<JsonResponse<MessageSendResultBean>> {
+        return mineService.sendMessage(map)
+    }
 }
