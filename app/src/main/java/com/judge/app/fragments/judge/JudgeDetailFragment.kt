@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +26,7 @@ import com.judge.data.repository.JudgeRepository
 import com.judge.fragmentJudgeDetail
 import com.judge.utils.LogUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 
 /**
@@ -68,6 +72,8 @@ class JudgeDetailFragment : BaseMvRxFragment() {
     lateinit var refreshLayouts: SmartRefreshLayout
     lateinit var tableLayout: SlidingTabLayout
     lateinit var viewPager: ViewPager
+    lateinit var  back : LinearLayout
+    lateinit var tv_title : TextView
     val epoxyController by lazy { epoxyController() }
     val viewModel: JudgeDetailViewModel by fragmentViewModel()
     lateinit var attentions: Attention
@@ -82,7 +88,9 @@ class JudgeDetailFragment : BaseMvRxFragment() {
             refreshLayouts = findViewById(R.id.refreshLayout)
             tableLayout = findViewById(R.id.tabLayout)
             viewPager = findViewById(R.id.viewPager)
-
+            back = findViewById(R.id.back)
+            tv_title = findViewById(R.id.tv_title)
+            back.setOnClickListener { findNavController().popBackStack() }
             val linearLayoutManager = object : LinearLayoutManager(context,RecyclerView.VERTICAL,false){
                 override fun canScrollVertically(): Boolean {
                     return false
@@ -103,6 +111,7 @@ class JudgeDetailFragment : BaseMvRxFragment() {
             resources.getString(R.string.essence)
         )
         withState(viewModel) { state ->
+            tv_title.text = state.attention.title
             val fragments = ArrayList<Fragment>().also {
                 it.add(JudgeCateGoryDetailFragment(state.attention.id))
                 it.add(HotCategoryDatailFragment(state.attention.id))
@@ -117,14 +126,15 @@ class JudgeDetailFragment : BaseMvRxFragment() {
     }
 
     fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-
+        if(state.forum == null){
+            context?.let {
+                RxToast.info(it, "null", Toast.LENGTH_SHORT, false).show()
+            }
+        }
         state.forum?.let {
             fragmentJudgeDetail {
                 id(state.forum.fid + state.forum.posts)
                 forum(it)
-                onClick { _->
-                    findNavController().popBackStack()
-                }
             }
         }
     }

@@ -58,9 +58,9 @@
                 android:textColor="#feae34"
                 android:textSize="@dimen/text_16"
                 tools:text="dsfs"
-                android:layout_marginLeft="@dimen/dp_15"
                 app:layout_constraintTop_toTopOf="@id/tv_markerName"
-                app:layout_constraintLeft_toRightOf="@id/tv_markerName"/>
+                app:layout_constraintLeft_toRightOf="@id/tv_markerName"
+                app:layout_constraintRight_toLeftOf="@id/btn_exchange"/>
 
 
         <TextView

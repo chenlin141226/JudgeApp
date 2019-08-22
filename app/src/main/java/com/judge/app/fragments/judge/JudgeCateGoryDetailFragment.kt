@@ -1,10 +1,7 @@
 package com.judge.app.fragments.judge
 
 import android.graphics.Color
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
-import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.*
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
@@ -21,21 +18,40 @@ import org.jetbrains.anko.collections.forEachWithIndex
  * @date: 2019/8/18
  * 最新
  */
-data class  NewState(
+data class NewState(
     val isLoading: Boolean = false,
-    val categoryDetails: List<ForumThreadlist> = emptyList()) :MvRxState
+    val categoryDetails: List<ForumThreadlist> = emptyList(),
+    val page: Int = 1
+) : MvRxState
 
 class NewViewModel(initialiState: NewState) : MvRxViewModel<NewState>(initialiState) {
 
 
-    fun fetchDetail(id : String) = withState { state ->
+    fun fetchDetail(id: String) = withState { state ->
         if (state.isLoading) return@withState
-        val map = hashMapOf("page" to "1", "fid" to id)
+        val map = hashMapOf("page" to "${state.page}", "fid" to id)
         JudgeRepository.getNewCategoryDetail(map).subscribeOn(Schedulers.io())
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
             .doFinally { setState { copy(isLoading = false) } }
             .execute { copy(categoryDetails = it()?.Variables?.forum_threadlist ?: emptyList()) }
+    }
+
+
+    fun loadMoreDetail(id: String, page: Int) = withState { state ->
+
+        val map = hashMapOf("page" to "$page", "fid" to id)
+        JudgeRepository.getNewCategoryDetail(map).subscribeOn(Schedulers.io())
+            .doOnSubscribe { setState { copy(isLoading = true) } }
+            .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute {
+                copy(
+                    categoryDetails = categoryDetails.plus(
+                        it()?.Variables?.forum_threadlist ?: emptyList()
+                    )
+                )
+            }
     }
 
     fun clearDatail() = withState { state ->
@@ -52,9 +68,10 @@ class NewViewModel(initialiState: NewState) : MvRxViewModel<NewState>(initialiSt
 }
 
 class JudgeCateGoryDetailFragment(id: String) : BaseFragment() {
-    private val viewModel : NewViewModel by fragmentViewModel()
-    var id = id
-    override fun epoxyController() = simpleController(viewModel) {state ->
+    private val viewModel: NewViewModel by fragmentViewModel()
+    var ids = id
+    var page = 1
+    override fun epoxyController() = simpleController(viewModel) { state ->
 
         state.categoryDetails.forEachWithIndex { index, item ->
             judgeCategoryDetailItem {
@@ -67,12 +84,31 @@ class JudgeCateGoryDetailFragment(id: String) : BaseFragment() {
 
     override fun initView() {
         recyclerView.setBackgroundColor(Color.WHITE)
-      viewModel.fetchDetail(id)
+        withState(viewModel) { state ->
+            refreshLayout.apply {
+                setEnableAutoLoadMore(true)
+                setEnableRefresh(true)
+                setEnableLoadMore(true)
+                setOnRefreshListener {
+                    viewModel.fetchDetail(ids)
+                    it.finishRefresh(1000)
+                }
+                setOnLoadMoreListener {
+                    if (page <= 10) {
+                        page++
+                        viewModel.loadMoreDetail(ids,page)
+                    }
+                    it.finishLoadMore(1000)
+                }
+            }
+        }
+        viewModel.fetchDetail(ids)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-       viewModel.clearDatail()
+        page = 1
+        viewModel.clearDatail()
     }
 
 }
