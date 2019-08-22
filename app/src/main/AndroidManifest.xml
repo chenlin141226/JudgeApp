@@ -48,6 +48,8 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
+        <activity android:name=".app.activities.SignActivity"/>
+
         <service android:name=".utils.NetworkService"/>
     </application>
 

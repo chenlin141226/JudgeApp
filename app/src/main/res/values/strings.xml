@@ -122,6 +122,8 @@
     <string name="essence">精华</string>
     <string name="friends">好友</string>
     <string name="message_hint">请输入您要说的话</string>
+    <string name="post">签到</string>
+    <string name="sign">发帖</string>
 
 
 </resources>
