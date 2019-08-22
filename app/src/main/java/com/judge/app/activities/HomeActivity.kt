@@ -3,10 +3,7 @@ package com.judge.app.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.LinearLayout
 import androidx.core.view.get
-import androidx.navigation.findNavController
 import com.judge.R
 import com.judge.app.core.BaseActivity
 import com.judge.extensions.setSelectItem
