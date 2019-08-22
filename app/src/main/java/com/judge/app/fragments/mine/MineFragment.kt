@@ -1,6 +1,8 @@
 package com.judge.app.fragments.mine
 
 import android.content.res.TypedArray
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.mvrx.*
 import com.judge.R
 import com.judge.app.core.BaseFragment
@@ -106,6 +108,9 @@ class MineFragment : BaseFragment() {
             profile(state.uerData?.space)
             sign(state.uerData?.qiandaodb)
             uid("UID: " + state.uerData?.space?.uid)
+            onFriendsClick { _ ->
+                navigateTo(R.id.action_mineFragment_to_friendsFragment)
+            }
         }
         state.mineItems.forEachIndexed { index, item ->
             mineItem {

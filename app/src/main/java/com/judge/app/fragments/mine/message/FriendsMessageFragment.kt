@@ -1,5 +1,6 @@
 package com.judge.app.fragments.mine.message
 
+import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
@@ -20,6 +21,7 @@ import com.judge.utils.CenterTitle
 import com.judge.utils.LogUtils
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.friend_tip_view.view.*
+import kotlinx.android.synthetic.main.send_message_view.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
@@ -90,7 +92,7 @@ class FriendsMessageFragment : BaseFragment() {
             FriendMessageState::personalMessage
         ) { friend, personalMessage ->
             toolbar.isVisible = true
-            toolbar.title = friend?.username?:personalMessage?.tousername
+            toolbar.title = friend?.username ?: personalMessage?.tousername
             CenterTitle.centerTitle(toolbar, true)
         }
 
@@ -98,6 +100,15 @@ class FriendsMessageFragment : BaseFragment() {
         titleViewStub.inflate().apply {
             addFriend.onClick {
 
+            }
+        }
+        bottomViewStub.layoutResource = R.layout.send_message_view
+        bottomViewStub.inflate().apply {
+            messageEditText.setOnEditorActionListener { view, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+
+                }
+                false
             }
         }
     }

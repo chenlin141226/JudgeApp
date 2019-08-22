@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
 import com.judge.R
@@ -39,7 +40,7 @@ fun setImage(imageView: ImageView, imageUrl: String, isPhoto: Boolean) {
         .error(R.drawable.default_message_photo)
     if (isPhoto) {
         builder
-            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(RxImageTool.dp2px(10.0f))))
             .into(imageView)
     } else {
         builder.into(imageView)
@@ -57,13 +58,13 @@ fun setAllImage(imageView: ImageView, imageUrl: String) {
 fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
     if (!TextUtils.isEmpty(item.photoUrl)) {
         Glide.with(imageView).load(item.photoUrl).placeholder(R.drawable.default_photo)
-            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(RxImageTool.dp2px(10.0f))))
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
             .error(R.drawable.default_photo).into(imageView)
     } else {
         Glide.with(imageView).load(item.photoUri).placeholder(R.drawable.default_photo)
-            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(RxImageTool.dp2px(10.0f))))
             .error(R.drawable.default_photo).into(imageView)
     }
 

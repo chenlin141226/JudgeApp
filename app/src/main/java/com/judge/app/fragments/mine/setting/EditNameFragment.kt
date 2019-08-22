@@ -19,6 +19,7 @@ import com.judge.editTextView
 import com.judge.extensions.copy
 import com.judge.settingItem
 import com.judge.views.BottomPopupViewList
+import com.judge.views.SimpleTextWatcher
 import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vondear.rxtool.RxTool
 import kotlinx.android.parcel.Parcelize
@@ -94,9 +95,9 @@ class EditNameFragment : BaseFragment() {
             id("nameEdit")
             inputType(InputType.TYPE_CLASS_TEXT)
             item(state.settingArgs)
-            watcher {
-                args.content = it.toString()
-            }
+            textWatcher(SimpleTextWatcher{
+                args.content = it
+            })
         }
         state.items.forEachWithIndex { index, itemBean ->
             settingItem {

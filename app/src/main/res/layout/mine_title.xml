@@ -6,6 +6,7 @@
         <variable name="sign" type="com.judge.data.bean.Qiandaodb"/>
         <variable name="photoUrl" type="String"/>
         <variable name="uid" type="String"/>
+        <variable name="onFriendsClick" type="android.view.View.OnClickListener"/>
     </data>
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="wrap_content"
@@ -36,7 +37,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/user_name"
                     android:textSize="@dimen/text_14"
                     android:textColor="@color/white"
-                    android:text="@string/level"
+                    android:text="@{sign.level}"
             />
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -83,6 +84,7 @@
                     android:orientation="vertical"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:onClick="@{onFriendsClick}"
             >
                 <TextView
                         android:id="@+id/friendsNumber"

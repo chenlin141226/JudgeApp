@@ -37,7 +37,8 @@ class FavoriteViewModel(
         fetchTopics()
     }
 
-    fun fetchTopics() {
+    fun fetchTopics() = withState { state ->
+        if (state.isLoading) return@withState
         MineRepository.getPublishedTopics(map)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe {

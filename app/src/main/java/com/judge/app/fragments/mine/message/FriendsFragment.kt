@@ -15,6 +15,7 @@ import com.judge.data.repository.MineRepository
 import com.judge.friendItemView
 import com.judge.searchEditView
 import com.judge.utils.LogUtils
+import com.judge.views.SimpleTextWatcher
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.appcompat.v7.navigationIconResource
 
@@ -49,7 +50,10 @@ class FriendViewModel(
     }
 
     companion object : MvRxViewModelFactory<FriendViewModel, FriendState> {
-        override fun create(viewModelContext: ViewModelContext, state: FriendState): FriendViewModel? {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: FriendState
+        ): FriendViewModel? {
             return FriendViewModel(state)
         }
     }
@@ -57,27 +61,28 @@ class FriendViewModel(
 
 class FriendsFragment : BaseFragment() {
     private val friendViewModel: FriendViewModel by fragmentViewModel()
-    override fun epoxyController(): MvRxEpoxyController = simpleController(friendViewModel) { state ->
-        searchEditView {
-            id("search friend")
-            watcher {
+    override fun epoxyController(): MvRxEpoxyController =
+        simpleController(friendViewModel) { state ->
+            searchEditView {
+                id("search friend")
+                textWatcher(SimpleTextWatcher {
+
+                })
+            }
+
+            state.friends?.forEachIndexed { index, friend ->
+                friendItemView {
+                    id(friend.uid + index)
+                    friend(friend)
+                    onDeleteClick { _ ->
+                    }
+                    onItemClick { _ ->
+                        navigateTo(R.id.action_friendsFragment_to_friendsMessageFragment, friend)
+                    }
+                }
 
             }
         }
-
-        state.friends?.forEachIndexed { index, friend ->
-            friendItemView {
-                id(friend.uid + index)
-                friend(friend)
-                onDeleteClick { _ ->
-                }
-                onItemClick { _ ->
-                    navigateTo(R.id.action_friendsFragment_to_friendsMessageFragment, friend)
-                }
-            }
-
-        }
-    }
 
     override fun initView() {
         super.initView()
