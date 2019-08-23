@@ -4,8 +4,7 @@ import com.judge.data.bean.*
 import com.judge.network.Constant
 import com.judge.network.JsonResponse
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.QueryMap
+import retrofit2.http.*
 
 /**
  * @author: jaffa
@@ -46,6 +45,12 @@ interface JudgeApiService {
     @GET(Constant.ESSENCE)
     fun getEssenceCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
 
+    //表情
     @GET(Constant.EXPRESSION)
     fun getExpression() : Observable<JsonResponse<EpressionBean>>
+
+    //签到 发表
+    @FormUrlEncoded
+    @POST(Constant.EXPRESSION)
+    fun pushContent(@FieldMap map : HashMap<String,String>) : Observable<JsonResponse<SignResultBean>>
 }

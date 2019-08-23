@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.load.resource.gif.GifDrawable
@@ -24,7 +23,6 @@ import com.judge.data.bean.Recommend
 import com.judge.data.bean.SettingItemBean
 import com.judge.network.ServiceCreator
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout
-import com.vondear.rxtool.RxConstants
 import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxTool
 import org.jetbrains.anko.textColor

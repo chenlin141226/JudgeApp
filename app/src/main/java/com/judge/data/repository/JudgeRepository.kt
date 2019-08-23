@@ -47,4 +47,7 @@ object JudgeRepository {
 
     //表情
     fun getExpression(): Observable<JsonResponse<EpressionBean>> = judgeService.getExpression()
+
+    //签到 - 发表
+    fun pushContent(map: HashMap<String, String>) : Observable<JsonResponse<SignResultBean>> = judgeService.pushContent(map)
 }
