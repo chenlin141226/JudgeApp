@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
@@ -18,7 +17,6 @@ import com.judge.data.bean.Recommend
 import com.judge.data.bean.SettingItemBean
 import com.judge.network.ServiceCreator
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout
-import com.vondear.rxtool.RxConstants
 import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxTool
 import org.jetbrains.anko.textColor
@@ -37,9 +35,10 @@ fun setImage(imageView: ImageView, imageUrl: String, isPhoto: Boolean) {
         .diskCacheStrategy(DiskCacheStrategy.NONE)
         .skipMemoryCache(true)
         .transition(withCrossFade())
-        .error(R.drawable.default_message_photo)
+        .error(R.drawable.default_photo)
     if (isPhoto) {
         builder
+            .placeholder(R.drawable.default_photo)
             .apply(RequestOptions.bitmapTransform(RoundedCorners(RxImageTool.dp2px(10.0f))))
             .into(imageView)
     } else {

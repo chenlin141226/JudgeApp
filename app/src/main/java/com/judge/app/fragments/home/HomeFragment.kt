@@ -24,7 +24,8 @@ import org.jetbrains.anko.collections.forEachWithIndex
 data class HomeState(
     val responseBean: Async<JsonResponse<BannerBean>> = Uninitialized,
     val news: List<News>? = emptyList(),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val isRefreshing: Boolean = false
 ) : MvRxState
 
 class HomeViewModel(
@@ -35,7 +36,7 @@ class HomeViewModel(
 
     init {
         fetchBanners()
-        refreshNews()
+        fetchNews()
     }
 
     private fun fetchBanners() {
@@ -57,12 +58,12 @@ class HomeViewModel(
         HomeRepository.fetchNews(newsMap)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe {
-                setState { copy(isLoading = true) }
+                setState { copy(isLoading = true, isRefreshing = true) }
             }
             .doOnError {
                 it.message?.let { it1 -> LogUtils.e(it1) }
             }
-            .doFinally { setState { copy(isLoading = false) } }
+            .doFinally { setState { copy(isLoading = false, isRefreshing = false) } }
             .execute {
                 copy(news = news?.plus((it()?.Variables?.data ?: emptyList())))
             }
@@ -72,12 +73,12 @@ class HomeViewModel(
         HomeRepository.fetchNews(newsMap)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe {
-                setState { copy(isLoading = true) }
+                setState { copy(isRefreshing = true) }
             }
             .doOnError {
                 it.message?.let { it1 -> LogUtils.e(it1) }
             }
-            .doFinally { setState { copy(isLoading = false) } }
+            .doFinally { setState { copy(isRefreshing = false) } }
             .execute {
                 copy(news = it()?.Variables?.data ?: emptyList())
             }
@@ -111,10 +112,8 @@ class HomeFragment : BaseFragment() {
             setEnableLoadMore(true)
             setOnRefreshListener {
                 viewModel.refreshNews()
-                it.finishRefresh(1000)
             }
             setOnLoadMoreListener {
-                it.finishLoadMore(1000)
                 viewModel.fetchNews()
             }
         }
@@ -133,6 +132,12 @@ class HomeFragment : BaseFragment() {
             }
             setBanners(images)
         })
+        viewModel.selectSubscribe(HomeState::isRefreshing) {
+            if (!it) {
+                refreshLayout.finishRefresh()
+                refreshLayout.finishLoadMore()
+            }
+        }
     }
 
     private fun setBanners(images: ArrayList<String>) {

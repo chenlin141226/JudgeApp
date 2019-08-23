@@ -12,22 +12,25 @@ import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.Friend
 import com.judge.data.repository.MineRepository
+import com.judge.extensions.copy
 import com.judge.friendItemView
 import com.judge.searchEditView
 import com.judge.utils.LogUtils
 import com.judge.views.SimpleTextWatcher
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 
 data class FriendState(
     val isLoading: Boolean = false,
-    val friends: List<Friend>? = emptyList()
+    val friends: List<Friend> = emptyList()
 ) : MvRxState
 
 class FriendViewModel(
     initialState: FriendState
 ) : MvRxViewModel<FriendState>(initialState) {
     private val map = hashMapOf("version" to "4", "module" to "friend")
+    private lateinit var friendList: List<Friend>
 
     init {
         fetchFriends()
@@ -44,8 +47,22 @@ class FriendViewModel(
             }
             .doFinally { setState { copy(isLoading = false) } }
             .execute {
-                copy(friends = it()?.Variables?.list)
+                friendList = it()?.Variables?.list ?: emptyList()
+                copy(friends = it()?.Variables?.list ?: emptyList())
             }
+    }
+
+    fun searchFriends(text: String) {
+        if (text.isEmpty()) {
+            setState { copy(friends = friendList) }
+        } else {
+            val list = friendList.filter {
+                it.username.contains(text)
+            }
+            setState {
+                copy(friends = list)
+            }
+        }
     }
 
     companion object : MvRxViewModelFactory<FriendViewModel, FriendState> {
@@ -65,11 +82,11 @@ class FriendsFragment : BaseFragment() {
             searchEditView {
                 id("search friend")
                 textWatcher(SimpleTextWatcher {
-
+                    friendViewModel.searchFriends(it)
                 })
             }
 
-            state.friends?.forEachIndexed { index, friend ->
+            state.friends.forEachIndexed { index, friend ->
                 friendItemView {
                     id(friend.uid + index)
                     friend(friend)
