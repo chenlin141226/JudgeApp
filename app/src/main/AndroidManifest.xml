@@ -40,7 +40,7 @@
 
         <activity android:name=".app.activities.HomeActivity"
                   android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustUnspecified|stateAlwaysHidden"
+                  android:windowSoftInputMode="adjustPan"
         />
 
         <activity

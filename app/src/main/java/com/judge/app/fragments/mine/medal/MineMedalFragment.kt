@@ -34,4 +34,9 @@ class MineMedalFragment : BaseFragment() {
         super.initView()
         toolbar.isVisible = true
     }
+
+    override fun initData() {
+        super.initData()
+        viewModel.fetchMineMedals()
+    }
 }

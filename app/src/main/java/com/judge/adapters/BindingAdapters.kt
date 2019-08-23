@@ -41,9 +41,10 @@ fun setImage(imageView: ImageView, imageUrl: String, isPhoto: Boolean) {
         .diskCacheStrategy(DiskCacheStrategy.NONE)
         .skipMemoryCache(true)
         .transition(withCrossFade())
-        .error(R.drawable.default_message_photo)
+        .error(R.drawable.default_photo)
     if (isPhoto) {
         builder
+            .placeholder(R.drawable.default_photo)
             .apply(RequestOptions.bitmapTransform(RoundedCorners(RxImageTool.dp2px(10.0f))))
             .into(imageView)
     } else {

@@ -26,13 +26,22 @@ data class MedalState(
 class MedalViewModel(
     initialState: MedalState
 ) : MvRxViewModel<MedalState>(initialState) {
-    private val map = hashMapOf("version" to "4", "module" to "medals")
-
-    init {
-        fetchMedals()
+    fun fetchCenterMedals() {
+        val map =
+            hashMapOf("version" to "4", "module" to "medals", "display" to "all")
+        fetchMedals(map)
     }
 
-    private fun fetchMedals() = withState { state ->
+    fun fetchMineMedals() {
+        val map =
+            hashMapOf(
+                "version" to "4", "module" to "medals", "display" to "id",
+                "uid" to (MineRepository.userProfile?.member_uid ?: "")
+            )
+        fetchMedals(map)
+    }
+
+    private fun fetchMedals(map: HashMap<String, String>) = withState { state ->
         if (state.isLoading) return@withState
         MineRepository.getMedals(map).subscribeOn(Schedulers.io())
             .doOnSubscribe {
@@ -48,7 +57,10 @@ class MedalViewModel(
     }
 
     companion object : MvRxViewModelFactory<MedalViewModel, MedalState> {
-        override fun create(viewModelContext: ViewModelContext, state: MedalState): MedalViewModel? {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: MedalState
+        ): MedalViewModel? {
             return MedalViewModel(state)
         }
     }
@@ -57,11 +69,6 @@ class MedalViewModel(
 class MedalCenterFragment : BaseFragment() {
     private val viewModel: MedalViewModel by fragmentViewModel()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-        if (state.isLoading) {
-            loadingDialog.show()
-        } else {
-            loadingDialog.dismiss()
-        }
         state.medals?.forEachWithIndex { index, medal ->
             medalItemView {
                 id(medal.name + index)
@@ -80,6 +87,18 @@ class MedalCenterFragment : BaseFragment() {
                 navigateTo(R.id.action_medalCenterFragment_to_mineMedalFragment, null)
             }
         }
+        viewModel.selectSubscribe(MedalState::isLoading) {
+            if (it) {
+                loadingDialog.show()
+            } else {
+                loadingDialog.dismiss()
+            }
+        }
+    }
+
+    override fun initData() {
+        super.initData()
+        viewModel.fetchCenterMedals()
     }
 
 }
