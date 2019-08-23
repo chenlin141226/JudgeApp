@@ -127,6 +127,10 @@
 
     <!--    发帖   -->
     <string name="publish">发表</string>
+    <string name="hint">写写我今天想说的...</string>
+    <string name="more">更多</string>
+    <string name="sumile">心情图片</string>
+    <string name="emoji">表情包</string>
 
 
 </resources>

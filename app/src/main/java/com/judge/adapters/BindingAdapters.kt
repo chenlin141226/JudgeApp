@@ -1,15 +1,22 @@
 package com.judge.adapters
 
+import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.judge.R
 import com.judge.data.bean.Data
 import com.judge.data.bean.MineItemBean
@@ -137,5 +144,22 @@ fun setEditionText(btn: Button, favorite: String) {
         btn.text = "已订阅"
         btn.setBackgroundResource(R.drawable.subscibe)
     }
+}
+
+@BindingAdapter("gifImageUrl", requireAll = false)
+fun setGifImage(imageView: ImageView, imageUrl: String) {
+    Glide.with(imageView).load(imageUrl).listener(object : RequestListener<Drawable>{
+        override fun onLoadFailed( e: GlideException?,model: Any?,target: Target<Drawable>?,isFirstResource: Boolean): Boolean {
+            return false
+        }
+
+        override fun onResourceReady(resource: Drawable?,model: Any?,target: Target<Drawable>?,dataSource: DataSource?,isFirstResource: Boolean): Boolean {
+            if(resource is GifDrawable){
+                resource.setLoopCount(1)
+            }
+            return false
+        }
+
+    }).into(imageView)
 }
 

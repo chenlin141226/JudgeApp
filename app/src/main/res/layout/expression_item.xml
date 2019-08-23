@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="item"
+                type="com.judge.data.bean.Smiley" />
+        <variable
+                name="onclick"
+                type="android.view.View.OnClickListener" />
+    </data>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_8"
+            android:onClick="@{onclick}"
+            android:background="#FFFFFF">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:gifImageUrl = "@{item.emoticon}"
+                android:background="@drawable/ziya"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dp_60"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp_40"
+                android:textSize="@dimen/text_14"
+                android:text="@{item.name}"/>
+    </RelativeLayout>
+</layout>

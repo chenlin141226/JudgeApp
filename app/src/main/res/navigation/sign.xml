@@ -3,28 +3,46 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/sign.xml"
         app:startDestination="@id/sendTopicFragment">
-    <fragment android:id="@+id/sendTopicFragment"
+    <fragment
+            android:id="@+id/sendTopicFragment"
             android:name="com.judge.app.fragments.topic.SendTopicFragment">
-        <action android:id="@+id/action_sendTopicFragment_to_postFragment"
+        <action
+                android:id="@+id/action_sendTopicFragment_to_postFragment"
                 app:destination="@id/postFragment"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"/>
+                app:popExitAnim="@anim/slide_out_right" />
 
-        <action android:id="@+id/action_sendTopicFragment_to_signFragment"
+        <action
+                android:id="@+id/action_sendTopicFragment_to_signFragment"
                 app:destination="@id/signFragment"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"/>
+                app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-    <fragment android:id="@+id/postFragment"
+    <fragment
+            android:id="@+id/postFragment"
             android:name="com.judge.app.fragments.topic.PostTopicFragment"
-            android:label=""/>
+            android:label="">
+        <action
+                android:id="@+id/action_postFragment_to_expressionFragment"
+                app:destination="@id/expressionFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
-    <fragment android:id="@+id/signFragment"
+    <fragment
+            android:id="@+id/signFragment"
             android:name="com.judge.app.fragments.topic.SignFragment"
-            android:label=""/>
+            android:label="" />
+
+    <fragment
+            android:id="@+id/expressionFragment"
+            android:name="com.judge.app.fragments.topic.ExpressionFragment"
+            android:label="" />
 </navigation>

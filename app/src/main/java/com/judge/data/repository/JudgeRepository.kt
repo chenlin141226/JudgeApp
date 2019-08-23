@@ -17,7 +17,8 @@ object JudgeRepository {
     }
 
     //资讯
-    fun getInformation(map: HashMap<String, String>): Observable<JsonResponse<InformationBean>> = judgeService.getInformation(map)
+    fun getInformation(map: HashMap<String, String>): Observable<JsonResponse<InformationBean>> =
+        judgeService.getInformation(map)
 
     //推荐
     fun getRecommend(): Observable<JsonResponse<RecommendBean>> = judgeService.getRecommend()
@@ -26,17 +27,24 @@ object JudgeRepository {
     fun getEdition(): Observable<JsonResponse<EditionBean>> = judgeService.getEdition()
 
     //关注
-    fun getAttention() : Observable<JsonResponse<AttentionBean>> = judgeService.getAttention()
+    fun getAttention(): Observable<JsonResponse<AttentionBean>> = judgeService.getAttention()
 
     //详情（最新）
-    fun getNewCategoryDetail(map: HashMap<String, String>) : Observable<JsonResponse<JudgeCategoryDetailBean>> = judgeService.getNewCategoryDetail(map)
+    fun getNewCategoryDetail(map: HashMap<String, String>): Observable<JsonResponse<JudgeCategoryDetailBean>> =
+        judgeService.getNewCategoryDetail(map)
 
     //详情（热门）
-    fun getHotCategoryDetail(map: HashMap<String, String>) : Observable<JsonResponse<JudgeCategoryDetailBean>> = judgeService.getHotCategoryDetail(map)
+    fun getHotCategoryDetail(map: HashMap<String, String>): Observable<JsonResponse<JudgeCategoryDetailBean>> =
+        judgeService.getHotCategoryDetail(map)
 
     //详情（热帖）
-    fun getHotTopicCategoryDetail(map: HashMap<String, String>) : Observable<JsonResponse<JudgeCategoryDetailBean>> = judgeService.getHotTopicCategoryDetail(map)
+    fun getHotTopicCategoryDetail(map: HashMap<String, String>): Observable<JsonResponse<JudgeCategoryDetailBean>> =
+        judgeService.getHotTopicCategoryDetail(map)
 
     //详情（精华）
-    fun getEssenceCategoryDetail(map: HashMap<String, String>) : Observable<JsonResponse<JudgeCategoryDetailBean>> = judgeService.getEssenceCategoryDetail(map)
+    fun getEssenceCategoryDetail(map: HashMap<String, String>): Observable<JsonResponse<JudgeCategoryDetailBean>> =
+        judgeService.getEssenceCategoryDetail(map)
+
+    //表情
+    fun getExpression(): Observable<JsonResponse<EpressionBean>> = judgeService.getExpression()
 }
