@@ -17,7 +17,6 @@ import com.judge.searchEditView
 import com.judge.utils.LogUtils
 import com.judge.views.SimpleTextWatcher
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.appcompat.v7.navigationIconResource
 
 
 data class FriendState(
@@ -87,6 +86,6 @@ class FriendsFragment : BaseFragment() {
     override fun initView() {
         super.initView()
         toolbar.isVisible = true
-        //toolbar.navigationIconResource = R.drawable.left
+        sharedViewModel.setVisible(false)
     }
 }
