@@ -45,4 +45,7 @@ interface JudgeApiService {
     //详情最新
     @GET(Constant.ESSENCE)
     fun getEssenceCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
+
+    @GET(Constant.EXPRESSION)
+    fun getExpression() : Observable<JsonResponse<EpressionBean>>
 }

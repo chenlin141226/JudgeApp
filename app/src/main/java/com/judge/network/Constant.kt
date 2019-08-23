@@ -43,4 +43,7 @@ object Constant {
 
     //裁判说 - 详情页(精华)
     const val ESSENCE        = "api/mobile/index.php?version=4&module=forumdisplay&filter=digest&digest=1"
+
+    //发帖 - 表情
+    const val EXPRESSION = "api/mobile/index.php?module=zen_dsu_paulsign&version=4"
 }

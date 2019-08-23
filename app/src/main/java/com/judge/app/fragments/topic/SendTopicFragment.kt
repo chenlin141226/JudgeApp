@@ -33,10 +33,10 @@ class SendTopicFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        post.setOnClickListener {
+        sign.setOnClickListener {
             findNavController().navigate(R.id.action_sendTopicFragment_to_postFragment)
         }
-        sign.setOnClickListener {
+        post.setOnClickListener {
             findNavController().navigate(R.id.action_sendTopicFragment_to_signFragment)
         }
         quit.setOnClickListener { activity?.finish() }
