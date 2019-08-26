@@ -1,14 +1,27 @@
 package com.judge.app.fragments.topic
 
+import android.annotation.SuppressLint
 import android.text.InputType
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.navigation.findNavController
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.airbnb.mvrx.*
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.R
 import com.judge.app.core.BaseFragment
+import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.bean.EpressionBean
+import com.judge.data.bean.SignResult
+import com.judge.data.bean.Smiley
+import com.judge.data.repository.JudgeRepository
 import com.judge.posttopicItem
+import com.judge.utils.LogUtils
 import com.judge.views.SimpleTextWatcher
+import com.vondear.rxtool.view.RxToast
+import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 /**
@@ -16,25 +29,129 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
  * @date: 2019/8/22
  * 签到
  */
-class PostTopicFragment : BaseFragment(){
-    override fun epoxyController() = simpleController {
+
+data class PostTopicState(
+    val content: String = "",
+    val length: String = "0/20",
+    var formhash: String = "",
+    var qdxq: String = "",
+    val gifUrl: String = "",
+    val isLoading: Boolean = false,
+    val result: SignResult? = null,
+    val expressions: List<Smiley> = emptyList(),
+    val variabless: EpressionBean? = null
+) : MvRxState
+
+class PostTopicViewModel(initialState: PostTopicState) :
+    MvRxViewModel<PostTopicState>(initialState) {
+
+    init {
+        expression()
+    }
+
+    fun expression() = withState { state ->
+
+    }
+
+    fun updataItem(args: ExpressionArgs) {
+        setState { copy(gifUrl = args.gifUrl, formhash = args.formhash, qdxq = args.qdxq) }
+    }
+
+    fun updataContent(content: String) {
+        setState { copy(content = content) }
+    }
+
+    //更新文字长度变化
+    fun updateLength(str: String) {
+        setState { copy(length = "${str.length}/20") }
+    }
+
+    //发表
+    fun pushContent() = withState { state: PostTopicState ->
+        if (state.isLoading) return@withState
+
+        val map = hashMapOf(
+            "operation" to "qiandao",
+            "todaysay" to state.content,
+            "formhash" to state.formhash,
+            "qdxq" to state.qdxq,
+            "qdmode" to "1"
+        )
+
+        JudgeRepository.pushContent(map).subscribeOn(Schedulers.io())
+            .doOnSubscribe { setState { copy(isLoading = true) } }
+            .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute { copy(result = it()?.Variables?.data) }
+    }
+
+
+    companion object : MvRxViewModelFactory<PostTopicViewModel, PostTopicState> {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: PostTopicState
+        ): PostTopicViewModel? {
+            return PostTopicViewModel(state)
+        }
+    }
+}
+
+class PostTopicFragment : BaseFragment() {
+    private val viewModel: PostTopicViewModel by fragmentViewModel()
+    override fun epoxyController() = simpleController(viewModel) { state ->
         posttopicItem {
-            id("post")
+            id("postTopic")
             inputType(InputType.TYPE_CLASS_TEXT)
-           // item(state.settingArgs)
+            item(state.gifUrl)
+            lenth(state.length)
             textWatcher(SimpleTextWatcher {
-                //args.content = it
+                viewModel.updataContent(it)
+                viewModel.updateLength(it)
             })
+
+            onclick { _ ->
+                findNavController().navigate(R.id.action_postFragment_to_expressionFragment)
+            }
         }
     }
 
+    override fun initData() {
+        super.initData()
+        LiveEventBus.get().with("expression", ExpressionArgs::class.java)
+            .observe(this, Observer<ExpressionArgs> {
+                viewModel.updataItem(it)
+            })
+    }
+
+    @SuppressLint("ResourceAsColor")
     override fun initView() {
         toolbar.isVisible = true
+        toolbar.title = resources.getString(R.string.post)
+        toolbar.setTitleTextColor(R.color.colorAccent)
         rightButton.apply {
             text = resources.getString(R.string.publish)
             visibility = View.VISIBLE
             onClick {
-                findNavController().navigate(R.id.action_postFragment_to_expressionFragment)
+                viewModel.pushContent()
+                viewModel.selectSubscribe(PostTopicState::result,PostTopicState::gifUrl,PostTopicState::content) { result,url,content ->
+                     if(url.isEmpty()){
+                         context?.let {
+                             RxToast.info(it, "请选择心情图片!", Toast.LENGTH_SHORT, false).show()
+                         }
+                         return@selectSubscribe
+                     }
+                    if(content.isEmpty()){
+                        context?.let {
+                            RxToast.info(it, "请编辑内容!", Toast.LENGTH_SHORT, false).show()
+                        }
+                        return@selectSubscribe
+                    }
+                    if (result == null) return@selectSubscribe
+                    context?.let {
+                        RxToast.info(it, result.msg.toString(), Toast.LENGTH_SHORT, false).show()
+                    }
+                }
+
             }
         }
     }
