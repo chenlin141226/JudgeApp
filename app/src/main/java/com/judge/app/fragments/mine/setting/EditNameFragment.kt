@@ -10,13 +10,16 @@ import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.SettingItemBean
+import com.judge.data.repository.MineRepository
 import com.judge.editTextView
 import com.judge.extensions.copy
 import com.judge.settingItem
+import com.judge.utils.LogUtils
 import com.judge.views.BottomPopupViewList
 import com.judge.views.SimpleTextWatcher
 import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vondear.rxtool.RxTool
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.parcel.Parcelize
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.support.v4.toast

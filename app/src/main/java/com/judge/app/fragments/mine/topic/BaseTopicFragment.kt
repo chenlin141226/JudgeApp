@@ -25,4 +25,16 @@ abstract class BaseTopicFragment : BaseFragment() {
             }
         }
     }
+
+    override fun initView() {
+        super.initView()
+        sharedViewModel.setVisible(false)
+        viewModel.selectSubscribe(TopicState::isLoading) {
+            if (it) {
+                loadingDialog.show()
+            } else {
+                loadingDialog.dismiss()
+            }
+        }
+    }
 }

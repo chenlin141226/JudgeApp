@@ -8,22 +8,22 @@ import android.net.Uri
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
-import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.*
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.bean.ProfileUpdateResultBean
 import com.judge.data.bean.SettingItemBean
 import com.judge.data.bean.UpLoadPhotoResultBean
 import com.judge.data.repository.MineRepository
 import com.judge.extensions.copy
+import com.judge.network.JsonResponse
 import com.judge.settingItem
 import com.judge.settingTitle
+import com.judge.utils.LogUtils
 import com.judge.views.BottomPopupViewList
 import com.lxj.xpopup.interfaces.OnSelectListener
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -45,14 +45,16 @@ import java.util.*
 
 data class SettingState(
     val items: List<SettingItemBean> = emptyList(),
-    val resultBean: UpLoadPhotoResultBean? = null
+    val resultBean: UpLoadPhotoResultBean? = null,
+    val updateProfileResult: Async<JsonResponse<ProfileUpdateResultBean>> = Uninitialized
 ) : MvRxState
 
 class SettingViewModel(
     initialState: SettingState
 ) : MvRxViewModel<SettingState>(initialState) {
     private val list = LinkedList<SettingItemBean>()
-    val bottomList: Array<String> = RxTool.getContext().resources.getStringArray(R.array.setting_bottom_list)
+    val bottomList: Array<String> =
+        RxTool.getContext().resources.getStringArray(R.array.setting_bottom_list)
     private val map = hashMapOf("version" to "4", "module" to "uploadavatar")
 
     init {
@@ -69,10 +71,17 @@ class SettingViewModel(
                     photoUrl = MineRepository.userProfile?.member_avatar ?: ""
                 )
                 1 -> SettingItemBean(title = name, content = profileDetail?.realname ?: "")
-                2 -> SettingItemBean(title = name, content = profileDetail?.gender ?: "")
-                3 -> SettingItemBean(title = name, content = profileDetail?.birthday ?: "")
+                2 -> SettingItemBean(
+                    title = name, content = when (profileDetail?.gender) {
+                        "0" -> "保密"
+                        "1" -> "男"
+                        "2" -> "女"
+                        else -> ""
+                    }
+                )
+                3 -> SettingItemBean(title = name, content = profileDetail?.birthdate ?: "")
                 4 -> SettingItemBean(title = name, content = profileDetail?.address ?: "")
-                5 -> SettingItemBean(title = name, content = profileDetail?.telephone ?: "")
+                5 -> SettingItemBean(title = name, content = profileDetail?.mobile ?: "")
                 6 -> SettingItemBean(title = name, content = profileDetail?.qq ?: "")
                 else -> SettingItemBean(title = "")
             }
@@ -101,12 +110,60 @@ class SettingViewModel(
 
     fun updateItem(settingArgs: SettingArgs) {
         setState {
-            copy(items = items.copy(settingArgs.index, items[settingArgs.index].copy(content = settingArgs.content)))
+            copy(
+                items = items.copy(
+                    settingArgs.index,
+                    items[settingArgs.index].copy(content = settingArgs.content)
+                )
+            )
         }
     }
 
+    fun updateProfile(settingArgs: SettingArgs) = withState { state ->
+        if (state.updateProfileResult is Loading) return@withState
+        val map = hashMapOf("zen_submit" to "1")
+        when (settingArgs.index) {
+            1 -> {
+                map["realname"] = settingArgs.content
+                map["privacy-realname"] = "0"
+            }
+            2 -> {
+                map["gender"] = if (settingArgs.content == "男") "1" else "2"
+                map["privacy-gender"] = "0"
+            }
+            3 -> {
+                map["birthdate"] = settingArgs.content
+                map["privacy-birthdate"] = "0"
+            }
+            4 -> {
+                map["address"] = settingArgs.content
+                map["privacy-address"] = "0"
+            }
+            5 -> {
+                map["mobile"] = settingArgs.content
+                map["privacy-mobile"] = "0"
+            }
+            6 -> {
+                map["qq"] = settingArgs.content
+                map["privacy-qq"] = "0"
+            }
+            else -> {
+            }
+        }
+        MineRepository.updateProfile(map).subscribeOn(Schedulers.io())
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .execute {
+                copy(updateProfileResult = it)
+            }
+    }
+
     companion object : MvRxViewModelFactory<SettingViewModel, SettingState> {
-        override fun create(viewModelContext: ViewModelContext, state: SettingState): SettingViewModel? {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: SettingState
+        ): SettingViewModel? {
             return SettingViewModel(state)
         }
     }
@@ -156,12 +213,30 @@ class SettingFragment : BaseFragment() {
                     onClick { _ ->
                         val settingArgs = SettingArgs(index, list[index].content)
                         when (index) {
-                            1 -> navigateTo(R.id.action_settingFragment_to_editNameFragment, settingArgs)
-                            2 -> navigateTo(R.id.action_settingFragment_to_editGenderFragment, settingArgs)
-                            3 -> navigateTo(R.id.action_settingFragment_to_editBirthdayFragment, settingArgs)
-                            4 -> navigateTo(R.id.action_settingFragment_to_editAddressFragment, settingArgs)
-                            5 -> navigateTo(R.id.action_settingFragment_to_editPhoneNumberFragment, settingArgs)
-                            6 -> navigateTo(R.id.action_settingFragment_to_editQQFragment, settingArgs)
+                            1 -> navigateTo(
+                                R.id.action_settingFragment_to_editNameFragment,
+                                settingArgs
+                            )
+                            2 -> navigateTo(
+                                R.id.action_settingFragment_to_editGenderFragment,
+                                settingArgs
+                            )
+                            3 -> navigateTo(
+                                R.id.action_settingFragment_to_editBirthdayFragment,
+                                settingArgs
+                            )
+                            4 -> navigateTo(
+                                R.id.action_settingFragment_to_editAddressFragment,
+                                settingArgs
+                            )
+                            5 -> navigateTo(
+                                R.id.action_settingFragment_to_editPhoneNumberFragment,
+                                settingArgs
+                            )
+                            6 -> navigateTo(
+                                R.id.action_settingFragment_to_editQQFragment,
+                                settingArgs
+                            )
                         }
                     }
                 }
@@ -175,7 +250,14 @@ class SettingFragment : BaseFragment() {
         LiveEventBus.get().with("setting", SettingArgs::class.java)
             .observe(this@SettingFragment, Observer<SettingArgs> {
                 viewModel.updateItem(it)
+                viewModel.updateProfile(it)
             })
+        viewModel.asyncSubscribe(SettingState::updateProfileResult, onSuccess = {
+            LogUtils.e(it.Variables.data.toString())
+            LiveEventBus.get().with("updateProfile").post(true)
+        }, onFail = {
+            LogUtils.e(it.localizedMessage ?: "error")
+        })
     }
 
     override fun initView() {
@@ -200,7 +282,14 @@ class SettingFragment : BaseFragment() {
             RxPhotoTool.CROP_IMAGE//普通裁剪后的处理
             -> {
                 viewModel.updatePhoto(RxPhotoTool.cropImageUri)
-                viewModel.upLoadPhoto(File(RxPhotoTool.getImageAbsolutePath(context, RxPhotoTool.cropImageUri)))
+                viewModel.upLoadPhoto(
+                    File(
+                        RxPhotoTool.getImageAbsolutePath(
+                            context,
+                            RxPhotoTool.cropImageUri
+                        )
+                    )
+                )
             }
 
             UCrop.REQUEST_CROP//UCrop裁剪之后的处理
@@ -227,7 +316,12 @@ class SettingFragment : BaseFragment() {
         //设置toolbar颜色
         options.setToolbarColor(ActivityCompat.getColor(RxTool.getContext(), R.color.colorPrimary))
         //设置状态栏颜色
-        options.setStatusBarColor(ActivityCompat.getColor(RxTool.getContext(), R.color.colorPrimaryDark))
+        options.setStatusBarColor(
+            ActivityCompat.getColor(
+                RxTool.getContext(),
+                R.color.colorPrimaryDark
+            )
+        )
 
         //开始设置
         //设置最大缩放比例

@@ -179,7 +179,8 @@ data class ProfileDetail(
     val weight: String,
     val yahoo: String,
     val zipcode: String,
-    val zodiac: String
+    val zodiac: String,
+    val birthdate: String
 )
 
 data class Admingroup(
