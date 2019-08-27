@@ -13,9 +13,7 @@ import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.bean.EpressionBean
 import com.judge.data.bean.SignResult
-import com.judge.data.bean.Smiley
 import com.judge.data.repository.JudgeRepository
 import com.judge.posttopicItem
 import com.judge.utils.LogUtils
@@ -37,32 +35,20 @@ data class PostTopicState(
     var qdxq: String = "",
     val gifUrl: String = "",
     val isLoading: Boolean = false,
-    val result: SignResult? = null,
-    val expressions: List<Smiley> = emptyList(),
-    val variabless: EpressionBean? = null
+    val result: SignResult? = null
 ) : MvRxState
 
 class PostTopicViewModel(initialState: PostTopicState) :
     MvRxViewModel<PostTopicState>(initialState) {
 
-    init {
-        expression()
-    }
-
-    fun expression() = withState { state ->
-
-    }
 
     fun updataItem(args: ExpressionArgs) {
         setState { copy(gifUrl = args.gifUrl, formhash = args.formhash, qdxq = args.qdxq) }
     }
 
-    fun updataContent(content: String) {
-        setState { copy(content = content) }
-    }
-
     //更新文字长度变化
     fun updateLength(str: String) {
+        setState { copy(content = str) }
         setState { copy(length = "${str.length}/20") }
     }
 
@@ -99,17 +85,18 @@ class PostTopicViewModel(initialState: PostTopicState) :
 class PostTopicFragment : BaseFragment() {
     private val viewModel: PostTopicViewModel by fragmentViewModel()
     override fun epoxyController() = simpleController(viewModel) { state ->
+
         posttopicItem {
             id("postTopic")
             inputType(InputType.TYPE_CLASS_TEXT)
             item(state.gifUrl)
             lenth(state.length)
             textWatcher(SimpleTextWatcher {
-                viewModel.updataContent(it)
                 viewModel.updateLength(it)
             })
 
             onclick { _ ->
+                viewModel.updateLength("")
                 findNavController().navigate(R.id.action_postFragment_to_expressionFragment)
             }
         }
@@ -131,26 +118,19 @@ class PostTopicFragment : BaseFragment() {
         rightButton.apply {
             text = resources.getString(R.string.publish)
             visibility = View.VISIBLE
+
             onClick {
                 viewModel.pushContent()
-                viewModel.selectSubscribe(PostTopicState::result,PostTopicState::gifUrl,PostTopicState::content) { result,url,content ->
-                     if(url.isEmpty()){
-                         context?.let {
-                             RxToast.info(it, "请选择心情图片!", Toast.LENGTH_SHORT, false).show()
-                         }
-                         return@selectSubscribe
-                     }
-                    if(content.isEmpty()){
-                        context?.let {
-                            RxToast.info(it, "请编辑内容!", Toast.LENGTH_SHORT, false).show()
-                        }
-                        return@selectSubscribe
+
+                viewModel.selectSubscribe(
+                    PostTopicState::result
+                ) { result ->
+                    if (result != null) {
+                        Toast.makeText(context, result.msg, Toast.LENGTH_SHORT).show()
                     }
-                    if (result == null) return@selectSubscribe
-                    context?.let {
-                        RxToast.info(it, result.msg.toString(), Toast.LENGTH_SHORT, false).show()
-                    }
+
                 }
+
 
             }
         }

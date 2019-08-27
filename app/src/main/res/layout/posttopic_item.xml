@@ -12,6 +12,9 @@
         <variable
                 name="lenth"
                 type="String" />
+        <variable
+                name="content"
+                type="String" />
 
         <variable
                 name="onclick"
@@ -100,6 +103,7 @@
                     android:minHeight="@dimen/dp_140"
                     android:maxLength="20"
                     android:padding="@dimen/dp_10"
+                    android:text="@{content}"
                     app:addTextChangedListener="@{textWatcher}"/>
 
             <TextView

@@ -125,7 +125,7 @@
             <ImageView
                     android:layout_width="@dimen/dp_23"
                     android:layout_height="@dimen/dp_23"
-                    android:background="@drawable/right"
+                    android:background="@drawable/right_yellow"
                     tools:ignore="ContentDescription"/>
         </LinearLayout>
 

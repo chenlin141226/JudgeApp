@@ -82,7 +82,7 @@ class ExpressionFragment : BaseFragment() {
                     args.qdxq = item.qdxq
                     args.formhash = state.variables?.formhash.toString()
                     LiveEventBus.get().with("expression").post(args)
-                    findNavController().popBackStack()
+                    findNavController().navigateUp()
                 }
             }
         }

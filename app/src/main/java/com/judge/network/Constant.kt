@@ -46,4 +46,8 @@ object Constant {
 
     //发帖 - 表情
     const val EXPRESSION = "api/mobile/index.php?module=zen_dsu_paulsign&version=4"
+
+  //积分商城
+    const val MARK = "/api/mobile/index.php?version=4&module=x7ree"
+
 }

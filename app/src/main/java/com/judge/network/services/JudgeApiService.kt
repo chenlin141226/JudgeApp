@@ -53,4 +53,8 @@ interface JudgeApiService {
     @FormUrlEncoded
     @POST(Constant.EXPRESSION)
     fun pushContent(@FieldMap map : HashMap<String,String>) : Observable<JsonResponse<SignResultBean>>
+
+    //积分商城
+    @GET(Constant.MARK)
+    fun getMarket(@QueryMap map: HashMap<String, String>) : Observable<JsonResponse<MarketInfoBean<DataItems>>>
 }

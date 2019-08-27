@@ -16,14 +16,14 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
 
-        <action android:id="@+id/action_marketFragment_to_productDetailsFragment"
+        <action android:id="@+id/action_marketFragments_to_productDetailsFragment"
                 app:destination="@id/product_details"
                 app:enterAnim="@anim/anim_enter"
                 app:exitAnim="@anim/anim_exit"
                 app:popEnterAnim="@anim/anim_pop_enter"
                 app:popExitAnim="@anim/anim_pop_exit"/>
 
-        <action android:id="@+id/action_marketFragment_to_exchangeSuccessFragment"
+        <action android:id="@+id/action_marketFragments_to_exchangeSuccessFragment"
                 app:destination="@id/exchangeSuccessFragment"
                 app:enterAnim="@anim/anim_enter"
                 app:exitAnim="@anim/anim_exit"

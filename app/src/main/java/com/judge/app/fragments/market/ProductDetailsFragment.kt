@@ -10,7 +10,7 @@ import com.airbnb.mvrx.fragmentViewModel
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.bean.MarketBean
+import com.judge.data.bean.CategoryItem
 import com.judge.views.productDetailView
 import com.vondear.rxtool.view.RxToast
 
@@ -19,14 +19,14 @@ import com.vondear.rxtool.view.RxToast
  * @date: 2019/8/5
  */
 data class ProductDetailState(
-    val market: MarketBean,
+    val market: CategoryItem,
     val name: String? = null,
     val qq: String? = null,
     val phone: String? = null,
     val adress: String? = null
 ) : MvRxState {
 
-    constructor(args: MarketBean) : this(market = args)
+    constructor(args: CategoryItem) : this(market = args)
 }
 
 class ProductDetailViewModel(state: ProductDetailState) : MvRxViewModel<ProductDetailState>(state) {
@@ -60,7 +60,7 @@ class ProductDetailsFragment : BaseFragment() {
 
     override fun epoxyController() = simpleController(viewModel) { state ->
         productDetailView {
-            id("ProductDetailsFragment")
+            id(state.name+state.market.id_7ree)
             goodsDetail(state.market)
             userName(state.name)
             qQ(state.qq)

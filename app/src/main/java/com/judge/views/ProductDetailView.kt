@@ -10,8 +10,9 @@ import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
 import com.bumptech.glide.Glide
 import com.judge.R
-import com.judge.data.bean.MarketBean
+import com.judge.data.bean.CategoryItem
 import com.judge.extensions.setTextIfDifferent
+import com.judge.network.Constant
 import kotlinx.android.synthetic.main.product_detail_item.view.*
 
 /**
@@ -41,20 +42,12 @@ class ProductDetailView @JvmOverloads constructor(
     }
 
     @ModelProp
-    fun setGoodsDetail(marker: MarketBean) {
-        Glide.with(context).load(marker.marketUrl).centerCrop().into(iv_topUrl)
-//        Glide.with(context).load(marker.marketUrl).into(object : SimpleTarget<Drawable>() {
-//            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-//                iv_topUrl.setImageDrawable(resource)
-//                val lp = iv_topUrl.layoutParams
-//                lp.width = RxDeviceTool.getScreenWidth(context)
-//                lp.height = RxDeviceTool.getScreenHeight(context) * resource.intrinsicHeight / resource.intrinsicWidth
-//                iv_topUrl.layoutParams = lp
-//            }
-//
-//        })
-        tv_goodsCategory.text = marker.marketName
-        tv_goodsPrice.text = marker.marketNumber
+    fun setGoodsDetail(marker: CategoryItem) {
+        Glide.with(context).load(Constant.BASE_URL+"/${marker.pic_7ree}").into(iv_topUrl)
+        tv_goodsCategory.text = marker.fenlei_7ree
+        tv_goodsPrice.text = marker.price_7ree
+        tv_productName.text = marker.name_7ree
+        tv_whistleNum.text = marker.cost_7ree+"铜哨子"
     }
 
 
