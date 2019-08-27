@@ -1,10 +1,10 @@
 package com.judge.app.fragments.mine
 
 import android.content.res.TypedArray
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.mvrx.*
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.R
+import androidx.lifecycle.Observer
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
@@ -19,7 +19,6 @@ import com.judge.utils.LogUtils
 import com.vondear.rxtool.RxTool
 import io.reactivex.schedulers.Schedulers
 import java.util.*
-import kotlin.collections.HashMap
 
 data class MineItemState(
     val uerData: ProfileBean? = null,
@@ -36,11 +35,11 @@ class MineItemViewModel(
     private val map = hashMapOf("version" to "4", "module" to "profile")
 
     init {
+        getUserData()
         getItems()
-        getUserData(map)
     }
 
-    private fun getUserData(map: HashMap<String, String>) = withState { state ->
+    fun getUserData() = withState { state ->
         if (state.isLoading) return@withState
         MineRepository.getUserData(map).subscribeOn(Schedulers.io())
             .doOnSubscribe {
@@ -87,7 +86,10 @@ class MineItemViewModel(
     }
 
     companion object : MvRxViewModelFactory<MineItemViewModel, MineItemState> {
-        override fun create(viewModelContext: ViewModelContext, state: MineItemState): MineItemViewModel? {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: MineItemState
+        ): MineItemViewModel? {
             return MineItemViewModel(state)
         }
     }
@@ -97,11 +99,6 @@ class MineFragment : BaseFragment() {
     private val viewModel: MineItemViewModel by fragmentViewModel()
 
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-        if (state.isLoading) {
-            loadingDialog.show()
-        } else {
-            loadingDialog.dismiss()
-        }
         mineTitle {
             id("mine title")
             photoUrl(state.uerData?.member_avatar)
@@ -137,4 +134,15 @@ class MineFragment : BaseFragment() {
         super.initView()
         sharedViewModel.setVisible(true)
     }
+
+    override fun initData() {
+        super.initData()
+        LiveEventBus.get().with("updateProfile", Boolean::class.java).observe(this, Observer<Boolean> {
+            if (it) {
+                viewModel.getUserData()
+            }
+        })
+
+    }
+
 }

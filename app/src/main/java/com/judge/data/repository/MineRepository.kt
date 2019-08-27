@@ -89,4 +89,8 @@ object MineRepository {
     fun sendMessage(map: HashMap<String, String>): Observable<JsonResponse<MessageSendResultBean>> {
         return mineService.sendMessage(map)
     }
+
+    fun updateProfile(map: HashMap<String, String>): Observable<JsonResponse<ProfileUpdateResultBean>> {
+        return mineService.updateProfile(map)
+    }
 }

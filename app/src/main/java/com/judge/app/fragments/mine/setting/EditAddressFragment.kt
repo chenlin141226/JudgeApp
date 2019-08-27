@@ -20,7 +20,6 @@ import org.jetbrains.anko.support.v4.toast
 
 class EditAddressFragment : BaseEditFragment() {
     private lateinit var provincesAndCities: Pair<List<ProvinceBean>, List<List<City>>>
-    private lateinit var address: String
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
         blankView {
             id("blank view")
@@ -35,13 +34,13 @@ class EditAddressFragment : BaseEditFragment() {
                             val pickView: OptionsPickerView<IPickerViewData> =
                                 OptionsPickerBuilder(context,
                                     OnOptionsSelectListener { position1, position2, _, _ ->
-                                        address = provincesAndCities.first[position1].name
+                                        val address = provincesAndCities.first[position1].name
                                             .plus(" ")
                                             .plus(
                                                 provincesAndCities.second[position1][position2].name
                                             )
                                         args.content = address
-                                        viewModel.updateItem(index, itemBean, address)
+                                        viewModel.updateItem(index,itemBean,address)
                                     }).setTitleText("城市选择")
                                     .setDividerColor(Color.BLACK)
                                     .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
