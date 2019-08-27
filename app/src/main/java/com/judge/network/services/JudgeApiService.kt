@@ -57,4 +57,7 @@ interface JudgeApiService {
     //积分商城
     @GET(Constant.MARK)
     fun getMarket(@QueryMap map: HashMap<String, String>) : Observable<JsonResponse<MarketInfoBean<DataItems>>>
+
+    @GET(Constant.MYPRODUCT)
+    fun getMyProduct(@Query("page") page: String) : Observable<JsonResponse<MyProductBean>>
 }

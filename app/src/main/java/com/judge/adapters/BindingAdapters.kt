@@ -1,5 +1,6 @@
 package com.judge.adapters
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.widget.Button
@@ -162,3 +163,33 @@ fun setGifImage(imageView: ImageView, imageUrl: String) {
     }).into(imageView)
 }
 
+//根据状态是否发货
+@BindingAdapter("bindStatus", requireAll = false)
+fun setProductStatus(btn: Button,status:String){
+    when (status) {
+        "0" -> {
+            btn.text = RxTool.getContext().resources.getString(R.string.nosend)
+            btn.background = RxTool.getContext().resources.getDrawable(R.drawable.subscibe)
+        }
+        "1" -> {
+            btn.text = RxTool.getContext().resources.getString(R.string.requet)
+            btn.background = RxTool.getContext().resources.getDrawable(R.color.request)
+        }
+        "2" -> {
+            btn.text = RxTool.getContext().resources.getString(R.string.success)
+            btn.background = RxTool.getContext().resources.getDrawable(R.color.request)
+        }
+        "3" -> {
+            btn.text = RxTool.getContext().resources.getString(R.string.reject)
+            btn.background = RxTool.getContext().resources.getDrawable(R.color.reject)
+        }
+        "4" -> {
+            btn.text = RxTool.getContext().resources.getString(R.string.send)
+            btn.background = RxTool.getContext().resources.getDrawable(R.drawable.mark_item_exchange)
+        }
+        "5" -> {
+            btn.text = RxTool.getContext().resources.getString(R.string.receive)
+            btn.background = RxTool.getContext().resources.getDrawable(R.color.receive)
+        }
+    }
+}
