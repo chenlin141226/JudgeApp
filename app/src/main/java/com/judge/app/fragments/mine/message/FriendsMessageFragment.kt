@@ -110,6 +110,10 @@ class FriendMessageViewModel(
         }
     }
 
+    fun addFriend(friendId: String) {
+
+    }
+
     companion object : MvRxViewModelFactory<FriendMessageViewModel, FriendMessageState> {
         override fun create(
             viewModelContext: ViewModelContext,

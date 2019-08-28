@@ -38,12 +38,12 @@ fun setImage(imageView: ImageView, imageUrl: String, isPhoto: Boolean) {
         ServiceCreator.BASE_URL + imageUrl
     }
     val builder = Glide.with(imageView).load(url)
-        .diskCacheStrategy(DiskCacheStrategy.NONE)
-        .skipMemoryCache(true)
         .transition(withCrossFade())
         .error(R.drawable.default_photo)
     if (isPhoto) {
         builder
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
             .placeholder(R.drawable.default_photo)
             .apply(RequestOptions.bitmapTransform(RoundedCorners(RxImageTool.dp2px(10.0f))))
             .into(imageView)

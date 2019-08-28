@@ -6,3 +6,8 @@ data class JsonResponse<T>(
     val Variables: T,
     val Message: Message
 )
+
+data class Message(
+    val messagestr: String,
+    val messageval: String
+)

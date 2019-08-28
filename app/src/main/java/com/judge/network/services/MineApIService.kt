@@ -46,4 +46,8 @@ interface MineApIService {
     @FormUrlEncoded
     @POST("/api/mobile/index.php?version=4&module=zen_update_profile")
     fun updateProfile(@FieldMap map: HashMap<String, String>): Observable<JsonResponse<ProfileUpdateResultBean>>
+
+    @FormUrlEncoded
+    @POST("/api/mobile/index.php?version=4&module=sendpm")
+    fun addFriend(@FieldMap map: HashMap<String, String>): Observable<JsonResponse<MessageSendResultBean>>
 }

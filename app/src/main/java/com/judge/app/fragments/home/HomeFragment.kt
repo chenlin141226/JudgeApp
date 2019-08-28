@@ -128,7 +128,7 @@ class HomeFragment : BaseFragment() {
         viewModel.asyncSubscribe(HomeState::responseBean, onSuccess = {
             val images = ArrayList<String>()
             it.Variables.data.forEach { item ->
-                images.add(ServiceCreator.BASE_URL + item.pic)
+                images.add(ServiceCreator.BASE_URL + "/" + item.pic)
             }
             setBanners(images)
         })
