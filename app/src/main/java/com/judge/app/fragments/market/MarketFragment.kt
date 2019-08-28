@@ -20,7 +20,7 @@ import org.jetbrains.anko.textColor
  */
 class MarketFragment : BaseFragment() {
 
-    override fun epoxyController(): MvRxEpoxyController = simpleController{}
+    override fun epoxyController(): MvRxEpoxyController = simpleController {}
 
 
     override fun setToolBar() {
@@ -31,7 +31,7 @@ class MarketFragment : BaseFragment() {
         rightButton.apply {
             visibility = View.VISIBLE
             text = resources.getString(R.string.me)
-            textColor = ContextCompat.getColor(context,R.color.color_gray)
+            textColor = ContextCompat.getColor(context, R.color.color_gray)
             onClick {
                 navigateTo(R.id.action_marketFragment_to_myProductFragment, null)
             }
@@ -47,7 +47,7 @@ class MarketFragment : BaseFragment() {
         )
 
         val fragments = ArrayList<Fragment>().also {
-            for (index in 0 until 4) {
+            for (index in 0 until 4){
                 it.add(AllProductFragment(index))
             }
         }
@@ -55,10 +55,10 @@ class MarketFragment : BaseFragment() {
         //使用Viewstub添加布局
         titleViewStub.layoutResource = R.layout.topic_view
 
-         titleViewStub.inflate().apply {
-             viewPager.adapter = ViewPagerAdapter(childFragmentManager, fragments, titles)
-             viewPager.offscreenPageLimit = 4
-             tabLayout.setViewPager(viewPager)
+        titleViewStub.inflate().apply {
+            viewPager.adapter = ViewPagerAdapter(childFragmentManager, fragments, titles)
+            viewPager.offscreenPageLimit = 4
+            tabLayout.setViewPager(viewPager)
         }
 
     }

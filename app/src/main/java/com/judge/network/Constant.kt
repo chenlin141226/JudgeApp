@@ -5,10 +5,10 @@ package com.judge.network
  * @date: 2019/8/11
  */
 object Constant {
-     const val BASE_URL = "http://bbs.caipanshuo.com"
+    const val BASE_URL = "http://bbs.caipanshuo.com"
 
     //随机验证码
-     const val SAFE_CODE = "/source/plugin/login_mobile/index.php?version=4&module=seccode"
+    const val SAFE_CODE = "/source/plugin/login_mobile/index.php?version=4&module=seccode"
 
     //手机验证码(post)
     const val PHONE_CODE = "/source/plugin/login_mobile/index.php?version=4&module=smscode&regist="
@@ -33,17 +33,25 @@ object Constant {
     const val ATTENTION = "/api/mobile/index.php?version=4&module=myfavforum"
 
     //裁判说 - 详情页(最新)
-    const val CATEGORYDETAIL = "api/mobile/index.php?version=4&module=forumdisplay&filter=lastpost&orderby=lastpost"
+    const val CATEGORYDETAIL =
+        "api/mobile/index.php?version=4&module=forumdisplay&filter=lastpost&orderby=lastpost"
 
     //裁判说 - 详情页(热门)
-    const val Hot            = "api/mobile/index.php?version=4&module=forumdisplay&filter=heat&orderby=heats"
+    const val Hot = "api/mobile/index.php?version=4&module=forumdisplay&filter=heat&orderby=heats"
 
     //裁判说 - 详情页(热帖)
-    const val HOTTOPIC       = "api/mobile/index.php?version=4&module=forumdisplay&filter=hot"
+    const val HOTTOPIC = "api/mobile/index.php?version=4&module=forumdisplay&filter=hot"
 
     //裁判说 - 详情页(精华)
-    const val ESSENCE        = "api/mobile/index.php?version=4&module=forumdisplay&filter=digest&digest=1"
+    const val ESSENCE = "api/mobile/index.php?version=4&module=forumdisplay&filter=digest&digest=1"
 
     //发帖 - 表情
     const val EXPRESSION = "api/mobile/index.php?module=zen_dsu_paulsign&version=4"
+
+    //积分商城
+    const val MARK = "/api/mobile/index.php?version=4&module=x7ree"
+
+    //我得商品
+    const val MYPRODUCT = "/api/mobile/index.php?version=4&module=x7ree&code_7ree=2"
+
 }

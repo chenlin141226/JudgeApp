@@ -50,4 +50,10 @@ object JudgeRepository {
 
     //签到 - 发表
     fun pushContent(map: HashMap<String, String>) : Observable<JsonResponse<SignResultBean>> = judgeService.pushContent(map)
+
+    //积分商城
+    fun getMarket(map: HashMap<String, String>) : Observable<JsonResponse<MarketInfoBean<DataItems>>> = judgeService.getMarket(map)
+
+    //我得商品
+    fun getMyProduct(page : String) : Observable<JsonResponse<MyProductBean>> = judgeService.getMyProduct(page)
 }

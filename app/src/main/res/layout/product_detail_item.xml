@@ -28,7 +28,10 @@
                 android:id="@+id/tv_productName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="锦瑟香也 fz t1 耳机"
+                android:singleLine="true"
+                android:lines="1"
+                tools:text="锦瑟香也 fz t1 耳机asdasdasdasdassas"
+                android:maxWidth="@dimen/dp_200"
                 android:layout_marginLeft="@dimen/dp_30"
                 android:layout_centerVertical="true"/>
 
@@ -36,7 +39,7 @@
                 android:id="@+id/tv_whistleNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4600 铜哨子"
+                tools:text="4600 铜哨子"
                 android:layout_marginRight="@dimen/dp_30"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
@@ -64,7 +67,7 @@
                 android:id="@+id/tv_goodsCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 游戏数码"
+                tools:text=" 游戏数码"
                 app:layout_constraintLeft_toRightOf="@id/tv_goods"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -74,7 +77,7 @@
                 android:id="@+id/tv_goodsPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 149元"
+                tools:text=" 149元"
                 android:layout_marginRight="@dimen/dp_40"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

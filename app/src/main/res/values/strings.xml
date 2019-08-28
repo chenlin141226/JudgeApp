@@ -131,6 +131,12 @@
     <string name="more">更多</string>
     <string name="sumile">心情图片</string>
     <string name="emoji">表情包</string>
+    <string name="nosend">未发货</string>
+    <string name="requet">申请退货</string>
+    <string name="success">成功退货</string>
+    <string name="reject">退货驳回</string>
+    <string name="send">已发货</string>
+    <string name="receive">已收货</string>
 
 
 </resources>
