@@ -10,7 +10,7 @@ import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.Friend
 import com.judge.data.bean.FriendMessage
-import com.judge.data.bean.MessageSendResultBean
+import com.judge.data.bean.CommonResultBean
 import com.judge.data.bean.PersonalMessage
 import com.judge.data.repository.MineRepository
 import com.judge.extensions.add
@@ -32,7 +32,8 @@ import org.jetbrains.anko.support.v4.toast
 data class FriendMessageState(
     val isLoading: Boolean = false,
     val friendMessages: List<FriendMessage>? = emptyList(),
-    val sendResultBean: Async<JsonResponse<MessageSendResultBean>> = Uninitialized,
+    val sendResultBean: Async<JsonResponse<CommonResultBean>> = Uninitialized,
+    val addFriendResult: Async<JsonResponse<CommonResultBean>> = Uninitialized,
     val friend: Friend?,
     val personalMessage: PersonalMessage?
 ) : MvRxState {
@@ -111,7 +112,25 @@ class FriendMessageViewModel(
     }
 
     fun addFriend(friendId: String) {
-
+        val queryMap = hashMapOf(
+            "version" to "4",
+            "module" to "friend_add", "uid" to friendId
+        )
+        val fieldMap = hashMapOf(
+            "addsubmit" to "tru",
+            "formhash" to (MineRepository.userProfile?.formhash ?: "")
+        )
+        MineRepository.addFriend(queryMap, fieldMap).subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                setState { copy(isLoading = true) }
+            }
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute {
+                copy(addFriendResult = it)
+            }
     }
 
     companion object : MvRxViewModelFactory<FriendMessageViewModel, FriendMessageState> {
@@ -168,10 +187,14 @@ class FriendsMessageFragment : BaseFragment() {
                 toast(it.Message.messagestr)
             }
         })
+
+        viewModel.asyncSubscribe(FriendMessageState::addFriendResult, onSuccess = {
+            toast("好友请求已发送！")
+        })
         titleViewStub.layoutResource = R.layout.friend_tip_view
         titleViewStub.inflate().apply {
             addFriend.onClick {
-
+                viewModel.addFriend(toUid)
             }
         }
         bottomViewStub.layoutResource = R.layout.send_message_view

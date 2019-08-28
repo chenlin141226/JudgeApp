@@ -1,6 +1,6 @@
 package com.judge.data.bean
 
-data class MessageSendResultBean(
+data class CommonResultBean(
     val auth: String,
     val code: String,
     val cookiepre: String,

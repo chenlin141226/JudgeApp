@@ -9,11 +9,9 @@ import com.judge.network.ServiceCreator
 import com.judge.network.services.MineApIService
 import io.reactivex.Observable
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
-import kotlin.math.min
 
 object MineRepository {
     var userProfile: ProfileBean? = null
@@ -86,11 +84,18 @@ object MineRepository {
         return mineService.getFriendsMessage(map)
     }
 
-    fun sendMessage(map: HashMap<String, String>): Observable<JsonResponse<MessageSendResultBean>> {
+    fun sendMessage(map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>> {
         return mineService.sendMessage(map)
     }
 
     fun updateProfile(map: HashMap<String, String>): Observable<JsonResponse<ProfileUpdateResultBean>> {
         return mineService.updateProfile(map)
+    }
+
+    fun addFriend(
+        queryMap: HashMap<String, String>,
+        fieldMap: HashMap<String, String>
+    ): Observable<JsonResponse<CommonResultBean>> {
+        return mineService.addFriend(queryMap, fieldMap)
     }
 }
