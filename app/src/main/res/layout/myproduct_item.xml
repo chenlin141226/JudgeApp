@@ -63,7 +63,7 @@
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{product.time_7ree.substring(0,10)}"
+                android:text="@{product.time_7ree}"
                 android:textSize="@dimen/text_14"
                 tools:text = "234"
                 android:textColor="@color/color_gray"

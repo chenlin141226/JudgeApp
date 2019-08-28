@@ -11,7 +11,7 @@
     <ImageView
             android:id="@+id/iv_topUrl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_200"
+            android:layout_height="@dimen/dp_150"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription"/>
@@ -48,7 +48,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_75"
+            android:layout_height="@dimen/dp_65"
             android:background="#f6f5fa"
             app:layout_constraintTop_toBottomOf="@id/rl"
             app:layout_constraintStart_toStartOf="parent">

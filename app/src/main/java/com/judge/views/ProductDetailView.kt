@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.product_detail_item.view.*
  * @author: jaffa
  * @date: 2019/8/5
  */
-@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
+@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_MATCH_HEIGHT)
 class ProductDetailView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -84,7 +84,7 @@ class ProductDetailView @JvmOverloads constructor(
     var onAdressChanged: ((newText: String) -> Unit)? = null
 
     //兑换点击事件
-    @CallbackProp
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
     fun setExchangeClickListener(listener: OnClickListener?) {
         btn_exchange.setOnClickListener(listener)
     }
