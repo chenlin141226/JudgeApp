@@ -26,38 +26,42 @@ interface JudgeApiService {
 
     //关注
     @GET(Constant.ATTENTION)
-    fun getAttention() : Observable<JsonResponse<AttentionBean>>
+    fun getAttention(): Observable<JsonResponse<AttentionBean>>
 
     //详情最新
     @GET(Constant.CATEGORYDETAIL)
-    fun getNewCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
+    fun getNewCategoryDetail(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
 
     //详情 热门
     @GET(Constant.Hot)
-    fun getHotCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
+    fun getHotCategoryDetail(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
 
     // 详情 热帖
     @GET(Constant.HOTTOPIC)
-    fun getHotTopicCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
+    fun getHotTopicCategoryDetail(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
 
     //详情 金华
     //详情最新
     @GET(Constant.ESSENCE)
-    fun getEssenceCategoryDetail(@QueryMap map : HashMap<String,String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
+    fun getEssenceCategoryDetail(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<JudgeCategoryDetailBean>>
 
     //表情
     @GET(Constant.EXPRESSION)
-    fun getExpression() : Observable<JsonResponse<EpressionBean>>
+    fun getExpression(): Observable<JsonResponse<EpressionBean>>
 
     //签到 发表
     @FormUrlEncoded
     @POST(Constant.EXPRESSION)
-    fun pushContent(@FieldMap map : HashMap<String,String>) : Observable<JsonResponse<SignResultBean>>
+    fun pushContent(@FieldMap map: HashMap<String, String>): Observable<JsonResponse<SignResultBean>>
 
     //积分商城
     @GET(Constant.MARK)
-    fun getMarket(@QueryMap map: HashMap<String, String>) : Observable<JsonResponse<MarketInfoBean<DataItems>>>
+    fun getMarket(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<MarketInfoBean<DataItems>>>
 
     @GET(Constant.MYPRODUCT)
-    fun getMyProduct(@Query("page") page: String) : Observable<JsonResponse<MyProductBean>>
+    fun getMyProduct(@Query("page") page: String): Observable<JsonResponse<MyProductBean>>
+
+    @FormUrlEncoded
+    @POST(Constant.EXCHANGE)
+    fun postProduct(@Query("id_7ree") id_7ree: String, @FieldMap map: HashMap<String, String>):Observable<JsonResponse<ExchangeBean>>
 }

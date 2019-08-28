@@ -23,13 +23,6 @@
                 app:popEnterAnim="@anim/anim_pop_enter"
                 app:popExitAnim="@anim/anim_pop_exit"/>
 
-        <action android:id="@+id/action_marketFragments_to_exchangeSuccessFragment"
-                app:destination="@id/exchangeSuccessFragment"
-                app:enterAnim="@anim/anim_enter"
-                app:exitAnim="@anim/anim_exit"
-                app:popEnterAnim="@anim/anim_pop_enter"
-                app:popExitAnim="@anim/anim_pop_exit"/>
-
     </fragment>
 
     <fragment android:id="@+id/myfragment"
@@ -38,9 +31,18 @@
 
     <fragment android:id="@+id/product_details"
               android:name="com.judge.app.fragments.market.ProductDetailsFragment"
-              android:label="@string/product_detail"/>
+              android:label="@string/product_detail">
+
+        <action android:id="@+id/action_marketFragments_to_exchangeSuccessFragment"
+                app:destination="@id/exchangeSuccessFragment"
+                app:enterAnim="@anim/anim_enter"
+                app:exitAnim="@anim/anim_exit"
+                app:popEnterAnim="@anim/anim_pop_enter"
+                app:popExitAnim="@anim/anim_pop_exit"/>
+    </fragment>
     <fragment android:id="@+id/exchangeSuccessFragment"
               android:name="com.judge.app.fragments.market.ExchangeSuccessFragment"
               android:label=""/>
+
 
 </navigation>

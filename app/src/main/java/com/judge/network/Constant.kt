@@ -54,4 +54,7 @@ object Constant {
     //我得商品
     const val MYPRODUCT = "/api/mobile/index.php?version=4&module=x7ree&code_7ree=2"
 
+    //立即兑换
+    const val EXCHANGE = "/api/mobile/index.php?version=4&module=x7ree&code_7ree=1"
+
 }

@@ -56,4 +56,7 @@ object JudgeRepository {
 
     //我得商品
     fun getMyProduct(page : String) : Observable<JsonResponse<MyProductBean>> = judgeService.getMyProduct(page)
+
+    //立即兑换
+    fun postProduct(productId : String,map: HashMap<String, String>):Observable<JsonResponse<ExchangeBean>> = judgeService.postProduct(productId,map)
 }

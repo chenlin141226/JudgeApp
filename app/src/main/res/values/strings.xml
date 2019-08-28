@@ -74,6 +74,10 @@
     <string name="hint_email">请输入邮箱地址</string>
     <string name="hint_phoneCode">请输入手机验证码</string>
     <string name="hint_code">请输入随机验证码</string>
+    <string name="product_username">请输入姓名</string>
+    <string name="product_qq">请输入QQ号</string>
+    <string name="product_phonee">请输入手机号</string>
+    <string name="product_adress">请输入地址</string>
   
     <!-- ——————   积分商城  —————-->
     <string name="me">我的</string>
@@ -137,6 +141,7 @@
     <string name="reject">退货驳回</string>
     <string name="send">已发货</string>
     <string name="receive">已收货</string>
+    <string name="exchange_success">兑换成功</string>
 
 
 </resources>
