@@ -78,7 +78,7 @@ fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
 
 @BindingAdapter("swipeState", requireAll = false)
 fun setWipeMenu(swipeMenu: SwipeMenuLayout, ste: String) {
-    swipeMenu.smoothClose()
+    swipeMenu.quickClose()
 }
 
 @BindingAdapter("drawableSrc", requireAll = false)
@@ -148,13 +148,24 @@ fun setEditionText(btn: Button, favorite: String) {
 
 @BindingAdapter("gifImageUrl", requireAll = false)
 fun setGifImage(imageView: ImageView, imageUrl: String) {
-    Glide.with(imageView).load(imageUrl).listener(object : RequestListener<Drawable>{
-        override fun onLoadFailed( e: GlideException?,model: Any?,target: Target<Drawable>?,isFirstResource: Boolean): Boolean {
+    Glide.with(imageView).load(imageUrl).listener(object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
             return false
         }
 
-        override fun onResourceReady(resource: Drawable?,model: Any?,target: Target<Drawable>?,dataSource: DataSource?,isFirstResource: Boolean): Boolean {
-            if(resource is GifDrawable){
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            if (resource is GifDrawable) {
                 resource.setLoopCount(1)
             }
             return false
@@ -165,7 +176,7 @@ fun setGifImage(imageView: ImageView, imageUrl: String) {
 
 //根据状态是否发货
 @BindingAdapter("bindStatus", requireAll = false)
-fun setProductStatus(btn: Button,status:String){
+fun setProductStatus(btn: Button, status: String) {
     when (status) {
         "0" -> {
             btn.text = RxTool.getContext().resources.getString(R.string.nosend)
@@ -185,7 +196,8 @@ fun setProductStatus(btn: Button,status:String){
         }
         "4" -> {
             btn.text = RxTool.getContext().resources.getString(R.string.send)
-            btn.background = RxTool.getContext().resources.getDrawable(R.drawable.mark_item_exchange)
+            btn.background =
+                RxTool.getContext().resources.getDrawable(R.drawable.mark_item_exchange)
         }
         "5" -> {
             btn.text = RxTool.getContext().resources.getString(R.string.receive)

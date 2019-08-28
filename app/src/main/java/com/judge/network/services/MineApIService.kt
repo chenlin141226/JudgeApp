@@ -15,9 +15,6 @@ interface MineApIService {
     fun getMedals(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<MedalBean>>
 
     @GET("/api/mobile/index.php")
-    fun getWhistles(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<MedalBean>>
-
-    @GET("/api/mobile/index.php")
     fun getTopics(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<TopicBean>>
 
     @Multipart
@@ -50,4 +47,8 @@ interface MineApIService {
     @FormUrlEncoded
     @POST("/api/mobile/index.php")
     fun addFriend(@QueryMap queryMap: HashMap<String, String>, @FieldMap map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>>
+
+    @FormUrlEncoded
+    @POST("/api/mobile/index.php")
+    fun deleteTopics(@QueryMap queryMap: HashMap<String, String>, @FieldMap map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>>
 }

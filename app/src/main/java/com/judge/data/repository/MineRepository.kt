@@ -98,4 +98,11 @@ object MineRepository {
     ): Observable<JsonResponse<CommonResultBean>> {
         return mineService.addFriend(queryMap, fieldMap)
     }
+
+    fun deleteTopics(
+        queryMap: HashMap<String, String>,
+        fieldMap: HashMap<String, String>
+    ): Observable<JsonResponse<CommonResultBean>> {
+        return mineService.deleteTopics(queryMap, fieldMap)
+    }
 }

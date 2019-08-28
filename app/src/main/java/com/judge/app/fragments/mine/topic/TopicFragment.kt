@@ -2,18 +2,18 @@ package com.judge.app.fragments.mine.topic
 
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
+import com.airbnb.mvrx.*
 import com.judge.R
 import com.judge.adapters.ViewPagerAdapter
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.bean.CommonResultBean
 import com.judge.data.bean.Topic
 import com.judge.data.repository.MineRepository
 import com.judge.extensions.delete
+import com.judge.network.JsonResponse
 import com.judge.utils.LogUtils
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.topic_view.view.*
@@ -21,13 +21,16 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 
 data class TopicState(
     val topicItems: List<Topic> = emptyList(),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val deleteResult: Async<JsonResponse<CommonResultBean>> = Uninitialized
 ) : MvRxState
 
 class TopicViewModel(
     initialState: TopicState
 ) : MvRxViewModel<TopicState>(initialState) {
     private lateinit var topicMap: HashMap<String, String>
+    private lateinit var queryMap: HashMap<String, String>
+    private lateinit var fieldMap: HashMap<String, String>
 
     fun fetchPublishedTopics() {
         topicMap = hashMapOf("version" to "4", "module" to "mythread", "page" to "1")
@@ -51,6 +54,7 @@ class TopicViewModel(
         fetchTopics()
     }
 
+
     private fun fetchTopics() = withState { state ->
         if (state.isLoading) return@withState
         MineRepository.getPublishedTopics(topicMap)
@@ -63,7 +67,11 @@ class TopicViewModel(
             }
             .doFinally { setState { copy(isLoading = false) } }
             .execute {
-                copy(topicItems = topicItems.plus((it()?.Variables?.data ?: emptyList())))
+                copy(
+                    topicItems = topicItems.plus(
+                        (it()?.Variables?.data ?: it()?.Variables?.list ?: emptyList())
+                    )
+                )
             }
     }
 
@@ -86,6 +94,12 @@ class TopicViewModel(
     fun deleteTopic(index: Int) {
         setState {
             copy(topicItems = topicItems.delete(index))
+        }
+    }
+
+    fun deleteTopic() {
+        setState {
+            copy(topicItems = topicItems.delete(topicItems))
         }
     }
 

@@ -15,7 +15,7 @@ class FavoriteFragment : BaseTopicFragment() {
             visibility = View.VISIBLE
             text = getString(R.string.clear_all)
             onClick {
-
+                viewModel.deleteTopic()
             }
         }
     }

@@ -2,6 +2,7 @@ package com.judge.data.bean
 
 data class TopicBean constructor(
     val `data`: List<Topic>,
+    val list: List<Topic>,
     val auth: String,
     val code: String,
     val cookiepre: String,
@@ -15,7 +16,8 @@ data class TopicBean constructor(
     val perpage: String,
     val readaccess: String,
     val saltkey: String,
-    val success: String
+    val success: String,
+    val count: String
 )
 
 data class Topic(
@@ -74,5 +76,12 @@ data class Topic(
     val tid: String,
     val typeid: String,
     val views: String,
-    val weeknew: String
+    val weeknew: String,
+    val description: String,
+    val favid: String,
+    val idtype: String,
+    val spaceuid: String,
+    val title: String,
+    val uid: String,
+    val url: String
 )

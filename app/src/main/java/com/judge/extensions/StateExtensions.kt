@@ -18,6 +18,9 @@ inline fun <T> List<T>.delete(filter: (T) -> Boolean): List<T> =
 fun <T> List<T>.delete(i: Int): List<T> =
     toMutableList().apply { removeAt(i) }
 
+fun <T> List<T>.delete(list: List<T>): List<T> =
+    toMutableList().apply { removeAll(list) }
+
 fun <T> List<T>.update(newValue: (T) -> T, finder: (T) -> Boolean) =
     indexOfFirst(finder).let { index ->
         if (index >= 0) copy(index, newValue(get(index))) else this
