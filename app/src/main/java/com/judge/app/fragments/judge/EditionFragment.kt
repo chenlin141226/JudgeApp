@@ -1,19 +1,21 @@
 package com.judge.app.fragments.judge
 
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
-import com.airbnb.mvrx.fragmentViewModel
+import android.widget.Toast
+import com.airbnb.mvrx.*
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.Forumlist
+import com.judge.data.bean.SubscribeBean
 import com.judge.data.repository.JudgeRepository
-import com.judge.editTextView
 import com.judge.editionItem
+import com.judge.network.JsonResponse
+import com.judge.network.Message
 import com.judge.utils.LogUtils
+import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
+import org.jetbrains.anko.support.v4.runOnUiThread
 
 /**
  * @author: jaffa
@@ -22,7 +24,8 @@ import org.jetbrains.anko.collections.forEachWithIndex
  */
 data class EditionState(
     val editionItems: List<Forumlist>? = emptyList(),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val formhash: String? = null
 ) : MvRxState
 
 class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>(editionState) {
@@ -37,11 +40,36 @@ class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnError { it.message?.let { it1 -> LogUtils.e(it1) } }
             .doFinally { setState { copy(isLoading = false) } }
-            .execute { copy(editionItems = it()?.Variables?.forumlist ?: emptyList()) }
+            .execute {
+                copy(
+                    editionItems = it()?.Variables?.forumlist ?: emptyList(),
+                    formhash = it()?.Variables?.formhash
+                )
+            }
     }
 
+//    //订阅
+//    fun SubscribeJudge(id: String) = withState { state ->
+//
+//        val maps = hashMapOf("formhash" to state.formhash, "id" to id)
+//        JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
+//            .doOnSubscribe { setState { copy(isLoading = true) } }
+//            .doOnError {
+//                it.message.let { it1 ->
+//                    LogUtils.e(it1!!)
+//                }
+//            }
+//            .doFinally {
+//                setState { copy(isLoading = false) }
+//            }
+//
+//    }
+
     companion object : MvRxViewModelFactory<EditionViewModel, EditionState> {
-        override fun create(viewModelContext: ViewModelContext, state: EditionState): EditionViewModel? {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: EditionState
+        ): EditionViewModel? {
             return EditionViewModel(state)
         }
     }
@@ -50,18 +78,33 @@ class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>
 
 class EditionFragment : BaseFragment() {
 
-    private val viewModel : EditionViewModel by fragmentViewModel()
+    private val viewModel: EditionViewModel by fragmentViewModel()
 
-    override fun epoxyController() = simpleController(viewModel) {state ->
+    override fun epoxyController() = simpleController(viewModel) { state ->
 
         state.editionItems?.forEachWithIndex { index, item ->
-              editionItem {
-                  id(item.fid)
-                  editionItem(item)
-                  onClick { _, _, _, position ->
+            editionItem {
+                id(item.fid)
+                editionItem(item)
+                onClick { _ ->
+                    val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
+                    JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
+                        .subscribe { it ->
+                            val msg = it.Message.messagestr
+                            runOnUiThread {
+                                context?.let {
+                                    RxToast.info(
+                                        it,
+                                        msg,
+                                        Toast.LENGTH_SHORT,
+                                        false
+                                    ).show()
+                                }
+                            }
+                        }
+                }
 
-                  }
-              }
+            }
         }
 
     }

@@ -3,6 +3,7 @@ package com.judge.network.services
 import com.judge.data.bean.*
 import com.judge.network.Constant
 import com.judge.network.JsonResponse
+import com.judge.network.Message
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -64,4 +65,7 @@ interface JudgeApiService {
     @FormUrlEncoded
     @POST(Constant.EXCHANGE)
     fun postProduct(@Query("id_7ree") id_7ree: String, @FieldMap map: HashMap<String, String>):Observable<JsonResponse<ExchangeBean>>
+
+    @GET(Constant.SUBSCRIBE)
+    fun subscribeJudge(@QueryMap map: HashMap<String, String?>) : Observable<JsonResponse<Message>>
 }
