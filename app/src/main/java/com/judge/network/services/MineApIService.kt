@@ -50,5 +50,9 @@ interface MineApIService {
 
     @FormUrlEncoded
     @POST("/api/mobile/index.php")
-    fun deleteTopics(@QueryMap queryMap: HashMap<String, String>, @FieldMap map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>>
+    fun deleteTopics(
+        @QueryMap queryMap: HashMap<String, String>,
+        @FieldMap fieldMap: HashMap<String, String>,
+        @Field("favorite[]") ids: List<String>
+    ): Observable<JsonResponse<CommonResultBean>>
 }

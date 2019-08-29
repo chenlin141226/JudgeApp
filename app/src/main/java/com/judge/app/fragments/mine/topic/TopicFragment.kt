@@ -18,6 +18,9 @@ import com.judge.utils.LogUtils
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.topic_view.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 data class TopicState(
     val topicItems: List<Topic> = emptyList(),
@@ -31,7 +34,7 @@ class TopicViewModel(
     private lateinit var topicMap: HashMap<String, String>
     private lateinit var queryMap: HashMap<String, String>
     private lateinit var fieldMap: HashMap<String, String>
-
+    private var deleteIndex = -1
     fun fetchPublishedTopics() {
         topicMap = hashMapOf("version" to "4", "module" to "mythread", "page" to "1")
         fetchTopics()
@@ -87,20 +90,63 @@ class TopicViewModel(
             }
             .doFinally { setState { copy(isLoading = false) } }
             .execute {
-                copy(topicItems = (it()?.Variables?.data ?: emptyList()))
+                copy(topicItems = it()?.Variables?.data ?: it()?.Variables?.list ?: emptyList())
             }
     }
 
-    fun deleteTopic(index: Int) {
-        setState {
-            copy(topicItems = topicItems.delete(index))
+    fun deleteTopics(index: Int, type: String) = withState { state ->
+        if (state.deleteResult is Loading) return@withState
+        val ids = LinkedList<String>()
+        deleteIndex = index
+        if (index == -1) {
+            state.topicItems.forEach {
+                ids.add(it.favid)
+            }
+        } else {
+            ids.add(state.topicItems[index].favid)
         }
+        when (type) {
+            "favorite" -> {
+                queryMap =
+                    hashMapOf("version" to "4", "module" to "myfav_delete", "checkall" to "1")
+                fieldMap =
+                    hashMapOf(
+                        "formhash" to (MineRepository.userProfile?.formhash ?: ""),
+                        "delfavorite" to "true"
+                    )
+            }
+            "history" -> {
+
+            }
+            "published" -> {
+
+            }
+            "replied" -> {
+
+            }
+            else -> {
+
+            }
+        }
+        MineRepository.deleteTopics(queryMap, fieldMap, ids)
+            .subscribeOn(Schedulers.io())
+            .execute {
+                copy(deleteResult = it)
+            }
+
     }
 
     fun deleteTopic() {
-        setState {
-            copy(topicItems = topicItems.delete(topicItems))
+        if (deleteIndex == -1) {
+            setState {
+                copy(topicItems = topicItems.delete(topicItems))
+            }
+        } else {
+            setState {
+                copy(topicItems = topicItems.delete(deleteIndex))
+            }
         }
+
     }
 
     companion object : MvRxViewModelFactory<TopicViewModel, TopicState> {

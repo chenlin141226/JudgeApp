@@ -4,6 +4,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.judge.R
 import com.judge.app.fragments.mine.topic.BaseTopicFragment
+import com.judge.app.fragments.mine.topic.TopicState
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class FavoriteFragment : BaseTopicFragment() {
@@ -15,12 +16,20 @@ class FavoriteFragment : BaseTopicFragment() {
             visibility = View.VISIBLE
             text = getString(R.string.clear_all)
             onClick {
-                viewModel.deleteTopic()
+                viewModel.deleteTopics(-1, "favorite")
             }
         }
     }
+
     override fun initData() {
         super.initData()
         viewModel.fetchFavoriteTopics()
+        viewModel.asyncSubscribe(TopicState::deleteResult, onSuccess = {
+            viewModel.deleteTopic()
+        })
+    }
+
+    override fun deleteTopics(index: Int) {
+        viewModel.deleteTopics(index, "favorite")
     }
 }

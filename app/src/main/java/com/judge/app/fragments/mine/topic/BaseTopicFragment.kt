@@ -19,7 +19,7 @@ abstract class BaseTopicFragment : BaseFragment() {
                     toast("You clicked item!")
                 }
                 onDeleteClick { _ ->
-                    viewModel.deleteTopic(index)
+                    deleteTopics(index)
                     toast("Item index  is $index!")
                 }
             }
@@ -37,4 +37,6 @@ abstract class BaseTopicFragment : BaseFragment() {
             }
         }
     }
+
+    open fun deleteTopics(index:Int) {}
 }

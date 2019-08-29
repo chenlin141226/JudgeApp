@@ -1,66 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
-        <variable name="item" type="com.judge.data.bean.News"/>
-        <variable name="onClick" type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="item"
+            type="com.judge.data.bean.News" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
     </data>
+
     <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/dp_100"
-            android:padding="@dimen/dp_10"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginBottom="@dimen/dp_5"
-            android:background="@drawable/bg_medal"
-            android:onClick="@{onClick}"
-    >
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_hot_news"
-                android:layout_gravity="start|bottom"
-                android:layout_marginEnd="@dimen/dp_10"
-        />
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/bg_news"
+        android:minHeight="@dimen/dp_100"
+        android:onClick="@{onClick}"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_20"
         >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:src="@drawable/ic_hot_news" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_16"
-                    android:textColor="@color/white"
-                    android:padding="@dimen/dp_5"
-                    android:background="@drawable/news_title_bg"
-                    android:text="@{item.subject}"
-            />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/news_title_bg"
+                android:padding="@dimen/dp_5"
+                android:text="@{item.subject}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_16" />
+
             <LinearLayout
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/news_time_bg"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:padding="@dimen/dp_5"
-            >
+                    android:layout_marginEnd="@dimen/dp_10"
+                    android:text="@{item.author}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_14" />
+
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_14"
-                        android:text="@{item.author}"
-                        android:layout_marginEnd="@dimen/dp_10"
-                />
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_14"
-                        android:text="@{item.lastpost}"
-                        android:layout_marginStart="@dimen/dp_10"
-                />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:text="@{item.lastpost}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_14" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

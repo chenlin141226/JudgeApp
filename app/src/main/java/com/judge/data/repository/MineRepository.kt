@@ -101,8 +101,9 @@ object MineRepository {
 
     fun deleteTopics(
         queryMap: HashMap<String, String>,
-        fieldMap: HashMap<String, String>
+        fieldMap: HashMap<String, String>,
+        ids: List<String>
     ): Observable<JsonResponse<CommonResultBean>> {
-        return mineService.deleteTopics(queryMap, fieldMap)
+        return mineService.deleteTopics(queryMap, fieldMap, ids)
     }
 }
