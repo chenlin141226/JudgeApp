@@ -113,12 +113,17 @@ class LoginFragment : BaseFragment() {
                 }
 
                 loginViewModel.login()
-                if (state.loginRequest is Success && state.login?.retcode==0) {
-                    context?.let {
-                        RxToast.info(it, state.login.retmsg.toString(), Toast.LENGTH_SHORT, false).show()
-                    }
-                    startActivity(Intent(context, HomeActivity::class.java))
-                    activity?.finish()
+            }
+
+            if (state.loginRequest is Success && state.login?.retcode==0) {
+                context?.let {
+                    RxToast.info(it, state.login.retmsg.toString(), Toast.LENGTH_SHORT, false).show()
+                }
+                startActivity(Intent(context, HomeActivity::class.java))
+                activity?.finish()
+            }else if(state.login?.retcode== 100001){
+                context?.let {
+                    RxToast.info(it, state.login.retmsg.toString(), Toast.LENGTH_SHORT, false).show()
                 }
             }
 
