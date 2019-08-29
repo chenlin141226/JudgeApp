@@ -2,6 +2,7 @@ package com.judge.data.repository
 
 import com.judge.data.bean.*
 import com.judge.network.JsonResponse
+import com.judge.network.Message
 import com.judge.network.ServiceCreator
 import com.judge.network.services.JudgeApiService
 import io.reactivex.Observable
@@ -59,4 +60,7 @@ object JudgeRepository {
 
     //立即兑换
     fun postProduct(productId : String,map: HashMap<String, String>):Observable<JsonResponse<ExchangeBean>> = judgeService.postProduct(productId,map)
+
+    //订阅
+    fun subscribeJudge(map: HashMap<String, String?>) : Observable<JsonResponse<Message>> = judgeService.subscribeJudge(map)
 }

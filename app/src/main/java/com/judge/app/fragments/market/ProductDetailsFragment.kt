@@ -121,6 +121,7 @@ class ProductDetailsFragment : BaseFragment() {
                 context?.let {RxToast.info(it,state.product.success,Toast.LENGTH_SHORT,false).show()}
                 runOnUiThread {  navigateTo(R.id.action_marketFragments_to_exchangeSuccessFragment) }
             }else if(state.product?.code == "0"){
+
                 context?.let {RxToast.info(it,state.product.error,Toast.LENGTH_SHORT,false).show()}
             }
         }
