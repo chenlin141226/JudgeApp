@@ -6,10 +6,10 @@
     android:background="@drawable/aa_dialog_bg"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingLeft="36dp"
-    android:paddingTop="18dp"
-    android:paddingRight="36dp"
-    android:paddingBottom="18dp">
+    android:paddingStart="@dimen/dp_20"
+    android:paddingTop="@dimen/dp_5"
+    android:paddingEnd="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_5">
 
 
     <com.vondear.rxui.view.progressing.SpinKitView
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="10dp"
+        android:padding="@dimen/dp_10"
         app:SpinKit_Color="@color/colorPrimary" />
 
     <TextView
@@ -26,9 +26,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/brown"
+        android:layout_marginTop="@dimen/dp_10"
         android:text="@string/loading"
+        android:textColor="@color/brown"
         android:textSize="16sp" />
 
 </LinearLayout>
