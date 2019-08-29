@@ -17,6 +17,7 @@ import com.judge.network.ServiceCreator
 import com.judge.newsItemView
 import com.judge.utils.LogUtils
 import com.youth.banner.Banner
+import com.youth.banner.Transformer
 import com.youth.banner.loader.ImageLoader
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
@@ -128,7 +129,7 @@ class HomeFragment : BaseFragment() {
         viewModel.asyncSubscribe(HomeState::responseBean, onSuccess = {
             val images = ArrayList<String>()
             it.Variables.data.forEach { item ->
-                images.add(ServiceCreator.BASE_URL + "/" + item.pic)
+                images.add(ServiceCreator.BASE_URL + item.pic)
             }
             setBanners(images)
         })
@@ -144,7 +145,11 @@ class HomeFragment : BaseFragment() {
         bannerView.setImages(images)
             .setImageLoader(object : ImageLoader() {
                 override fun displayImage(context: Context, path: Any, imageView: ImageView) {
-                    Glide.with(context).load(path).into(imageView)
+                    Glide.with(context)
+                        .load(path)
+                        .into(imageView.apply {
+                            scaleType = ImageView.ScaleType.FIT_XY
+                        })
                 }
             })
             .start()

@@ -1,174 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-                name="profile"
-                type="com.judge.data.bean.ProfileDetail" />
+            name="profile"
+            type="com.judge.data.bean.ProfileDetail" />
 
         <variable
-                name="sign"
-                type="com.judge.data.bean.Qiandaodb" />
+            name="sign"
+            type="com.judge.data.bean.Qiandaodb" />
 
         <variable
-                name="photoUrl"
-                type="String" />
+            name="photoUrl"
+            type="String" />
 
         <variable
-                name="uid"
-                type="String" />
+            name="uid"
+            type="String" />
 
         <variable
-                name="onFriendsClick"
-                type="android.view.View.OnClickListener" />
+            name="onFriendsClick"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_20">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_20">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_mine_title"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_30"
+            android:paddingEnd="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_60">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_mine_title"
-                android:paddingStart="@dimen/dp_20"
-                android:paddingTop="@dimen/dp_30"
-                android:paddingEnd="@dimen/dp_20"
-                android:paddingBottom="@dimen/dp_60">
+                android:text="@{profile.realname}"
+                android:textSize="@dimen/text_20"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{profile.realname}"
-                    android:textSize="@dimen/text_20"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                    android:id="@+id/user_level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{sign.level}"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_14"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/user_name" />
+                android:id="@+id/user_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="@{sign.level}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_14"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
             <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                        android:id="@+id/photo_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/user_photo"
-                        android:minWidth="@dimen/dp_50"
-                        android:minHeight="@dimen/dp_50"
-                        android:scaleType="fitXY"
-                        app:imageUrl='@{photoUrl+""}'
-                        app:isPhoto="@{true}" />
+                    android:id="@+id/photo_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/user_photo"
+                    android:minWidth="@dimen/dp_50"
+                    android:minHeight="@dimen/dp_50"
+                    android:scaleType="fitXY"
+                    app:imageUrl='@{photoUrl+""}'
+                    app:isPhoto="@{true}" />
 
                 <TextView
-                        android:id="@+id/userId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text='@{uid}'
-                        android:textSize="@dimen/text_18" />
+                    android:id="@+id/userId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{uid}'
+                    android:textSize="@dimen/text_18" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_110"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:background="@drawable/bg_item"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/friendLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_110"
-                android:layout_marginEnd="@dimen/dp_15"
-                android:background="@drawable/bg_item"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:onClick="@{onFriendsClick}"
+                android:orientation="vertical">
 
-            <LinearLayout
-                    android:id="@+id/friendLayout"
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/friendsNumber"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="center"
-                    android:onClick="@{onFriendsClick}"
-                    android:orientation="vertical">
+                    android:text="@{profile.friends}"
+                    android:textSize="@dimen/text_18"
+                    android:textStyle="bold" />
 
                 <TextView
-                        android:id="@+id/friendsNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@{profile.friends}"
-                        android:textSize="@dimen/text_18"
-                        android:textStyle="bold" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/friends" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/friends" />
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/signLayout"
-                    android:layout_width="0dp"
+                android:id="@+id/signLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mothSignNumber"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:text="@{sign.mdays}"
+                    android:textSize="@dimen/text_18"
+                    android:textStyle="bold" />
 
                 <TextView
-                        android:id="@+id/mothSignNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@{sign.mdays}"
-                        android:textSize="@dimen/text_18"
-                        android:textStyle="bold" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/moth_sign" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/moth_sign" />
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/totalSignLayout"
-                    android:layout_width="0dp"
+                android:id="@+id/totalSignLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:layout_weight="1.2"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_5"
-                    android:layout_weight="1.2"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:text="@{sign.days}"
+                    android:textSize="@dimen/text_18"
+                    android:textStyle="bold" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@{sign.days}"
-                        android:textSize="@dimen/text_18"
-                        android:textStyle="bold" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/total_sign" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/total_sign" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

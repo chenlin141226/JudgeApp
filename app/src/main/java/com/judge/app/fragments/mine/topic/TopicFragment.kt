@@ -53,7 +53,7 @@ class TopicViewModel(
 
     fun fetchRepliedTopics() {
         topicMap =
-            hashMapOf("version" to "4", "module" to "my", "start" to "0", "limit" to "20")
+            hashMapOf("version" to "4", "module" to "mythread", "start" to "0", "limit" to "20")
         fetchTopics()
     }
 
