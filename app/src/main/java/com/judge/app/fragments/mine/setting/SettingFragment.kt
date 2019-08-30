@@ -19,6 +19,7 @@ import com.judge.data.bean.ProfileUpdateResultBean
 import com.judge.data.bean.SettingItemBean
 import com.judge.data.bean.UpLoadPhotoResultBean
 import com.judge.data.repository.MineRepository
+import com.judge.databinding.LoginedInfoViewBinding
 import com.judge.extensions.copy
 import com.judge.network.JsonResponse
 import com.judge.settingItem
@@ -263,6 +264,12 @@ class SettingFragment : BaseFragment() {
     override fun initView() {
         super.initView()
         toolbar.isVisible = true
+        sharedViewModel.setVisible(false)
+        bottomViewStub.layoutResource = R.layout.logined_info_view
+        bottomViewStub.inflate().apply {
+            LoginedInfoViewBinding.bind(this).profile = MineRepository.userProfile?.space
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

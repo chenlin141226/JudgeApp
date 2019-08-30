@@ -80,6 +80,7 @@ class MedalCenterFragment : BaseFragment() {
     override fun initView() {
         super.initView()
         toolbar.isVisible = true
+        sharedViewModel.setVisible(false)
         rightButton.apply {
             isVisible = true
             text = getString(R.string.mine)

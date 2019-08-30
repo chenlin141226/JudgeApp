@@ -143,6 +143,9 @@
     <string name="receive">已收货</string>
     <string name="exchange_success">兑换成功</string>
     <string name="loading">加载中...</string>
+    <string name="login_times">登录次数：</string>
+    <string name="last_login_time">上次登录：</string>
+    <string name="register_date">注册时间：</string>
 
 
 </resources>

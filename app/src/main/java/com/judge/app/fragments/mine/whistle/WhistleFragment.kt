@@ -56,6 +56,7 @@ class WhistleFragment : BaseFragment() {
     override fun setToolBar() {
         super.setToolBar()
         toolbar.visibility = View.VISIBLE
+        sharedViewModel.setVisible(false)
         rightButton.apply {
             visibility = View.VISIBLE
             text = getString(R.string.whistle_rules)
