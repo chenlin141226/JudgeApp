@@ -17,7 +17,6 @@ import com.judge.network.JsonResponse
 import com.judge.utils.LogUtils
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.topic_view.view.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -25,7 +24,8 @@ import kotlin.collections.HashMap
 data class TopicState(
     val topicItems: List<Topic> = emptyList(),
     val isLoading: Boolean = false,
-    val deleteResult: Async<JsonResponse<CommonResultBean>> = Uninitialized
+    val deleteResult: Async<JsonResponse<CommonResultBean>> = Uninitialized,
+    val isSwipeEnable: Boolean = false
 ) : MvRxState
 
 class TopicViewModel(
@@ -57,6 +57,11 @@ class TopicViewModel(
         fetchTopics()
     }
 
+    fun setSwipeEnable(isEnable: Boolean) {
+        setState {
+            copy(isSwipeEnable = isEnable)
+        }
+    }
 
     private fun fetchTopics() = withState { state ->
         if (state.isLoading) return@withState
@@ -167,14 +172,6 @@ class TopicFragment : BaseFragment() {
     override fun initView() {
         super.initView()
         toolbar.visibility = View.VISIBLE
-        toolbar.visibility = View.VISIBLE
-        rightButton.apply {
-            visibility = View.VISIBLE
-            text = getString(R.string.clear_all)
-            onClick {
-
-            }
-        }
         val titles = arrayOf(getString(R.string.published_topic), getString(R.string.replied_topic))
         val fragments = ArrayList<Fragment>().also {
             it.add(PublishedTopicFragment())

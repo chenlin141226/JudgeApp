@@ -27,6 +27,7 @@ class FavoriteFragment : BaseTopicFragment() {
         viewModel.asyncSubscribe(TopicState::deleteResult, onSuccess = {
             viewModel.deleteTopic()
         })
+        viewModel.setSwipeEnable(true)
     }
 
     override fun deleteTopics(index: Int) {

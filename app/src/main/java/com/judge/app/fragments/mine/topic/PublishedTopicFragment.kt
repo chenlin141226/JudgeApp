@@ -5,5 +5,6 @@ class PublishedTopicFragment : BaseTopicFragment() {
     override fun initData() {
         super.initData()
         viewModel.fetchPublishedTopics()
+        viewModel.setSwipeEnable(false)
     }
 }

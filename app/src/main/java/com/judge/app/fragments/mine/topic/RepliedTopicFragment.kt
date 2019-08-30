@@ -5,5 +5,6 @@ class RepliedTopicFragment : BaseTopicFragment() {
     override fun initData() {
         super.initData()
         viewModel.fetchRepliedTopics()
+        viewModel.setSwipeEnable(false)
     }
 }

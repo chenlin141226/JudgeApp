@@ -333,9 +333,9 @@ class SettingFragment : BaseFragment() {
         //设置是否展示矩形裁剪框
         options.setShowCropFrame(false)
         //设置裁剪框横竖线的宽度
-        options.setCropGridStrokeWidth(20);
+        options.setCropGridStrokeWidth(20)
         //设置裁剪框横竖线的颜色
-        options.setCropGridColor(Color.GREEN);
+        options.setCropGridColor(Color.GREEN)
         //设置竖线的数量
         options.setCropGridColumnCount(0)
         //设置横线的数量

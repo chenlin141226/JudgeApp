@@ -23,5 +23,6 @@ class HistoryFragment : BaseTopicFragment() {
     override fun initData() {
         super.initData()
         viewModel.fetchHistoryTopics()
+        viewModel.setSwipeEnable(true)
     }
 }

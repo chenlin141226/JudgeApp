@@ -2,13 +2,32 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="topic"
+            type="com.judge.data.bean.Topic" />
+
+        <variable
+            name="onItemClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onDeleteClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="isSwipeEnable"
+            type="Boolean" />
+    </data>
+
     <com.mcxtzhang.swipemenulib.SwipeMenuLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_5"
         android:background="@drawable/bg_topic"
         android:padding="@dimen/dp_10"
-        app:swipeState='@{topic.title + " "}'>
+        app:swipeState='@{isSwipeEnable}'>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -84,19 +103,4 @@
             android:src="@drawable/ic_delete" />
 
     </com.mcxtzhang.swipemenulib.SwipeMenuLayout>
-
-    <data>
-
-        <variable
-            name="topic"
-            type="com.judge.data.bean.Topic" />
-
-        <variable
-            name="onItemClick"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="onDeleteClick"
-            type="android.view.View.OnClickListener" />
-    </data>
 </layout>

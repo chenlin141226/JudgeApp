@@ -1,6 +1,5 @@
 package com.judge.adapters
 
-import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.widget.Button
@@ -77,8 +76,11 @@ fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
 }
 
 @BindingAdapter("swipeState", requireAll = false)
-fun setWipeMenu(swipeMenu: SwipeMenuLayout, ste: String) {
-    swipeMenu.quickClose()
+fun setWipeMenu(swipeMenu: SwipeMenuLayout, isSwipeEnable: Boolean) {
+    swipeMenu.isSwipeEnable = isSwipeEnable
+    if (isSwipeEnable) {
+        swipeMenu.quickClose()
+    }
 }
 
 @BindingAdapter("drawableSrc", requireAll = false)
