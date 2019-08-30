@@ -1,6 +1,7 @@
 package com.judge.views
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.ScrollView
@@ -10,7 +11,12 @@ import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
 import com.judge.R
 import com.judge.extensions.setTextIfDifferent
+import kotlinx.android.synthetic.main.view_login.view.*
 import kotlinx.android.synthetic.main.view_register.view.*
+import kotlinx.android.synthetic.main.view_register.view.btn_get_code
+import kotlinx.android.synthetic.main.view_register.view.et_code
+import kotlinx.android.synthetic.main.view_register.view.et_password
+import kotlinx.android.synthetic.main.view_register.view.et_username
 
 /**
  * @author: jaffa
@@ -77,6 +83,15 @@ class RegistView @JvmOverloads constructor(
     fun setCode(code : CharSequence?){
         et_code.setTextIfDifferent(code)
     }
+
+    /**
+     * 第一次获取验证码
+     */
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
+    fun setimageBitmap(bitmap : Bitmap?){
+        btn_get_code.setImageBitmap(bitmap)
+    }
+
 
 
     @set:CallbackProp

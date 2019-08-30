@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.fragmentViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -20,6 +21,7 @@ import com.judge.network.Constant
 import com.judge.views.registView
 import com.vondear.rxtool.view.RxToast
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.support.v4.runOnUiThread
 
 /**
  * @author: jaffa
@@ -70,6 +72,8 @@ class RegisterFragment : BaseFragment() {
 
             onCodeChanged { viewModel.setCode(it) }
 
+           //第一次获取验证码
+            setimageBitmap(state.codeUrl)
 
             //返回按钮
             backClickListener { _ ->
@@ -77,26 +81,31 @@ class RegisterFragment : BaseFragment() {
             }
 
             //随机验证码
-            codeClickListener { btn_code ->
-                Glide.with(context!!)
-                    .load(Constant.BASE_URL + Constant.SAFE_CODE)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .centerCrop()
-                    .into(btn_code as ImageView)
+            codeClickListener { _ ->
+                viewModel.requestCode()
             }
 
             //发送验证码
             phoneCodeClickListener { _ ->
                 if (state.phone.isEmpty()) {
                     context?.let {
-                        RxToast.info(it, resources.getString(R.string.hint_phone), Toast.LENGTH_SHORT, true).show()
+                        RxToast.info(
+                            it,
+                            resources.getString(R.string.hint_phone),
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
                     }
                     return@phoneCodeClickListener
                 }
                 viewModel.getPhoneCode()
             }
-
+            if(state.submitResult is Success&&state.submit?.retcode == 1){
+                context?.let {RxToast.info( it,state.submit.retmsg.toString(),Toast.LENGTH_SHORT,true ).show()}
+            }else if(state.submit?.retcode == 100001){
+                context?.let {RxToast.info( it,state.submit.retmsg.toString(),Toast.LENGTH_SHORT,true ).show()}
+               runOnUiThread {  findNavController().navigateUp() }
+            }
             //注册提交
             submitClickListener { _ ->
                 if (state.username.isEmpty()) {
@@ -135,19 +144,34 @@ class RegisterFragment : BaseFragment() {
 
                 if (state.confirmPwd != state.password) {
                     context?.let {
-                        RxToast.info(it, resources.getString(R.string.isequal), Toast.LENGTH_SHORT, true).show()
+                        RxToast.info(
+                            it,
+                            resources.getString(R.string.isequal),
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
                     }
                     return@submitClickListener
                 }
                 if (state.email.isEmpty()) {
                     context?.let {
-                        RxToast.info(it, resources.getString(R.string.hint_email), Toast.LENGTH_SHORT, true).show()
+                        RxToast.info(
+                            it,
+                            resources.getString(R.string.hint_email),
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
                     }
                     return@submitClickListener
                 }
                 if (state.phone.isEmpty()) {
                     context?.let {
-                        RxToast.info(it, resources.getString(R.string.hint_phone), Toast.LENGTH_SHORT, true).show()
+                        RxToast.info(
+                            it,
+                            resources.getString(R.string.hint_phone),
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
                     }
                     return@submitClickListener
                 }
@@ -164,7 +188,12 @@ class RegisterFragment : BaseFragment() {
                 }
                 if (state.code.isEmpty()) {
                     context?.let {
-                        RxToast.info(it, resources.getString(R.string.hint_code), Toast.LENGTH_SHORT, true).show()
+                        RxToast.info(
+                            it,
+                            resources.getString(R.string.hint_code),
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
                     }
                     return@submitClickListener
                 }
@@ -177,7 +206,9 @@ class RegisterFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.selectSubscribe(RegisterState::submit) { submit ->
             if (!submit?.retmsg.isNullOrEmpty()) {
-                context?.let { RxToast.info(it, submit?.retmsg.toString(), Toast.LENGTH_SHORT, true).show() }
+                context?.let {
+                    RxToast.info(it, submit?.retmsg.toString(), Toast.LENGTH_SHORT, true).show()
+                }
             }
         }
     }
