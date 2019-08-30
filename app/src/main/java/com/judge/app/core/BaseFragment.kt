@@ -3,13 +3,13 @@ package com.judge.app.core
 
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.annotation.IdRes
-import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.Button
+import androidx.annotation.IdRes
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -23,6 +23,7 @@ import com.judge.models.SharedViewModel
 import com.judge.utils.CenterTitle.centerTitle
 import com.judge.utils.LogUtils
 import com.judge.utils.NetworkUtils
+import com.judge.views.DialogLoading
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.vondear.rxtool.RxKeyboardTool
 import com.vondear.rxui.view.dialog.RxDialogLoading
@@ -38,7 +39,7 @@ abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
     protected lateinit var rightButton: Button
     protected lateinit var titleViewStub: ViewStub
     protected lateinit var bottomViewStub: ViewStub
-    protected lateinit var loadingDialog: RxDialogLoading
+    protected lateinit var loadingDialog: DialogLoading
     //protected lateinit var coordinatorLayout: CoordinatorLayout
     protected val epoxyController by lazy { epoxyController() }
 
@@ -83,7 +84,8 @@ abstract class BaseFragment : BaseMvRxFragment(), AnkoLogger {
             bottomViewStub = findViewById(R.id.bottomStub)
             // coordinatorLayout = findViewById(R.id.coordinator_layout)
             recyclerView.setController(epoxyController)
-            loadingDialog = RxDialogLoading(context, false, null)
+            loadingDialog = DialogLoading(context, false, null)
+            loadingDialog.setContentView(R.layout.loading_dialog)
             toolbar.setupWithNavController(findNavController())
             initView()
             initData()

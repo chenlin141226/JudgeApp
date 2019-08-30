@@ -17,7 +17,6 @@ import com.judge.network.ServiceCreator
 import com.judge.newsItemView
 import com.judge.utils.LogUtils
 import com.youth.banner.Banner
-import com.youth.banner.Transformer
 import com.youth.banner.loader.ImageLoader
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex

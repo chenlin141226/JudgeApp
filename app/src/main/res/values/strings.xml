@@ -142,6 +142,7 @@
     <string name="send">已发货</string>
     <string name="receive">已收货</string>
     <string name="exchange_success">兑换成功</string>
+    <string name="loading">加载中...</string>
 
 
 </resources>
