@@ -8,6 +8,8 @@ import com.judge.app.core.MvRxViewModel
 import com.judge.data.bean.LoginBean
 import com.judge.data.repository.LoginRepository
 import com.judge.utils.LogUtils
+import com.vondear.rxtool.RxSPTool
+import com.vondear.rxtool.RxTool
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.support.v4.runOnUiThread
 
@@ -31,6 +33,12 @@ class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginSt
 
     init {
         requestCode()
+    }
+
+    //登录成功后会直接取上次的用户名和密码
+    fun getUserNameAndPsw(){
+        setState { copy(username = RxSPTool.getString(RxTool.getContext(),"username"),
+            password = RxSPTool.getString(RxTool.getContext(),"password")) }
     }
 
     fun setUserName(username: String) {

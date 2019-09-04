@@ -1,7 +1,6 @@
 package com.judge.app.fragments.judge
 
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.*
 import com.judge.R
 import com.judge.app.core.BaseFragment
@@ -9,13 +8,11 @@ import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.attentionItem
 import com.judge.data.bean.Attention
-import com.judge.data.bean.AttentionBean
 import com.judge.data.repository.JudgeRepository
 import com.judge.utils.LogUtils
 import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
-import org.jetbrains.anko.support.v4.runOnUiThread
 
 /**
  * @author: jaffa
@@ -60,16 +57,6 @@ class AttentionFragment : BaseFragment() {
     val viewModel: AttentionViewModel by fragmentViewModel()
 
     override fun epoxyController() = simpleController(viewModel) { state ->
-
-        runOnUiThread {
-            if (state.isLoading) {
-                loadingDialog.show()
-            } else {
-                loadingDialog.dismiss()
-            }
-
-        }
-
         state.attentionItems.forEachWithIndex { index, item ->
             attentionItem {
                 id(item.favid)
@@ -86,6 +73,13 @@ class AttentionFragment : BaseFragment() {
 
 
     override fun initView() {
+        viewModel.selectSubscribe(AttentionState::isLoading) {
+            if (it) {
+                loadingDialog.show()
+            } else {
+                loadingDialog.dismiss()
+            }
+        }
         refreshLayout.apply {
             setEnableAutoLoadMore(true)
             setEnableRefresh(true)

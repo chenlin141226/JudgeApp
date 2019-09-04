@@ -18,6 +18,7 @@ import com.judge.models.LoginViewModel
 import com.judge.network.ServiceCreator
 import com.judge.network.services.LoginApiService
 import com.judge.views.loginView
+import com.vondear.rxtool.RxSPTool
 import com.vondear.rxtool.view.RxToast
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -116,6 +117,9 @@ class LoginFragment : BaseFragment() {
             }
 
             if (state.loginRequest is Success && state.login?.retcode==0) {
+                //保存用户名密码
+                RxSPTool.putString(context,"username",state.username)
+                RxSPTool.putString(context,"password",state.password)
                 context?.let {
                     RxToast.info(it, state.login.retmsg.toString(), Toast.LENGTH_SHORT, false).show()
                 }
@@ -141,4 +145,7 @@ class LoginFragment : BaseFragment() {
 
     }
 
+    override fun initData() {
+        loginViewModel.getUserNameAndPsw()
+    }
 }
