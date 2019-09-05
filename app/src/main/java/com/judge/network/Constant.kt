@@ -63,4 +63,7 @@ object Constant {
     //是否登录
     const val LOGINSTATUS = "/api/mobile/index.php?version=4&module=login"
 
+    //找回密码
+    const val FINDPASSWORD = "/api/mobile/index.php?version=4&module=lostpsswd"
+
 }

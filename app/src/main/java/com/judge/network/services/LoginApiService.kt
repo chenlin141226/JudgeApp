@@ -1,9 +1,6 @@
 package com.judge.network.services
 
-import com.judge.data.bean.LoginBean
-import com.judge.data.bean.LoginStatus
-import com.judge.data.bean.PhoneCodeBean
-import com.judge.data.bean.RegisterResultBean
+import com.judge.data.bean.*
 import com.judge.network.Constant
 import com.judge.network.JsonResponse
 import io.reactivex.Observable
@@ -38,4 +35,9 @@ interface LoginApiService {
     //是否登录
     @GET(Constant.LOGINSTATUS)
     fun isLogin() : Observable<JsonResponse<LoginStatus>>
+
+    //找回密码
+    @FormUrlEncoded
+    @POST(Constant.FINDPASSWORD)
+    fun findPwd(@FieldMap map: HashMap<String, String>) : Observable<JsonResponse<FindPwdBean>>
 }

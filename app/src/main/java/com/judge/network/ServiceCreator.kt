@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 object ServiceCreator {
     const val BASE_URL = "http://bbs.caipanshuo.com"
     private const val CONNECT_TIMEOUT = 10L
-    private const val READ_TIMEOUT = 20L
+    private const val READ_TIMEOUT = 40L
     private const val WRITE_TIMEOUT = 20L
     var COOKIE : String = ""
 

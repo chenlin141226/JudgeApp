@@ -1,9 +1,6 @@
 package com.judge.data.repository
 
-import com.judge.data.bean.LoginBean
-import com.judge.data.bean.LoginStatus
-import com.judge.data.bean.PhoneCodeBean
-import com.judge.data.bean.RegisterResultBean
+import com.judge.data.bean.*
 import com.judge.network.JsonResponse
 import com.judge.network.ServiceCreator
 import com.judge.network.services.LoginApiService
@@ -33,4 +30,7 @@ object LoginRepository {
 
     //是否登录
     fun isLogin(): Observable<JsonResponse<LoginStatus>> = loginseivice.isLogin()
+
+    //找回密码
+    fun findPwd(map: HashMap<String, String>) : Observable<JsonResponse<FindPwdBean>> = loginseivice.findPwd(map)
 }
