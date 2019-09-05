@@ -6,6 +6,7 @@ import android.widget.ImageView
 import com.airbnb.mvrx.*
 import com.judge.app.core.MvRxViewModel
 import com.judge.data.bean.LoginBean
+import com.judge.data.bean.LoginStatus
 import com.judge.data.repository.LoginRepository
 import com.judge.utils.LogUtils
 import com.vondear.rxtool.RxSPTool
@@ -26,14 +27,29 @@ data class LoginState(
     val password: String = "",
     val question: String? = null,
     val seccode: String = "",
-    val codeUrl: Bitmap? = null
+    val codeUrl: Bitmap? = null,
+    val loginStatus : LoginStatus? =null
 ) : MvRxState
 
 class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginState>(loginState) {
 
     init {
         requestCode()
+        isLogin()
     }
+
+    //是否登录
+    fun isLogin(){
+        LoginRepository.isLogin().subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                setState { copy(isLoading = true) }
+            }
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute { copy(loginStatus = it()?.Variables) }
+     }
 
     //登录成功后会直接取上次的用户名和密码
     fun getUserNameAndPsw(){

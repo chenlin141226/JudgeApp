@@ -60,4 +60,7 @@ object Constant {
     //立即兑换
     const val EXCHANGE = "/api/mobile/index.php?version=4&module=x7ree&code_7ree=1"
 
+    //是否登录
+    const val LOGINSTATUS = "/api/mobile/index.php?version=4&module=login"
+
 }

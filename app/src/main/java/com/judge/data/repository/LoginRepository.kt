@@ -1,8 +1,10 @@
 package com.judge.data.repository
 
 import com.judge.data.bean.LoginBean
+import com.judge.data.bean.LoginStatus
 import com.judge.data.bean.PhoneCodeBean
 import com.judge.data.bean.RegisterResultBean
+import com.judge.network.JsonResponse
 import com.judge.network.ServiceCreator
 import com.judge.network.services.LoginApiService
 import io.reactivex.Observable
@@ -28,4 +30,7 @@ object LoginRepository {
 
     //登录
     fun Login(map : HashMap<String,String>) : Observable<LoginBean> =loginseivice.login(map)
+
+    //是否登录
+    fun isLogin(): Observable<JsonResponse<LoginStatus>> = loginseivice.isLogin()
 }

@@ -6,9 +6,11 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.airbnb.mvrx.MvRxState
 import com.judge.app.activities.LoggingActivity
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
+import com.judge.data.bean.LoginStatus
 import com.judge.views.findPwdView
 import com.vondear.rxtool.view.RxToast
 import kotlinx.android.synthetic.main.activity_login.*
@@ -18,6 +20,14 @@ import kotlinx.android.synthetic.main.activity_login.*
  * @date: 2019/7/28
  * 找回密码Fragment
  */
+data class FindPwdState(
+    val loginStatus :LoginStatus,
+    val isLoading: Boolean = false
+) : MvRxState {
+
+    constructor(args: LoginStatus) : this(loginStatus = args)
+}
+
 class ForgetFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

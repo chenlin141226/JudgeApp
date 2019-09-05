@@ -1,9 +1,11 @@
 package com.judge.network.services
 
 import com.judge.data.bean.LoginBean
+import com.judge.data.bean.LoginStatus
 import com.judge.data.bean.PhoneCodeBean
 import com.judge.data.bean.RegisterResultBean
 import com.judge.network.Constant
+import com.judge.network.JsonResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -32,4 +34,8 @@ interface LoginApiService {
     //获取随机验证码
     @GET(Constant.SAFE_CODE)
     fun getCode() : Observable<ResponseBody>
+
+    //是否登录
+    @GET(Constant.LOGINSTATUS)
+    fun isLogin() : Observable<JsonResponse<LoginStatus>>
 }
