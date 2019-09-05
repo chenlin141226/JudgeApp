@@ -31,7 +31,7 @@ class LoggingActivity : BaseActivity() {
     fun initView(navController: NavController) {
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
-                RxToast.info(baseContext, "点击成功", Toast.LENGTH_SHORT, true).show()
+               // RxToast.info(baseContext, "点击成功", Toast.LENGTH_SHORT, true).show()
                 navController.navigateUp()
             }
 

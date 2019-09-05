@@ -14,6 +14,7 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.SignResult
+import com.judge.data.bean.SignResultBean
 import com.judge.data.repository.JudgeRepository
 import com.judge.posttopicItem
 import com.judge.utils.LogUtils
@@ -21,6 +22,7 @@ import com.judge.views.SimpleTextWatcher
 import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.runOnUiThread
 
 /**
  * @author: jaffa
@@ -31,10 +33,11 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 data class PostTopicState(
     val content: String = "",
     val length: String = "0/20",
-    var formhash: String = "",
-    var qdxq: String = "",
+    val formhash: String = "",
+    val qdxq: String = "",
     val gifUrl: String = "",
     val isLoading: Boolean = false,
+    val sign: SignResultBean? = null,
     val result: SignResult? = null
 ) : MvRxState
 
@@ -68,9 +71,12 @@ class PostTopicViewModel(initialState: PostTopicState) :
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
             .doFinally { setState { copy(isLoading = false) } }
-            .execute { copy(result = it()?.Variables?.data) }
+            .execute { copy(result = it()?.Variables?.data, sign = it()?.Variables) }
     }
 
+    fun reset() {
+        setState { copy(result = null, sign = null) }
+    }
 
     companion object : MvRxViewModelFactory<PostTopicViewModel, PostTopicState> {
         override fun create(
@@ -99,16 +105,30 @@ class PostTopicFragment : BaseFragment() {
                 viewModel.updateLength("")
                 findNavController().navigate(R.id.action_postFragment_to_expressionFragment)
             }
+
+
+            if (state.sign?.code == "1") {
+                context?.let {
+                    RxToast.info(it, state.result?.msg.toString(), Toast.LENGTH_SHORT, false).show()
+                }
+            } else if (state.sign?.code == "0") {
+                context?.let {
+                    RxToast.info(it, state.result?.msg.toString(), Toast.LENGTH_SHORT, false).show()
+                    runOnUiThread { findNavController().popBackStack() }
+                }
+            }
         }
     }
 
     override fun initData() {
         super.initData()
+        viewModel.reset()
         LiveEventBus.get().with("expression", ExpressionArgs::class.java)
             .observe(this, Observer<ExpressionArgs> {
                 viewModel.updataItem(it)
             })
     }
+
 
     @SuppressLint("ResourceAsColor")
     override fun initView() {
@@ -120,18 +140,23 @@ class PostTopicFragment : BaseFragment() {
             visibility = View.VISIBLE
 
             onClick {
-                viewModel.pushContent()
-
-                viewModel.selectSubscribe(
-                    PostTopicState::result
-                ) { result ->
-                    if (result != null) {
-                        Toast.makeText(context, result.msg, Toast.LENGTH_SHORT).show()
+                withState(viewModel) { state ->
+                    if (state.gifUrl.isEmpty()) {
+                        context?.let {
+                            RxToast.info(it, "请选择心情图片", Toast.LENGTH_SHORT, false).show()
+                        }
+                        return@withState
                     }
 
+                    if (state.content.isEmpty()) {
+                        context?.let {
+                            RxToast.info(it, "请发表内容", Toast.LENGTH_SHORT, false).show()
+                        }
+                        return@withState
+                    }
+
+                    viewModel.pushContent()
                 }
-
-
             }
         }
     }
