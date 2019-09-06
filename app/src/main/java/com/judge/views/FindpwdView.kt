@@ -7,8 +7,11 @@ import android.util.AttributeSet
 import android.widget.EditText
 import android.widget.FrameLayout
 import com.airbnb.epoxy.CallbackProp
+import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
+import com.airbnb.epoxy.TextProp
 import com.judge.R
+import com.judge.extensions.setTextIfDifferent
 import kotlinx.android.synthetic.main.view_findpsw.view.*
 
 /**
@@ -31,6 +34,16 @@ class FindPwdView @JvmOverloads constructor(
         et_username.addTextChangedListener(userNameWatcher)
     }
 
+    @TextProp
+    fun setEmail(email : CharSequence?){
+        et_email.setTextIfDifferent(email)
+    }
+
+    @TextProp
+    fun setUserName(username : CharSequence?){
+        et_username.setTextIfDifferent(username)
+    }
+
 
     @set:CallbackProp
     var onUserNameChanged : ((newText : String) -> Unit)? =null
@@ -38,12 +51,12 @@ class FindPwdView @JvmOverloads constructor(
     @set:CallbackProp
     var onEmailChanged : ((newText : String) -> Unit)? =null
 
-    @CallbackProp
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
     fun setBackCliclListener(listener: OnClickListener?){
         register_back.setOnClickListener(listener)
     }
 
-    @CallbackProp
+    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
     fun setSubmitClickListener(listener: OnClickListener?){
         iv_register.setOnClickListener(listener)
     }

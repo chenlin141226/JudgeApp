@@ -77,7 +77,6 @@
                     android:background="@drawable/login_input_bg"
                     android:hint="@string/emails"
                     android:textSize="@dimen/text_14"
-                    android:maxLength="16"
                     android:padding="@dimen/dp_10"
                     android:textColor="#d4cdca"
                     app:layout_constraintBottom_toTopOf="@+id/et_username"
