@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@drawable/market_item_bg">
+        <ImageView
+                android:id="@+id/iv_market"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+                android:id="@+id/tv_markerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="@dimen/text_16"
+                tools:text="dsfdsfdsfdsf"
+                android:layout_marginStart="@dimen/dp_10"
+                app:layout_constraintTop_toTopOf="@id/iv_market"
+                app:layout_constraintLeft_toRightOf="@id/iv_market"/>
+
+
+        <TextView
+                android:id="@+id/tv_markerNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_12"
+                tools:text="dsfdsfdsfdsfdsfdsfdsfdsfdsfddsfdsdfdsfdsfdsfdsfdsfdsfsdfdsdsfdsfdsfdsfdsdsfdsfdsfdssfdsfdsfdsfdsfdsfdsakfhdkashfkdhasfkhdaskfhdkshfkdshafksf"
+                android:lines="2"
+                android:textColor="@color/color_gray"
+                android:layout_marginStart="@dimen/dp_10"
+                app:layout_constraintLeft_toRightOf="@id/iv_market"
+                app:layout_constraintTop_toBottomOf="@id/tv_markerName"
+                app:layout_constraintBottom_toBottomOf="@id/iv_market"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

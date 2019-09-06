@@ -149,6 +149,8 @@
     <string name="last_login_time">上次登录：</string>
     <string name="register_date">注册时间：</string>
     <string name="contribute">投稿到板块</string>
+    <string name="attention_plate">关注板块</string>
+    <string name="recommend_plate">推荐板块</string>
 
 
 </resources>

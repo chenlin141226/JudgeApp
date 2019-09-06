@@ -63,4 +63,7 @@ object JudgeRepository {
 
     //订阅
     fun subscribeJudge(map: HashMap<String, String?>) : Observable<JsonResponse<Message>> = judgeService.subscribeJudge(map)
+
+    //推荐，关注板块
+    fun getPlate():Observable<JsonResponse<PlateBean>> = judgeService.getPlate()
 }

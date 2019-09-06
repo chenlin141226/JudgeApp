@@ -33,7 +33,9 @@
         R.layout.expression_item,
         R.layout.myproduct_item,
         R.layout.history_topic_item,
-        R.layout.sendtopic_item
+        R.layout.sendtopic_item,
+        R.layout.plate_item,
+        R.layout.plate_content_item
 })
 
 package com.judge;

@@ -55,17 +55,24 @@ interface JudgeApiService {
     @POST(Constant.EXPRESSION)
     fun pushContent(@FieldMap map: HashMap<String, String>): Observable<JsonResponse<SignResultBean>>
 
+    //关注，推荐板块
+    @GET(Constant.CONTRIBUTEPLATE)
+    fun getPlate():Observable<JsonResponse<PlateBean>>
+
     //积分商城
     @GET(Constant.MARK)
     fun getMarket(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<MarketInfoBean<DataItems>>>
 
+    //我的商品
     @GET(Constant.MYPRODUCT)
     fun getMyProduct(@Query("page") page: String): Observable<JsonResponse<MyProductBean>>
 
+    //兑换商品
     @FormUrlEncoded
     @POST(Constant.EXCHANGE)
     fun postProduct(@Query("id_7ree") id_7ree: String, @FieldMap map: HashMap<String, String>):Observable<JsonResponse<ExchangeBean>>
 
+    //兑换成功
     @GET(Constant.SUBSCRIBE)
     fun subscribeJudge(@QueryMap map: HashMap<String, String?>) : Observable<JsonResponse<Message>>
 }
