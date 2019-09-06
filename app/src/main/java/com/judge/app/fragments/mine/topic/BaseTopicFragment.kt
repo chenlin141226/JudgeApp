@@ -4,6 +4,8 @@ import com.airbnb.mvrx.fragmentViewModel
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
+import com.judge.models.TopicState
+import com.judge.models.TopicViewModel
 import com.judge.topicItem
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.support.v4.toast

@@ -78,9 +78,7 @@ fun setPhotoImage(imageView: ImageView, item: SettingItemBean) {
 @BindingAdapter("swipeState", requireAll = false)
 fun setWipeMenu(swipeMenu: SwipeMenuLayout, isSwipeEnable: Boolean) {
     swipeMenu.isSwipeEnable = isSwipeEnable
-    if (isSwipeEnable) {
-        swipeMenu.quickClose()
-    }
+    swipeMenu.quickClose()
 }
 
 @BindingAdapter("drawableSrc", requireAll = false)

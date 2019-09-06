@@ -4,7 +4,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.judge.R
 import com.judge.app.fragments.mine.topic.BaseTopicFragment
-import com.judge.app.fragments.mine.topic.TopicState
+import com.judge.models.TopicState
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class FavoriteFragment : BaseTopicFragment() {
