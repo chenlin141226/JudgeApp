@@ -132,6 +132,8 @@
     <!--    发帖   -->
     <string name="publish">发表</string>
     <string name="hint">写写我今天想说的...</string>
+    <string name="title">标题</string>
+    <string name="content">请输入正文内容</string>
     <string name="more">更多</string>
     <string name="sumile">心情图片</string>
     <string name="emoji">表情包</string>
@@ -146,6 +148,7 @@
     <string name="login_times">登录次数：</string>
     <string name="last_login_time">上次登录：</string>
     <string name="register_date">注册时间：</string>
+    <string name="contribute">投稿到板块</string>
 
 
 </resources>

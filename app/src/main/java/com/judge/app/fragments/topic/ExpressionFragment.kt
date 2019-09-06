@@ -48,7 +48,7 @@ class ExpressionViewModel(initialState: ExpressionState) :
         fetchExpression()
     }
 
-    fun fetchExpression() = withState { state ->
+    fun fetchExpression() = withState { _ ->
         JudgeRepository.getExpression().subscribeOn(Schedulers.io())
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
@@ -73,7 +73,7 @@ class ExpressionFragment : BaseFragment() {
     val args = ExpressionArgs()
 
     override fun epoxyController() = simpleController(viewModel) { state ->
-        state.expression.forEachWithIndex { index, item ->
+        state.expression.forEachWithIndex { _, item ->
             expressionItem {
                 id(item.id)
                 item(item)

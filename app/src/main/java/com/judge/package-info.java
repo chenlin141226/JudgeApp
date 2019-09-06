@@ -31,7 +31,8 @@
         R.layout.fragment_judge_detail,
         R.layout.posttopic_item,
         R.layout.expression_item,
-        R.layout.myproduct_item
+        R.layout.myproduct_item,
+        R.layout.sendtopic_item
 })
 
 package com.judge;

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+                name="inputType"
+                type="int" />
+
+        <variable
+                name="content"
+                type="String" />
+
+        <variable
+                name="title"
+                type="String" />
+
+        <variable
+                name="titleTextWatcher"
+                type="android.text.TextWatcher" />
+
+        <variable
+                name="contentTextWatcher"
+                type="android.text.TextWatcher" />
+
+
+        <variable
+                name="onclick"
+                type="android.view.View.OnClickListener" />
+
+    </data>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:background="#FFFFFF">
+
+                <ImageView
+                        android:id="@+id/iv_sumile"
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/contribute"
+                        android:layout_marginStart="@dimen/dp_40"/>
+
+                <TextView
+                        android:id="@+id/tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/contribute"
+                        android:textColor="#494850"
+                        android:textSize="@dimen/text_14"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_toRightOf="@id/iv_sumile"/>
+
+
+
+                <LinearLayout
+                        android:id="@+id/iv_right"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/dp_30"
+                        android:onClick="@{onclick}"
+                        android:orientation="horizontal"
+                        >
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                            android:text="@string/more"
+                            android:textColor="#494850"
+                            android:textSize="@dimen/text_14" />
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp_7"
+                            android:background="@drawable/right" />
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_20">
+
+                <EditText
+                        android:id="@+id/editor_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:background="@drawable/bg_edit"
+                        android:gravity="start|center"
+                        android:hint="@string/title"
+                        android:inputType="@{inputType}"
+                        android:text="@{title}"
+                        android:padding="@dimen/dp_10"
+                        app:addTextChangedListener="@{titleTextWatcher}"/>
+
+                <EditText
+                        android:id="@+id/editor_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/editor_title"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bg_edit"
+                        android:gravity="start|top"
+                        android:hint="@string/content"
+                        android:inputType="@{inputType}"
+                        android:minHeight="@dimen/dp_140"
+                        android:padding="@dimen/dp_10"
+                        android:text="@{content}"
+                        app:addTextChangedListener="@{contentTextWatcher}"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+</layout>

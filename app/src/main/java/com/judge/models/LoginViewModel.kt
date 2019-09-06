@@ -98,6 +98,10 @@ class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginSt
     }
 
 
+    fun reset(){
+        setState { copy(loginRequest = Uninitialized,login = null) }
+    }
+
     companion object : MvRxViewModelFactory<LoginViewModel, LoginState> {
         override fun create(viewModelContext: ViewModelContext, state: LoginState): LoginViewModel? {
             return LoginViewModel(state)
