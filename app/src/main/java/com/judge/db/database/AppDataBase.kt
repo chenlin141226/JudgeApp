@@ -5,12 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.judge.db.Converters
 import com.judge.db.bean.HistoryTopicBean
 import com.judge.db.dao.HistoryTopicDao
 
 @Database(entities = [HistoryTopicBean::class], version = 1)
-@TypeConverters(Converters::class)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun historyTopicDao(): HistoryTopicDao
 

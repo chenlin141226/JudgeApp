@@ -8,88 +8,18 @@ import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
-import com.judge.app.core.MvRxViewModel
-import com.judge.data.bean.BannerBean
-import com.judge.data.bean.News
-import com.judge.data.repository.HomeRepository
-import com.judge.network.JsonResponse
+import com.judge.db.bean.HistoryTopicBean
+import com.judge.models.HomeState
+import com.judge.models.HomeViewModel
 import com.judge.network.ServiceCreator
 import com.judge.newsItemView
-import com.judge.utils.LogUtils
+import com.vondear.rxtool.RxTimeTool
 import com.youth.banner.Banner
 import com.youth.banner.loader.ImageLoader
-import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
+import java.util.*
+import kotlin.collections.ArrayList
 
-data class HomeState(
-    val responseBean: Async<JsonResponse<BannerBean>> = Uninitialized,
-    val news: List<News>? = emptyList(),
-    val isLoading: Boolean = false,
-    val isRefreshing: Boolean = false
-) : MvRxState
-
-class HomeViewModel(
-    state: HomeState
-) : MvRxViewModel<HomeState>(state) {
-    private val bannerMap = hashMapOf("bid" to "151", "module" to "get_diy")
-    private val newsMap = hashMapOf("start" to "0", "module" to "latestthreads", "limit" to "20")
-
-    init {
-        fetchBanners()
-        fetchNews()
-    }
-
-    private fun fetchBanners() {
-        HomeRepository.fetchBanners(bannerMap)
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe {
-                setState { copy(isLoading = true) }
-            }
-            .doOnError {
-                it.message?.let { it1 -> LogUtils.e(it1) }
-            }
-            .doFinally { setState { copy(isLoading = false) } }
-            .execute {
-                copy(responseBean = it)
-            }
-    }
-
-    fun fetchNews() {
-        HomeRepository.fetchNews(newsMap)
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe {
-                setState { copy(isLoading = true, isRefreshing = true) }
-            }
-            .doOnError {
-                it.message?.let { it1 -> LogUtils.e(it1) }
-            }
-            .doFinally { setState { copy(isLoading = false, isRefreshing = false) } }
-            .execute {
-                copy(news = news?.plus((it()?.Variables?.data ?: emptyList())))
-            }
-    }
-
-    fun refreshNews() {
-        HomeRepository.fetchNews(newsMap)
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe {
-                setState { copy(isRefreshing = true) }
-            }
-            .doOnError {
-                it.message?.let { it1 -> LogUtils.e(it1) }
-            }
-            .doFinally { setState { copy(isRefreshing = false) } }
-            .execute {
-                copy(news = it()?.Variables?.data ?: emptyList())
-            }
-    }
-
-    companion object : MvRxViewModelFactory<HomeViewModel, HomeState> {
-        override fun create(viewModelContext: ViewModelContext, state: HomeState): HomeViewModel? {
-            return HomeViewModel(state)
-        }
-    }
-}
 
 class HomeFragment : BaseFragment() {
     private val viewModel: HomeViewModel by fragmentViewModel()
@@ -100,6 +30,14 @@ class HomeFragment : BaseFragment() {
                 id(newsItem.author + index)
                 item(newsItem)
                 onClick { _ ->
+                    viewModel.insertHistoryTopicItem(
+                        HistoryTopicBean(
+                            topicTitle = newsItem.subject,
+                            topicAuthor = newsItem.author,
+                            surfedTime = RxTimeTool.date2String(Date()),
+                            id = newsItem.tid
+                        )
+                    )
                 }
             }
         }

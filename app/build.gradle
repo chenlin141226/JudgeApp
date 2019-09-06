@@ -96,14 +96,13 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'
 
     //Room 数据库
-    implementation "androidx.room:room-runtime:2.2.0-beta01"
-    annotationProcessor "androidx.room:room-compiler:2.2.0-beta01"
+    implementation "androidx.room:room-runtime:2.2.0-rc01"
     // For Kotlin use kapt instead of annotationProcessor
     // optional - Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:2.2.0-beta01"
-    kapt "android.arch.persistence.room:compiler:2.2.0-beta01"
+    implementation "androidx.room:room-ktx:2.2.0-rc01"
+    kapt "androidx.room:room-compiler:2.2.0-rc01"
     // optional - RxJava support for Room
-    implementation "androidx.room:room-rxjava2:2.2.0-beta01"
+    implementation "androidx.room:room-rxjava2:2.2.0-rc01"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

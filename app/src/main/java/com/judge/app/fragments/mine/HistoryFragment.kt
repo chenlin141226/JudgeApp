@@ -15,7 +15,7 @@ class HistoryFragment : BaseTopicFragment() {
             visibility = View.VISIBLE
             text = getString(R.string.clear_all)
             onClick {
-                viewModel.deleteTopic()
+                viewModel.deleteTopics(-1, "history")
             }
         }
     }
@@ -24,5 +24,9 @@ class HistoryFragment : BaseTopicFragment() {
         super.initData()
         viewModel.fetchHistoryTopics()
         viewModel.setSwipeEnable(true)
+    }
+
+    override fun deleteTopics(index: Int) {
+        viewModel.deleteTopics(index, "history")
     }
 }

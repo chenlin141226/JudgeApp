@@ -4,6 +4,7 @@ import com.airbnb.mvrx.fragmentViewModel
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
+import com.judge.historyTopicItem
 import com.judge.models.TopicState
 import com.judge.models.TopicViewModel
 import com.judge.topicItem
@@ -16,6 +17,20 @@ abstract class BaseTopicFragment : BaseFragment() {
         state.topicItems.forEachWithIndex { index, topic ->
             topicItem {
                 id(topic.subject + index)
+                topic(topic)
+                isSwipeEnable(state.isSwipeEnable)
+                onItemClick { _ ->
+                    toast("You clicked item!")
+                }
+                onDeleteClick { _ ->
+                    deleteTopics(index)
+                    toast("Item index  is $index!")
+                }
+            }
+        }
+        state.historyTopics.forEachWithIndex { index, topic ->
+            historyTopicItem {
+                id(topic.topicTitle + index)
                 topic(topic)
                 isSwipeEnable(state.isSwipeEnable)
                 onItemClick { _ ->

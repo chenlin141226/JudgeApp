@@ -14,7 +14,6 @@ import com.judge.utils.LogUtils
 import com.vondear.rxtool.RxTool
 import io.reactivex.schedulers.Schedulers
 import java.util.*
-import kotlin.collections.HashMap
 
 data class TopicState(
     val topicItems: List<Topic> = emptyList(),
@@ -32,6 +31,7 @@ class TopicViewModel(
     private lateinit var queryMap: HashMap<String, String>
     private lateinit var fieldMap: HashMap<String, String>
     private var deleteIndex = -1
+    private var deleteType = ""
     fun fetchPublishedTopics() {
         topicMap = hashMapOf("version" to "4", "module" to "mythread", "page" to "1")
         fetchTopics()
@@ -110,57 +110,71 @@ class TopicViewModel(
 
     fun deleteTopics(index: Int, type: String) = withState { state ->
         if (state.deleteResult is Loading) return@withState
-        val ids = LinkedList<String>()
         deleteIndex = index
-        if (index == -1) {
-            state.topicItems.forEach {
-                ids.add(it.favid)
-            }
+        deleteType = type
+        if (type == "history") {
+            deleteTopic()
         } else {
-            ids.add(state.topicItems[index].favid)
+            val ids = LinkedList<String>()
+            if (index == -1) {
+                state.topicItems.forEach {
+                    ids.add(it.favid)
+                }
+            } else {
+                ids.add(state.topicItems[index].favid)
+            }
+            when (type) {
+                "favorite" -> {
+                    queryMap =
+                        hashMapOf("version" to "4", "module" to "myfav_delete", "checkall" to "1")
+                    fieldMap =
+                        hashMapOf(
+                            "formhash" to (MineRepository.userProfile?.formhash ?: ""),
+                            "delfavorite" to "true"
+                        )
+                }
+                "published" -> {
+
+                }
+                "replied" -> {
+
+                }
+                else -> {
+
+                }
+            }
+            MineRepository.deleteTopics(queryMap, fieldMap, ids)
+                .subscribeOn(Schedulers.io())
+                .execute {
+                    copy(deleteResult = it)
+                }
         }
-        when (type) {
-            "favorite" -> {
-                queryMap =
-                    hashMapOf("version" to "4", "module" to "myfav_delete", "checkall" to "1")
-                fieldMap =
-                    hashMapOf(
-                        "formhash" to (MineRepository.userProfile?.formhash ?: ""),
-                        "delfavorite" to "true"
-                    )
-            }
-            "history" -> {
-
-            }
-            "published" -> {
-
-            }
-            "replied" -> {
-
-            }
-            else -> {
-
-            }
-        }
-        MineRepository.deleteTopics(queryMap, fieldMap, ids)
-            .subscribeOn(Schedulers.io())
-            .execute {
-                copy(deleteResult = it)
-            }
-
     }
 
-    fun deleteTopic() {
-        if (deleteIndex == -1) {
-            setState {
-                copy(topicItems = topicItems.delete(topicItems))
+    fun deleteTopic() = withState {
+        if (deleteType == "history") {
+            if (deleteIndex == -1) {
+                historyTopicDao.deleteAllHistoryTopics()
+                setState {
+                    copy(historyTopics = historyTopics.delete(historyTopics))
+                }
+            } else {
+                historyTopicDao.deleteHistoryTopic(it.historyTopics[deleteIndex])
+                setState {
+                    copy(historyTopics = historyTopics.delete(deleteIndex))
+                }
             }
         } else {
-            setState {
-                copy(topicItems = topicItems.delete(deleteIndex))
+            if (deleteIndex == -1) {
+                setState {
+                    copy(topicItems = topicItems.delete(topicItems))
+                }
+            } else {
+                setState {
+                    copy(topicItems = topicItems.delete(deleteIndex))
+                }
             }
         }
-
     }
 
     companion object : MvRxViewModelFactory<TopicViewModel, TopicState> {
