@@ -33,7 +33,7 @@ class EditAddressFragment : BaseEditFragment() {
                         0 -> {
                             val pickView: OptionsPickerView<IPickerViewData> =
                                 OptionsPickerBuilder(context,
-                                    OnOptionsSelectListener { position1, position2, _, _ ->
+                                    OnOptionsSelectListener { position1, position2, position3, _ ->
                                         val address = provincesAndCities.first[position1].name
                                             .plus(" ")
                                             .plus(

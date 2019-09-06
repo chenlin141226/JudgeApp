@@ -26,7 +26,6 @@ import com.judge.utils.NetworkUtils
 import com.judge.views.DialogLoading
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.vondear.rxtool.RxKeyboardTool
-import com.vondear.rxui.view.dialog.RxDialogLoading
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.AnkoLogger
 
