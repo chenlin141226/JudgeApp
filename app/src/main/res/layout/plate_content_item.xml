@@ -4,7 +4,12 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+      <variable
+              name="item"
+              type="com.judge.data.bean.PlateCategory" />
+        <variable
+                name="onclick"
+                type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,14 +17,17 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_10"
             android:layout_margin="@dimen/dp_10"
-            android:background="@drawable/market_item_bg">
+            android:background="@drawable/market_item_bg"
+            android:onClick="@{onclick}">
         <ImageView
                 android:id="@+id/iv_market"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="@dimen/dp_50"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:imageUrl="@{item.icon}"
+                app:isPhoto="@{true}" />
 
         <TextView
                 android:id="@+id/tv_markerName"
@@ -28,6 +36,7 @@
                 android:textColor="#000"
                 android:textSize="@dimen/text_16"
                 tools:text="dsfdsfdsfdsf"
+                android:text="@{item.name}"
                 android:layout_marginStart="@dimen/dp_10"
                 app:layout_constraintTop_toTopOf="@id/iv_market"
                 app:layout_constraintLeft_toRightOf="@id/iv_market"/>
@@ -38,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_12"
+                android:text="@{item.description}"
                 tools:text="dsfdsfdsfdsfdsfdsfdsfdsfdsfddsfdsdfdsfdsfdsfdsfdsfdsfsdfdsdsfdsfdsfdsfdsdsfdsfdsfdssfdsfdsfdsfdsfdsfdsakfhdkashfkdhasfkhdaskfhdkshfkdshafksf"
                 android:lines="2"
                 android:textColor="@color/color_gray"
