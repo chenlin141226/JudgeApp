@@ -66,4 +66,7 @@ object JudgeRepository {
 
     //推荐，关注板块
     fun getPlate():Observable<JsonResponse<PlateBean>> = judgeService.getPlate()
+
+    //发帖
+    fun pushTie(map: HashMap<String, String>) : Observable<JsonResponse<PushTie>> = judgeService.pushTie(map)
 }

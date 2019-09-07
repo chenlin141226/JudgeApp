@@ -66,7 +66,9 @@ object Constant {
     //找回密码
     const val FINDPASSWORD = "/api/mobile/index.php?version=4&module=lostpsswd"
 
-    //发帖
+    //发帖板块
     const val CONTRIBUTEPLATE = "/api/mobile/index.php?version=4&module=forumindex"
 
+    //发帖
+    const val PUSHTIE = "/api/mobile/index.php?version=4&module=newthread"
 }

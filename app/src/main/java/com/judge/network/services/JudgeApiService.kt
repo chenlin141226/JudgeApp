@@ -59,6 +59,12 @@ interface JudgeApiService {
     @GET(Constant.CONTRIBUTEPLATE)
     fun getPlate():Observable<JsonResponse<PlateBean>>
 
+    //发帖
+    @FormUrlEncoded
+    @POST(Constant.PUSHTIE)
+    fun pushTie(@FieldMap map: HashMap<String, String>) : Observable<JsonResponse<PushTie>>
+
+
     //积分商城
     @GET(Constant.MARK)
     fun getMarket(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<MarketInfoBean<DataItems>>>
@@ -75,4 +81,5 @@ interface JudgeApiService {
     //兑换成功
     @GET(Constant.SUBSCRIBE)
     fun subscribeJudge(@QueryMap map: HashMap<String, String?>) : Observable<JsonResponse<Message>>
+
 }

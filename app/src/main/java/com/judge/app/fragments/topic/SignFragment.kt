@@ -2,20 +2,23 @@ package com.judge.app.fragments.topic
 
 import android.text.InputType
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
-import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.*
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.bean.PushTie
+import com.judge.data.repository.JudgeRepository
+import com.judge.network.Message
 import com.judge.sendtopicItem
 import com.judge.views.SimpleTextWatcher
+import com.vondear.rxtool.view.RxToast
+import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 /**
@@ -23,11 +26,13 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
  * @date: 2019/8/22
  */
 data class SendTopicState(
-    val title: String? = "",
-    val content: String? = "",
-    val plate: String? = "",
-    val backPlate: String? = "",
-    val formhash: String = ""
+    val title: String = "",
+    val content: String = "",
+    val plate: String = "",
+    val backPlate: String = "",
+    val formhash: String = "",
+    val pushTie : PushTie? =null,
+    val message : Message? =null
 ) : MvRxState
 
 class SendTopicViewModel(initialState: SendTopicState) :
@@ -46,7 +51,14 @@ class SendTopicViewModel(initialState: SendTopicState) :
     }
 
     fun pushTie() = withState { state ->
+        val map = hashMapOf("fid" to "2","topicsubmit" to "1",
+            "subject" to state.backPlate,"message" to state.title+state.content,"formhash" to state.formhash)
+        JudgeRepository.pushTie(map).subscribeOn(Schedulers.io())
+            .execute { copy(pushTie = it()?.Variables,message = it()?.Message) }
+    }
 
+    fun reset(){
+        setState { copy(pushTie = null,message = null) }
     }
 
     companion object : MvRxViewModelFactory<SendTopicViewModel, SendTopicState> {
@@ -70,6 +82,7 @@ class SignFragment : BaseFragment() {
             inputType(InputType.TYPE_CLASS_TEXT)
             title(state.title)
             content(state.content)
+            plate(state.backPlate)
             titleTextWatcher(SimpleTextWatcher { viewModel.updateTitlet(it) })
 
             contentTextWatcher(SimpleTextWatcher { viewModel.updateContent(it) })
@@ -77,6 +90,14 @@ class SignFragment : BaseFragment() {
             onclick { _ ->
                 findNavController().navigate(R.id.action_signFragment_to_contributeplate)
             }
+
+            if(state.pushTie?.code == "1"||state.pushTie?.code == "0"){
+                viewModel.reset()
+                context?.let {
+                    RxToast.info(it, state.message?.messagestr.toString(), Toast.LENGTH_SHORT, false).show()
+                }
+            }
+
         }
     }
 
@@ -87,7 +108,29 @@ class SignFragment : BaseFragment() {
             text = resources.getString(R.string.publish)
             visibility = View.VISIBLE
             onClick {
-                viewModel.pushTie()
+                withState(viewModel){state->
+                    if(state.backPlate.isEmpty()){
+                        context?.let {
+                            RxToast.info(it,"请选择投稿板块", Toast.LENGTH_SHORT, false).show()
+                        }
+                        return@withState
+                    }
+
+                    if(state.title.isEmpty()){
+                        context?.let {
+                            RxToast.info(it,"请输入标题", Toast.LENGTH_SHORT, false).show()
+                        }
+                        return@withState
+                    }
+
+                    if(state.content.isEmpty()){
+                        context?.let {
+                            RxToast.info(it,"请输入内容", Toast.LENGTH_SHORT, false).show()
+                        }
+                        return@withState
+                    }
+                    viewModel.pushTie()
+                }
             }
         }
     }

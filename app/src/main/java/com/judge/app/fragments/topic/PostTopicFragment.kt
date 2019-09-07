@@ -107,14 +107,10 @@ class PostTopicFragment : BaseFragment() {
             }
 
 
-            if (state.sign?.code == "1") {
+            if (state.sign?.code == "1" || state.sign?.code == "0") {
+                viewModel.reset()
                 context?.let {
                     RxToast.info(it, state.result?.msg.toString(), Toast.LENGTH_SHORT, false).show()
-                }
-            } else if (state.sign?.code == "0") {
-                context?.let {
-                    RxToast.info(it, state.result?.msg.toString(), Toast.LENGTH_SHORT, false).show()
-                    runOnUiThread { findNavController().popBackStack() }
                 }
             }
         }
@@ -122,7 +118,6 @@ class PostTopicFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
-        viewModel.reset()
         LiveEventBus.get().with("expression", ExpressionArgs::class.java)
             .observe(this, Observer<ExpressionArgs> {
                 viewModel.updataItem(it)

@@ -115,6 +115,12 @@ class ContributeplateFragment : BaseFragment() {
             plateContentItem {
                 id(state.plate.size)
                 item(item)
+                onclick { _ ->
+                    plateArgs.plateName = item.name
+                    plateArgs.formhash = state.variables?.formhash.toString()
+                    LiveEventBus.get().with("plate").post(plateArgs)
+                    findNavController().navigateUp()
+                }
             }
         }
     }
