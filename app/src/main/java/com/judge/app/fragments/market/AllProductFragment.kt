@@ -28,7 +28,7 @@ class MarketViewModel(marketState: MarketState) : MvRxViewModel<MarketState>(mar
         fetchMarkInfo(1)
     }
 
-    fun fetchMarkInfo(index: Int) = withState { state ->
+    fun fetchMarkInfo(index: Int) = withState { _ ->
         val map = hashMapOf("page" to "1", "fenlei_7ree" to "${index + 1}")
         JudgeRepository.getMarket(map).subscribeOn(Schedulers.io())
             .doOnSubscribe { setState { copy(isLoading = true) } }
@@ -41,7 +41,7 @@ class MarketViewModel(marketState: MarketState) : MvRxViewModel<MarketState>(mar
             }
     }
 
-    fun loadMoreMarkInfo(page: Int,index: Int) = withState { state ->
+    fun loadMoreMarkInfo(page: Int,index: Int) = withState { _ ->
 
         val map = hashMapOf("page" to "$page", "fenlei_7ree" to "$index")
         JudgeRepository.getMarket(map).subscribeOn(Schedulers.io())
@@ -98,7 +98,7 @@ class AllProductFragment(index: Int) : BaseFragment() {
 
     override fun initData() {
         viewModel.fetchMarkInfo(index)
-        withState(viewModel) { state ->
+        withState(viewModel) { _ ->
             refreshLayout.apply {
                 setEnableAutoLoadMore(true)
                 setEnableRefresh(true)

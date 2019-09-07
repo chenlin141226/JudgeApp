@@ -129,6 +129,7 @@ class LoginFragment : BaseFragment() {
                 context?.let {
                     RxToast.info(it, state.login.retmsg.toString(), Toast.LENGTH_SHORT, false).show()
                 }
+                loginViewModel.reset()
             }
 
 

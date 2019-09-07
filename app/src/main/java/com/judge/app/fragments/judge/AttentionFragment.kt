@@ -57,11 +57,11 @@ class AttentionFragment : BaseFragment() {
     val viewModel: AttentionViewModel by fragmentViewModel()
 
     override fun epoxyController() = simpleController(viewModel) { state ->
-        state.attentionItems.forEachWithIndex { index, item ->
+        state.attentionItems.forEachWithIndex { _, item ->
             attentionItem {
                 id(item.favid)
                 attention(item)
-                onParentClick { model, parentView, clickedView, position ->
+                onParentClick { _, _, _, _ ->
                     navigateTo(R.id.action_judgeFragment_to_judgeDetailFragment, item)
                 }
                 onClick { _ ->

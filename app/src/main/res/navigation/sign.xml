@@ -39,7 +39,19 @@
     <fragment
             android:id="@+id/signFragment"
             android:name="com.judge.app.fragments.topic.SignFragment"
-            android:label="" />
+            android:label="">
+        <action
+                android:id="@+id/action_signFragment_to_contributeplate"
+                app:destination="@id/contributeplate"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment android:id="@+id/contributeplate"
+        android:name="com.judge.app.fragments.topic.ContributeplateFragment"
+        android:label=""/>
 
     <fragment
             android:id="@+id/expressionFragment"
