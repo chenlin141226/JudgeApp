@@ -13,10 +13,21 @@ data class ProvinceBean(
 }
 
 data class City(
+    val children: List<Region>,
     val code: String,
     val name: String
-): IPickerViewData {
+) : IPickerViewData {
     override fun getPickerViewText(): String {
         return this.name
     }
 }
+
+data class Region(
+    val code: String,
+    val name: String
+) : IPickerViewData {
+    override fun getPickerViewText(): String {
+        return this.name
+    }
+}
+

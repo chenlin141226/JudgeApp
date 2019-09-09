@@ -12,6 +12,9 @@ import okhttp3.MultipartBody
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 object MineRepository {
     var userProfile: ProfileBean? = null
@@ -69,11 +72,23 @@ object MineRepository {
     fun getProvincesAndCities(context: Context): Pair<List<ProvinceBean>, List<List<City>>> {
         val provinces = getProvinces(context)
         val cities = ArrayList<List<City>>()
-
         provinces.forEach {
             cities.add(it.children)
         }
         return Pair(provinces, cities)
+    }
+
+    fun getCityRegions(context: Context): List<List<List<Region>>> {
+        val regions = LinkedList<List<List<Region>>>()
+        val provinces = getProvinces(context)
+        provinces.forEach { province ->
+            val cityRegions = LinkedList<List<Region>>()
+            province.children.forEach {
+                cityRegions.add(it.children)
+            }
+            regions.add(cityRegions)
+        }
+        return regions
     }
 
     fun getFriends(map: HashMap<String, String>): Observable<JsonResponse<FriendBean>> {

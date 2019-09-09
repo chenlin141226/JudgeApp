@@ -17,8 +17,8 @@ data class HomeState(
     val responseBean: Async<JsonResponse<BannerBean>> = Uninitialized,
     val news: List<News>? = emptyList(),
     val isLoading: Boolean = false,
-    val isRefreshing: Boolean = false,
-    val number: Long = -1
+    val isRefreshing: Boolean = false
+    //val number: Long = -1
 ) : MvRxState
 
 class HomeViewModel(
@@ -82,7 +82,7 @@ class HomeViewModel(
         historyTopicDao.insertHistoryTopic(bean).subscribeOn(Schedulers.io())
             .execute {
                 copy(
-                    number = it() ?: -1
+                    //number = it() ?: -1
                 )
             }
     }
