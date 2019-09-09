@@ -1,7 +1,11 @@
 package com.judge.app.fragments.judge
 
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager
 import com.airbnb.mvrx.*
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
@@ -9,14 +13,14 @@ import com.judge.data.bean.Forumlist
 import com.judge.data.bean.SubscribeBean
 import com.judge.data.repository.JudgeRepository
 import com.judge.editionItem
-import com.judge.network.JsonResponse
 import com.judge.network.Message
 import com.judge.utils.LogUtils
-import com.vondear.rxtool.view.RxToast
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
-import org.jetbrains.anko.support.v4.runOnUiThread
 import org.jetbrains.anko.support.v4.toast
+import com.judge.R
+import com.vondear.rxtool.view.RxToast
 
 /**
  * @author: jaffa
@@ -56,6 +60,7 @@ class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>
 
         val maps = hashMapOf("formhash" to state.formhash, "id" to id)
         JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
             .doFinally { setState { copy(isLoading = false) } }
@@ -63,9 +68,6 @@ class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>
 
     }
 
-    fun reset(){
-        setState { copy() }
-    }
 
     companion object : MvRxViewModelFactory<EditionViewModel, EditionState> {
         override fun create(
@@ -92,10 +94,17 @@ class EditionFragment : BaseFragment() {
                     //viewModel.SubscribeJudge(item.fid)
                     val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
                     JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
                             val messagestr = it.Message.messagestr
-                            LogUtils.e(messagestr+"8888888888888888888888888888888888888888")
-                           toast(messagestr)
+                            context?.let {
+                                RxToast.info(
+                                    context!!,
+                                    messagestr,
+                                    Toast.LENGTH_SHORT,
+                                    false
+                                ).show()
+                            }
                         }
                 }
 
