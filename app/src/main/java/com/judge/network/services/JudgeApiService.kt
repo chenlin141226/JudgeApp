@@ -78,8 +78,8 @@ interface JudgeApiService {
     @POST(Constant.EXCHANGE)
     fun postProduct(@Query("id_7ree") id_7ree: String, @FieldMap map: HashMap<String, String>):Observable<JsonResponse<ExchangeBean>>
 
-    //兑换成功
+    //订阅
     @GET(Constant.SUBSCRIBE)
-    fun subscribeJudge(@QueryMap map: HashMap<String, String?>) : Observable<JsonResponse<Message>>
+    fun subscribeJudge(@QueryMap map: HashMap<String, String?>) : Observable<JsonResponse<SubscribeBean>>
 
 }

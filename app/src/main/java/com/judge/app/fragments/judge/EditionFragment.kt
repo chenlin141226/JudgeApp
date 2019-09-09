@@ -16,6 +16,7 @@ import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.support.v4.runOnUiThread
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * @author: jaffa
@@ -25,7 +26,9 @@ import org.jetbrains.anko.support.v4.runOnUiThread
 data class EditionState(
     val editionItems: List<Forumlist>? = emptyList(),
     val isLoading: Boolean = false,
-    val formhash: String? = null
+    val formhash: String? = null,
+    val subscribeBean: SubscribeBean? = null,
+    val message: Message? = null
 ) : MvRxState
 
 class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>(editionState) {
@@ -48,22 +51,21 @@ class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>
             }
     }
 
-//    //订阅
-//    fun SubscribeJudge(id: String) = withState { state ->
-//
-//        val maps = hashMapOf("formhash" to state.formhash, "id" to id)
-//        JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
-//            .doOnSubscribe { setState { copy(isLoading = true) } }
-//            .doOnError {
-//                it.message.let { it1 ->
-//                    LogUtils.e(it1!!)
-//                }
-//            }
-//            .doFinally {
-//                setState { copy(isLoading = false) }
-//            }
-//
-//    }
+    //订阅
+    fun SubscribeJudge(id: String) = withState { state ->
+
+        val maps = hashMapOf("formhash" to state.formhash, "id" to id)
+        JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
+            .doOnSubscribe { setState { copy(isLoading = true) } }
+            .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute { copy(subscribeBean = it()?.Variables, message = it()?.Message) }
+
+    }
+
+    fun reset(){
+        setState { copy() }
+    }
 
     companion object : MvRxViewModelFactory<EditionViewModel, EditionState> {
         override fun create(
@@ -87,23 +89,21 @@ class EditionFragment : BaseFragment() {
                 id(item.fid)
                 editionItem(item)
                 onClick { _ ->
+                    //viewModel.SubscribeJudge(item.fid)
                     val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
                     JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
-                        .subscribe { it ->
-                            val msg = it.Message.messagestr
-                            runOnUiThread {
-                                context?.let {
-                                    RxToast.info(
-                                        it,
-                                        msg,
-                                        Toast.LENGTH_SHORT,
-                                        false
-                                    ).show()
-                                }
-                            }
+                        .subscribe {
+                            val messagestr = it.Message.messagestr
+                            LogUtils.e(messagestr+"8888888888888888888888888888888888888888")
+                           toast(messagestr)
                         }
                 }
 
+//               if(state.subscribeBean?.code == "1"||state.subscribeBean?.code == "0"){
+//                   context?.let {
+//                       RxToast.info(it, state.message?.messagestr.toString(), Toast.LENGTH_SHORT, false).show()
+//                   }
+//               }
             }
         }
 

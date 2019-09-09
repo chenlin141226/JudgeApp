@@ -1,6 +1,5 @@
 package com.judge.app.fragments.judge
 
-import android.widget.Toast
 import com.airbnb.mvrx.*
 import com.judge.R
 import com.judge.app.core.BaseFragment
@@ -10,7 +9,6 @@ import com.judge.attentionItem
 import com.judge.data.bean.Attention
 import com.judge.data.repository.JudgeRepository
 import com.judge.utils.LogUtils
-import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 

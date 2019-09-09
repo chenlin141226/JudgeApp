@@ -62,7 +62,7 @@ object JudgeRepository {
     fun postProduct(productId : String,map: HashMap<String, String>):Observable<JsonResponse<ExchangeBean>> = judgeService.postProduct(productId,map)
 
     //订阅
-    fun subscribeJudge(map: HashMap<String, String?>) : Observable<JsonResponse<Message>> = judgeService.subscribeJudge(map)
+    fun subscribeJudge(map: HashMap<String, String?>) : Observable<JsonResponse<SubscribeBean>> = judgeService.subscribeJudge(map)
 
     //推荐，关注板块
     fun getPlate():Observable<JsonResponse<PlateBean>> = judgeService.getPlate()

@@ -30,7 +30,7 @@ object Constant {
     const val EDITION = "/api/mobile/index.php?version=4&module=forumindex"
 
     //订阅
-    const val SUBSCRIBE = "/api/mobile/index.php?version=4&module=favthread"
+    const val SUBSCRIBE = "/api/mobile/index.php?version=4&module=favforum"
 
     //裁判说 - 关注
     const val ATTENTION = "/api/mobile/index.php?version=4&module=myfavforum"

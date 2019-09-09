@@ -9,9 +9,16 @@
         <action
                 android:id="@+id/action_judgeFragment_to_judgeDetailFragment"
                 app:destination="@id/judgeDetailFragment"/>
+        <action
+                android:id="@+id/action_judgeFragment_to_attentionFragment"
+                app:destination="@id/attentionFragment"/>
     </fragment>
     <fragment
             android:id="@+id/judgeDetailFragment"
             android:name="com.judge.app.fragments.judge.JudgeDetailFragment"
             android:label="JudgeDetailFragment"/>
+    <fragment
+        android:id="@+id/attentionFragment"
+        android:name="com.judge.app.fragments.judge.AttentionFragment"
+        android:label=""/>
 </navigation>
