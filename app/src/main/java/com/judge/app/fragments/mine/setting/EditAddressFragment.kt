@@ -52,8 +52,6 @@ class EditAddressFragment : BaseEditFragment() {
                                     .setCancelColor(context!!.resources.getColor(R.color.colorPrimary))
                                     .setSubmitColor(context!!.resources.getColor(R.color.colorPrimary))
                                     .build()
-                            provincesAndCities = MineRepository.getProvincesAndCities(context!!)
-                            regions = MineRepository.getCityRegions(context!!)
                             pickView.setPicker(
                                 provincesAndCities.first,
                                 provincesAndCities.second,
@@ -77,4 +75,11 @@ class EditAddressFragment : BaseEditFragment() {
             }
         }
     }
+
+    override fun initData() {
+        super.initData()
+        provincesAndCities = MineRepository.getProvincesAndCities(context!!)
+        regions = MineRepository.getCityRegions(context!!)
+    }
+
 }

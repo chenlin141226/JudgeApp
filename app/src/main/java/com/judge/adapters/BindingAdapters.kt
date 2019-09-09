@@ -46,7 +46,7 @@ fun setImage(imageView: ImageView, imageUrl: String, isPhoto: Boolean) {
         builder
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
-            .placeholder(R.drawable.default_photo)
+            .error(R.drawable.default_photo)
             .apply(RequestOptions.bitmapTransform(RoundedCorners(RxImageTool.dp2px(10.0f))))
             .into(imageView)
     } else {
