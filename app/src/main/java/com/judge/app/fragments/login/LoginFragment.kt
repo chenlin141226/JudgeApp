@@ -139,7 +139,7 @@ class LoginFragment : BaseFragment() {
             }
             //找回密码
             findClickListener { _ ->
-              navigateTo(R.id.action_homeFragment_to_forgetFragment,state.loginStatus)
+              navigateTo(R.id.action_homeFragment_to_forgetFragment)
             }
 
         }
@@ -147,7 +147,6 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun initData() {
-        loginViewModel.isLogin()
         loginViewModel.getUserNameAndPsw()
     }
 }

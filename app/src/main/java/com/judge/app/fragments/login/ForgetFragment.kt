@@ -30,19 +30,19 @@ import kotlinx.android.synthetic.main.activity_login.*
  * 找回密码Fragment
  */
 data class FindPwdState(
-    val loginStatus: LoginStatus,
+    val loginStatus: LoginStatus? =null,
     val isLoading: Boolean = false,
     val userName: String = "",
     val email: String = "",
     val findPwd: FindPwdBean? = null,
     val message: Message? = null
-) : MvRxState {
-
-    constructor(args: LoginStatus) : this(loginStatus = args)
-}
+) : MvRxState
 
 class FindPwdViewModel(initialiState: FindPwdState) : MvRxViewModel<FindPwdState>(initialiState) {
 
+    init {
+        isLogin()
+    }
 
     fun setUserName(username: String) {
         setState { copy(userName = username) }
@@ -52,9 +52,10 @@ class FindPwdViewModel(initialiState: FindPwdState) : MvRxViewModel<FindPwdState
         setState { copy(email = email) }
     }
 
+    //找回密码
     fun findPwd() = withState { state ->
         val map = hashMapOf(
-            "formhash" to state.loginStatus.formhash,
+            "formhash" to state.loginStatus?.formhash,
             "email" to state.email,
             "username" to state.userName
         )
@@ -71,6 +72,20 @@ class FindPwdViewModel(initialiState: FindPwdState) : MvRxViewModel<FindPwdState
                 message = it()?.Message) }
     }
 
+    //是否登录
+    fun isLogin(){
+        LoginRepository.isLogin().subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                setState { copy(isLoading = true) }
+            }
+            .doOnError {
+                it.message?.let { it1 -> LogUtils.e(it1) }
+            }
+            .doFinally { setState { copy(isLoading = false) } }
+            .execute { copy(loginStatus = it()?.Variables) }
+    }
+
+    //重置
     fun reset(){
         setState { copy(findPwd = null,message = null) }
     }
@@ -120,10 +135,16 @@ class ForgetFragment : BaseFragment() {
                 viewModel.findPwd()
             }
 
-            if(state.findPwd?.code == "1"){
-                context?.let { RxToast.info(it, state.message?.messagestr.toString(), Toast.LENGTH_SHORT, true).show() }
-            }else if(state.findPwd?.code == "0"){
-                context?.let { RxToast.info(it, state.message?.messagestr.toString(), Toast.LENGTH_SHORT, true).show() }
+            if(state.findPwd?.code == "1"||state.findPwd?.code == "0") {
+                context?.let {
+                    RxToast.info(
+                        it,
+                        state.message?.messagestr.toString(),
+                        Toast.LENGTH_SHORT,
+                        true
+                    ).show()
+                    viewModel.reset()
+                }
             }
         }
     }

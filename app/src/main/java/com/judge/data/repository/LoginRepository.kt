@@ -32,5 +32,5 @@ object LoginRepository {
     fun isLogin(): Observable<JsonResponse<LoginStatus>> = loginseivice.isLogin()
 
     //找回密码
-    fun findPwd(map: HashMap<String, String>) : Observable<JsonResponse<FindPwdBean>> = loginseivice.findPwd(map)
+    fun findPwd(map: HashMap<String, String?>) : Observable<JsonResponse<FindPwdBean>> = loginseivice.findPwd(map)
 }

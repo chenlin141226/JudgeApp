@@ -39,6 +39,7 @@ class MarketFragment : BaseFragment() {
     }
 
     override fun initView() {
+        sharedViewModel.setVisible(true)
         val titles = arrayOf(
             resources.getString(R.string.virtualCard),
             resources.getString(R.string.videoMembers),

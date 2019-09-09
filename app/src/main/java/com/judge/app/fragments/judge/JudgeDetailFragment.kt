@@ -58,6 +58,10 @@ class JudgeDetailViewModel(initialiState: JudgeDetailState) : MvRxViewModel<Judg
             .execute { copy(forum = it()?.Variables?.forum) }
     }
 
+    fun reset(){
+        setState { copy(forum = null) }
+    }
+
     companion object : MvRxViewModelFactory<JudgeDetailViewModel, JudgeDetailState> {
 
         override fun create(viewModelContext: ViewModelContext, state: JudgeDetailState): JudgeDetailViewModel? {
@@ -80,6 +84,7 @@ class JudgeDetailFragment : BaseMvRxFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         epoxyController.onRestoreInstanceState(savedInstanceState)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -99,7 +104,9 @@ class JudgeDetailFragment : BaseMvRxFragment() {
             recyclerView.isNestedScrollingEnabled = false
             recyclerView.layoutManager = linearLayoutManager
             recyclerView.setController(epoxyController)
+
             initView()
+            initData()
         }
     }
 
@@ -125,12 +132,11 @@ class JudgeDetailFragment : BaseMvRxFragment() {
         }
     }
 
+    fun initData(){
+        viewModel.fetchDetail()
+    }
+
     fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
-        if(state.forum == null){
-            context?.let {
-                RxToast.info(it, "null", Toast.LENGTH_SHORT, false).show()
-            }
-        }
         state.forum?.let {
             fragmentJudgeDetail {
                 id(state.forum.fid + state.forum.posts)

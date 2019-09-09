@@ -95,6 +95,11 @@ class MyProductFragment : BaseFragment() {
         }
     }
 
+    override fun initView() {
+        super.initView()
+        sharedViewModel.setVisible(false)
+    }
+
     override fun initData() {
         toolbar.visibility = View.VISIBLE
         toolbar.setBackgroundColor(Color.WHITE)

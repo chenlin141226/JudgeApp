@@ -1,11 +1,7 @@
 package com.judge.app.fragments.judge
 
 import android.annotation.SuppressLint
-import android.view.Gravity
-import android.widget.TableLayout
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.flyco.tablayout.SlidingTabLayout
 import com.judge.R
 import com.judge.adapters.ViewPagerAdapter
 import com.judge.app.core.BaseFragment

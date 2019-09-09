@@ -65,7 +65,7 @@ class AttentionFragment : BaseFragment() {
                     navigateTo(R.id.action_judgeFragment_to_judgeDetailFragment, item)
                 }
                 onClick { _ ->
-                    context?.let { RxToast.info(it, "success", Toast.LENGTH_SHORT, true).show() }
+                    //context?.let { RxToast.info(it, "success", Toast.LENGTH_SHORT, true).show() }
                 }
             }
         }
@@ -73,6 +73,7 @@ class AttentionFragment : BaseFragment() {
 
 
     override fun initView() {
+        sharedViewModel.setVisible(true)
         viewModel.selectSubscribe(AttentionState::isLoading) {
             if (it) {
                 loadingDialog.show()
@@ -94,5 +95,10 @@ class AttentionFragment : BaseFragment() {
                 it.finishLoadMore(1000)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+       // sharedViewModel.setVisible(false)
     }
 }

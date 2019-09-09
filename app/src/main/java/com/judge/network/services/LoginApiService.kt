@@ -39,5 +39,5 @@ interface LoginApiService {
     //找回密码
     @FormUrlEncoded
     @POST(Constant.FINDPASSWORD)
-    fun findPwd(@FieldMap map: HashMap<String, String>) : Observable<JsonResponse<FindPwdBean>>
+    fun findPwd(@FieldMap map: HashMap<String, String?>) : Observable<JsonResponse<FindPwdBean>>
 }
