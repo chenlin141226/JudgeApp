@@ -61,6 +61,7 @@ object MineRepository {
             buff.forEachLine {
                 stringBuilder.append(it)
             }
+            buff.close()
         } catch (e: IOException) {
             e.printStackTrace()
         }

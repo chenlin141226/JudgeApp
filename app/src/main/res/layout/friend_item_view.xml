@@ -45,7 +45,6 @@
                 android:layout_margin="@dimen/dp_5"
                 android:background="@drawable/bg_photo"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_delete"
                 app:imageUrl="@{friend.avatar}"
                 app:isPhoto="@{true}" />
 
