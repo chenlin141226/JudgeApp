@@ -23,6 +23,9 @@ abstract class AppDataBase : RoomDatabase() {
             }
         }
 
+        /**
+         * ！！！数据库没有做用户区分！！！
+         */
         private fun buildDatabase(context: Context): AppDataBase {
             return Room.databaseBuilder(context, AppDataBase::class.java, "AppDatabase").build()
         }
