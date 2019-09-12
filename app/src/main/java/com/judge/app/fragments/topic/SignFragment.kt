@@ -20,6 +20,7 @@ import com.judge.views.SimpleTextWatcher
 import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.runOnUiThread
 
 /**
  * @author: jaffa
@@ -91,7 +92,13 @@ class SignFragment : BaseFragment() {
                 findNavController().navigate(R.id.action_signFragment_to_contributeplate)
             }
 
-            if(state.pushTie?.code == "1"||state.pushTie?.code == "0"){
+            if(state.pushTie?.code == "1"){
+                viewModel.reset()
+                context?.let {
+                    RxToast.info(it, state.message?.messagestr.toString(), Toast.LENGTH_SHORT, false).show()
+                }
+                runOnUiThread { findNavController().popBackStack() }
+            }else if(state.pushTie?.code == "0"){
                 viewModel.reset()
                 context?.let {
                     RxToast.info(it, state.message?.messagestr.toString(), Toast.LENGTH_SHORT, false).show()

@@ -11,6 +11,7 @@ import com.judge.data.repository.JudgeRepository
 import com.judge.extensions.clear
 import com.judge.myproductItem
 import com.judge.utils.LogUtils
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 
@@ -27,12 +28,14 @@ data class MyProductState(
 class MyProductViewModel(initialState: MyProductState) :
     MvRxViewModel<MyProductState>(initialState) {
 
-    init {
-        fetchMyProduct(1)
-    }
+//    init {
+//        fetchMyProduct(1)
+//    }
 
     fun fetchMyProduct(page: Int) {
-        JudgeRepository.getMyProduct("$page").subscribeOn(Schedulers.io())
+        JudgeRepository.getMyProduct("$page")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnError {
                 it.message?.let { it1 -> LogUtils.e(it1) }

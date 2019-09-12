@@ -107,11 +107,17 @@ class PostTopicFragment : BaseFragment() {
             }
 
 
-            if (state.sign?.code == "1" || state.sign?.code == "0") {
-                viewModel.reset()
+            if (state.result?.submit == "1") {
                 context?.let {
-                    RxToast.info(it, state.result?.msg.toString(), Toast.LENGTH_SHORT, false).show()
+                    RxToast.info(it, "签到成功", Toast.LENGTH_SHORT, false).show()
                 }
+                viewModel.reset()
+                runOnUiThread { findNavController().popBackStack() }
+            }else if(state.result?.submit == "0"){
+                context?.let {
+                    RxToast.info(it, state.result.msg, Toast.LENGTH_SHORT, false).show()
+                }
+                viewModel.reset()
             }
         }
     }
