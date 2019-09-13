@@ -24,9 +24,9 @@ data class MarketState(
 ) : MvRxState
 
 class MarketViewModel(marketState: MarketState) : MvRxViewModel<MarketState>(marketState) {
-    init {
-        fetchMarkInfo(1)
-    }
+//    init {
+//        fetchMarkInfo(1)
+//    }
 
     fun fetchMarkInfo(index: Int) = withState { _ ->
         val map = hashMapOf("page" to "1", "fenlei_7ree" to "${index + 1}")
