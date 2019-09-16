@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.runOnUiThread
 
-/**
+/**-
  * @author: jaffa
  * @date: 2019/8/22
  * 签到

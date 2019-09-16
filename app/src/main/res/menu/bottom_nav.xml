@@ -29,10 +29,9 @@
             android:contentDescription="@string/title_judge"
             android:title="@string/title_judge"/>
     <item
-            android:id="@+id/space"
+            android:id="@+id/topic"
             android:contentDescription="@string/title_market"
             android:title=""
-            android:enabled="false"
     />
     <item
             android:id="@+id/market"
