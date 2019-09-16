@@ -38,6 +38,7 @@ class HomeFragment : BaseFragment() {
                             id = newsItem.tid
                         )
                     )
+                    navigateTo(R.id.action_homeFragment_to_newsDetailFragment)
                 }
             }
         }
