@@ -51,10 +51,6 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <activity
-                android:name=".app.activities.SignActivity"
-                android:screenOrientation="portrait" />
-
         <service
                 android:name=".utils.NetworkService"
                 android:screenOrientation="portrait" />

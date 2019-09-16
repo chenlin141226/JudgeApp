@@ -3,13 +3,10 @@ package com.judge.app.fragments.topic
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.navigation.findNavController
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
-import com.judge.extensions.setSelectItem
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_sendtopic.view.*
 
 /**

@@ -2,8 +2,6 @@ package com.judge.app.fragments.topic
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
-import android.util.Log
-import android.view.MenuItem
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.MvRxState

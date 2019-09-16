@@ -12,10 +12,6 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-//        signImageView.setOnClickListener {
-//            Log.e("TAG","success")
-//            startActivity(Intent(this,SignActivity::class.java))
-//        }
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
