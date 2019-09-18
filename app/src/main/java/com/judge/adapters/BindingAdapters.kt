@@ -55,6 +55,11 @@ fun setImage(imageView: ImageView, imageUrl: String, isPhoto: Boolean) {
 
 }
 
+@BindingAdapter("imageId", requireAll = false)
+fun setAllImage(imageView: ImageView, id: Int) {
+    imageView.setImageResource(id)
+}
+
 @BindingAdapter("imageAllUrl", requireAll = false)
 fun setAllImage(imageView: ImageView, imageUrl: String) {
     Glide.with(imageView).load(imageUrl).placeholder(R.drawable.footbar)

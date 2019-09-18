@@ -117,4 +117,12 @@
         <item>@drawable/ic_track_selected</item>
         <item>@drawable/ic_setting_selected</item>
     </integer-array>
+
+    <integer-array name="share_item_icons">
+        <item>@drawable/ic_wechat</item>
+        <item>@drawable/ic_friends_circle</item>
+        <item>@drawable/ic_qq</item>
+        <item>@drawable/ic_qq_zone</item>
+        <item>@drawable/ic_microblog</item>
+    </integer-array>
 </resources>
