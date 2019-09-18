@@ -29,6 +29,10 @@ class ShareBottomPopupView(
                 shareItem {
                     id(i)
                     imageSrcId(shareIcons.getResourceId(i, 0))
+                    onClick { _ ->
+                        onSelectListener.onSelect(i, i.toString())
+                        dismiss()
+                    }
                 }
             }
             shareIcons.recycle()
