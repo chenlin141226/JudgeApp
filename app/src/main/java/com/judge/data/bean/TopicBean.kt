@@ -83,5 +83,6 @@ data class Topic(
     val spaceuid: String,
     val title: String,
     val uid: String,
-    val url: String
+    val url: String,
+    val vdateline: String
 )
