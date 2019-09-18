@@ -56,7 +56,11 @@ class TopicViewModel(
 
     fun fetchFavoriteTopics() {
         topicMap =
-            hashMapOf("version" to "4", "module" to "myfavthread", "start" to "0", "limit" to "20")
+            hashMapOf(
+                "version" to "4",
+                "module" to "myfavthread",
+                "formhash" to (MineRepository.userProfile?.formhash ?: "")
+            )
         fetchTopics()
     }
 
