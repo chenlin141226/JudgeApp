@@ -2,6 +2,7 @@ package com.judge.data.repository
 
 import com.judge.data.bean.BannerBean
 import com.judge.data.bean.NewsBean
+import com.judge.data.bean.NewsDetailBean
 import com.judge.network.JsonResponse
 import com.judge.network.ServiceCreator
 import com.judge.network.services.HomeApIService
@@ -18,5 +19,9 @@ object HomeRepository {
 
     fun fetchNews(map: HashMap<String, String>): Observable<JsonResponse<NewsBean>> {
         return homeService.getHomeNews(map)
+    }
+
+    fun fetchNewsDetail(map: HashMap<String, String>): Observable<JsonResponse<NewsDetailBean>> {
+        return homeService.getNewsDetail(map)
     }
 }

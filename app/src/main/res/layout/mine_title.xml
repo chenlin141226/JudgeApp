@@ -121,7 +121,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/friends" />
+                    android:text="@string/friends"
+                    android:textSize="@dimen/text_15" />
             </LinearLayout>
 
             <LinearLayout
@@ -145,7 +146,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/moth_sign" />
+                    android:text="@string/moth_sign"
+                    android:textSize="@dimen/text_15" />
             </LinearLayout>
 
             <LinearLayout
@@ -169,7 +171,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/total_sign" />
+                    android:text="@string/total_sign"
+                    android:textSize="@dimen/text_15" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

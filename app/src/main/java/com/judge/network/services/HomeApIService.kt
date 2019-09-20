@@ -2,6 +2,7 @@ package com.judge.network.services
 
 import com.judge.data.bean.BannerBean
 import com.judge.data.bean.NewsBean
+import com.judge.data.bean.NewsDetailBean
 import com.judge.network.JsonResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -13,4 +14,7 @@ interface HomeApIService {
 
     @GET("/api/mobile/index.php")
     fun getHomeNews(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<NewsBean>>
+
+    @GET("/api/mobile/index.php")
+    fun getNewsDetail(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<NewsDetailBean>>
 }
