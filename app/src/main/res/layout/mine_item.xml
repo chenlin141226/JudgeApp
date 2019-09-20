@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
->
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <variable name="item" type="com.judge.data.bean.MineItemBean"/>
-        <variable name="onClick" type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="item"
+            type="com.judge.data.bean.MineItemBean" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
     </data>
+
     <TextView
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_30"
-            android:layout_marginEnd="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:drawablePadding="@dimen/dp_20"
-            android:gravity="center_vertical"
-            android:text="@{item.text}"
-            android:onClick="@{onClick}"
-            app:drawableSrc="@{item}"
-    />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:drawablePadding="@dimen/dp_20"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/text_15"
+        android:onClick="@{onClick}"
+        android:orientation="horizontal"
+        android:text="@{item.text}"
+        app:drawableSrc="@{item}" />
 </layout>

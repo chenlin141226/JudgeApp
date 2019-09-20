@@ -1,5 +1,8 @@
 package com.judge.data.bean
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class NewsBean(
     val `data`: List<News>,
     val auth: Any,
@@ -17,7 +20,7 @@ data class NewsBean(
     val success: String
 )
 
-
+@Parcelize
 data class News(
     val attachment: String,
     val author: String,
@@ -33,4 +36,4 @@ data class News(
     val subject: String,
     val tid: String,
     val views: String
-)
+):Parcelable
