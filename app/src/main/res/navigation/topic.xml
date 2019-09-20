@@ -7,7 +7,7 @@
     <fragment
             android:id="@+id/topicFragments"
             android:name="com.judge.app.fragments.topic.TopicFragment"
-            android:label="HomeFragment">
+            android:label="">
         <action
                 android:id="@+id/action_sendTopicFragment_to_postFragment"
                 app:destination="@id/postFragment"

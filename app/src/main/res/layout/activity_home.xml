@@ -22,6 +22,7 @@
                android:src="@drawable/ic_sign"
                android:layout_gravity="center_horizontal"
                android:contentDescription="@string/sign_in"
+
                android:id="@+id/signImageView"
                android:layout_marginBottom="@dimen/dp_20"
                app:layout_constraintBottom_toBottomOf="parent"

@@ -135,7 +135,6 @@ class PostTopicFragment : BaseFragment() {
     override fun initView() {
         toolbar.isVisible = true
         toolbar.title = resources.getString(R.string.post)
-        toolbar.setTitleTextColor(R.color.colorAccent)
         rightButton.apply {
             text = resources.getString(R.string.publish)
             visibility = View.VISIBLE
