@@ -45,8 +45,12 @@ class NewsDetailViewModel(
         HomeRepository.fetchNewsDetail(map)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe {
-
-            }.execute {
+                setState { copy(isLoading = true) }
+            }
+            .doFinally {
+                setState { copy(isLoading = false) }
+            }
+            .execute {
                 copy(newsDetailResponse = it)
             }
     }
@@ -70,6 +74,7 @@ class NewsDetailFragment : BaseFragment() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun initView() {
         super.initView()
+        sharedViewModel.setVisible(false)
         setHasOptionsMenu(true)
         refreshLayout.isVisible = false
         toolbar.apply {

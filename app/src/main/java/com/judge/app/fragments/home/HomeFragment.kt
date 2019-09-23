@@ -45,6 +45,7 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun initView() {
+        sharedViewModel.setVisible(true)
         refreshLayout.apply {
             setEnableAutoLoadMore(true)
             setEnableRefresh(true)
