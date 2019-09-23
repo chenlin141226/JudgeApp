@@ -1,12 +1,13 @@
 package com.judge.app.fragments.home
 
+import android.webkit.WebView
 import androidx.core.view.isVisible
 import com.airbnb.mvrx.Async
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.fragmentViewModel
-import com.github.lzyzsd.jsbridge.BridgeWebView
 import com.google.gson.Gson
+import com.jeremyliao.liveeventbus.utils.AppUtils.getApplicationContext
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
@@ -16,11 +17,9 @@ import com.judge.data.bean.News
 import com.judge.data.bean.NewsDetailBean
 import com.judge.data.repository.HomeRepository
 import com.judge.network.JsonResponse
-import com.judge.utils.LogUtils
 import com.judge.views.ShareBottomPopupView
 import com.lxj.xpopup.interfaces.OnSelectListener
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.news_detail_view.*
 import kotlinx.android.synthetic.main.news_detail_view.view.*
 import org.jetbrains.anko.appcompat.v7.coroutines.onMenuItemClick
 import org.jetbrains.anko.support.v4.toast
@@ -53,7 +52,7 @@ class NewsDetailViewModel(
 class NewsDetailFragment : BaseFragment() {
     private val newsDetailUrl = "http://10.5.45.221:8080/"
     private val viewModel: NewsDetailViewModel by fragmentViewModel()
-    private lateinit var detailWebView: BridgeWebView
+    private lateinit var detailWebView: WebView
     override fun epoxyController(): MvRxEpoxyController = simpleController {
     }
 
@@ -82,22 +81,14 @@ class NewsDetailFragment : BaseFragment() {
         titleViewStub.layoutResource = R.layout.news_detail_view
         titleViewStub.inflate().apply {
             detailWebView = webView
-
-            //从H5 Js 获取数据
-            webView.registerHandler("") { data, function ->
-                function.onCallBack(data)
-            }
-
-            //向H5 Js 发送数据
-            /*webView.callHandler("", Gson().toJson()) { responseData ->
-                LogUtils.e(responseData)
-            }*/
-
+            webView.settings.javaScriptEnabled =true
+            detailWebView.loadUrl(newsDetailUrl)
         }
     }
 
     override fun initData() {
         super.initData()
+
         viewModel.selectSubscribe(NewsDetailState::newsId) {
             viewModel.fetchNewsDetail(it)
         }
@@ -109,10 +100,7 @@ class NewsDetailFragment : BaseFragment() {
             }
         }
         viewModel.asyncSubscribe(NewsDetailState::newsDetailResponse, onSuccess = {
-            detailWebView.callHandler("getInfo", Gson().toJson(it)) { result ->
-                webView.loadUrl(newsDetailUrl)
-                LogUtils.e(result)
-            }
+            detailWebView.loadUrl("javascript:('"+Gson().toJson(it)+"')")
         })
     }
 
