@@ -1,13 +1,17 @@
 package com.judge.app.fragments.home
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.view.ViewGroup
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.core.view.isVisible
 import com.airbnb.mvrx.Async
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.fragmentViewModel
 import com.google.gson.Gson
-import com.jeremyliao.liveeventbus.utils.AppUtils.getApplicationContext
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
@@ -56,6 +60,7 @@ class NewsDetailFragment : BaseFragment() {
     override fun epoxyController(): MvRxEpoxyController = simpleController {
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun initView() {
         super.initView()
         setHasOptionsMenu(true)
@@ -79,10 +84,16 @@ class NewsDetailFragment : BaseFragment() {
             }
         }
         titleViewStub.layoutResource = R.layout.news_detail_view
+        titleViewStub.run {
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+        }
         titleViewStub.inflate().apply {
             detailWebView = webView
-            webView.settings.javaScriptEnabled =true
+            detailWebView.settings.javaScriptEnabled = true
+
             detailWebView.loadUrl(newsDetailUrl)
+
         }
     }
 
@@ -100,7 +111,26 @@ class NewsDetailFragment : BaseFragment() {
             }
         }
         viewModel.asyncSubscribe(NewsDetailState::newsDetailResponse, onSuccess = {
-            detailWebView.loadUrl("javascript:('"+Gson().toJson(it)+"')")
+            //detailWebView.loadUrl("javascript:getInfo('"+Gson().toJson(it)+"')")
+            detailWebView.webViewClient = object : WebViewClient() {
+                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                    super.onPageStarted(view, url, favicon)
+                }
+
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+
+                    detailWebView.loadUrl("javascript:getInfo('" + Gson().toJson(it) + "')")
+                }
+
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    detailWebView.loadUrl(newsDetailUrl)
+                    return true
+                }
+            }
         })
     }
 
