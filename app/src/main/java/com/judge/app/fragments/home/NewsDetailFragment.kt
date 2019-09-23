@@ -1,9 +1,7 @@
 package com.judge.app.fragments.home
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.view.isVisible
@@ -31,6 +29,7 @@ import org.jetbrains.anko.support.v4.toast
 data class NewsDetailState(
     val isLoading: Boolean = false,
     val newsDetailResponse: Async<JsonResponse<NewsDetailBean>> = Uninitialized,
+    val isPageFinished: Boolean = false,
     val newsId: String
 ) : MvRxState {
     constructor(args: News) : this(newsId = args.tid)
@@ -51,12 +50,20 @@ class NewsDetailViewModel(
                 copy(newsDetailResponse = it)
             }
     }
+
+    fun setPageFinished(boolean: Boolean) = withState {
+        if (it.isPageFinished) return@withState
+        setState {
+            copy(isPageFinished = boolean)
+        }
+    }
 }
 
 class NewsDetailFragment : BaseFragment() {
     private val newsDetailUrl = "http://10.5.45.221:8080/"
     private val viewModel: NewsDetailViewModel by fragmentViewModel()
     private lateinit var detailWebView: WebView
+    private lateinit var newsId: String
     override fun epoxyController(): MvRxEpoxyController = simpleController {
     }
 
@@ -91,17 +98,19 @@ class NewsDetailFragment : BaseFragment() {
         titleViewStub.inflate().apply {
             detailWebView = webView
             detailWebView.settings.javaScriptEnabled = true
-
+            detailWebView.webViewClient = object : WebViewClient() {
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    viewModel.setPageFinished(true)
+                }
+            }
             detailWebView.loadUrl(newsDetailUrl)
-
         }
     }
 
     override fun initData() {
         super.initData()
-
         viewModel.selectSubscribe(NewsDetailState::newsId) {
-            viewModel.fetchNewsDetail(it)
+            newsId = it
         }
         viewModel.selectSubscribe(NewsDetailState::isLoading) {
             if (it) {
@@ -110,27 +119,13 @@ class NewsDetailFragment : BaseFragment() {
                 loadingDialog.dismiss()
             }
         }
-        viewModel.asyncSubscribe(NewsDetailState::newsDetailResponse, onSuccess = {
-            //detailWebView.loadUrl("javascript:getInfo('"+Gson().toJson(it)+"')")
-            detailWebView.webViewClient = object : WebViewClient() {
-                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                    super.onPageStarted(view, url, favicon)
-                }
-
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    super.onPageFinished(view, url)
-
-                    detailWebView.loadUrl("javascript:getInfo('" + Gson().toJson(it) + "')")
-                }
-
-                override fun shouldOverrideUrlLoading(
-                    view: WebView?,
-                    request: WebResourceRequest?
-                ): Boolean {
-                    detailWebView.loadUrl(newsDetailUrl)
-                    return true
-                }
+        viewModel.selectSubscribe(NewsDetailState::isPageFinished) {
+            if (it) {
+                viewModel.fetchNewsDetail(newsId)
             }
+        }
+        viewModel.asyncSubscribe(NewsDetailState::newsDetailResponse, onSuccess = {
+            detailWebView.loadUrl("javascript:getInfo(" + Gson().toJson(it) + ")")
         })
     }
 
