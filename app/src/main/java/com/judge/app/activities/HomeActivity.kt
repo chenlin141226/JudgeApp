@@ -6,12 +6,14 @@ import com.judge.R
 import com.judge.app.core.BaseActivity
 import com.judge.extensions.setSelectItem
 import com.judge.extensions.setupWithNavController
+import com.vondear.rxui.activity.AndroidBug5497Workaround
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        AndroidBug5497Workaround.assistActivity(this)
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
@@ -34,7 +36,13 @@ class HomeActivity : BaseActivity() {
             itemIconTintList = null
             setSelectItem(bottom_nav.menu[0])
         }
-        val navGraphIds = listOf(R.navigation.home, R.navigation.judge,R.navigation.topic, R.navigation.market, R.navigation.mine)
+        val navGraphIds = listOf(
+            R.navigation.home,
+            R.navigation.judge,
+            R.navigation.topic,
+            R.navigation.market,
+            R.navigation.mine
+        )
 
         // Setup the bottom navigation view with a list of navigation graphs
         bottom_nav.setupWithNavController(

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.WindowManager
 import com.airbnb.mvrx.BaseMvRxActivity
 import com.vondear.rxtool.RxPermissionsTool
+import com.vondear.rxui.activity.AndroidBug5497Workaround
 
 abstract class BaseActivity : BaseMvRxActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +15,8 @@ abstract class BaseActivity : BaseMvRxActivity() {
         setStatusBar()
         RxPermissionsTool.with(this).addPermission(Manifest.permission.ACCESS_FINE_LOCATION)
             .addPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-            .addPermission(Manifest.permission.READ_EXTERNAL_STORAGE).addPermission(Manifest.permission.CAMERA)
+            .addPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+            .addPermission(Manifest.permission.CAMERA)
             .addPermission(Manifest.permission.READ_PHONE_STATE)
             .initPermission()
     }
