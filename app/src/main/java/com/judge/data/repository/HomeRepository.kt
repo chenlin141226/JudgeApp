@@ -33,4 +33,8 @@ object HomeRepository {
     fun addToFavorite(map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>> {
         return homeService.addToFavorite(map)
     }
+
+    fun sendCommentToPerson(map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>> {
+        return homeService.sendCommentToPerson(map)
+    }
 }

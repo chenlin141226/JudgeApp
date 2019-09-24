@@ -12,6 +12,7 @@ import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
+import com.judge.data.bean.ReplyBean
 import com.judge.models.NewsDetailState
 import com.judge.models.NewsDetailViewModel
 import com.judge.views.ShareBottomPopupView
@@ -110,7 +111,8 @@ class NewsDetailFragment : BaseFragment() {
     }
 
     @JavascriptInterface
-    fun replayForPerson() {
-        toast("评论回复")
+    fun replayForPerson(replayData: String) {
+        val bean = Gson().fromJson(replayData, ReplyBean::class.java)
+        viewModel.commentToPerson(forumId, bean)
     }
 }

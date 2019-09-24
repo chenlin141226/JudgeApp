@@ -7,6 +7,7 @@ import com.judge.app.core.MvRxViewModel
 import com.judge.data.bean.CommonResultBean
 import com.judge.data.bean.News
 import com.judge.data.bean.NewsDetailBean
+import com.judge.data.bean.ReplyBean
 import com.judge.data.repository.HomeRepository
 import com.judge.data.repository.MineRepository
 import com.judge.network.JsonResponse
@@ -72,6 +73,21 @@ class NewsDetailViewModel(
         )
 
         HomeRepository.addToFavorite(map).subscribeOn(Schedulers.io())
+            .execute {
+                copy(commentResult = it)
+            }
+    }
+
+    //回复发表的评论
+    fun commentToPerson(forumId: String,bean:ReplyBean){
+        val map = hashMapOf(
+            "fid" to forumId,
+            "tid" to bean.tid,
+            "message" to bean.message,
+            "formhash" to (MineRepository.userProfile?.formhash ?: ""),
+            "replysubmit" to "1"
+        )
+        HomeRepository.sendNewsComment(map).subscribeOn(Schedulers.io())
             .execute {
                 copy(commentResult = it)
             }

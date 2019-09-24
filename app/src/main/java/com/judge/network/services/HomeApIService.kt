@@ -24,4 +24,7 @@ interface HomeApIService {
 
     @GET("/api/mobile/index.php")
     fun addToFavorite(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>>
+
+    @GET("/api/mobile/index.php")
+    fun sendCommentToPerson(@QueryMap map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>>
 }
