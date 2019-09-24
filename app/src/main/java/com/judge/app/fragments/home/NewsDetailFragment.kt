@@ -2,76 +2,35 @@ package com.judge.app.fragments.home
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup
+import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.view.isVisible
-import com.airbnb.mvrx.Async
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.fragmentViewModel
 import com.google.gson.Gson
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
-import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.bean.News
-import com.judge.data.bean.NewsDetailBean
-import com.judge.data.repository.HomeRepository
-import com.judge.network.JsonResponse
+import com.judge.models.NewsDetailState
+import com.judge.models.NewsDetailViewModel
 import com.judge.views.ShareBottomPopupView
 import com.lxj.xpopup.interfaces.OnSelectListener
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.news_detail_view.view.*
 import org.jetbrains.anko.appcompat.v7.coroutines.onMenuItemClick
 import org.jetbrains.anko.support.v4.toast
 
-data class NewsDetailState(
-    val isLoading: Boolean = false,
-    val newsDetailResponse: Async<JsonResponse<NewsDetailBean>> = Uninitialized,
-    val isPageFinished: Boolean = false,
-    val newsId: String
-) : MvRxState {
-    constructor(args: News) : this(newsId = args.tid)
-}
-
-class NewsDetailViewModel(
-    initialState: NewsDetailState
-) : MvRxViewModel<NewsDetailState>(initialState) {
-    val map = hashMapOf("version" to "4", "module" to "viewthread")
-
-    fun fetchNewsDetail(tid: String) {
-        map["tid"] = tid
-        HomeRepository.fetchNewsDetail(map)
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe {
-                setState { copy(isLoading = true) }
-            }
-            .doFinally {
-                setState { copy(isLoading = false) }
-            }
-            .execute {
-                copy(newsDetailResponse = it)
-            }
-    }
-
-    fun setPageFinished(boolean: Boolean) = withState {
-        if (it.isPageFinished) return@withState
-        setState {
-            copy(isPageFinished = boolean)
-        }
-    }
-}
 
 class NewsDetailFragment : BaseFragment() {
     private val newsDetailUrl = "http://10.5.45.221:8080/"
     private val viewModel: NewsDetailViewModel by fragmentViewModel()
     private lateinit var detailWebView: WebView
     private lateinit var newsId: String
+    private lateinit var forumId: String
     override fun epoxyController(): MvRxEpoxyController = simpleController {
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint("SetJavaScriptEnabled", "JavascriptInterface")
     override fun initView() {
         super.initView()
         sharedViewModel.setVisible(false)
@@ -108,6 +67,7 @@ class NewsDetailFragment : BaseFragment() {
                     viewModel.setPageFinished(true)
                 }
             }
+            detailWebView.addJavascriptInterface(this@NewsDetailFragment, "android")
             detailWebView.loadUrl(newsDetailUrl)
         }
     }
@@ -130,8 +90,27 @@ class NewsDetailFragment : BaseFragment() {
             }
         }
         viewModel.asyncSubscribe(NewsDetailState::newsDetailResponse, onSuccess = {
+            forumId = it.Variables.fid
             detailWebView.loadUrl("javascript:getInfo(" + Gson().toJson(it) + ")")
+        })
+        viewModel.asyncSubscribe(NewsDetailState::commentResult, onSuccess = {
+            viewModel.fetchNewsDetail(newsId)
         })
     }
 
+    @JavascriptInterface
+    fun replay(message: String) {
+        viewModel.sendNewsComment(forumId, newsId, message)
+    }
+
+    //H5收藏按钮 回调
+    @JavascriptInterface
+    fun collect() {
+        viewModel.addToFavorite(newsId)
+    }
+
+    @JavascriptInterface
+    fun replayForPerson() {
+        toast("评论回复")
+    }
 }

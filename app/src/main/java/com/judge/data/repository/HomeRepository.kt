@@ -1,6 +1,7 @@
 package com.judge.data.repository
 
 import com.judge.data.bean.BannerBean
+import com.judge.data.bean.CommonResultBean
 import com.judge.data.bean.NewsBean
 import com.judge.data.bean.NewsDetailBean
 import com.judge.network.JsonResponse
@@ -23,5 +24,13 @@ object HomeRepository {
 
     fun fetchNewsDetail(map: HashMap<String, String>): Observable<JsonResponse<NewsDetailBean>> {
         return homeService.getNewsDetail(map)
+    }
+
+    fun sendNewsComment(map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>> {
+        return homeService.sendNewsComment(map)
+    }
+
+    fun addToFavorite(map: HashMap<String, String>): Observable<JsonResponse<CommonResultBean>> {
+        return homeService.addToFavorite(map)
     }
 }
