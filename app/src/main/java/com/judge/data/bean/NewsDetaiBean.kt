@@ -27,7 +27,8 @@ data class NewsDetailBean(
     val setting_rewriterule: SettingRewriterule,
     val setting_rewritestatus: List<Any>,
     val success: String,
-    val thread: Thread
+    val thread: Thread,
+    val favid: String
 )
 
 data class Postlist(

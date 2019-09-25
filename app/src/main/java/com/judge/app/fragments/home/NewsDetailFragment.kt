@@ -28,6 +28,7 @@ class NewsDetailFragment : BaseFragment() {
     private lateinit var detailWebView: WebView
     private lateinit var newsId: String
     private lateinit var forumId: String
+    private lateinit var favId:String
     private var isFavorite: Boolean = false
     override fun epoxyController(): MvRxEpoxyController = simpleController {
     }
@@ -94,6 +95,7 @@ class NewsDetailFragment : BaseFragment() {
         viewModel.asyncSubscribe(NewsDetailState::newsDetailResponse, onSuccess = {
             forumId = it.Variables.fid
             isFavorite = it.Variables.isfav == "1"
+            favId = it.Variables.favid
             detailWebView.loadUrl("javascript:getInfo(" + Gson().toJson(it) + ")")
         })
         viewModel.asyncSubscribe(NewsDetailState::commentResult, onSuccess = {
@@ -110,7 +112,7 @@ class NewsDetailFragment : BaseFragment() {
     @JavascriptInterface
     fun collect() {
         if (isFavorite) {
-            viewModel.deleteFavorite(newsId)
+            viewModel.deleteFavorite(favId)
         } else {
             viewModel.addToFavorite(newsId)
         }
