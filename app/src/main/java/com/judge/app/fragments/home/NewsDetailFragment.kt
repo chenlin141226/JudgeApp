@@ -28,7 +28,7 @@ class NewsDetailFragment : BaseFragment() {
     private lateinit var detailWebView: WebView
     private lateinit var newsId: String
     private lateinit var forumId: String
-    private lateinit var favId:String
+    private lateinit var favId: String
     private var isFavorite: Boolean = false
     override fun epoxyController(): MvRxEpoxyController = simpleController {
     }
@@ -45,7 +45,6 @@ class NewsDetailFragment : BaseFragment() {
             onMenuItemClick { item ->
                 when (item?.itemId) {
                     R.id.action_share -> {
-                        toast("share")
                         ShareBottomPopupView(context)
                             .setOnSelectListener(OnSelectListener { position, _ ->
 
@@ -103,6 +102,7 @@ class NewsDetailFragment : BaseFragment() {
         })
     }
 
+    //发表评论
     @JavascriptInterface
     fun replay(message: String) {
         viewModel.sendNewsComment(forumId, newsId, message)

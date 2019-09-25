@@ -101,6 +101,7 @@ class NewsDetailViewModel(
             "fid" to forumId,
             "tid" to bean.tid,
             "message" to bean.message,
+            "noticetrimstr" to bean.noticetrimstr,
             "formhash" to (MineRepository.userProfile?.formhash ?: ""),
             "replysubmit" to "1"
         )
