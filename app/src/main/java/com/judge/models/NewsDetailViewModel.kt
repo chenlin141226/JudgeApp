@@ -64,6 +64,7 @@ class NewsDetailViewModel(
             }
     }
 
+    //添加收藏
     fun addToFavorite(newsId: String) {
         val map = hashMapOf(
             "id" to newsId,
@@ -78,8 +79,24 @@ class NewsDetailViewModel(
             }
     }
 
+    fun deleteFavorite(id:String){
+        val queryMap =
+            hashMapOf("version" to "4", "module" to "myfav_delete", "checkall" to "1")
+        val fieldMap =
+            hashMapOf(
+                "formhash" to (MineRepository.userProfile?.formhash ?: ""),
+                "delfavorite" to "true"
+            )
+        val ids = listOf(id)
+        MineRepository.deleteTopics(queryMap, fieldMap, ids)
+            .subscribeOn(Schedulers.io())
+            .execute {
+                copy(commentResult = it)
+            }
+    }
+
     //回复发表的评论
-    fun commentToPerson(forumId: String,bean:ReplyBean){
+    fun commentToPerson(forumId: String, bean: ReplyBean) {
         val map = hashMapOf(
             "fid" to forumId,
             "tid" to bean.tid,

@@ -2,17 +2,19 @@ package com.judge.data.bean
 
 data class NewsDetailBean(
     val allowpostcomment: List<String>,
-    val auth: Any,
+    val auth: String,
     val cache_custominfo_postno: List<String>,
     val code: String,
     val commentcount: List<Any>,
     val comments: List<Any>,
     val cookiepre: String,
     val fid: String,
+    val fid_name: String,
     val formhash: String,
     val forum: Forum,
     val forum_threadpay: String,
     val groupid: String,
+    val isfav: String,
     val ismoderator: String,
     val member_avatar: String,
     val member_uid: String,
@@ -28,12 +30,10 @@ data class NewsDetailBean(
     val thread: Thread
 )
 
-
 data class Postlist(
     val adminid: String,
     val anonymous: String,
     val attachment: String,
-    val attachments: List<Any>,
     val author: String,
     val authorid: String,
     val dateline: String,
@@ -41,15 +41,17 @@ data class Postlist(
     val first: String,
     val groupiconid: String,
     val groupid: String,
-    val imagelist: List<Any>,
+    val leavel: String,
     val memberstatus: String,
     val message: String,
     val number: String,
     val pid: String,
     val position: String,
+    val recovery_time: String,
     val replycredit: String,
     val status: String,
     val tid: String,
+    val touxiang: String,
     val username: String
 )
 

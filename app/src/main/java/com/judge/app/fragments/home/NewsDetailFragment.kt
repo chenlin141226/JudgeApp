@@ -28,6 +28,7 @@ class NewsDetailFragment : BaseFragment() {
     private lateinit var detailWebView: WebView
     private lateinit var newsId: String
     private lateinit var forumId: String
+    private var isFavorite: Boolean = false
     override fun epoxyController(): MvRxEpoxyController = simpleController {
     }
 
@@ -92,6 +93,7 @@ class NewsDetailFragment : BaseFragment() {
         }
         viewModel.asyncSubscribe(NewsDetailState::newsDetailResponse, onSuccess = {
             forumId = it.Variables.fid
+            isFavorite = it.Variables.isfav == "1"
             detailWebView.loadUrl("javascript:getInfo(" + Gson().toJson(it) + ")")
         })
         viewModel.asyncSubscribe(NewsDetailState::commentResult, onSuccess = {
@@ -107,7 +109,11 @@ class NewsDetailFragment : BaseFragment() {
     //H5收藏按钮 回调
     @JavascriptInterface
     fun collect() {
-        viewModel.addToFavorite(newsId)
+        if (isFavorite) {
+            viewModel.deleteFavorite(newsId)
+        } else {
+            viewModel.addToFavorite(newsId)
+        }
     }
 
     @JavascriptInterface
