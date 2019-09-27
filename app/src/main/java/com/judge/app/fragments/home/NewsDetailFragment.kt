@@ -77,7 +77,7 @@ class NewsDetailFragment : BaseFragment() {
     override fun initData() {
         super.initData()
         viewModel.selectSubscribe(NewsDetailState::newsId) {
-            newsId = it
+            newsId = it.tid
         }
         viewModel.selectSubscribe(NewsDetailState::isLoading) {
             if (it) {

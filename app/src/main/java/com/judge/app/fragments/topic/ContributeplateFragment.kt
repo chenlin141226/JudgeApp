@@ -31,7 +31,8 @@ import org.jetbrains.anko.collections.forEachWithIndex
 data class PlateArgs @JvmOverloads constructor(
     var plateName: String = "",
     var formhash: String = "",
-    var fid : String = ""
+    var fid : String = "",
+    var typeId : String =""
 ) : Parcelable
 
 data class PlateState(
@@ -102,6 +103,7 @@ class ContributeplateFragment : BaseFragment() {
                     plateArgs.plateName = item.name
                     plateArgs.formhash = state.variables?.formhash.toString()
                     plateArgs.fid = item.fid
+                    plateArgs.typeId = item.typeid
                     LiveEventBus.get().with("plate").post(plateArgs)
                     findNavController().navigateUp()
                 }

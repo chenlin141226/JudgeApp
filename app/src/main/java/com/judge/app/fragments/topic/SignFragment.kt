@@ -34,26 +34,34 @@ data class SendTopicState(
     val formhash: String = "",
     val pushTie : PushTie? =null,
     val message : Message? =null,
-    val fid : String = ""
+    val fid : String = "",
+    val typeId : String = ""
 ) : MvRxState
 
 class SendTopicViewModel(initialState: SendTopicState) :
     MvRxViewModel<SendTopicState>(initialState) {
 
+    /**
+     * 获取板块参数
+     */
     fun updateArgs(args: PlateArgs) {
-        setState { copy(backPlate = args.plateName,formhash = args.formhash,fid = args.fid)}
+        setState { copy(backPlate = args.plateName,formhash = args.formhash,fid = args.fid,typeId = args.typeId)}
     }
 
     fun updateTitlet(title: String) {
         setState { copy(title = title) }
     }
 
+    //跟新发帖内容
     fun updateContent(content: String) {
         setState { copy(content = content) }
     }
 
+    /**
+     * 发帖
+     */
     fun pushTie() = withState { state ->
-        val map = hashMapOf("fid" to state.fid,"topicsubmit" to "1",
+        val map = hashMapOf("fid" to state.fid,"topicsubmit" to "1","typeid" to state.typeId,
             "subject" to state.backPlate,"message" to state.title+state.content,"formhash" to state.formhash)
         JudgeRepository.pushTie(map).subscribeOn(Schedulers.io())
             .execute { copy(pushTie = it()?.Variables,message = it()?.Message) }

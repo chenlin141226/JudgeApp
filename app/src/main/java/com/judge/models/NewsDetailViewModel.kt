@@ -4,6 +4,7 @@ import com.airbnb.mvrx.Async
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.Uninitialized
 import com.judge.app.core.MvRxViewModel
+import com.judge.app.fragments.home.Detail
 import com.judge.data.bean.CommonResultBean
 import com.judge.data.bean.News
 import com.judge.data.bean.NewsDetailBean
@@ -18,9 +19,11 @@ data class NewsDetailState(
     val newsDetailResponse: Async<JsonResponse<NewsDetailBean>> = Uninitialized,
     val commentResult: Async<JsonResponse<CommonResultBean>> = Uninitialized,
     val isPageFinished: Boolean = false,
-    val newsId: String
+   // val newsId: String,
+    val newsId: Detail
 ) : MvRxState {
-    constructor(args: News) : this(newsId = args.tid)
+    //constructor(args: News) : this(newsId = args.tid)
+    constructor(args: Detail) : this(newsId = args)
 }
 
 class NewsDetailViewModel(

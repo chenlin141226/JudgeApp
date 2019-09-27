@@ -35,5 +35,6 @@ data class PlateCategory(
     val name: String,
     val posts: String,
     val threads: String,
-    val todayposts: String
+    val todayposts: String,
+    val typeid : String
 )
