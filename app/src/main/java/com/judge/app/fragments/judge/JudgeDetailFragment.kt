@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +25,6 @@ import com.judge.data.repository.JudgeRepository
 import com.judge.fragmentJudgeDetail
 import com.judge.utils.LogUtils
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 
 /**

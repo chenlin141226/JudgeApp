@@ -14,6 +14,13 @@
         <action
                 android:id="@+id/action_judgeFragment_to_attentionFragment"
                 app:destination="@id/attentionFragment" />
+
+        <action
+                android:id="@+id/action_judgeFragment_to_newsDetailFragment"
+                app:destination="@id/newsDetailFragment" />
+        <action
+                android:id="@+id/action_judgeFragment_to_informationFragment"
+                app:destination="@id/informationFragment" />
     </fragment>
 
     <fragment
@@ -34,6 +41,11 @@
             android:id="@+id/newsDetailFragment"
             android:name="com.judge.app.fragments.home.NewsDetailFragment"
             android:label="@string/news_detail"/>
+
+    <fragment
+            android:id="@+id/informationFragment"
+            android:name="com.judge.app.fragments.judge.InformationFragment"
+            android:label="InformationFragment" />
 
 
 </navigation>

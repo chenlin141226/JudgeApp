@@ -2,17 +2,10 @@ package com.judge.app.fragments.judge
 
 import android.graphics.Color
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
-import com.airbnb.mvrx.*
 import com.judge.R
 import com.judge.adapters.ViewPagerAdapter
 import com.judge.app.core.BaseFragment
-import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
-import com.judge.data.bean.Data
-import com.judge.data.repository.JudgeRepository
-import com.judge.utils.LogUtils
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.topic_view.view.*
 
 /**

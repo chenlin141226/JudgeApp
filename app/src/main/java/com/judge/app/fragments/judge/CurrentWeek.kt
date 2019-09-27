@@ -1,10 +1,12 @@
 package com.judge.app.fragments.judge
 
 import com.airbnb.mvrx.*
+import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.Data
+import com.judge.data.bean.Detail
 import com.judge.data.repository.JudgeRepository
 import com.judge.todayItem
 import com.judge.utils.LogUtils
@@ -14,6 +16,7 @@ import org.jetbrains.anko.collections.forEachWithIndex
 /**
  * @author: jaffa
  * @date: 2019/8/11
+ * 本周
  */
 data class WeekState(
     val information: List<Data>? = emptyList(),
@@ -54,6 +57,7 @@ class WeekViewModel(initialiState: WeekState) : MvRxViewModel<WeekState>(initial
 class CurrentWeek : BaseFragment() {
 
     private val viewModel: WeekViewModel by fragmentViewModel()
+    val args = Detail()
 
     override fun epoxyController() = simpleController(viewModel) { state ->
 
@@ -61,6 +65,10 @@ class CurrentWeek : BaseFragment() {
             todayItem {
                 id(item.tid + index)
                 informationBean(item)
+                parentOnClick { _ ->
+                    args.tid = item.tid
+                    navigateTo(R.id.action_judgeFragment_to_newsDetailFragment,args)
+                }
             }
         }
     }

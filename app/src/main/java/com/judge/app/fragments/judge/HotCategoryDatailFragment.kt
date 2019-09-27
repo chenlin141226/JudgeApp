@@ -57,8 +57,8 @@ class HotCategoryDatailFragment(id: String) : BaseFragment() {
             judgeCategoryDetailItem {
                 id(item.tid+"hot")
                 viewmodel(item)
-                    args.tid = item.tid
                     parentOnclick{_ ->
+                        args.tid = item.tid
                         navigateTo(R.id.action_judgeDetailFragment_to_newsDetailFragment,args)
                 }
             }

@@ -1,23 +1,21 @@
 package com.judge.app.fragments.judge
 
 import android.graphics.Color
-import android.widget.Toast
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.airbnb.mvrx.fragmentViewModel
+import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.bean.Detail
 import com.judge.data.bean.Recommend
-import com.judge.data.bean.RecommendBean
 import com.judge.data.repository.JudgeRepository
 import com.judge.recommendItem
 import com.judge.utils.LogUtils
-import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
-import org.jetbrains.anko.support.v4.runOnUiThread
 
 /**
  * @author: jaffa
@@ -29,7 +27,8 @@ data class RecommendState(
     val isLoading: Boolean = false
 ) : MvRxState
 
-class RecommendViewModel(initialState: RecommendState) : MvRxViewModel<RecommendState>(initialState) {
+class RecommendViewModel(initialState: RecommendState) :
+    MvRxViewModel<RecommendState>(initialState) {
 
     init {
         fetchRecommend()
@@ -50,7 +49,10 @@ class RecommendViewModel(initialState: RecommendState) : MvRxViewModel<Recommend
 
 
     companion object : MvRxViewModelFactory<RecommendViewModel, RecommendState> {
-        override fun create(viewModelContext: ViewModelContext, state: RecommendState): RecommendViewModel? {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: RecommendState
+        ): RecommendViewModel? {
             return RecommendViewModel(state)
         }
     }
@@ -60,22 +62,21 @@ class RecommendFragment : BaseFragment() {
 
     private val viewModel: RecommendViewModel by fragmentViewModel()
 
+    val args = Detail()
+
     override fun epoxyController() = simpleController(viewModel) { state ->
-
-        runOnUiThread {
-            if (state.isLoading) {
-                loadingDialog.show()
-            } else {
-                loadingDialog.dismiss()
-            }
-
-        }
 
         state.recommendItems?.forEachWithIndex { idnex, item ->
 
             recommendItem {
                 id(item.tid + idnex)
                 recommend(item)
+
+
+                onParentClick { _ ->
+                    args.tid = item.tid
+                     navigateTo(R.id.action_judgeFragment_to_newsDetailFragment,args)
+                }
             }
         }
 
@@ -83,6 +84,15 @@ class RecommendFragment : BaseFragment() {
 
     override fun initView() {
         recyclerView.setBackgroundColor(Color.parseColor("#f6f5fa"))
+
+        viewModel.selectSubscribe(RecommendState::isLoading) {
+            if (it) {
+                loadingDialog.show()
+            } else {
+                loadingDialog.dismiss()
+            }
+        }
+
         refreshLayout.apply {
             setEnableAutoLoadMore(true)
             setEnableRefresh(true)

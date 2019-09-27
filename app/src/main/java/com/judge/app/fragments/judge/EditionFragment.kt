@@ -1,11 +1,7 @@
 package com.judge.app.fragments.judge
 
 import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import com.airbnb.mvrx.*
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
@@ -18,8 +14,6 @@ import com.judge.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
-import org.jetbrains.anko.support.v4.toast
-import com.judge.R
 import com.vondear.rxtool.view.RxToast
 
 /**

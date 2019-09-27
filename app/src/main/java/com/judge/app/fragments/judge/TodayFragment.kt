@@ -1,29 +1,26 @@
 package com.judge.app.fragments.judge
 
-import androidx.databinding.BindingAdapter
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.airbnb.mvrx.fragmentViewModel
+import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
 import com.judge.data.bean.Data
+import com.judge.data.bean.Detail
 import com.judge.data.repository.JudgeRepository
 import com.judge.todayItem
 import com.judge.utils.LogUtils
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
-import java.text.SimpleDateFormat
-import java.util.*
-import android.widget.TextView
-import android.widget.Toast
-import com.vondear.rxtool.view.RxToast
 
 
 /**
  * @author: jaffa
  * @date: 2019/8/11
+ * 当日
  */
 data class TodayState(
     val information: List<Data>? = emptyList(),
@@ -80,6 +77,7 @@ class TodayViewModel(initialiState: TodayState) : MvRxViewModel<TodayState>(init
 class TodayFragment : BaseFragment() {
 
     private val viewModel: TodayViewModel by fragmentViewModel()
+    val args = Detail()
 
     override fun epoxyController() = simpleController(viewModel) { state ->
 
@@ -87,6 +85,10 @@ class TodayFragment : BaseFragment() {
             todayItem {
                 id(item.tid + index)
                 informationBean(item)
+                parentOnClick { _ ->
+                    args.tid = item.tid
+                    navigateTo(R.id.action_judgeFragment_to_newsDetailFragment,args)
+                }
             }
         }
     }

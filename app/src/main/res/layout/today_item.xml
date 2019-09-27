@@ -8,6 +8,9 @@
         <variable
                 name="informationBean"
                 type="com.judge.data.bean.Data"/>
+        <variable
+                name="parentOnClick"
+                type="android.view.View.OnClickListener" />
 
     </data>
 
@@ -18,7 +21,8 @@
             android:padding="@dimen/dp_15"
             android:layout_marginLeft="@dimen/dp_15"
             android:layout_marginRight="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_10">
+            android:layout_marginTop="@dimen/dp_10"
+            android:onClick="@{parentOnClick}">
 
         <TextView
                 android:id="@+id/tv_info"
