@@ -23,7 +23,7 @@ import org.jetbrains.anko.collections.forEachWithIndex
 class EssenceViewModel(initialiState: NewState) : MvRxViewModel<NewState>(initialiState) {
 
 
-    fun fetchDetail(id : String) = withState { state ->
+    fun fetchDetail(id: String) = withState { state ->
         if (state.isLoading) return@withState
         val map = hashMapOf("page" to "1", "fid" to id)
         JudgeRepository.getEssenceCategoryDetail(map).subscribeOn(Schedulers.io())
@@ -40,27 +40,28 @@ class EssenceViewModel(initialiState: NewState) : MvRxViewModel<NewState>(initia
 
     companion object : MvRxViewModelFactory<EssenceViewModel, NewState> {
 
-        override fun create(viewModelContext: ViewModelContext, state: NewState): EssenceViewModel? {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: NewState
+        ): EssenceViewModel? {
             return EssenceViewModel(state)
         }
     }
 }
 
 class EssenceCategoryDatailFragment(id: String) : BaseFragment() {
-    private val viewModel : EssenceViewModel by fragmentViewModel()
+    private val viewModel: EssenceViewModel by fragmentViewModel()
     var id = id
     val args = Detail()
-    override fun epoxyController() = simpleController(viewModel) {state ->
+    override fun epoxyController() = simpleController(viewModel) { state ->
 
         state.categoryDetails.forEachWithIndex { index, item ->
             judgeCategoryDetailItem {
                 id(item.tid)
                 viewmodel(item)
-                parentOnclick{_ ->
-                    args.tid = item.tid
-                    parentOnclick{_ ->
-                        navigateTo(R.id.action_judgeDetailFragment_to_newsDetailFragment,args)
-                    }
+                args.tid = item.tid
+                parentOnclick { _ ->
+                    navigateTo(R.id.action_judgeDetailFragment_to_newsDetailFragment, args)
                 }
             }
         }
