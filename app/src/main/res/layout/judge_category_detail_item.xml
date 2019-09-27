@@ -7,13 +7,18 @@
          <variable
                  name="viewmodel"
                  type="com.judge.data.bean.ForumThreadlist"/>
+
+        <variable
+                name="parentOnclick"
+                type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_10"
-            android:background="@drawable/judge_detail_item_bg" >
+            android:background="@drawable/judge_detail_item_bg"
+            android:onClick="@{parentOnclick}">
 
         <TextView
                 android:id="@+id/tv_title"

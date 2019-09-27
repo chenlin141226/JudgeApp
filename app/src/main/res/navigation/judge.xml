@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/judge" app:startDestination="@id/judgeFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/judge"
+        app:startDestination="@id/judgeFragment">
 
-    <fragment android:id="@+id/judgeFragment"
-              android:name="com.judge.app.fragments.judge.JudgeFragment"
-              android:label="JudgeFragment">
+    <fragment
+            android:id="@+id/judgeFragment"
+            android:name="com.judge.app.fragments.judge.JudgeFragment"
+            android:label="JudgeFragment">
         <action
                 android:id="@+id/action_judgeFragment_to_judgeDetailFragment"
-                app:destination="@id/judgeDetailFragment"/>
+                app:destination="@id/judgeDetailFragment" />
         <action
                 android:id="@+id/action_judgeFragment_to_attentionFragment"
-                app:destination="@id/attentionFragment"/>
+                app:destination="@id/attentionFragment" />
     </fragment>
+
     <fragment
             android:id="@+id/judgeDetailFragment"
             android:name="com.judge.app.fragments.judge.JudgeDetailFragment"
-            android:label="JudgeDetailFragment"/>
+            android:label="JudgeDetailFragment">
+        <action
+                android:id="@+id/action_judgeDetailFragment_to_newsDetailFragment"
+                app:destination="@id/newsDetailFragment" />
+    </fragment>
+
     <fragment
-        android:id="@+id/attentionFragment"
-        android:name="com.judge.app.fragments.judge.AttentionFragment"
-        android:label=""/>
+            android:id="@+id/attentionFragment"
+            android:name="com.judge.app.fragments.judge.AttentionFragment"
+            android:label="" />
+
+    <fragment
+            android:id="@+id/newsDetailFragment"
+            android:name="com.judge.app.fragments.home.NewsDetailFragment"
+            android:label="@string/news_detail"/>
+
+
 </navigation>

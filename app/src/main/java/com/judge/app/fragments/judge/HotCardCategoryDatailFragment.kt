@@ -4,9 +4,11 @@ import android.graphics.Color
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.airbnb.mvrx.fragmentViewModel
+import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.bean.Detail
 import com.judge.data.repository.JudgeRepository
 import com.judge.extensions.clear
 import com.judge.judgeCategoryDetailItem
@@ -49,12 +51,20 @@ class HotTopicViewModel(initialiState: NewState) : MvRxViewModel<NewState>(initi
 class HotCardCategoryDatailFragment(id: String) :BaseFragment() {
     private val viewModel : HotTopicViewModel by fragmentViewModel()
     var id = id
+
+    val args = Detail()
     override fun epoxyController() = simpleController(viewModel) {state ->
 
         state.categoryDetails.forEachWithIndex { index, item ->
             judgeCategoryDetailItem {
                 id(item.tid+"hotTopic")
                 viewmodel(item)
+                parentOnclick{_ ->
+                    args.tid = item.tid
+                    parentOnclick{_ ->
+                        navigateTo(R.id.action_judgeDetailFragment_to_newsDetailFragment,args)
+                    }
+                }
             }
         }
 

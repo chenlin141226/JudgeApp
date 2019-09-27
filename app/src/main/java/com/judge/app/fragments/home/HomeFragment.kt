@@ -1,7 +1,6 @@
 package com.judge.app.fragments.home
 
 import android.content.Context
-import android.os.Parcelable
 import android.widget.ImageView
 import com.airbnb.mvrx.*
 import com.bumptech.glide.Glide
@@ -9,6 +8,7 @@ import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.simpleController
+import com.judge.data.bean.Detail
 import com.judge.db.bean.HistoryTopicBean
 import com.judge.models.HomeState
 import com.judge.models.HomeViewModel
@@ -17,21 +17,15 @@ import com.judge.newsItemView
 import com.vondear.rxtool.RxTimeTool
 import com.youth.banner.Banner
 import com.youth.banner.loader.ImageLoader
-import kotlinx.android.parcel.Parcelize
 import org.jetbrains.anko.collections.forEachWithIndex
 import java.util.*
 import kotlin.collections.ArrayList
-import com.judge.app.fragments.home.Detail as Detail1
 
-@Parcelize
-data class Detail(
-    var tid : String = ""
-):Parcelable
 
 class HomeFragment : BaseFragment() {
     private val viewModel: HomeViewModel by fragmentViewModel()
     private lateinit var bannerView: Banner
-    val args = Detail1()
+    val args = Detail()
     override fun epoxyController(): MvRxEpoxyController = simpleController(viewModel) { state ->
 
 

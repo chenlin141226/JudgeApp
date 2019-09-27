@@ -12,6 +12,8 @@ import com.judge.judgeCategoryDetailItem
 import com.judge.utils.LogUtils
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
+import com.judge.R
+import com.judge.data.bean.Detail
 
 /**
  * @author: jaffa
@@ -71,12 +73,18 @@ class JudgeCateGoryDetailFragment(id: String) : BaseFragment() {
     private val viewModel: NewViewModel by fragmentViewModel()
     var ids = id
     var page = 1
+
+    val args = Detail()
     override fun epoxyController() = simpleController(viewModel) { state ->
 
         state.categoryDetails.forEachWithIndex { index, item ->
             judgeCategoryDetailItem {
                 id(item.tid)
                 viewmodel(item)
+                args.tid = item.tid
+                parentOnclick{_ ->
+
+                }
             }
         }
 

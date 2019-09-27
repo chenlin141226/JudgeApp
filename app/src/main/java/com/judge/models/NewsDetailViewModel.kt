@@ -4,11 +4,7 @@ import com.airbnb.mvrx.Async
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.Uninitialized
 import com.judge.app.core.MvRxViewModel
-import com.judge.app.fragments.home.Detail
-import com.judge.data.bean.CommonResultBean
-import com.judge.data.bean.News
-import com.judge.data.bean.NewsDetailBean
-import com.judge.data.bean.ReplyBean
+import com.judge.data.bean.*
 import com.judge.data.repository.HomeRepository
 import com.judge.data.repository.MineRepository
 import com.judge.network.JsonResponse

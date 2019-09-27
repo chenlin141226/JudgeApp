@@ -93,6 +93,10 @@ class AllProductFragment(index: Int) : BaseFragment() {
         }
     }
 
+    override fun initView() {
+        super.initView()
+        sharedViewModel.setVisible(true )
+    }
     override fun initData() {
         viewModel.fetchMarkInfo(index)
         withState(viewModel) { _ ->
