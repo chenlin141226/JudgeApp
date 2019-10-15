@@ -15,13 +15,18 @@ import com.judge.R
 import com.judge.app.activities.LoggingActivity
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.simpleController
+import com.judge.data.repository.LoginRepository
 import com.judge.models.RegisterState
 import com.judge.models.RegisterViewModel
 import com.judge.network.Constant
 import com.judge.views.registView
+import com.vondear.rxtool.RxConstTool
 import com.vondear.rxtool.view.RxToast
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.support.v4.runOnUiThread
+import java.util.regex.Pattern
 
 /**
  * @author: jaffa
@@ -72,7 +77,7 @@ class RegisterFragment : BaseFragment() {
 
             onCodeChanged { viewModel.setCode(it) }
 
-           //第一次获取验证码
+            //第一次获取验证码
             setimageBitmap(state.codeUrl)
 
             //返回按钮
@@ -89,117 +94,115 @@ class RegisterFragment : BaseFragment() {
             phoneCodeClickListener { _ ->
                 if (state.phone.isEmpty()) {
                     context?.let {
-                        RxToast.info(
-                            it,
+                        RxToast.info(it,
                             resources.getString(R.string.hint_phone),
                             Toast.LENGTH_SHORT,
-                            true
-                        ).show()
+                            true).show()
                     }
                     return@phoneCodeClickListener
                 }
                 viewModel.getPhoneCode()
             }
-            if(state.submitResult is Success&&state.submit?.retcode == 1){
-                context?.let {RxToast.info( it,state.submit.retmsg.toString(),Toast.LENGTH_SHORT,true ).show()}
-            }else if(state.submit?.retcode == 100001){
-                context?.let {RxToast.info( it,state.submit.retmsg.toString(),Toast.LENGTH_SHORT,true ).show()}
-               runOnUiThread {  findNavController().navigateUp() }
-            }
+
+            //            if (state.submitResult is Success && state.submit?.retcode == 1) {
+            //                context?.let {
+            //                    RxToast.info(
+            //                        it,
+            //                        state.submit.retmsg.toString(),
+            //                        Toast.LENGTH_SHORT,
+            //                        true
+            //                    ).show()
+            //                }
+            //                findNavController().navigateUp()
+            //            } else if (state.submit?.retcode == 100001) {
+            //                context?.let {
+            //                    RxToast.info(
+            //                        it,
+            //                        state.submit.retmsg.toString(),
+            //                        Toast.LENGTH_SHORT,
+            //                        true
+            //                    ).show()
+            //                }
+            //            }
             //注册提交
             submitClickListener { _ ->
-                if (state.username.isEmpty()) {
-                    context?.let {
-                        RxToast.info(
-                            it,
-                            resources.getString(R.string.hint_username),
-                            Toast.LENGTH_SHORT,
-                            true
-                        ).show()
-                    }
-                    return@submitClickListener
-                }
-                if (state.password.isEmpty()) {
-                    context?.let {
-                        RxToast.info(
-                            it,
-                            resources.getString(R.string.hint_password),
-                            Toast.LENGTH_SHORT,
-                            true
-                        ).show()
-                    }
-                    return@submitClickListener
-                }
-                if (state.confirmPwd.isEmpty()) {
-                    context?.let {
-                        RxToast.info(
-                            it,
-                            resources.getString(R.string.hint_confirm),
-                            Toast.LENGTH_SHORT,
-                            true
-                        ).show()
-                    }
-                    return@submitClickListener
-                }
 
-                if (state.confirmPwd != state.password) {
-                    context?.let {
-                        RxToast.info(
-                            it,
-                            resources.getString(R.string.isequal),
-                            Toast.LENGTH_SHORT,
-                            true
-                        ).show()
+                if (markWords(state)) return@submitClickListener
+                //viewModel.submit()
+                val maps = hashMapOf("phone" to state.phone,
+                    "username" to state.username,
+                    "password" to state.password,
+                    "pcode" to state.phoneCode,
+                    "seccode" to state.code,
+                    "email" to state.email)
+
+                LoginRepository.register(maps).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe { it ->
+                        val msg = it.retmsg
+                        context?.let {
+                            RxToast.info(it, msg.toString(), Toast.LENGTH_SHORT, true).show()
+                        }
+                        if (it.retcode == 1) {
+                            findNavController().navigateUp()
+                        }
                     }
-                    return@submitClickListener
-                }
-                if (state.email.isEmpty()) {
-                    context?.let {
-                        RxToast.info(
-                            it,
-                            resources.getString(R.string.hint_email),
-                            Toast.LENGTH_SHORT,
-                            true
-                        ).show()
-                    }
-                    return@submitClickListener
-                }
-                if (state.phone.isEmpty()) {
-                    context?.let {
-                        RxToast.info(
-                            it,
-                            resources.getString(R.string.hint_phone),
-                            Toast.LENGTH_SHORT,
-                            true
-                        ).show()
-                    }
-                    return@submitClickListener
-                }
-                if (state.phoneCode.isEmpty()) {
-                    context?.let {
-                        RxToast.info(
-                            it,
-                            resources.getString(R.string.hint_phoneCode),
-                            Toast.LENGTH_SHORT,
-                            true
-                        ).show()
-                    }
-                    return@submitClickListener
-                }
-                if (state.code.isEmpty()) {
-                    context?.let {
-                        RxToast.info(
-                            it,
-                            resources.getString(R.string.hint_code),
-                            Toast.LENGTH_SHORT,
-                            true
-                        ).show()
-                    }
-                    return@submitClickListener
-                }
-                viewModel.submit()
             }
         }
+    }
+
+    private fun markWords(state: RegisterState): Boolean {
+        if (state.username.isEmpty()) {
+            Toast.makeText(context, R.string.hint_username, Toast.LENGTH_SHORT).show()
+            return true
+        }
+
+        if (state.username.length < 3) {
+            Toast.makeText(context, "用戶名不能少于三个字符", Toast.LENGTH_SHORT).show()
+            return true
+        }
+
+        if (state.password.isEmpty()) {
+            Toast.makeText(context, R.string.hint_password, Toast.LENGTH_SHORT).show()
+            return true
+        }
+
+        if (state.password.length < 6) {
+            Toast.makeText(context, "密码不能少于六个字符", Toast.LENGTH_SHORT).show()
+            return true
+        }
+
+        if (state.confirmPwd.isEmpty()) {
+            Toast.makeText(context, R.string.hint_confirm, Toast.LENGTH_SHORT).show()
+            return true
+        }
+
+        if (state.confirmPwd != state.password) {
+            Toast.makeText(context, R.string.isequal, Toast.LENGTH_SHORT).show()
+            return true
+        }
+        if (state.email.isEmpty()) {
+            Toast.makeText(context, R.string.hint_email, Toast.LENGTH_SHORT).show()
+            return true
+        }
+        if (state.phone.isEmpty()) {
+            Toast.makeText(context, R.string.hint_phone, Toast.LENGTH_SHORT).show()
+            return true
+        }
+
+        if (!Pattern.compile(RxConstTool.REGEX_MOBILE_EXACT).matcher(state.phone).matches()) {
+            Toast.makeText(context, "请输入正确的手机号码", Toast.LENGTH_SHORT).show()
+            return true
+        }
+
+        if (state.phoneCode.isEmpty()) {
+            Toast.makeText(context, R.string.hint_phoneCode, Toast.LENGTH_SHORT).show()
+            return true
+        }
+        if (state.code.isEmpty()) {
+            Toast.makeText(context, R.string.hint_code, Toast.LENGTH_SHORT).show()
+            return true
+        }
+        return false
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
