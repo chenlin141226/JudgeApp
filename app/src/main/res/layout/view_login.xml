@@ -42,6 +42,7 @@
                 android:background="@drawable/login_input_bg"
                 android:hint="@string/password"
                 android:padding="10dp"
+                android:inputType="textPassword"
                 android:textColor="#d4cdca"
                 android:textSize="@dimen/text_14"
                 tools:ignore="Autofill,TextFields"/>
