@@ -1,5 +1,6 @@
 package com.judge.adapters
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -32,8 +33,8 @@ internal class ViewPagerAdapter(
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        // 覆写destroyItem并且空实现,这样每个Fragment中的视图就不会被销毁
-        // super.destroyItem(container, position, object);
+        //super.destroyItem(container, position, `object`)
+        container.removeView(`object` as View?)
     }
 
     override fun getItemPosition(`object`: Any): Int {

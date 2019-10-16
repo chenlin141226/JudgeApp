@@ -1,7 +1,10 @@
 package com.judge.app.fragments.judge
 
-import android.widget.Toast
+import android.os.Bundle
+import android.view.View
+import androidx.lifecycle.Observer
 import com.airbnb.mvrx.*
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
@@ -14,20 +17,17 @@ import com.judge.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
-import com.vondear.rxtool.view.RxToast
 
 /**
  * @author: jaffa
  * @date: 2019/8/11
  * 主版
  */
-data class EditionState(
-    val editionItems: List<Forumlist>? = emptyList(),
-    val isLoading: Boolean = false,
-    val formhash: String? = null,
-    val subscribeBean: SubscribeBean? = null,
-    val message: Message? = null
-) : MvRxState
+data class EditionState(val editionItems: List<Forumlist>? = emptyList(),
+                        val isLoading: Boolean = false,
+                        val formhash: String? = null,
+                        val subscribeBean: SubscribeBean? = null,
+                        val message: Message? = null) : MvRxState
 
 class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>(editionState) {
     init {
@@ -40,12 +40,9 @@ class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>
         JudgeRepository.getEdition().subscribeOn(Schedulers.io())
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnError { it.message?.let { it1 -> LogUtils.e(it1) } }
-            .doFinally { setState { copy(isLoading = false) } }
-            .execute {
-                copy(
-                    editionItems = it()?.Variables?.forumlist ?: emptyList(),
-                    formhash = it()?.Variables?.formhash
-                )
+            .doFinally { setState { copy(isLoading = false) } }.execute {
+                copy(editionItems = it()?.Variables?.forumlist ?: emptyList(),
+                    formhash = it()?.Variables?.formhash)
             }
     }
 
@@ -64,10 +61,8 @@ class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>
 
 
     companion object : MvRxViewModelFactory<EditionViewModel, EditionState> {
-        override fun create(
-            viewModelContext: ViewModelContext,
-            state: EditionState
-        ): EditionViewModel? {
+        override fun create(viewModelContext: ViewModelContext,
+                            state: EditionState): EditionViewModel? {
             return EditionViewModel(state)
         }
     }
@@ -84,33 +79,23 @@ class EditionFragment : BaseFragment() {
             editionItem {
                 id(item.fid)
                 editionItem(item)
-                onClick { _ ->
-                    //viewModel.SubscribeJudge(item.fid)
-                    val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
-                    JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe {
-                            val messagestr = it.Message.messagestr
-                            context?.let {
-                                RxToast.info(
-                                    context!!,
-                                    messagestr,
-                                    Toast.LENGTH_SHORT,
-                                    false
-                                ).show()
-                            }
-                        }
-                }
 
-//               if(state.subscribeBean?.code == "1"||state.subscribeBean?.code == "0"){
-//                   context?.let {
-//                       RxToast.info(it, state.message?.messagestr.toString(), Toast.LENGTH_SHORT, false).show()
-//                   }
-//               }
+                onClick { _ ->
+                    viewModel.SubscribeJudge(item.fid)
+//                    val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
+//                    JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
+//                            Toast.makeText(context,it.Message.messagestr,Toast.LENGTH_SHORT).show()
+//                            viewModel.fetEditionData()
+//                        }
+                    LiveEventBus.get().with("EditionFragment").post("EditionFragment")
+                }
             }
         }
 
     }
+
+
 
     override fun initView() {
         refreshLayout.apply {

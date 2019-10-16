@@ -1,10 +1,13 @@
 package com.judge.app.fragments.judge
 
+import androidx.lifecycle.Observer
 import com.airbnb.mvrx.*
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.app.fragments.topic.PlateArgs
 import com.judge.attentionItem
 import com.judge.data.bean.Attention
 import com.judge.data.repository.JudgeRepository
@@ -71,6 +74,9 @@ class AttentionFragment : BaseFragment() {
 
 
     override fun initView() {
+        LiveEventBus.get().with("EditionFragment").observe(this, Observer{
+            viewModel.fetchAttention()
+        })
         sharedViewModel.setVisible(true)
         viewModel.selectSubscribe(AttentionState::isLoading) {
             if (it) {
