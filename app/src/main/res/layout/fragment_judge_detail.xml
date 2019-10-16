@@ -62,7 +62,7 @@
                     android:id="@+id/tv_sign_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="签到"
+                    android:text="今日"
                     android:textSize="@dimen/text_16"
                     android:textColor="#898c94"
                     app:layout_constraintLeft_toRightOf="@id/iv_header"
