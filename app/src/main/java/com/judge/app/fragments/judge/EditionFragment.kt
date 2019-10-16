@@ -1,10 +1,8 @@
 package com.judge.app.fragments.judge
 
-import android.os.Bundle
-import android.view.View
-import androidx.lifecycle.Observer
 import com.airbnb.mvrx.*
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.judge.R
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
@@ -23,7 +21,7 @@ import org.jetbrains.anko.collections.forEachWithIndex
  * @date: 2019/8/11
  * 主版
  */
-data class EditionState(val editionItems: List<Forumlist>? = emptyList(),
+data class EditionState(val editionItems: List<Forumlist> = emptyList(),
                         val isLoading: Boolean = false,
                         val formhash: String? = null,
                         val subscribeBean: SubscribeBean? = null,
@@ -33,7 +31,6 @@ class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>
     init {
         fetEditionData()
     }
-
     fun fetEditionData() = withState { state ->
         if (state.isLoading) return@withState
 
@@ -75,19 +72,22 @@ class EditionFragment : BaseFragment() {
 
     override fun epoxyController() = simpleController(viewModel) { state ->
 
-        state.editionItems?.forEachWithIndex { index, item ->
-            editionItem {
-                id(item.fid)
-                editionItem(item)
+        state.editionItems.forEachWithIndex { index, item ->
 
+            editionItem {
+                id(item.fid+"abcd")
+                editionItem(item)
+                onParentClick { _->
+                    navigateTo(R.id.action_judgeFragment_to_judgeDetailFragment,item)
+                }
                 onClick { _ ->
                     viewModel.SubscribeJudge(item.fid)
-//                    val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
-//                    JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
-//                            Toast.makeText(context,it.Message.messagestr,Toast.LENGTH_SHORT).show()
-//                            viewModel.fetEditionData()
-//                        }
+                    //                    val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
+                    //                    JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
+                    //                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    //                            Toast.makeText(context,it.Message.messagestr,Toast.LENGTH_SHORT).show()
+                    //                            viewModel.fetEditionData()
+                    //                        }
                     LiveEventBus.get().with("EditionFragment").post("EditionFragment")
                 }
             }

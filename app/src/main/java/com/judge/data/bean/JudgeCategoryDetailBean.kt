@@ -18,6 +18,7 @@ data class JudgeCategoryDetailBean(
     val member_username: String,
     val notice: Notice,
     val page: String,
+    val page_total : String,
     val readaccess: String,
     val reward_unit: String,
     val saltkey: String,

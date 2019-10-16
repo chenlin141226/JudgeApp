@@ -21,6 +21,7 @@ import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.data.bean.Attention
 import com.judge.data.bean.Forum
+import com.judge.data.bean.Forumlist
 import com.judge.data.repository.JudgeRepository
 import com.judge.fragmentJudgeDetail
 import com.judge.utils.LogUtils
@@ -31,11 +32,11 @@ import io.reactivex.schedulers.Schedulers
  * 裁判说详情界面
  */
 data class JudgeDetailState(
-    val attention: Attention,
+    val attention: Forumlist,
     val isLoading: Boolean = false,
     val forum: Forum? = null
 ) : MvRxState {
-    constructor(args: Attention) : this(attention = args)
+    constructor(args: Forumlist) : this(attention = args)
 }
 
 class JudgeDetailViewModel(initialiState: JudgeDetailState) : MvRxViewModel<JudgeDetailState>(initialiState) {
@@ -48,7 +49,7 @@ class JudgeDetailViewModel(initialiState: JudgeDetailState) : MvRxViewModel<Judg
     fun fetchDetail() = withState { state ->
 
         if (state.isLoading) return@withState
-        val map = hashMapOf("page" to "1", "fid" to state.attention.id)
+        val map = hashMapOf("page" to "1", "fid" to state.attention.fid)
         JudgeRepository.getNewCategoryDetail(map).subscribeOn(Schedulers.io())
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
@@ -78,7 +79,6 @@ class JudgeDetailFragment : BaseMvRxFragment() {
     lateinit var tv_title : TextView
     val epoxyController by lazy { epoxyController() }
     val viewModel: JudgeDetailViewModel by fragmentViewModel()
-    lateinit var attentions: Attention
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         epoxyController.onRestoreInstanceState(savedInstanceState)
@@ -116,12 +116,12 @@ class JudgeDetailFragment : BaseMvRxFragment() {
             resources.getString(R.string.essence)
         )
         withState(viewModel) { state ->
-            tv_title.text = state.attention.title
+            tv_title.text = state.attention.name
             val fragments = ArrayList<Fragment>().also {
-                it.add(JudgeCateGoryDetailFragment(state.attention.id))
-                it.add(HotCategoryDatailFragment(state.attention.id))
-                it.add(HotCardCategoryDatailFragment(state.attention.id))
-                it.add(EssenceCategoryDatailFragment(state.attention.id))
+                it.add(JudgeCateGoryDetailFragment(state.attention.fid))
+                it.add(HotCategoryDatailFragment(state.attention.fid))
+                it.add(HotCardCategoryDatailFragment(state.attention.fid))
+                it.add(EssenceCategoryDatailFragment(state.attention.fid))
             }
             viewPager.adapter = ViewPagerAdapter(childFragmentManager, fragments, titles)
             viewPager.offscreenPageLimit = 4

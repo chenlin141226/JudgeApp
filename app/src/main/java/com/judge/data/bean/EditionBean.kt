@@ -1,5 +1,8 @@
 package com.judge.data.bean
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class EditionBean(
     val auth: String,
     val catlist: List<Catlist>,
@@ -28,7 +31,7 @@ data class Catlist(
     val name: String
 )
 
-
+@Parcelize
 data class Forumlist(
     val description: String,
     val fid: String,
@@ -38,4 +41,4 @@ data class Forumlist(
     val threads: String,
     val todayposts: String,
     val favorite: String
-)
+): Parcelable

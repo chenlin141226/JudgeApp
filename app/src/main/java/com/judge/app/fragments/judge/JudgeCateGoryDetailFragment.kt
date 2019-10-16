@@ -1,6 +1,7 @@
 package com.judge.app.fragments.judge
 
 import android.graphics.Color
+import android.util.Log
 import com.airbnb.mvrx.*
 import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxViewModel
@@ -14,6 +15,7 @@ import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 import com.judge.R
 import com.judge.data.bean.Detail
+import java.util.function.LongFunction
 
 /**
  * @author: jaffa
@@ -23,11 +25,11 @@ import com.judge.data.bean.Detail
 data class NewState(
     val isLoading: Boolean = false,
     val categoryDetails: List<ForumThreadlist> = emptyList(),
-    val page: Int = 1
+    val page: Int = 1,
+    val page_total: String = ""
 ) : MvRxState
 
 class NewViewModel(initialiState: NewState) : MvRxViewModel<NewState>(initialiState) {
-
 
     fun fetchDetail(id: String) = withState { state ->
         if (state.isLoading) return@withState
@@ -36,7 +38,8 @@ class NewViewModel(initialiState: NewState) : MvRxViewModel<NewState>(initialiSt
             .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnError { it.message.let { it1 -> LogUtils.e(it1!!) } }
             .doFinally { setState { copy(isLoading = false) } }
-            .execute { copy(categoryDetails = it()?.Variables?.forum_threadlist ?: emptyList()) }
+            .execute { copy(categoryDetails = it()?.Variables?.forum_threadlist ?: emptyList(),
+                page_total = it()?.Variables?.page_total.toString()) }
     }
 
 
@@ -75,9 +78,10 @@ class JudgeCateGoryDetailFragment(id: String) : BaseFragment() {
     var page = 1
 
     val args = Detail()
+    var pageTotal = 1
     override fun epoxyController() = simpleController(viewModel) { state ->
-
         state.categoryDetails.forEachWithIndex { index, item ->
+            pageTotal = state.page_total.toInt()
             judgeCategoryDetailItem {
                 id(item.tid)
                 viewmodel(item)
@@ -91,6 +95,7 @@ class JudgeCateGoryDetailFragment(id: String) : BaseFragment() {
     }
 
     override fun initView() {
+        viewModel.fetchDetail(ids)
         recyclerView.setBackgroundColor(Color.WHITE)
         withState(viewModel) { state ->
             refreshLayout.apply {
@@ -102,7 +107,7 @@ class JudgeCateGoryDetailFragment(id: String) : BaseFragment() {
                     it.finishRefresh(1000)
                 }
                 setOnLoadMoreListener {
-                    if (page <= 10) {
+                    if (page<pageTotal) {
                         page++
                         viewModel.loadMoreDetail(ids,page)
                     }
@@ -110,7 +115,6 @@ class JudgeCateGoryDetailFragment(id: String) : BaseFragment() {
                 }
             }
         }
-        viewModel.fetchDetail(ids)
     }
 
     override fun onDestroy() {
