@@ -5,6 +5,7 @@ package com.judge.adapters
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -211,4 +212,9 @@ fun setProductStatus(btn: Button, status: String) {
             btn.background = RxTool.getContext().resources.getDrawable(R.color.receive)
         }
     }
+}
+
+@BindingAdapter("selection",requireAll = false)
+fun setSelection(et: EditText,content:String){
+    et.setSelection(content.length)
 }

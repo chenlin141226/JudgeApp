@@ -62,6 +62,8 @@ class SettingViewModel(
         getSettingTitles()
     }
 
+
+
     private fun getSettingTitles() {
         val titles = RxTool.getContext().resources.getStringArray(R.array.setting_item_title)
         val profileDetail = MineRepository.userProfile?.space
@@ -159,6 +161,9 @@ class SettingViewModel(
                 copy(updateProfileResult = it)
             }
     }
+
+
+
 
     companion object : MvRxViewModelFactory<SettingViewModel, SettingState> {
         override fun create(

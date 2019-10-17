@@ -18,6 +18,10 @@ import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
+/**
+ * 勋章中心
+ */
+
 data class MedalState(
     val isLoading: Boolean = false,
     val medals: List<Medal>? = emptyList()

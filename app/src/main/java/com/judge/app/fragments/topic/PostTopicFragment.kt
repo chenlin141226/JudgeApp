@@ -19,6 +19,8 @@ import com.judge.data.repository.JudgeRepository
 import com.judge.posttopicItem
 import com.judge.utils.LogUtils
 import com.judge.views.SimpleTextWatcher
+import com.vondear.rxtool.RxSPTool
+import com.vondear.rxtool.RxTool
 import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -51,6 +53,7 @@ class PostTopicViewModel(initialState: PostTopicState) :
 
     //更新文字长度变化
     fun updateLength(str: String) {
+        RxSPTool.putString(RxTool.getContext(),"posttopicItem",str)
         setState { copy(content = str) }
         setState { copy(length = "${str.length}/20") }
     }
@@ -97,12 +100,13 @@ class PostTopicFragment : BaseFragment() {
             inputType(InputType.TYPE_CLASS_TEXT)
             item(state.gifUrl)
             lenth(state.length)
+            content(state.content)
             textWatcher(SimpleTextWatcher {
                 viewModel.updateLength(it)
             })
 
             onclick { _ ->
-                viewModel.updateLength("")
+
                 findNavController().navigate(R.id.action_postFragment_to_expressionFragment)
             }
 
@@ -124,6 +128,10 @@ class PostTopicFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
+        //获取保存的文本内容
+        viewModel.updateLength(RxSPTool.getString(RxTool.getContext(),"posttopicItem"))
+
+        //从下一个界面获取表情相关的信息
         LiveEventBus.get().with("expression", ExpressionArgs::class.java)
             .observe(this, Observer<ExpressionArgs> {
                 viewModel.updataItem(it)
@@ -159,5 +167,12 @@ class PostTopicFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+
+    override fun onDetach() {
+        super.onDetach()
+        //销毁界面时不保存输入框的内容
+        RxSPTool.putString(context,"posttopicItem","")
     }
 }

@@ -104,6 +104,7 @@
                     android:maxLength="20"
                     android:padding="@dimen/dp_10"
                     android:text="@{content}"
+                    app:selection="@{content}"
                     app:addTextChangedListener="@{textWatcher}"/>
 
             <TextView

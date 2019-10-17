@@ -20,7 +20,7 @@ abstract class BaseTopicFragment : BaseFragment() {
                 topic(topic)
                 isSwipeEnable(state.isSwipeEnable)
                 onItemClick { _ ->
-                    toast("You clicked item!")
+                    //toast("You clicked item!")
                 }
                 onDeleteClick { _ ->
                     deleteTopics(index)
@@ -34,7 +34,7 @@ abstract class BaseTopicFragment : BaseFragment() {
                 topic(topic)
                 isSwipeEnable(state.isSwipeEnable)
                 onItemClick { _ ->
-                    toast("You clicked item!")
+                    //toast("You clicked item!")
                 }
                 onDeleteClick { _ ->
                     deleteTopics(index)
