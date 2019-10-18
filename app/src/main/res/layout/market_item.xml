@@ -55,7 +55,7 @@
                 android:id="@+id/tv_markerNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{mark.num_7ree}"
+                android:text='@{@string/kucun+mark.num_7ree}'
                 android:textSize="@dimen/text_14"
                 tools:text = "234"
                 android:textColor="@color/color_gray"
@@ -67,7 +67,7 @@
                 android:id="@+id/btn_exchange"
                 android:layout_width="@dimen/dp_47"
                 android:layout_height="@dimen/dp_23"
-               android:background="@drawable/mark_item_exchange"
+                android:background="@drawable/mark_item_exchange"
                 android:textAlignment="center"
                 android:text="@string/exchange"
                 android:clickable="false"
@@ -79,7 +79,7 @@
                 android:id="@+id/tv_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{mark.detail_7ree}"
+                android:text='@{@string/consume+mark.cost_7ree+@string/whistle}'
                 android:maxWidth="@dimen/dp_180"
                 android:singleLine="true"
                 android:lines="1"
