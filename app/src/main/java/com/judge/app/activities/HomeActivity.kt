@@ -13,7 +13,7 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        AndroidBug5497Workaround.assistActivity(this)
+        //AndroidBug5497Workaround.assistActivity(this)
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState

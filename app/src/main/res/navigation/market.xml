@@ -42,7 +42,14 @@
     </fragment>
     <fragment android:id="@+id/exchangeSuccessFragment"
               android:name="com.judge.app.fragments.market.ExchangeSuccessFragment"
-              android:label=""/>
+              android:label="兑换成功">
+        <action android:id="@+id/action_exchangeSuccessFragment_to_marketFragment"
+                app:destination="@id/marketFragment"
+                app:enterAnim="@anim/anim_enter"
+                app:exitAnim="@anim/anim_exit"
+                app:popEnterAnim="@anim/anim_pop_enter"
+                app:popExitAnim="@anim/anim_pop_exit"/>
+    </fragment>
 
 
 </navigation>

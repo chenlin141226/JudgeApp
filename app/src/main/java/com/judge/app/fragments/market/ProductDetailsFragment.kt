@@ -3,7 +3,6 @@ package com.judge.app.fragments.market
 import android.graphics.Color
 import android.view.View
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.*
 import com.judge.R
 import com.judge.app.core.BaseFragment
@@ -14,11 +13,10 @@ import com.judge.data.bean.ExchangeBean
 import com.judge.data.bean.ExchangeResult
 import com.judge.data.repository.JudgeRepository
 import com.judge.network.JsonResponse
-import com.judge.utils.LogUtils
 import com.judge.views.productDetailView
 import com.vondear.rxtool.view.RxToast
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.support.v4.runOnUiThread
 
 /**
  * @author: jaffa
@@ -29,9 +27,7 @@ data class ProductDetailState(
     val name: String = "",
     val qq: String = "",
     val phone: String = "",
-    val adress: String = "",
-    val product: ExchangeResult ?= null,
-    val productRequest: Async<JsonResponse<ExchangeBean>> = Uninitialized
+    val adress: String = ""
 ) : MvRxState {
 
     constructor(args: CategoryItem) : this(market = args)
@@ -55,19 +51,16 @@ class ProductDetailViewModel(state: ProductDetailState) : MvRxViewModel<ProductD
         setState { copy(adress = adress) }
     }
 
-    fun postProduct() = withState { state ->
-        val productId = state.market.id_7ree
-        val maps = hashMapOf("realname" to state.name,
-            "qq" to state.qq,"mobile" to state.phone,"address" to state.adress,"submit_7ree" to "1")
-        JudgeRepository.postProduct(productId,maps).subscribeOn(Schedulers.io())
-            .doOnError { it.message.let { it1 ->LogUtils.e(it1!!) } }
-            .execute {
-                copy(productRequest = it,product = it()?.Variables?.data) }
-    }
+//    fun postProduct() = withState { state ->
+//        val productId = state.market.id_7ree
+//        val maps = hashMapOf("realname" to state.name,
+//            "qq" to state.qq,"mobile" to state.phone,"address" to state.adress,"submit_7ree" to "1")
+//        JudgeRepository.postProduct(productId,maps).subscribeOn(Schedulers.io())
+//            .doOnError { it.message.let { it1 ->LogUtils.e(it1!!) } }
+//            .execute {
+//                copy(productRequest = it,product = it()?.Variables?.data) }
+//    }
 
-    fun setDefaut(){
-     setState { copy(product = null) }
-    }
 
     companion object : MvRxViewModelFactory<ProductDetailViewModel, ProductDetailState> {
         @JvmStatic
@@ -114,16 +107,24 @@ class ProductDetailsFragment : BaseFragment() {
                     return@exchangeClickListener
                 }
 
-                viewModel.postProduct()
+                val productId = state.market.id_7ree
+
+                val maps = hashMapOf("realname" to state.name,
+                    "qq" to state.qq,"mobile" to state.phone,"address" to state.adress,"submit_7ree" to "1")
+
+                JudgeRepository.postProduct(productId,maps).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe{its->
+
+                        if(its.Variables.data.code =="1"){
+                            context?.let {RxToast.info(it,"兑换成功",Toast.LENGTH_SHORT,false).show()}
+                            navigateTo(R.id.action_marketFragments_to_exchangeSuccessFragment)
+                        }else if(its.Variables.data.code == "0"){
+                            context?.let {RxToast.info(it,its.Variables.data.error,Toast.LENGTH_SHORT,false).show()}
+                        }
+                    }
             }
 
-            if(state.productRequest is Success&& state.product?.code == "1"){
-                context?.let {RxToast.info(it,state.product.success,Toast.LENGTH_SHORT,false).show()}
-                runOnUiThread {  navigateTo(R.id.action_marketFragments_to_exchangeSuccessFragment) }
-            }else if(state.product?.code == "0"){
-
-                context?.let {RxToast.info(it,state.product.error,Toast.LENGTH_SHORT,false).show()}
-            }
         }
 
     }
@@ -132,11 +133,6 @@ class ProductDetailsFragment : BaseFragment() {
         toolbar.visibility = View.VISIBLE
         toolbar.setBackgroundColor(Color.WHITE)
         sharedViewModel.setVisible(false)
-    }
-
-    override fun onDestroyView() {
-        viewModel.setDefaut()
-        super.onDestroyView()
     }
 
 }
