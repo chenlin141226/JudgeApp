@@ -10,6 +10,8 @@ import com.judge.data.bean.Forumlist
 import com.judge.data.bean.SubscribeBean
 import com.judge.data.repository.JudgeRepository
 import com.judge.editionItem
+import com.judge.models.TopicState
+import com.judge.network.JsonResponse
 import com.judge.network.Message
 import com.judge.utils.LogUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,6 +27,7 @@ data class EditionState(val editionItems: List<Forumlist> = emptyList(),
                         val isLoading: Boolean = false,
                         val formhash: String? = null,
                         val subscribeBean: SubscribeBean? = null,
+                        val subscribe: Async<JsonResponse<SubscribeBean>> = Uninitialized,
                         val message: Message? = null) : MvRxState
 
 class EditionViewModel(editionState: EditionState) : MvRxViewModel<EditionState>(editionState) {
@@ -81,6 +84,7 @@ class EditionFragment : BaseFragment() {
                     navigateTo(R.id.action_judgeFragment_to_judgeDetailFragment,item)
                 }
                 onClick { _ ->
+                    LiveEventBus.get().with("EditionFragment").post("EditionFragment")
                     viewModel.SubscribeJudge(item.fid)
                     //                    val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
                     //                    JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
@@ -88,7 +92,7 @@ class EditionFragment : BaseFragment() {
                     //                            Toast.makeText(context,it.Message.messagestr,Toast.LENGTH_SHORT).show()
                     //                            viewModel.fetEditionData()
                     //                        }
-                    LiveEventBus.get().with("EditionFragment").post("EditionFragment")
+
                 }
             }
         }
@@ -98,6 +102,7 @@ class EditionFragment : BaseFragment() {
 
 
     override fun initView() {
+
         refreshLayout.apply {
             setEnableAutoLoadMore(true)
             setEnableRefresh(true)

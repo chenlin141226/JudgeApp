@@ -49,6 +49,8 @@ class LoginFragment : BaseFragment() {
             userName(state.username)
             password(state.password)
             code(state.seccode)
+            question(state.question)
+            onQuestionChanged { loginViewModel.setQuestion(it) }
             onUserNameChanged { loginViewModel.setUserName(it) }
             onPasswordChanged { loginViewModel.setPassword(it) }
             onCodeChanged { loginViewModel.setCode(it) }
@@ -68,9 +70,13 @@ class LoginFragment : BaseFragment() {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
                     val spinnerData = resources.getStringArray(R.array.login_item_spinner)
                     loginViewModel.setQuestion(spinnerData[position])
+                    if (position == 0) loginViewModel.setisShow(false)
+                    else loginViewModel.setisShow(true)
                 }
 
             })
+
+            isShow(state.isShow)
 
             //第一次获取验证码
             setimageBitmap(state.codeUrl)

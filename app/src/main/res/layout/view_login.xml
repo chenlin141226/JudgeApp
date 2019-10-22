@@ -12,7 +12,7 @@
     <LinearLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_400"
+            android:layout_height="@dimen/dp_460"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
@@ -55,6 +55,19 @@
                 android:background="@drawable/login_input_bg"
                 android:dropDownVerticalOffset="@dimen/dp_30"
                 android:spinnerMode="dropdown"/>
+
+        <EditText
+                android:id="@+id/et_question"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_36"
+                android:background="@drawable/login_input_bg"
+                android:padding="10dp"
+                android:textColor="#d4cdca"
+                android:textSize="@dimen/text_14"
+                android:visibility="gone"
+                tools:ignore="MissingPrefix" />
+
 
         <EditText
                 android:id="@+id/et_code"

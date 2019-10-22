@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
@@ -35,6 +36,7 @@ class LoginView @JvmOverloads constructor(
     private val userNameWatcher = SimpleTextWatcher { onUserNameChanged?.invoke(it) }
     private val passwordWatcher = SimpleTextWatcher { onPasswordChanged?.invoke(it) }
     private val codeWatcher = SimpleTextWatcher { onCodeChanged?.invoke(it) }
+    private val questionWatcher = SimpleTextWatcher { onQuestionChanged?.invoke(it) }
 
     init {
         inflate(context, R.layout.view_login, this)
@@ -42,6 +44,7 @@ class LoginView @JvmOverloads constructor(
         et_username.addTextChangedListener(userNameWatcher)
         et_password.addTextChangedListener(passwordWatcher)
         et_code.addTextChangedListener(codeWatcher)
+        et_question.addTextChangedListener(questionWatcher)
 
         val spinnerData = resources.getStringArray(R.array.login_item_spinner)
         val spinnerAdapter = ArrayAdapter<String>(context, R.layout.login_spinner, spinnerData)
@@ -70,6 +73,20 @@ class LoginView @JvmOverloads constructor(
         et_code.setTextIfDifferent(code)
     }
 
+    @TextProp
+    fun setQuestion(code: CharSequence?) {
+        et_question.setTextIfDifferent(code)
+    }
+
+   @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
+   fun isShow(show : Boolean){
+       if(show){
+           et_question.visibility = View.VISIBLE
+       }else{
+           et_question.visibility = View.GONE
+       }
+   }
+
 
     @set:CallbackProp
     var onUserNameChanged: ((newText: String) -> Unit)? = null
@@ -79,6 +96,10 @@ class LoginView @JvmOverloads constructor(
 
     @set:CallbackProp
     var onCodeChanged: ((newText: String) -> Unit)? = null
+
+    @set:CallbackProp
+    var onQuestionChanged: ((newText: String) -> Unit)? = null
+
 
     /**
      * 登录的点击事件

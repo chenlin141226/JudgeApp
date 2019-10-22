@@ -27,7 +27,8 @@ data class LoginState(
     val password: String = "",
     val question: String? = null,
     val seccode: String = "",
-    val codeUrl: Bitmap? = null
+    val codeUrl: Bitmap? = null,
+    val isShow : Boolean = false
 ) : MvRxState
 
 class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginState>(loginState) {
@@ -55,6 +56,10 @@ class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginSt
 
     fun setQuestion(question: String) {
         setState { copy(question = question) }
+    }
+
+    fun setisShow(isShow : Boolean){
+        setState { copy(isShow = isShow) }
     }
 
     fun requestCode() = withState {
