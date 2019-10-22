@@ -70,8 +70,7 @@ class LoginFragment : BaseFragment() {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
                     val spinnerData = resources.getStringArray(R.array.login_item_spinner)
                     loginViewModel.setQuestion(spinnerData[position])
-                    if (position == 0) loginViewModel.setisShow(false)
-                    else loginViewModel.setisShow(true)
+                    if (position == 0) {loginViewModel.setisShow(false)}else{loginViewModel.setisShow(true)}
                 }
 
             })

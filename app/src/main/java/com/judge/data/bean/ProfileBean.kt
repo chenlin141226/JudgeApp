@@ -123,7 +123,7 @@ data class ProfileDetail(
     val lastvisit: String,
     val lookingfor: String,
     val magicgift: String,
-    val medals: String,
+    val medals: List<Medals>,
     val menunum: String,
     val mobile: String,
     val msn: String,
@@ -182,6 +182,14 @@ data class ProfileDetail(
     val zodiac: String,
     val birthdate: String
 )
+
+data class Medals(
+    val description: String,
+    val image: String,
+    val medalid: String,
+    val name: String
+)
+
 
 data class Admingroup(
     val allowbegincode: String,

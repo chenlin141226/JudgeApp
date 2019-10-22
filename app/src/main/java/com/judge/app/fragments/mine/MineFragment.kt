@@ -39,6 +39,9 @@ class MineItemViewModel(
         getItems()
     }
 
+    /**
+     * 获取用户信息
+     */
     fun getUserData() = withState { state ->
         if (state.isLoading) return@withState
         MineRepository.getUserData(map).subscribeOn(Schedulers.io())

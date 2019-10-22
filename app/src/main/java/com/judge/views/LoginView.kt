@@ -74,8 +74,8 @@ class LoginView @JvmOverloads constructor(
     }
 
     @TextProp
-    fun setQuestion(code: CharSequence?) {
-        et_question.setTextIfDifferent(code)
+    fun setQuestion(question: CharSequence?) {
+        et_question.setTextIfDifferent(question)
     }
 
    @ModelProp(ModelProp.Option.IgnoreRequireHashCode)
