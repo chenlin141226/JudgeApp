@@ -24,7 +24,7 @@
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_80"
                 android:layout_marginLeft="4dp"
-                app:imageUrl="@{product.goods_7ree.pic_7ree}"
+                app:imageUrl='@{product.goods_7ree.pic_7ree+""}'
                 app:isPhoto="@{false}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
