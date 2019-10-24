@@ -10,6 +10,7 @@ import com.judge.app.core.BaseFragment
 import com.judge.app.core.MvRxEpoxyController
 import com.judge.app.core.MvRxViewModel
 import com.judge.app.core.simpleController
+import com.judge.data.bean.Extcredits
 import com.judge.data.bean.WhistleBean
 import com.judge.data.repository.MineRepository
 import com.judge.whistleItem
@@ -18,7 +19,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
 data class WhistleState(
-    val whistleItems: List<WhistleBean>? = emptyList()
+    val whistleItems: List<Extcredits>? = emptyList()
 ) : MvRxState
 
 class WhistleViewModel(
@@ -31,7 +32,7 @@ class WhistleViewModel(
 
     private fun getWhistles() {
         setState {
-            copy(whistleItems = MineRepository.userProfile?.extcredits)
+            copy(whistleItems = MineRepository.userProfile?.space?.extcredits)
         }
     }
 

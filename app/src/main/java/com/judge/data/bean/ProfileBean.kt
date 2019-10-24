@@ -180,7 +180,14 @@ data class ProfileDetail(
     val yahoo: String,
     val zipcode: String,
     val zodiac: String,
-    val birthdate: String
+    val birthdate: String,
+    val extcredits : List<Extcredits>
+)
+
+data class Extcredits(
+    val img: String,
+    val title: String,
+    val ratio: String
 )
 
 data class Medals(
