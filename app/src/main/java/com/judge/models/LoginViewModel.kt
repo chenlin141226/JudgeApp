@@ -62,6 +62,10 @@ class LoginViewModel(private val loginState: LoginState) : MvRxViewModel<LoginSt
         setState { copy(isShow = isShow) }
     }
 
+
+    /**
+     * 获取验证码
+     */
     fun requestCode() = withState {
         LoginRepository.getCode().subscribeOn(Schedulers.io()).map {
             BitmapFactory.decodeStream(it.byteStream())
