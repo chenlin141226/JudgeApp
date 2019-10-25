@@ -17,6 +17,8 @@ import com.judge.data.repository.JudgeRepository
 import com.judge.network.Message
 import com.judge.sendtopicItem
 import com.judge.views.SimpleTextWatcher
+import com.vondear.rxtool.RxSPTool
+import com.vondear.rxtool.RxTool
 import com.vondear.rxtool.view.RxToast
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -25,6 +27,7 @@ import org.jetbrains.anko.support.v4.runOnUiThread
 /**
  * @author: jaffa
  * @date: 2019/8/22
+ * 发帖界面
  */
 data class SendTopicState(
     val title: String = "",
@@ -49,11 +52,13 @@ class SendTopicViewModel(initialState: SendTopicState) :
     }
 
     fun updateTitlet(title: String) {
+        RxSPTool.putString(RxTool.getContext(),"updateTitlet",title)
         setState { copy(title = title) }
     }
 
     //跟新发帖内容
     fun updateContent(content: String) {
+        RxSPTool.putString(RxTool.getContext(),"updateContent",content)
         setState { copy(content = content) }
     }
 
@@ -153,14 +158,19 @@ class SignFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
+
+        viewModel.updateTitlet(RxSPTool.getString(RxTool.getContext(),"updateTitlet"))
+        viewModel.updateContent(RxSPTool.getString(RxTool.getContext(),"updateContent"))
+
         LiveEventBus.get().with("plate", PlateArgs::class.java).observe(this, Observer<PlateArgs> {
             viewModel.updateArgs(it)
         })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.updateTitlet("")
-        viewModel.updateContent("")
+    override fun onDetach() {
+        super.onDetach()
+        //销毁界面时不保存输入框的内容
+        RxSPTool.putString(context,"updateTitlet","")
+        RxSPTool.putString(context,"updateContent","")
     }
 }
