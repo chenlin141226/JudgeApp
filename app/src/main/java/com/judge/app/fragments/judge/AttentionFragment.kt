@@ -62,12 +62,6 @@ class AttentionFragment : BaseFragment() {
             attentionItem {
                 id(item.favid)
                 attention(item)
-//                onParentClick { _, _, _, _ ->
-//                    navigateTo(R.id.action_judgeFragment_to_judgeDetailFragment, item)
-//                }
-                onClick { _ ->
-                    //context?.let { RxToast.info(it, "success", Toast.LENGTH_SHORT, true).show() }
-                }
             }
         }
     }
@@ -99,10 +93,5 @@ class AttentionFragment : BaseFragment() {
                 it.finishLoadMore(1000)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-       // sharedViewModel.setVisible(false)
     }
 }

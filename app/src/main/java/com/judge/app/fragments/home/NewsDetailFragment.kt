@@ -23,7 +23,8 @@ import org.jetbrains.anko.support.v4.toast
 
 
 class NewsDetailFragment : BaseFragment() {
-    private val newsDetailUrl = "http://10.5.45.221:8080/"
+
+    private val newsDetailUrl = "http://10.5.45.79:3333/"
     private val viewModel: NewsDetailViewModel by fragmentViewModel()
     private lateinit var detailWebView: WebView
     private lateinit var newsId: String
