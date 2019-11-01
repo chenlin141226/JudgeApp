@@ -45,6 +45,8 @@
               android:label="兑换成功">
         <action android:id="@+id/action_exchangeSuccessFragment_to_marketFragment"
                 app:destination="@id/marketFragment"
+                app:popUpToInclusive="true"
+                app:popUpTo="@id/marketFragment"
                 app:enterAnim="@anim/anim_enter"
                 app:exitAnim="@anim/anim_exit"
                 app:popEnterAnim="@anim/anim_pop_enter"

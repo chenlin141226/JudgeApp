@@ -99,7 +99,7 @@
                     android:background="@null"
                     android:gravity="start|top"
                     android:hint="@string/hint"
-                    android:inputType="@{inputType}"
+                    android:inputType="textMultiLine"
                     android:minHeight="@dimen/dp_140"
                     android:maxLength="20"
                     android:padding="@dimen/dp_10"

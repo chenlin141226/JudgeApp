@@ -97,7 +97,7 @@ class PostTopicFragment : BaseFragment() {
 
         posttopicItem {
             id("postTopic")
-            inputType(InputType.TYPE_CLASS_TEXT)
+           // inputType(InputType.TYPE_CLASS_TEXT)
             item(state.gifUrl)
             lenth(state.length)
             content(state.content)

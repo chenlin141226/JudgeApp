@@ -94,7 +94,7 @@ class SignFragment : BaseFragment() {
     override fun epoxyController() = simpleController(viewModel) { state ->
         sendtopicItem {
             id("sendtopic")
-            inputType(InputType.TYPE_CLASS_TEXT)
+            //inputType(InputType.TYPE_CLASS_TEXT)
             title(state.title)
             content(state.content)
             plate(state.backPlate)

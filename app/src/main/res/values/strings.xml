@@ -90,7 +90,7 @@
     <string name="gameExtensions">游戏周边</string>
     <string name="goods_category">商品分类:</string>
     <string name="goods_price">市场价格:</string>
-    <string name="receive_address">收获地址</string>
+    <string name="receive_address">收货地址</string>
     <string name="name">姓名:</string>
     <string name="qq">QQ:</string>
     <string name="phone_number">手机:</string>
@@ -107,7 +107,7 @@
     <string name="no_medal">您还没有获得过勋章</string>
     <string name="mine_medal">我的勋章</string>
     <string name="kucun">库存</string>
-    <string name="consume">消耗了</string>
+    <string name="consume">兑换了</string>
     <string name="whistle">铜哨子</string>
 
     <!-- ——————   裁判说  —————-->

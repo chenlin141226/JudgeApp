@@ -121,10 +121,11 @@
                         android:background="@drawable/bg_edit"
                         android:gravity="start|top"
                         android:hint="@string/content"
-                        android:inputType="@{inputType}"
+                        android:inputType="textMultiLine"
                         android:minHeight="@dimen/dp_140"
                         android:padding="@dimen/dp_10"
                         android:text="@{content}"
+                        app:selection="@{content}"
                         app:addTextChangedListener="@{contentTextWatcher}"/>
 
             </RelativeLayout>

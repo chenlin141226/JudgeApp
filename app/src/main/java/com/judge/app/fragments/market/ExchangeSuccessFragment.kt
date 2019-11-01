@@ -17,7 +17,7 @@ class ExchangeSuccessFragment : BaseFragment() {
          exchangeSuccessFragment {
              id("exchangeSuccessFragment")
              onclick { _ ->
-                 findNavController().navigateUp()
+                 navigateTo(R.id.action_exchangeSuccessFragment_to_marketFragment)
              }
          }
     }
