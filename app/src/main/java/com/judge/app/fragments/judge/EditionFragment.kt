@@ -1,5 +1,6 @@
 package com.judge.app.fragments.judge
 
+import android.widget.Toast
 import com.airbnb.mvrx.*
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.judge.R
@@ -86,12 +87,12 @@ class EditionFragment : BaseFragment() {
                 onClick { _ ->
                     LiveEventBus.get().with("EditionFragment").post("EditionFragment")
                     viewModel.SubscribeJudge(item.fid)
-                    //                    val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
-                    //                    JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
-                    //                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                    //                            Toast.makeText(context,it.Message.messagestr,Toast.LENGTH_SHORT).show()
-                    //                            viewModel.fetEditionData()
-                    //                        }
+//                                        val maps = hashMapOf("formhash" to state.formhash, "id" to item.fid)
+//                                        JudgeRepository.subscribeJudge(maps).subscribeOn(Schedulers.io())
+//                                            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+//                                                Toast.makeText(context,it.Message.messagestr,Toast.LENGTH_SHORT).show()
+//                                                viewModel.fetEditionData()
+//                                            }
 
                 }
             }

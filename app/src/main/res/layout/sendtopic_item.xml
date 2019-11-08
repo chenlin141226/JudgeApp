@@ -107,7 +107,7 @@
                         android:background="@drawable/bg_edit"
                         android:gravity="start|center"
                         android:hint="@string/title"
-                        android:inputType="@{inputType}"
+                        android:inputType="textMultiLine"
                         android:text="@{title}"
                         android:padding="@dimen/dp_10"
                         app:addTextChangedListener="@{titleTextWatcher}"/>
