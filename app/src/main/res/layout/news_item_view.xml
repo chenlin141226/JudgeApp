@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_10"
-                    android:text="@{item.lastpost}"
+                    android:text="@{item.date}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_14" />
             </LinearLayout>

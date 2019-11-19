@@ -35,5 +35,6 @@ data class News(
     val replies: String,
     val subject: String,
     val tid: String,
-    val views: String
+    val views: String,
+    val date : String
 ):Parcelable
