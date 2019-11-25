@@ -24,7 +24,7 @@ abstract class BaseTopicFragment : BaseFragment() {
                 }
                 onDeleteClick { _ ->
                     deleteTopics(index)
-                    toast("Item index  is $index!")
+                   // toast("Item index  is $index!")
                 }
             }
         }
@@ -33,12 +33,12 @@ abstract class BaseTopicFragment : BaseFragment() {
                 id(topic.topicTitle + index)
                 topic(topic)
                 isSwipeEnable(state.isSwipeEnable)
-                onItemClick { _ ->
+                    .   onItemClick { _ ->
                     //toast("You clicked item!")
                 }
                 onDeleteClick { _ ->
                     deleteTopics(index)
-                    toast("Item index  is $index!")
+                   // toast("Item index  is $index!")
                 }
             }
         }

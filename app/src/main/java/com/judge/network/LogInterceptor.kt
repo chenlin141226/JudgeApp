@@ -17,6 +17,12 @@ class LogInterceptor : Interceptor {
         val source = response.body()?.source()
         source?.request(Long.MAX_VALUE)
         val buffer = source?.buffer()
+        var charset = Charset.forName("utf-8")
+        val contentType = response.body()?.contentType()
+        if (contentType != null) {
+            charset = contentType!!.charset(charset)
+        }
+        val bodyString = buffer?.clone()?.readString(charset)
 
         val log = "\n**********************************"
             .plus("\nnetwork code ==== " + response.code())

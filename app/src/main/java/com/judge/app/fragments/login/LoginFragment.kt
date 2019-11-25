@@ -42,6 +42,7 @@ class LoginFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+
     override fun epoxyController() = simpleController(loginViewModel) { state ->
         loginView {
             id("login")

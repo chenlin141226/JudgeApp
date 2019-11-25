@@ -84,5 +84,6 @@ data class Topic(
     val title: String,
     val uid: String,
     val url: String,
-    val vdateline: String
+    val vdateline: String,
+    val dateTime : String
 )
